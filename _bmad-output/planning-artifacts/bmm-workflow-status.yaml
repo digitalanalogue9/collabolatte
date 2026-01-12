@@ -43,7 +43,7 @@ workflow_status:
 
       - id: "product-brief"
         name: "Product Brief"
-        status: "optional"
+        status: "_bmad-output/planning-artifacts/product-brief-collabolatte-2026-01-12.md"
         agent: "analyst"
         command: "/bmad:bmm:workflows:create-product-brief"
         selected: true

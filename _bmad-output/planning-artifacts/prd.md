@@ -49,6 +49,9 @@ elicitationInsights:
 
 ---
 
+**Alignment Note (2026-01-12):** This PRD has been explicitly aligned to the Product Brief dated 2026-01-12. MVP scope has been narrowed to a single opt‑in programme with minimal notification and no dashboards, programme creation, or conversation‑starter features. Prior content that exceeds the brief’s MVP boundary has been preserved in the ‘Deferred / Post‑MVP (from prior PRD)’ section for future phases.
+
+
 ## Success Criteria
 
 ### User Success
@@ -139,46 +142,15 @@ A participant considers Collabolatte worthwhile when at least one of these occas
 
 ---
 
-### Should-Have – Reduce Anxiety and Social Friction
+### Future Vision (post‑MVP, in order)
 
-**Philosophy:** This tier is where real iteration happens after the first cycle or two. These features reduce friction without adding complexity.
-
-| Feature | Rationale |
-|---------|-----------|
-| **Conversation starter suggestion** | Low effort, high confidence boost |
-| **"Practice coffee" framing** | First match feels lower-stakes |
-| **One free pass per cycle** | Explicit permission not to engage |
-| **Framing copy at join time** | "Most chats will be fine. A few will be useful. That's enough." Materially affects trust and expectations. |
+1. **Conversation support** – optional starters and gentle framing for first‑time matches.
+2. **Safety valves** – one free pass per cycle; match expiry window.
+3. **Programme flexibility** – additional programmes with clear purpose; controlled creation by trusted sponsors.
+4. **Boundary shaping** – light constraints to encourage cross‑function/region matching.
+5. **Growth mechanics** – gift a match; time‑boxed experiments.
 
 ---
-
-### Post-MVP – Expand Surface Area Carefully
-
-**Philosophy:** Only pursue once you have evidence that people keep showing up. Each feature increases complexity and potential failure modes.
-
-| Feature | Caution |
-|---------|---------|
-| Multiple matching algorithms | Only if there's demand signal |
-| Programme creation by anyone | **Wait until failure modes are understood.** Too early = fragmentation, dead programmes, noise. |
-| Ripple connections ("You met X, they know Y") | Requires trust already established |
-| Coffee roulette mode (instant match) | For power users after core is proven |
-| Gift a match | Social expansion mechanism |
-
----
-
-### Vision – Keep Private Until Behaviour Is Proven
-
-**Philosophy:** Credible futures, but invisible in early messaging or roadmaps. They invite the wrong scrutiny too soon.
-
-- Cross-company programmes
-- Alumni networks
-- Client relationship seeding
-- Advanced network analysis and insights
-
-**Rule:** These exist in planning documents only. No external communication until core behaviour is validated.
-
----
-
 ### Scope Summary
 
 | Tier | Purpose |
@@ -204,11 +176,7 @@ He receives an email from HR about Collabolatte—"an opt-in way to meet people 
 
 The signup is trivial—his name, department, and location are pre-filled from the corporate directory (SSO integration). He clicks "Join." Done. No bio, no interests, no quiz.
 
-Two weeks later, an email arrives: "You've been matched with **Samira, Principal Consultant, Singapore**." There's a conversation starter: "Samira works in sustainability strategy. You might ask what she's working on right now."
-
-Below the prompt is a single button: **[Introduce Yourself]**. One click opens a pre-drafted Teams message: "Hi Samira, I'm Tomás—we've been matched through Collabolatte. Fancy a 30-minute coffee sometime this week?"
-
-Tomás clicks. The message sends. The system logs: *match-acknowledged*.
+Two weeks later, an email arrives: "You've been matched with **Samira, Principal Consultant, Singapore**." The email includes a simple first‑move prompt with suggested copy to help him reach out.
 
 **Climax:**
 
@@ -232,9 +200,7 @@ He reads the fine print. Opt-in. No manager visibility. No feedback required. He
 
 His first match arrives: **Jess, Legal Counsel, London**. A lawyer? What would they even talk about?
 
-The email includes a conversation starter: "Jess recently worked on IP licensing for a client project. You might ask what surprised her."
-
-Marcus clicks **[Introduce Yourself]**. They schedule a call.
+The email includes a simple first‑move prompt with suggested copy. Marcus uses it and they schedule a call.
 
 **Climax:**
 
@@ -245,115 +211,6 @@ The call is... fine. Not transformative. But the conversation starter gave them 
 Marcus doesn't report anything. He simply stays opted in. The next month, he gets matched with someone in product—they realise they've been duplicating work and agree to share notes.
 
 Marcus tells a colleague: "It's not a waste of time. Low stakes. Occasionally useful."
-
----
-
-### Journey 3: Priya – The Programme Creator Sets Conditions
-
-**Opening Scene:**
-
-Priya leads L&D in the UK practice. She's been asked to "do something about cross-team connection" without adding to anyone's workload.
-
-She hears about Collabolatte. The promise: set it up, let it run, measure participation passively.
-
-**Rising Action:**
-
-Priya creates a programme: "UK Practice Coffee." She sets the cadence to fortnightly, group size to pairs, matching rule to random with a cross-boundary constraint (must match across function OR region). She writes one line of copy: "Meet someone you wouldn't otherwise. No agenda. No follow-up required."
-
-She sends an invite to 200 people. Thirty join in the first week.
-
-**Climax:**
-
-Six weeks later, she checks passive metrics. Twenty-two of the thirty are still opted in. She sees that 85% of matches crossed functional boundaries. She receives an unsolicited message from a senior partner: "I met someone in the Newcastle office I'd never have found otherwise."
-
-**Resolution:**
-
-Priya doesn't run Collabolatte—she set conditions and stepped back. When Helena asks for a board update, Priya says: "Seventy percent retention, cross-boundary matching working, no complaints, and a handful of unprompted good stories."
-
-*(In MVP, Priya sees basic aggregate metrics; full Programme Owner dashboard is Growth-phase.)*
-
----
-
-### Journey 4: Helena – The Executive Sponsor Defends the Investment
-
-**Opening Scene:**
-
-Helena is the CHRO. She approved the Collabolatte pilot because the pitch was low-cost, low-risk, and addressed a real problem.
-
-**Rising Action:**
-
-At the six-month mark, Priya sends a summary:
-- Opt-in retention: 65% stayed active across multiple cycles
-- Cross-boundary connections: 80% of matches crossed functions or regions
-- Anecdotes: Three concrete stories (surfaced via direct messages to Priya and one Slack thread)
-- Trust preserved: Zero complaints, zero escalations
-
-**Climax:**
-
-At the board meeting, a director asks: "What's the return on this?"
-
-Helena says: "The return is optionality. We've created a low-cost mechanism for cross-team connection that people actually use, that hasn't created backlash, and that occasionally produces real value. It's infrastructure, not a programme."
-
-**Resolution:**
-
-The board nods. The pilot becomes permanent.
-
----
-
-### Journey 5: Aisha – The Dormant User Returns
-
-**Opening Scene:**
-
-Aisha is a manager in Edinburgh, eight years at the firm. She joined Collabolatte early. Her first matches were fine, then forgettable. Then Q4 hit—deadlines, travel, no bandwidth. She ignored three match notifications. The system didn't chase her. No reminder. No "we miss you." Just silence.
-
-By January, Collabolatte had slipped off her radar.
-
-**Rising Action:**
-
-In March, things slow down. She notices a match notification: **David, Operations Lead, Dublin**. The conversation starter catches her eye: "David recently led the office relocation project. You might ask what he'd do differently."
-
-Aisha is about to lead a similar project. She clicks **[Introduce Yourself]**.
-
-**Climax:**
-
-David responds within an hour. They meet for 25 minutes. He tells her about the pitfalls—the vendor who overpromised, the comms plan that should have started earlier. Aisha leaves with three concrete actions.
-
-**Resolution:**
-
-Aisha stays opted in—this time with intent. She tells a colleague: "I ignored it for months. Nothing bad happened. Then it was useful exactly when I needed it."
-
-The system didn't punish her absence. It waited.
-
-*The system logs: user-reactivated-after-dormancy (silent metric for passive validation).*
-
-**Dormant User Re-engagement Guidance:** When a user returns after ≥2 missed cycles, match notification should include subtle acknowledgment: "Good to see you back" or equivalent. No guilt, no metrics—just warmth.
-
----
-
-## Journey Requirements Summary
-
-| Journey | Key Capabilities Revealed |
-|---------|---------------------------|
-| **Tomás (New Joiner)** | SSO/directory integration, one-click introduction, conversation starter, match-acknowledged logging |
-| **Marcus (Sceptic)** | Trust architecture, conversation starter (MVP), no manager visibility, graceful mediocrity |
-| **Priya (Programme Creator)** | Zero-maintenance setup, cross-boundary matching constraint, passive metrics |
-| **Helena (Executive Sponsor)** | Narrative evidence, aggregate reporting, side-channel anecdote capture |
-| **Aisha (Dormant User)** | Graceful inactivity, no guilt, re-engagement logging, "We waited" emotional contract |
-
----
-
-## Implicit Requirements (Surfaced by Elicitation)
-
-| Requirement | Rationale | Priority |
-|-------------|-----------|----------|
-| **Directory/SSO integration** | Pre-fill signup, reduce friction | MVP - hard dependency |
-| **One-click introduction action** | Reduce first-move friction | MVP |
-| **Conversation starter prompt** | Tips awkwardness toward usefulness | MVP (promoted from Should-Have) |
-| **Cross-boundary matching constraint** | Ensures thesis validation | MVP |
-| **Delivery confirmation (silent)** | Detect notification failures | MVP |
-| **Event logging (match-sent, match-acknowledged)** | Future-proof for re-engagement metrics | MVP |
-| **Re-engagement tracking (silent)** | Validates graceful dormancy works | MVP (lightweight) |
-| **Optional story capture channel** | Surface anecdotes for Helena | Post-MVP (or manual workaround) |
 
 ---
 
@@ -394,16 +251,6 @@ If it erodes trust, it doesn't ship.
 | **Retention limits** | Match history retention should be time-bounded; define retention period |
 | **No individual-level reporting** | Aggregate metrics only; no manager access to participation data |
 | **Audit trail** | Log what the system does (match-sent, match-acknowledged), not what users do |
-
----
-
-### Integration Requirements
-
-| Requirement | Rationale | Priority |
-|-------------|-----------|----------|
-| **SSO/Directory integration** | Pre-fill signup, reduce friction, ensure identity | MVP |
-| **Teams/Slack integration** | Notification delivery and one-click introduction | MVP |
-| **HRIS integration** | For cross-boundary constraint validation (function, region) | Post-MVP |
 
 ---
 
@@ -888,36 +735,9 @@ The MVP is complete when:
 
 | ID | Requirement | Phase | Priority | Journey Link |
 |----|-------------|-------|----------|---------------|
-| FR16 | Match notification email contains: matched participant name, conversation starter, Teams deep link, and suggested intro message (copy-paste friendly) | MVP | Must | Marcus |
+| FR16 | Match notification email contains: matched participant name, Teams deep link, and a simple first‑move prompt with suggested intro copy (copy‑paste friendly) | MVP | Must | Marcus |
 | FR17 | Email is sent via Azure Communication Services to user's Entra ID email | MVP | Must | Marcus |
 | FR18 | Teams deep link opens 1:1 chat with matched participant | MVP | Must | Marcus |
-| FR19 | Conversation starter is randomly selected from curated pool per programme | MVP | Must | Marcus |
-| FR20 | Maximum one reminder per match cycle; users are not penalised for not responding | MVP | Should | Marcus |
-
----
-
-### 5. Programme Management
-
-| ID | Requirement | Phase | Priority | Journey Link |
-|----|-------------|-------|----------|---------------|
-| FR21 | Programme Owner can create a new programme with name, description, and cadence | Growth | Must | Priya |
-| FR22 | Programme Owner can invite participants by email address or CSV upload | MVP | Must | Priya |
-| FR23 | Programme Owner can view aggregate participation metrics (joined, active, paused) | Growth | Should | Priya |
-| FR24 | Programme Owner can configure matching cadence (weekly, fortnightly, monthly) | MVP | Must | Priya |
-| FR25 | Programme Owner can edit programme name, description, and cadence | MVP | Should | Priya |
-| FR42 | Programme Owner receives notification when matching cycle completes, including match count | MVP | Should | Priya |
-
----
-
-### 6. Administration
-
-| ID | Requirement | Phase | Priority | Journey Link |
-|----|-------------|-------|----------|---------------|
-| FR26 | Admin can view all programmes in the system | MVP | Must | Helena |
-| FR27 | Admin can deactivate a programme | MVP | Must | Helena |
-| FR28 | Admin can assign Programme Owner role to users | MVP | Must | Helena |
-| FR29 | Admin cannot view individual participation or match data | MVP | Must | Helena (trust constraint) |
-| FR29a | Admin can view programme health dashboard showing aggregate metrics (participation rates, match completion, system alerts) | MVP | Should | Helena |
 
 ---
 
@@ -948,19 +768,9 @@ The MVP is complete when:
 
 ### Functional Requirements Summary
 
-| Capability Area | FR Count | MVP | Growth |
-|-----------------|----------|-----|--------|
-| User Identity & Access | 4 | 4 | 0 |
-| Programme Participation | 6 | 6 | 0 |
-| Matching | 5 | 5 | 0 |
-| Notifications | 5 | 5 | 0 |
-| Programme Management | 6 | 4 | 2 |
-| Administration | 5 | 5 | 0 |
-| Privacy & Trust | 6 | 6 | 0 |
-| Event Logging | 5 | 5 | 0 |
-| **Total** | **42** | **40** | **2** |
+MVP functional requirements have been aligned to the product brief (single programme, minimal notification, no dashboards or programme creation). Deferred requirements are preserved in the **Deferred / Post‑MVP** section below.
 
-**Traceability:** Every FR links to at least one User Journey. Every User Journey action maps to at least one FR.
+**Traceability:** Every remaining MVP FR links to an MVP‑scope journey and success criteria.
 
 **Party Mode Refinements Applied:**
 - FR4: Clarified "own" data access
@@ -977,6 +787,161 @@ The MVP is complete when:
 - FR41: User-facing transparency page
 - FR42: Cycle completion notification to Programme Owner
 - Anti-Mandate Principle added to Cultural Risk Mitigations
+
+---
+
+## Deferred / Post‑MVP (from prior PRD)
+### Deferred Notification Enhancements
+
+- FR19 Conversation starter selection (post‑MVP conversation support)
+- FR20 Reminder per match cycle (not in MVP; risks obligation)
+
+
+
+These sections were removed from the MVP‑aligned PRD but preserved here for future phases.
+
+
+### Journey 3: Priya – The Programme Creator Sets Conditions
+
+**Opening Scene:**
+
+Priya leads L&D in the UK practice. She's been asked to "do something about cross-team connection" without adding to anyone's workload.
+
+She hears about Collabolatte. The promise: set it up, let it run, measure participation passively.
+
+**Rising Action:**
+
+Priya creates a programme: "UK Practice Coffee." She sets the cadence to fortnightly, group size to pairs, matching rule to random with a cross-boundary constraint (must match across function OR region). She writes one line of copy: "Meet someone you wouldn't otherwise. No agenda. No follow-up required."
+
+She sends an invite to 200 people. Thirty join in the first week.
+
+**Climax:**
+
+Six weeks later, she checks passive metrics. Twenty-two of the thirty are still opted in. She sees that 85% of matches crossed functional boundaries. She receives an unsolicited message from a senior partner: "I met someone in the Newcastle office I'd never have found otherwise."
+
+**Resolution:**
+
+Priya doesn't run Collabolatte—she set conditions and stepped back. When Helena asks for a board update, Priya says: "Seventy percent retention, cross-boundary matching working, no complaints, and a handful of unprompted good stories."
+
+*(In MVP, Priya sees basic aggregate metrics; full Programme Owner dashboard is Growth-phase.)*
+
+---
+
+### Journey 4: Helena – The Executive Sponsor Defends the Investment
+
+**Opening Scene:**
+
+Helena is the CHRO. She approved the Collabolatte pilot because the pitch was low-cost, low-risk, and addressed a real problem.
+
+**Rising Action:**
+
+At the six-month mark, Priya sends a summary:
+- Opt-in retention: 65% stayed active across multiple cycles
+- Cross-boundary connections: 80% of matches crossed functions or regions
+- Anecdotes: Three concrete stories (surfaced via direct messages to Priya and one Slack thread)
+- Trust preserved: Zero complaints, zero escalations
+
+**Climax:**
+
+At the board meeting, a director asks: "What's the return on this?"
+
+Helena says: "The return is optionality. We've created a low-cost mechanism for cross-team connection that people actually use, that hasn't created backlash, and that occasionally produces real value. It's infrastructure, not a programme."
+
+**Resolution:**
+
+The board nods. The pilot becomes permanent.
+
+---
+
+### Journey 5: Aisha – The Dormant User Returns
+
+**Opening Scene:**
+
+Aisha is a manager in Edinburgh, eight years at the firm. She joined Collabolatte early. Her first matches were fine, then forgettable. Then Q4 hit—deadlines, travel, no bandwidth. She ignored three match notifications. The system didn't chase her. No reminder. No "we miss you." Just silence.
+
+By January, Collabolatte had slipped off her radar.
+
+**Rising Action:**
+
+In March, things slow down. She notices a match notification: **David, Operations Lead, Dublin**. The conversation starter catches her eye: "David recently led the office relocation project. You might ask what he'd do differently."
+
+Aisha is about to lead a similar project. She clicks **[Introduce Yourself]**.
+
+**Climax:**
+
+David responds within an hour. They meet for 25 minutes. He tells her about the pitfalls—the vendor who overpromised, the comms plan that should have started earlier. Aisha leaves with three concrete actions.
+
+**Resolution:**
+
+Aisha stays opted in—this time with intent. She tells a colleague: "I ignored it for months. Nothing bad happened. Then it was useful exactly when I needed it."
+
+The system didn't punish her absence. It waited.
+
+*The system logs: user-reactivated-after-dormancy (silent metric for passive validation).*
+
+**Dormant User Re-engagement Guidance:** When a user returns after ≥2 missed cycles, match notification should include subtle acknowledgment: "Good to see you back" or equivalent. No guilt, no metrics—just warmth.
+
+---
+
+## Journey Requirements Summary
+
+| Journey | Key Capabilities Revealed |
+|---------|---------------------------|
+| **Tomás (New Joiner)** | SSO/directory integration, one-click introduction, conversation starter, match-acknowledged logging |
+| **Marcus (Sceptic)** | Trust architecture, conversation starter (MVP), no manager visibility, graceful mediocrity |
+| **Priya (Programme Creator)** | Zero-maintenance setup, cross-boundary matching constraint, passive metrics |
+| **Helena (Executive Sponsor)** | Narrative evidence, aggregate reporting, side-channel anecdote capture |
+| **Aisha (Dormant User)** | Graceful inactivity, no guilt, re-engagement logging, "We waited" emotional contract |
+
+---
+
+## Implicit Requirements (Surfaced by Elicitation)
+
+| Requirement | Rationale | Priority |
+|-------------|-----------|----------|
+| **Directory/SSO integration** | Pre-fill signup, reduce friction | MVP - hard dependency |
+| **One-click introduction action** | Reduce first-move friction | MVP |
+| **Conversation starter prompt** | Tips awkwardness toward usefulness | MVP (promoted from Should-Have) |
+| **Cross-boundary matching constraint** | Ensures thesis validation | MVP |
+| **Delivery confirmation (silent)** | Detect notification failures | MVP |
+| **Event logging (match-sent, match-acknowledged)** | Future-proof for re-engagement metrics | MVP |
+| **Re-engagement tracking (silent)** | Validates graceful dormancy works | MVP (lightweight) |
+| **Optional story capture channel** | Surface anecdotes for Helena | Post-MVP (or manual workaround) |
+
+---
+
+### Integration Requirements
+
+| Requirement | Rationale | Priority |
+|-------------|-----------|----------|
+| **SSO/Directory integration** | Pre-fill signup, reduce friction, ensure identity | MVP |
+| **Teams/Slack integration** | Notification delivery and one-click introduction | MVP |
+| **HRIS integration** | For cross-boundary constraint validation (function, region) | Post-MVP |
+
+---
+
+### 5. Programme Management
+
+| ID | Requirement | Phase | Priority | Journey Link |
+|----|-------------|-------|----------|---------------|
+| FR21 | Programme Owner can create a new programme with name, description, and cadence | Growth | Must | Priya |
+| FR22 | Programme Owner can invite participants by email address or CSV upload | MVP | Must | Priya |
+| FR23 | Programme Owner can view aggregate participation metrics (joined, active, paused) | Growth | Should | Priya |
+| FR24 | Programme Owner can configure matching cadence (weekly, fortnightly, monthly) | MVP | Must | Priya |
+| FR25 | Programme Owner can edit programme name, description, and cadence | MVP | Should | Priya |
+| FR42 | Programme Owner receives notification when matching cycle completes, including match count | MVP | Should | Priya |
+
+---
+
+### 6. Administration
+
+| ID | Requirement | Phase | Priority | Journey Link |
+|----|-------------|-------|----------|---------------|
+| FR26 | Admin can view all programmes in the system | MVP | Must | Helena |
+| FR27 | Admin can deactivate a programme | MVP | Must | Helena |
+| FR28 | Admin can assign Programme Owner role to users | MVP | Must | Helena |
+| FR29 | Admin cannot view individual participation or match data | MVP | Must | Helena (trust constraint) |
+| FR29a | Admin can view programme health dashboard showing aggregate metrics (participation rates, match completion, system alerts) | MVP | Should | Helena |
 
 ---
 
@@ -1090,7 +1055,7 @@ Collabolatte is a **ritual engine for manufactured serendipity**—infrastructur
 | **Product Type** | Lightweight SaaS / Ritual Engine |
 | **Target Users** | Employees in large multinationals seeking cross-team connection |
 | **Core Hypothesis** | If we make it easy and low-stakes, people will repeatedly take the shot |
-| **MVP Scope** | 42 functional requirements, 27 non-functional requirements |
+| **MVP Scope** | Aligned to product brief; see Deferred section for removed items |
 | **Technical Stack** | Azure Static Web Apps, C# Functions, Table Storage, Entra ID |
 | **Estimated Cost** | ~£5/month |
 | **Timeline** | 4-6 weeks (MVP) |
@@ -1098,7 +1063,7 @@ Collabolatte is a **ritual engine for manufactured serendipity**—infrastructur
 ### Traceability Chain
 
 ```
-Vision → Success Criteria → User Journeys (5) → Functional Requirements (42) → Non-Functional Requirements (27)
+Vision → Success Criteria → User Journeys (2) → Functional Requirements (MVP-aligned) → Non-Functional Requirements (27)
 ```
 
 Every requirement traces back to a user journey. Every journey traces back to success criteria. The chain is complete.
