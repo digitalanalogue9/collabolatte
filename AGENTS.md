@@ -5,9 +5,7 @@ agents:
   - id: architect
     path: _bmad/bmm/agents/architect.md
   - id: bmad-master
-    path: _bmad/bmm/agents/bmad-master.md
-  - id: bmad-orchestrator
-    path: _bmad/bmm/agents/bmad-orchestrator.md
+    path: _bmad/core/agents/bmad-master.md
   - id: dev
     path: _bmad/bmm/agents/dev.md
   - id: pm
