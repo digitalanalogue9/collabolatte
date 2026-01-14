@@ -2,7 +2,7 @@
 stepsCompleted: [1, 2, 3, 4, 5, 6, 7]
 inputDocuments:
   - '_bmad-output/planning-artifacts/prd.md'
-  - '_bmad-output/planning-artifacts/product-brief-collabolatte-2026-01-12.md'
+  - '_bmad-output/planning-artifacts/product-brief.md'
   - '_bmad-output/planning-artifacts/ux-design-specification.md'
   - '_bmad-output/planning-artifacts/research/domain-weak-ties-serendipity-research-2026-01-11.md'
   - '_bmad-output/project-context.md'

@@ -94,11 +94,27 @@ Collabolatte creates a shared excuse to meet by pairing small groups on a gentle
 - **Long‑term:** Stays opted‑in quietly; builds a small network of weak ties across functions.
 
 **Sam (New Joiner)**
-- **Discovery:** Sees a light Teams or onboarding follow‑up note: “Optional. Low effort. You’ll get matched with a couple of people. No obligation.”
+- **Discovery:** Sees a light Teams or onboarding follow‑up note: "Optional. Low effort. You'll get matched with a couple of people. No obligation."
 - **Onboarding:** Clear reassurance: no performance tracking; meeting is a safe intro.
 - **Core Usage:** Matches help decode who does what beyond org charts.
 - **Success Moment:** A first conversation provides real context and a safe future contact.
 - **Long‑term:** Organisation feels smaller; confidence in reaching out increases.
+
+**Rachel (Programme Sponsor)**
+
+**Persona:**
+- **Role/Context:** HR Director or Practice Lead sponsoring the pilot. Accountable for "employee engagement" but sceptical of heavy programmes. Has budget pressure and limited time.
+- **Motivations:** Low‑maintenance initiative that shows genuine care without creating administrative burden or surveillance optics.
+- **Problem Experience (Moment):** Asked to "do something about connection" post‑pandemic. Previous initiatives (mentoring schemes, social events) required constant pushing and faded. Worried about launching something that becomes another obligation.
+
+**Journey:**
+- **Discovery:** Hears about Collabolatte from a peer organisation or reads about "coffee lottery" concepts. Intrigued by the low‑touch promise.
+- **Onboarding:** Receives a one‑page brief explaining the trust contract (no individual tracking, no manager visibility). Sees example comms for launch.
+- **Launch:** Sends a single, calm announcement. No fanfare, no targets.
+- **Ongoing:** Receives a monthly one‑line summary (e.g., "47 people opted in, 23 matches this cycle"). No dashboards to check.
+- **Success Moment:** At 3 months, hears an unprompted anecdote from a participant. Can say to leadership: "It's running, people like it, and it costs us nothing to maintain."
+- **Long‑term:** Forgets it's running — which is the point.
+
 ## Success Metrics
 
 ### User Success Outcomes (Behaviour‑First)
@@ -172,6 +188,33 @@ Stability first, then breadth; depth is a by‑product, not a target.
 - **Clear nudge:** Match notification with explicit first‑move prompt; Teams or email is sufficient.
 - **Do nothing else:** No scheduling, chat, feedback forms, or dashboards.
 
+### Match Notification Content
+
+_Example copy for the match notification email. Tone: calm, low-pressure, permission-giving._
+
+**Subject:** You've been matched with [Name] from [Department]
+
+**Body:**
+
+> Hi [Your Name],
+>
+> This cycle, you've been matched with **[Match Name]** from **[Department/Function]** in **[Location]**.
+>
+> **What happens next?**
+> Nothing, unless you'd like to. If you fancy a quick chat, here's a ready-to-send message:
+>
+> ---
+> *"Hi [Match Name], we've been matched through Collabolatte this cycle. Fancy a 15-minute virtual coffee sometime in the next couple of weeks? No agenda — just a chance to say hello. Let me know what works for you, or feel free to ignore this if it's not a good time."*
+>
+> [Copy to clipboard] · [Open Teams chat]
+>
+> ---
+>
+> **No pressure.** If this cycle doesn't work, you'll be matched again next time. No one is tracking whether you meet.
+>
+> Cheers,
+> Collabolatte
+
 **MVP in one sentence:**  
 A single, opt‑in programme that periodically matches small groups across organisational boundaries and nudges them to meet, with no obligation and no surveillance.
 
@@ -215,4 +258,33 @@ A single, opt‑in programme that periodically matches small groups across organ
 5. **Growth mechanics** – gift a match; time‑boxed experiments.
 
 Nothing here changes the core idea; it reduces friction or expands reach once trust is established.
+
+## Technical Constraints
+
+_Key technical decisions affecting product scope and delivery. See `architecture.md` for full details._
+
+### Platform & Identity
+- **Azure Static Web Apps** with built‑in authentication (EasyAuth) — no custom login screens
+- **Microsoft Entra ID** (corporate SSO) is the only identity provider for MVP
+- **Single‑tenant deployment** — one organisation initially; multi‑tenant architecture deferred
+
+### Data & Privacy
+- **Azure Table Storage** partitioned by programme — enforces data isolation at the infrastructure level
+- **Programme‑scoped queries only** — cross‑programme data access is architecturally blocked
+- **12‑month match retention** — user deletion requests honoured promptly
+
+### Notifications
+- **Email is authoritative** (Azure Communication Services) — delivery logging and retry built in
+- **Teams is additive** — deep links in notifications, but email remains the guaranteed fallback
+- **No SMS** in MVP
+
+### Cost & Scaling
+- **All‑Free tier deployment** — consumption‑based serverless; no pre‑provisioned capacity
+- **No Key Vault or Application Insights** in MVP — secrets via environment variables; basic platform logs only
+- **Upgrade hooks** in architecture for Key Vault, App Insights, and dynamic role management when needed
+
+### Constraints Affecting Product Decisions
+- **No real‑time features** — matching runs on a scheduled cadence, not on‑demand
+- **Aggregate reporting only** — minimum‑N threshold of 5 to prevent re‑identification
+- **Role management via allowlist** — Programme Owner/Admin roles assigned manually (no self‑service UI)
 

@@ -34,19 +34,29 @@ workflow_status:
         selected: true
         completed: "2026-01-11"
 
-      - id: "research"
-        name: "Research"
-        status: "optional"
+      - id: "research-domain"
+        name: "Research (Domain)"
+        status: "_bmad-output/planning-artifacts/research/domain-weak-ties-serendipity-research-2026-01-11.md"
         agent: "analyst"
         command: "/bmad:bmm:workflows:research"
         selected: true
+        completed: "2026-01-11"
+
+      - id: "research-market"
+        name: "Research (Market)"
+        status: "_bmad-output/planning-artifacts/research/market-competitive-landscape-research-2026-01-14.md"
+        agent: "analyst"
+        command: "/bmad:bmm:workflows:research"
+        selected: true
+        completed: "2026-01-14"
 
       - id: "product-brief"
         name: "Product Brief"
-        status: "_bmad-output/planning-artifacts/product-brief-collabolatte-2026-01-12.md"
+        status: "_bmad-output/planning-artifacts/product-brief.md"
         agent: "analyst"
         command: "/bmad:bmm:workflows:create-product-brief"
         selected: true
+        completed: "2026-01-12"
 
   # Phase 2: Planning
   - phase: 2
@@ -80,15 +90,17 @@ workflow_status:
 
       - id: "create-epics-and-stories"
         name: "Epics & Stories"
-        status: "required"
+        status: "complete"
         agent: "pm"
         command: "/bmad:bmm:workflows:create-epics-and-stories"
+        completed: "2026-01-14"
 
       - id: "test-design"
         name: "Test Design"
-        status: "optional"
+        status: "_bmad-output/test-design-system.md"
         agent: "tea"
         command: "/bmad:bmm:workflows:testarch-test-design"
+        completed: "2026-01-14"
 
       - id: "implementation-readiness"
         name: "Implementation Readiness"
@@ -105,3 +117,4 @@ workflow_status:
         status: "required"
         agent: "sm"
         command: "/bmad:bmm:workflows:sprint-planning"
+
