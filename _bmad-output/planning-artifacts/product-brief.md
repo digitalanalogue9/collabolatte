@@ -4,6 +4,7 @@ inputDocuments:
   - _bmad-output/analysis/brainstorming-session-2026-01-11.md
   - _bmad-output/planning-artifacts/research/domain-weak-ties-serendipity-research-2026-01-11.md
 date: 2026-01-12
+last_updated: 2026-01-14
 author: DA9
 ---
 
@@ -32,7 +33,7 @@ Current approaches rely on visibility, confidence, or heavy structure. Informal 
 
 ### Proposed Solution
 
-Collabolatte creates a shared excuse to meet by pairing small groups on a gentle cadence. The system initiates the connection, shares the social risk, and keeps the cost low enough that misses are acceptable. It is deliberately light, optional, and privacy‑respecting — focused on creating opportunities rather than forcing outcomes or surveilling behaviour.
+Collabolatte creates a shared excuse to meet by pairing small groups of people on a gentle cadence. The system initiates the connection, shares the social risk, and keeps the cost low enough that misses are acceptable. It is deliberately light, optional, and privacy‑respecting — focused on creating opportunities rather than forcing outcomes or surveilling behaviour.
 
 ### Key Differentiators
 
@@ -184,7 +185,7 @@ Stability first, then breadth; depth is a by‑product, not a target.
 - **Identity and trust:** Corporate sign‑in; minimal profile (name, function/department, location). No self‑promotion.
 - **One public programme:** Single, clearly framed programme with one cadence (e.g., monthly).
 - **Opt‑in participation:** One‑click join; one‑click leave/pause; no consequences.
-- **Matching:** Simple, transparent rule; small groups (2–3); avoid obvious repeats.
+- **Matching:** Simple, transparent rule; 1:1 pairs (MVP); larger groups can come post‑MVP; avoid obvious repeats.
 - **Clear nudge:** Match notification with explicit first‑move prompt; Teams or email is sufficient.
 - **Do nothing else:** No scheduling, chat, feedback forms, or dashboards.
 
@@ -216,7 +217,7 @@ _Example copy for the match notification email. Tone: calm, low-pressure, permis
 > Collabolatte
 
 **MVP in one sentence:**  
-A single, opt‑in programme that periodically matches small groups across organisational boundaries and nudges them to meet, with no obligation and no surveillance.
+A single, opt‑in programme that periodically matches pairs across organisational boundaries and nudges them to meet, with no obligation and no surveillance.
 
 ### Out of Scope for MVP (explicitly deferred)
 
@@ -287,4 +288,3 @@ _Key technical decisions affecting product scope and delivery. See `architecture
 - **No real‑time features** — matching runs on a scheduled cadence, not on‑demand
 - **Aggregate reporting only** — minimum‑N threshold of 5 to prevent re‑identification
 - **Role management via allowlist** — Programme Owner/Admin roles assigned manually (no self‑service UI)
-

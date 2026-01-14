@@ -63,10 +63,10 @@ After 2-3 monthly cycles:
 
 | Signal | Measure |
 |--------|---------|
-| People stay opted-in | >50% retention after cycle 2 |
-| Conversations happen | Anecdotal evidence (not tracked) |
-| No complaints | Zero concerns about pressure or surveillance |
-| Word spreads | People ask "how do I join?" |
+| Cycles run reliably | 2–3 cycles complete on schedule |
+| Notifications deliver | Delivery failures are visible and recoverable (no silent errors) |
+| Trust preserved | Zero concerns about pressure or surveillance |
+| Value emerges | A small handful of unprompted anecdotes (not tracked by the system) |
 
 **Success is quiet.** If it's working, people just... keep doing it.
 

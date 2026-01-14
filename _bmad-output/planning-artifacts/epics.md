@@ -33,14 +33,14 @@ FR17: Email is sent via Azure Communication Services to user's Entra ID email
 FR18: Teams deep link opens 1:1 chat with matched participant
 FR21: Programme Owner can create a new programme with name, description, and cadence
 FR22: Programme Owner can invite participants by email address or CSV upload
-FR23: Programme Owner can view aggregate participation metrics (joined, active, paused)
+FR23: Programme Owner can view aggregate participation metrics (joined, active, paused) [Growth]
 FR24: Programme Owner can configure matching cadence (weekly, fortnightly, monthly)
 FR25: Programme Owner can edit programme name, description, and cadence
 FR26: Admin can view all programmes in the system
 FR27: Admin can deactivate a programme
 FR28: Admin can assign Programme Owner role to users
 FR29: Admin cannot view individual participation or match data
-FR29a: Admin can view programme health dashboard showing aggregate metrics (participation rates, match completion, system alerts) [Growth]
+FR29a: Admin can view ops-only programme health (cycle execution, notification delivery health, trust guardrails status, operational errors) gated behind minimum-N ≥5
 FR30: No individual-level API endpoints exist for admin/owner queries about specific participants; individual participants can access their own data via authenticated endpoints
 FR31: No tracking of whether matched participants actually met
 FR32: All personal data deletable upon user request (GDPR Article 17)
@@ -52,7 +52,7 @@ FR37: Privacy-preserving aggregate queries only; minimum 5 participants required
 FR38: Event log entries are immutable and timestamped
 FR39: No individual-level event queries exposed to admin/owner roles
 FR41: Users can view a "What we collect" transparency page explaining data handling
-FR42: Programme Owner receives notification when matching cycle completes, including match count
+FR42: Programme Owner receives notification when matching cycle completes, including status and any system errors (no participation counts)
 
 ### NonFunctional Requirements
 
@@ -258,7 +258,7 @@ Failure modes:
 - Individual visibility creeps in
 Mitigations:
 - Aggregate-only, minimum-N enforced; no individual-level endpoints
-- FR29a remains Growth; MVP ops limited to controls + logs
+- FR29a is MVP but strictly ops-only; no participation counts or adoption signals
 - No multi-programme UI in MVP
 
 ## Pre-mortem Risk Summary
@@ -853,8 +853,10 @@ So that trust is preserved.
 
 **Given** aggregates are shown,
 **When** I view them,
-**Then** they include participation counts, active vs paused, and system health indicators only,
-**And** they exclude per-cycle performance views or success metrics.
+**Then** they include cycle execution health, notification delivery health, trust guardrails status, and operational errors (with correlation IDs) only,
+**And** they exclude participation counts, adoption signals, per-cycle performance views, or success metrics.
+
+**And** all ops-only health is gated behind minimum-N ≥5.
 
 ### Story 5.6: Matching cycle completion notice
 

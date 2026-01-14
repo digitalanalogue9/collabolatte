@@ -45,11 +45,13 @@ elicitationInsights:
 # Product Requirements Document - collabolatte
 
 **Author:** DA9
-**Date:** 2026-01-11
+**Date:** 2026-01-14
 
 ---
 
 **Alignment Note (2026-01-12):** This PRD has been explicitly aligned to the Product Brief dated 2026-01-12. MVP scope has been narrowed to a single opt‑in programme with minimal notification and no dashboards, programme creation, or conversation‑starter features. Prior content that exceeds the brief’s MVP boundary has been preserved in the ‘Deferred / Post‑MVP (from prior PRD)’ section for future phases.
+
+**Alignment Note (2026-01-14):** MVP ops “health” is **ops-only** and gated behind **minimum‑N ≥5**. In MVP, Programme Owners/Admins see only: cycle execution health, notification delivery health, trust guardrails status, and operational errors (with correlation IDs). No participation counts, banded adoption signals, or behavioural tracking.
 
 
 ## Success Criteria
@@ -69,7 +71,7 @@ A participant considers Collabolatte worthwhile when at least one of these occas
 
 **Key Insight:** It doesn't matter which of these happens—only that at least one occasionally does. The misses are acceptable if the cost stays low and the upside remains plausible.
 
-**Measurable Proxy:** Continued opt-in across multiple cycles.
+**Proxy (MVP):** The system runs monthly without trust complaints or escalations, and occasional unprompted anecdotes of value emerge. Do not add participation metrics or dashboards in MVP.
 
 ---
 
@@ -81,8 +83,8 @@ A participant considers Collabolatte worthwhile when at least one of these occas
 
 | Evidence Required | Description |
 |-------------------|-------------|
-| **Opt-in retention** | Meaningful proportion of eligible staff stayed opted in across multiple cycles |
-| **Boundary crossing** | Connections occurred across functions, practices, or regions—not just within existing silos |
+| **Safe operation** | Cycles run on the agreed cadence; delivery failures are visible and recoverable |
+| **Voluntary continuity (unmeasured)** | People keep opting in or returning without pressure, guilt loops, or metrics |
 | **Credible anecdotes** | A small number of concrete stories: an introduction made, duplication avoided, work unblocked, or idea sparked |
 | **Trust preserved** | No negative signals around surveillance, coercion, or time waste |
 
@@ -106,16 +108,14 @@ A participant considers Collabolatte worthwhile when at least one of these occas
 
 ---
 
-### Measurable Outcomes
+### Operational Outcomes (MVP)
 
-| Timeframe | Metric | Target |
-|-----------|--------|--------|
-| **8 weeks** | Do meetings actually happen once matched? | >50% of matches result in a meeting |
-| **8 weeks** | Does low-risk framing work, or create inertia? | Qualitative signal from early adopters |
-| **3 months** | Opt-in retention rate | >60% of initial participants remain active |
-| **6 months** | Cross-boundary connections | Majority of matches cross function/practice/region |
-| **6 months** | Unprompted anecdotes | ≥3 concrete stories of value created |
-| **6 months** | Trust indicators | Zero escalations or complaints about surveillance/coercion |
+In MVP, Collabolatte does **not** provide adoption/participation analytics. We prove safety and reliability with operational evidence only (gated behind **minimum‑N ≥5**):
+
+- **Cycle execution health**: last run, next run, succeeded/failed.
+- **Notification delivery health**: attempted/sent/failed (no recipient lists), retries exhausted.
+- **Trust guardrails status**: minimum‑N enforcement, “no individual reporting” invariants, deletion pipeline health (queue size + oldest age).
+- **Operational errors**: error category counts for the cycle and correlation IDs for investigation.
 
 ---
 
@@ -593,7 +593,7 @@ Collabolatte is a **Ritual Engine / Lightweight SaaS**—not a traditional B2B p
 
 **Goal:** Reduce friction, expand surface area.
 
-**Trigger:** >50% retention after 3 cycles; qualitative signal that value is real.
+**Trigger:** Multiple safe monthly cycles completed with no trust escalations, and leadership explicitly requests expansion.
 
 | Capability | Description |
 |------------|-------------|
@@ -615,7 +615,7 @@ Collabolatte is a **Ritual Engine / Lightweight SaaS**—not a traditional B2B p
 
 **Goal:** Enterprise readiness, multi-tenant capability.
 
-**Trigger:** Multiple organisations requesting pilots; retention sustained at 6 months.
+**Trigger:** Multiple organisations requesting pilots; sustained qualitative value and continued voluntary participation over time.
 
 | Capability | Description |
 |------------|-------------|
@@ -807,23 +807,23 @@ These sections were removed from the MVP‑aligned PRD but preserved here for fu
 
 Priya leads L&D in the UK practice. She's been asked to "do something about cross-team connection" without adding to anyone's workload.
 
-She hears about Collabolatte. The promise: set it up, let it run, measure participation passively.
+She hears about Collabolatte. The promise: set it up, let it run safely, and avoid measuring people.
 
 **Rising Action:**
 
-Priya creates a programme: "UK Practice Coffee." She sets the cadence to fortnightly, group size to pairs, matching rule to random with a cross-boundary constraint (must match across function OR region). She writes one line of copy: "Meet someone you wouldn't otherwise. No agenda. No follow-up required."
+Priya configures the programme: "UK Practice Coffee." She sets the cadence to monthly, match size to 1:1 pairs, and matching rule to random with repeat‑avoidance. She writes one line of copy: "Meet someone you wouldn't otherwise. No agenda. No follow‑up required."
 
-She sends an invite to 200 people. Thirty join in the first week.
+She shares a simple join link. Volunteers opt in.
 
 **Climax:**
 
-Six weeks later, she checks passive metrics. Twenty-two of the thirty are still opted in. She sees that 85% of matches crossed functional boundaries. She receives an unsolicited message from a senior partner: "I met someone in the Newcastle office I'd never have found otherwise."
+After a couple of cycles, she checks the ops health: cycles ran, notifications delivered, and there were no trust escalations. She receives an unsolicited message from a senior partner: "I met someone in the Newcastle office I'd never have found otherwise."
 
 **Resolution:**
 
-Priya doesn't run Collabolatte—she set conditions and stepped back. When Helena asks for a board update, Priya says: "Seventy percent retention, cross-boundary matching working, no complaints, and a handful of unprompted good stories."
+Priya doesn't run Collabolatte—she set conditions and stepped back. When Helena asks for a board update, Priya says: "Monthly cycles ran, notification delivery was reliable, no complaints, and a handful of unprompted good stories."
 
-*(In MVP, Priya sees basic aggregate metrics; full Programme Owner dashboard is Growth-phase.)*
+*(In MVP, Priya sees ops‑only health signals (cycle execution, notification delivery health, trust guardrails status, and operational errors with correlation IDs) gated behind minimum‑N ≥5. No participation counts.)*
 
 ---
 
@@ -836,10 +836,10 @@ Helena is the CHRO. She approved the Collabolatte pilot because the pitch was lo
 **Rising Action:**
 
 At the six-month mark, Priya sends a summary:
-- Opt-in retention: 65% stayed active across multiple cycles
-- Cross-boundary connections: 80% of matches crossed functions or regions
-- Anecdotes: Three concrete stories (surfaced via direct messages to Priya and one Slack thread)
-- Trust preserved: Zero complaints, zero escalations
+- The system ran predictably (monthly cycles completed as scheduled)
+- Notification delivery remained reliable (failures were visible and fixed quickly)
+- Trust posture held (no complaints, no escalations)
+- Anecdotes emerged organically (a small handful of concrete stories)
 
 **Climax:**
 
@@ -863,9 +863,9 @@ By January, Collabolatte had slipped off her radar.
 
 **Rising Action:**
 
-In March, things slow down. She notices a match notification: **David, Operations Lead, Dublin**. The conversation starter catches her eye: "David recently led the office relocation project. You might ask what he'd do differently."
+In March, things slow down. She notices a match notification: **David, Operations Lead, Dublin**.
 
-Aisha is about to lead a similar project. She clicks **[Introduce Yourself]**.
+Aisha is about to lead a similar project. She copies the suggested first‑move message and sends it in Teams.
 
 **Climax:**
 
@@ -877,7 +877,7 @@ Aisha stays opted in—this time with intent. She tells a colleague: "I ignored 
 
 The system didn't punish her absence. It waited.
 
-*The system logs: user-reactivated-after-dormancy (silent metric for passive validation).*
+*(MVP note: do not log “dormancy” or re‑engagement as behavioural analytics. Only system events are logged.)*
 
 **Dormant User Re-engagement Guidance:** When a user returns after ≥2 missed cycles, match notification should include subtle acknowledgment: "Good to see you back" or equivalent. No guilt, no metrics—just warmth.
 
@@ -925,11 +925,11 @@ The system didn't punish her absence. It waited.
 | ID | Requirement | Phase | Priority | Journey Link |
 |----|-------------|-------|----------|---------------|
 | FR21 | Programme Owner can create a new programme with name, description, and cadence | Growth | Must | Priya |
-| FR22 | Programme Owner can invite participants by email address or CSV upload | MVP | Must | Priya |
+| FR22 | Programme Owner can invite participants by email address or CSV upload | Growth | Should | Priya |
 | FR23 | Programme Owner can view aggregate participation metrics (joined, active, paused) | Growth | Should | Priya |
-| FR24 | Programme Owner can configure matching cadence (weekly, fortnightly, monthly) | MVP | Must | Priya |
+| FR24 | Programme Owner can configure matching cadence (MVP: monthly only; weekly/fortnightly are Growth) | MVP | Must | Priya |
 | FR25 | Programme Owner can edit programme name, description, and cadence | MVP | Should | Priya |
-| FR42 | Programme Owner receives notification when matching cycle completes, including match count | MVP | Should | Priya |
+| FR42 | Programme Owner receives notification when matching cycle completes, including status and any system errors (no participation counts) | MVP | Should | Priya |
 
 ---
 
@@ -941,7 +941,7 @@ The system didn't punish her absence. It waited.
 | FR27 | Admin can deactivate a programme | MVP | Must | Helena |
 | FR28 | Admin can assign Programme Owner role to users | MVP | Must | Helena |
 | FR29 | Admin cannot view individual participation or match data | MVP | Must | Helena (trust constraint) |
-| FR29a | Admin can view programme health dashboard showing aggregate metrics (participation rates, match completion, system alerts) | MVP | Should | Helena |
+| FR29a | Admin can view ops‑only programme health (cycle status, notification delivery health, trust guardrails status, operational errors with correlation IDs) gated behind minimum‑N ≥5 | MVP | Should | Helena |
 
 ---
 
