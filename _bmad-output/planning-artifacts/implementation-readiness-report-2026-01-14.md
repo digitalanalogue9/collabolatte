@@ -333,3 +333,14 @@ This assessment identified 7 issues across 3 categories (coverage, alignment, an
 
 **Assessor:** DA9 (facilitated)  
 **Assessment Date:** 2026-01-14
+
+## Post-assessment Updates (Implemented)
+
+**Update Date:** 2026-01-14  
+These changes were applied after the assessment to address the identified blockers.
+
+- **Cadence resolved:** MVP cadence is an ops setting (weekly or monthly; **default monthly**); no Programme Owner UI for cadence in MVP. Updated in `prd.md`, `epics.md`, and cadence wording in `ux-design-specification.md`.
+- **Deferred traceability fixed:** FR19 and FR20 are explicitly listed under a `Deferred / Post‑MVP` section in `epics.md`.
+- **Acceptance criteria tightened (single source):** Added a `Trust Copy Checklist` section in `epics.md` and referenced it from key participant-facing stories.
+
+**Revised Readiness Status:** READY (with minor concerns remaining around subjective AC wording in some stories and story numbering conventions such as `1.0a`).

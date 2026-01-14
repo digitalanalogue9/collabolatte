@@ -680,7 +680,7 @@ The MVP is complete when:
 
 - [ ] Users can authenticate via Entra ID
 - [ ] Users can join the pilot programme
-- [ ] Matching runs on schedule (weekly)
+- [ ] Matching runs on schedule (weekly or monthly; **default monthly**; configured as an ops setting, not user-configurable)
 - [ ] Match emails are delivered with conversation starter and Teams link
 - [ ] At least 20 participants are enrolled
 - [ ] First match cycle completes successfully
@@ -723,7 +723,7 @@ The MVP is complete when:
 
 | ID | Requirement | Phase | Priority | Journey Link |
 |----|-------------|-------|----------|---------------|
-| FR11 | System executes matching algorithm on programme-defined schedule (weekly/fortnightly) | MVP | Must | Marcus (triggered) |
+| FR11 | System executes matching algorithm on a predictable schedule (weekly or monthly; **default monthly**; configured as an ops setting, not user-configurable) | MVP | Must | Marcus (triggered) |
 | FR12 | All programme participants are eligible for matching; organisational boundary filtering is a Growth-phase capability | MVP | Must | Marcus |
 | FR13 | Random matching with architecture supporting future algorithm configurability | MVP | Must | Marcus |
 | FR14 | Matching algorithm avoids repeat pairings within configurable window (default: 3 cycles); historical matches stored per programme | MVP | Must | Marcus |
@@ -927,8 +927,8 @@ The system didn't punish her absence. It waited.
 | FR21 | Programme Owner can create a new programme with name, description, and cadence | Growth | Must | Priya |
 | FR22 | Programme Owner can invite participants by email address or CSV upload | Growth | Should | Priya |
 | FR23 | Programme Owner can view aggregate participation metrics (joined, active, paused) | Growth | Should | Priya |
-| FR24 | Programme Owner can configure matching cadence (MVP: monthly only; weekly/fortnightly are Growth) | MVP | Must | Priya |
-| FR25 | Programme Owner can edit programme name, description, and cadence | MVP | Should | Priya |
+| FR24 | Matching cadence is configurable as an ops setting (weekly or monthly; **default monthly**); no Programme Owner UI for cadence in MVP | MVP | Must | Priya |
+| FR25 | Programme Owner can edit programme name and description (cadence is ops-configured in MVP) | MVP | Should | Priya |
 | FR42 | Programme Owner receives notification when matching cycle completes, including status and any system errors (no participation counts) | MVP | Should | Priya |
 
 ---

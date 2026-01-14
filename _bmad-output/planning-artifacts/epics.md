@@ -23,7 +23,7 @@ FR7: Users can leave a programme at any time; if mid-cycle, pending match is can
 FR8: Users can view programmes they are currently enrolled in
 FR9: Users can pause participation in a programme (skip next cycle)
 FR10: Users receive confirmation of programme join/leave actions
-FR11: System executes matching algorithm on programme-defined schedule (weekly/fortnightly/monthly)
+FR11: System executes matching algorithm on a predictable schedule (weekly or monthly; default monthly; configured as an ops setting, not user-configurable)
 FR12: All programme participants are eligible for matching; organisational boundary filtering is a Growth-phase capability (MVP is random-only)
 FR13: Random matching with architecture supporting future algorithm configurability
 FR14: Matching algorithm avoids repeat pairings within configurable window (default: 3 cycles); historical matches stored per programme
@@ -31,11 +31,13 @@ FR15: If participant count is odd, one participant is gracefully excluded with e
 FR16: Match notification email contains: matched participant name, Teams deep link, and a simple first-move prompt with suggested intro copy (copy-paste friendly)
 FR17: Email is sent via Azure Communication Services to user's Entra ID email
 FR18: Teams deep link opens 1:1 chat with matched participant
+FR19 (Deferred / Post‑MVP): Conversation starter selection (post‑MVP conversation support)
+FR20 (Deferred / Post‑MVP): Reminder per match cycle (not in MVP; risks obligation)
 FR21: Programme Owner can create a new programme with name, description, and cadence
 FR22: Programme Owner can invite participants by email address or CSV upload
 FR23: Programme Owner can view aggregate participation metrics (joined, active, paused) [Growth]
-FR24: Programme Owner can configure matching cadence (weekly, fortnightly, monthly)
-FR25: Programme Owner can edit programme name, description, and cadence
+FR24: Matching cadence is configurable as an ops setting (weekly or monthly; default monthly); no Programme Owner UI for cadence in MVP
+FR25: Programme Owner can edit programme name and description (cadence is ops-configured in MVP)
 FR26: Admin can view all programmes in the system
 FR27: Admin can deactivate a programme
 FR28: Admin can assign Programme Owner role to users
@@ -121,6 +123,8 @@ FR15: Epic 2 - Get Matched
 FR16: Epic 3 - Have the Conversation
 FR17: Epic 3 - Have the Conversation
 FR18: Epic 3 - Have the Conversation
+FR19: Deferred / Post‑MVP (not in epics)
+FR20: Deferred / Post‑MVP (not in epics)
 FR21: Epic 5 - Operate Safely
 FR22: Epic 5 - Operate Safely
 FR23: Epic 5 - Operate Safely
@@ -165,6 +169,32 @@ Participants can pause, leave, and return without penalty, and see their own his
 ### Epic 5: Operate Safely
 Programme Owners and Admins can run the system safely with strict trust guardrails and operational controls.
 **FRs covered:** FR21, FR22, FR23, FR24, FR25, FR26, FR27, FR28, FR29, FR29a (Growth), FR30, FR31, FR32, FR33, FR34, FR35, FR36, FR37, FR38, FR39, FR42
+
+## Deferred / Post‑MVP (Not in Epics)
+
+- FR19: Conversation starter selection (post‑MVP conversation support)
+- FR20: Reminder per match cycle (not in MVP; risks obligation)
+
+Rule: these items remain explicitly out of MVP scope unless re-approved; they must not appear implicitly as “small enhancements” because they can erode the anti-mandate trust contract.
+
+## Trust Copy Checklist (Single Source of Truth)
+
+Applies to: join screen, match screen, pause/leave confirmations, invites, cycle notices, transparency pages, and match notification emails.
+
+**Required statements (where relevant):**
+- Participation is optional and consequence-free.
+- No behavioural tracking; no manager visibility.
+- What we store / what we do not store is explained in plain language.
+
+**Forbidden patterns (must not appear):**
+- Any “obligation” framing: “required”, “must”, “expected”, “mandatory”, “compliance”, “attendance”.
+- Any surveillance framing: “tracked”, “monitoring”, “engagement”, “adoption”, “participation rate”, “performance”.
+- Any gamification framing: “streak”, “leaderboard”, “score”, “points”.
+
+**Tone rules (testable):**
+- Neutral, non-celebratory, non-judgemental language.
+- Never guilt users for skipping/ignoring a match.
+- Failure states include a calm explanation and do not introduce urgency.
 
 ## Implementation Sequencing (Reasoning via Planning)
 
@@ -331,7 +361,7 @@ Participants can safely opt in, understand what is happening, and trust the syst
 - Create Azure Communication Services resource (email)
 - Set required app settings and secrets in SWA
 
-### Story 1.0a: Document infrastructure provisioning (Bicep)
+### Story 1.0: Document infrastructure provisioning (Bicep)
 
 As a delivery team,
 I want a documented Bicep-based infrastructure plan in /infra,
@@ -350,7 +380,7 @@ So that we can provision Azure consistently when we are ready.
 **When** a developer reviews /infra/README.md,
 **Then** they can follow it to implement Bicep later without ambiguity.
 
-### Story 1.0: Set up initial project from starter template
+### Story 1.1: Set up initial project from starter template
 
 As a delivery team,
 I want to set up the initial project from the approved starter templates,
@@ -375,7 +405,7 @@ So that Join & Trust stories can be implemented without blocking setup work.
 **When** a developer starts work on Epic 1 stories,
 **Then** they can run the web and API projects locally without additional scaffolding.
 
-### Story 1.1: First contact feels safe
+### Story 1.2: First contact feels safe
 
 As a prospective participant,
 I want to understand what Collabolatte is and is not before doing anything,
@@ -387,13 +417,15 @@ So that I can decide whether it feels safe and optional.
 **When** I view the first screen,
 **Then** I can immediately see that participation is optional and lightweight,
 **And** the screen explicitly states that behaviour is not tracked,
+**And** the copy conforms to the Trust Copy Checklist,
 **And** no action is required to understand this.
 
 **Given** I have not signed in,
 **When** I read the first screen,
-**Then** the trust message is in plain English without legal language.
+**Then** the trust message is in plain English without legal language,
+**And** it conforms to the Trust Copy Checklist.
 
-### Story 1.2: Authenticate without friction
+### Story 1.3: Authenticate without friction
 
 As a prospective participant,
 I want to authenticate using my corporate Entra ID without creating an account,
@@ -410,7 +442,7 @@ So that joining feels invisible and low-effort.
 **When** I land back in the app,
 **Then** I see clear reassurance that only basic identity data is used.
 
-### Story 1.3: See what we store (and do not)
+### Story 1.4: See what we store (and do not)
 
 As a prospective participant,
 I want to see a clear, plain-English summary of what data is stored about me before joining,
@@ -420,14 +452,15 @@ So that I can decide with confidence.
 
 **Given** I am on the join screen,
 **When** I look for data handling information,
-**Then** I can see a short, plain-English summary of what is stored and what is not.
+**Then** I can see a short, plain-English summary of what is stored and what is not,
+**And** it conforms to the Trust Copy Checklist.
 
 **Given** I want more detail,
 **When** I select the "What we store" link,
 **Then** I can view the full explanation without legalese,
 **And** I can return to the join screen without losing my place.
 
-### Story 1.4: Join with a single action
+### Story 1.5: Join with a single action
 
 As a prospective participant,
 I want to opt in with one clear, reversible action,
@@ -439,13 +472,14 @@ So that joining feels low-stakes.
 **When** I choose to join,
 **Then** there is a single primary Join action,
 **And** I am not asked for a bio, interests, or extra details,
-**And** the language avoids commitment or obligation.
+**And** the language avoids commitment or obligation,
+**And** it conforms to the Trust Copy Checklist.
 
 **Given** I select Join,
 **When** the action completes,
 **Then** I see a clear confirmation that I am now opted in.
 
-### Story 1.5: Know I can leave or pause
+### Story 1.6: Know I can leave or pause
 
 As a prospective participant,
 I want to know I can pause or leave at any time,
@@ -462,7 +496,7 @@ So that I feel safe opting in.
 **When** I read the join copy,
 **Then** pausing or leaving is mentioned explicitly at join time.
 
-### Story 1.6: Be treated as a participant by default
+### Story 1.7: Be treated as a participant by default
 
 As a newly joined participant,
 I want to be treated as a standard participant with no special visibility or responsibilities,
@@ -511,7 +545,7 @@ So that I know when to expect my next match.
 
 **Given** I am a joined participant,
 **When** I view the matching cadence,
-**Then** I can see it in simple terms (e.g., monthly),
+**Then** I can see it in simple terms (e.g., monthly by default),
 **And** I can see when the next match is expected.
 
 **Given** a matching run is delayed or fails,
@@ -594,7 +628,8 @@ So that trust in the system is preserved.
 
 **Given** a matching run fails internally,
 **When** I view the participant experience,
-**Then** I see no error messages or partial notifications.
+**Then** I see no error messages or partial notifications,
+**And** any participant-visible messaging conforms to the Trust Copy Checklist.
 
 **Given** a matching run fails,
 **When** the system recovers for the next cycle,
@@ -617,11 +652,13 @@ So that I can decide whether to engage without friction.
 **When** the notification email is sent,
 **Then** it includes the names of matched participants,
 **And** it includes the Teams deep link(s),
-**And** it states that the conversation is optional.
+**And** it states that the conversation is optional,
+**And** it conforms to the Trust Copy Checklist.
 
 **Given** I receive the match email,
 **When** I view it,
-**Then** it contains no tracking pixels, read receipts, or reminders implied.
+**Then** it contains no tracking pixels, read receipts, or reminders implied,
+**And** it conforms to the Trust Copy Checklist.
 
 ### Story 3.2: First-move prompt reduces social friction
 
@@ -635,7 +672,8 @@ So that starting the conversation feels easy and non-awkward.
 **When** I read the prompt,
 **Then** the tone is calm and optional,
 **And** the prompt can be copy-pasted without editing,
-**And** it explicitly permits ignoring or adapting the prompt.
+**And** it explicitly permits ignoring or adapting the prompt,
+**And** it conforms to the Trust Copy Checklist.
 
 ### Story 3.3: Teams deep link works reliably
 
@@ -785,15 +823,21 @@ Programme Owners and Admins can run the system safely with strict trust guardrai
 ### Story 5.1: Programme exists and can be configured
 
 As a Programme Owner,
-I want to configure a single programme's name, description, and cadence,
-So that the programme can run safely without expanding scope.
+I want to set the programme name and description and see the programme cadence,
+So that the programme is clear and runs predictably without expanding scope.
 
 **Acceptance Criteria:**
 
 **Given** a single programme exists,
-**When** I set or update its name, description, or cadence,
+**When** I set or update its name or description,
 **Then** the changes apply to future cycles only,
 **And** the MVP remains limited to a single programme.
+
+**Given** I am a Programme Owner,
+**When** I view the programme settings,
+**Then** I can see the cadence in simple terms (monthly by default; weekly optional via ops),
+**And** I cannot change cadence via any UI surface in MVP,
+**And** participant-facing copy about cadence conforms to the Trust Copy Checklist.
 
 ### Story 5.2: Participants can be invited
 
@@ -805,7 +849,8 @@ So that I can open the programme without friction.
 
 **Given** I am a Programme Owner,
 **When** I send invites by email or CSV,
-**Then** the invite message states participation is optional and low-pressure.
+**Then** the invite message states participation is optional and low-pressure,
+**And** it conforms to the Trust Copy Checklist.
 
 **Given** invites are sent,
 **When** participants join,
@@ -870,7 +915,8 @@ So that I know the system is running without pressure.
 **When** the notice is sent,
 **Then** it states the cycle completed,
 **And** it includes any system errors if relevant,
-**And** it does not include participation stats or celebratory language.
+**And** it does not include participation stats or celebratory language,
+**And** it conforms to the Trust Copy Checklist.
 
 ### Story 5.7: Privacy controls are real
 

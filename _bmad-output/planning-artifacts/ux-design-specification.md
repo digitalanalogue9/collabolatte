@@ -136,7 +136,7 @@ MVP is web-only, surfaced primarily via Teams and email links. The primary inter
 - First discovery: reassurance, clarity, and a sense this won’t waste time.
 - Core experience: low anxiety, clear expectations, shared responsibility (“we were both invited”).
 - After completion: quiet satisfaction, mild confidence, no follow-up stress; a “that was fine” micro-moment.
-- If something goes wrong: neutral, no guilt; calm transparency (“we missed this cycle, we’ll try again next week”).
+- If something goes wrong: neutral, no guilt; calm transparency (“we missed this cycle, we’ll try again next cycle”).
 - Returning later: familiarity, low stakes, trust that nothing has changed.
 
 ### Micro-Emotions
@@ -157,7 +157,7 @@ Explicitly avoid:
 ### Design Implications
 - Make voluntariness explicit: opt-in, opt-out, and non-response are all valid outcomes.
 - Keep tone low-key: calm, plain language that reduces social risk.
-- Use predictable cadence cues as trust anchors (e.g., “Next match: week of…”).
+- Use predictable cadence cues as trust anchors (e.g., “Next match: on/around …”).
 - Avoid UI patterns that imply measurement, optimisation, or evaluation.
 - Treat failure as absorbed by the system: no guilt loops, no “missed match” messaging.
 - Visuals should feel quiet: spacious layouts, soft contrast, no celebratory theatrics.
@@ -515,5 +515,4 @@ None required for MVP. Optional tiny wrappers only if reused more than once:
 - Keep match-link screen calm, readable, and low-effort.
 - Keep assets and bundles lightweight for managed corporate environments.
 - Tests assert behaviour and intent; flaky tests are fixed or removed.
-
 
