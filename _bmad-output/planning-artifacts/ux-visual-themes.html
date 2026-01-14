@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Collabolatte — Visual Foundation Theme Options</title>
+  <style>
+    :root { color-scheme: light; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      margin: 0; background: #f7f7f5; color: #1f2428;
+      font-size: 14px; line-height: 1.6;
+    }
+    .wrap { max-width: 1100px; margin: 32px auto; padding: 0 20px 60px; }
+    h1 { font-size: 24px; margin: 8px 0 4px; }
+    p { color: #4f5960; margin: 6px 0 18px; }
+    .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .card {
+      border-radius: 14px; padding: 16px; background: #fff; border: 1px solid #e5e7eb;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .theme {
+      border-radius: 12px; border: 1px solid var(--border); background: var(--surface);
+      padding: 14px; display: grid; gap: 12px;
+    }
+    .swatches { display: grid; gap: 8px; grid-template-columns: repeat(5, 1fr); }
+    .swatch { height: 34px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.08); }
+    .ui {
+      border-radius: 10px; background: var(--bg); padding: 12px; border: 1px solid var(--border);
+      display: grid; gap: 10px;
+    }
+    .row { display: flex; align-items: center; gap: 10px; }
+    .chip {
+      padding: 4px 8px; border-radius: 999px; background: var(--chip-bg, var(--muted));
+      color: var(--subtle); font-size: 12px; border: 1px solid var(--border);
+    }
+    .btn {
+      padding: 8px 12px; border-radius: 8px; border: 1px solid var(--accent-border, var(--accent));
+      background: var(--accent); color: var(--accent-contrast); font-weight: 600; font-size: 13px;
+      min-height: 34px;
+    }
+    .btn.secondary { background: transparent; color: var(--accent-muted, var(--accent)); border-color: var(--accent-muted, var(--accent)); }
+    .label { font-size: 12px; color: var(--subtle); }
+    .title { font-size: 16px; color: var(--text); font-weight: 600; }
+    .body { font-size: 14px; color: var(--text); line-height: 1.6; }
+    .list { display: grid; gap: 6px; }
+    .kpi { display: grid; gap: 4px; background: var(--surface); border: 1px dashed var(--border); padding: 8px; border-radius: 8px; }
+    button:focus-visible, .btn:focus-visible {
+      outline: 2px solid var(--focus, #7ea99a);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Collabolatte — Calm Theme Options</h1>
+    <p>Three low‑pressure visual directions. Each keeps contrast gentle, avoids urgency cues, and emphasises predictability.</p>
+
+    <div class="grid">
+      <!-- Theme 1 -->
+      <div class="card">
+        <div class="theme" style="--bg:#f6f5f2; --surface:#ffffff; --border:#e6e4df; --text:#1f2428; --subtle:#4f5b61; --muted:#f0ede7; --chip-bg:#f5f2ed; --accent:#3a7f6c; --accent-border:#5d9a89; --accent-muted:#6a9486; --accent-contrast:#ffffff; --focus:#7ea99a;">
+          <div class="title">Theme A — Sage Calm</div>
+          <div class="label">Warm neutral base + soft sage accent</div>
+          <div class="swatches">
+            <div class="swatch" style="background:#f6f5f2"></div>
+            <div class="swatch" style="background:#ffffff"></div>
+            <div class="swatch" style="background:#e6e4df"></div>
+            <div class="swatch" style="background:#3a7f6c"></div>
+            <div class="swatch" style="background:#1f2428"></div>
+          </div>
+          <div class="ui">
+            <div class="row"><div class="chip">Optional</div><div class="chip">No tracking</div></div>
+            <div class="title">You’ve been matched with Samira</div>
+            <div class="body">If you’d like, say hello and propose a short coffee chat. No pressure if you skip.</div>
+            <div class="row"><button class="btn">Introduce yourself</button><button class="btn secondary">Skip</button></div>
+            <div class="kpi"><div class="label">Next match</div><div class="body">Week of 12 May</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme 2 -->
+      <div class="card">
+        <div class="theme" style="--bg:#f4f7f9; --surface:#ffffff; --border:#dfe7ee; --text:#1c2730; --subtle:#65707a; --muted:#eef3f7; --accent:#486a9a; --accent-contrast:#ffffff;">
+          <div class="title">Theme B — Blue Quiet</div>
+          <div class="label">Cool neutral base + muted blue accent</div>
+          <div class="swatches">
+            <div class="swatch" style="background:#f4f7f9"></div>
+            <div class="swatch" style="background:#ffffff"></div>
+            <div class="swatch" style="background:#dfe7ee"></div>
+            <div class="swatch" style="background:#486a9a"></div>
+            <div class="swatch" style="background:#1c2730"></div>
+          </div>
+          <div class="ui">
+            <div class="row"><div class="chip">Optional</div><div class="chip">Easy to leave</div></div>
+            <div class="title">You’ve been matched with Tomás</div>
+            <div class="body">A short coffee chat, if you want it. No obligation either way.</div>
+            <div class="row"><button class="btn">Send hello</button><button class="btn secondary">Later</button></div>
+            <div class="kpi"><div class="label">Next match</div><div class="body">Week of 12 May</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme 3 -->
+      <div class="card">
+        <div class="theme" style="--bg:#f7f4f0; --surface:#ffffff; --border:#e8e0d8; --text:#2a2420; --subtle:#6f6761; --muted:#f1ece6; --accent:#8b6a46; --accent-contrast:#ffffff;">
+          <div class="title">Theme C — Oat + Clay</div>
+          <div class="label">Earthy neutral base + soft clay accent</div>
+          <div class="swatches">
+            <div class="swatch" style="background:#f7f4f0"></div>
+            <div class="swatch" style="background:#ffffff"></div>
+            <div class="swatch" style="background:#e8e0d8"></div>
+            <div class="swatch" style="background:#8b6a46"></div>
+            <div class="swatch" style="background:#2a2420"></div>
+          </div>
+          <div class="ui">
+            <div class="row"><div class="chip">Optional</div><div class="chip">No metrics</div></div>
+            <div class="title">You’ve been matched with Jess</div>
+            <div class="body">If you’d like, introduce yourself and suggest a quick coffee. Skipping is fine.</div>
+            <div class="row"><button class="btn">Introduce</button><button class="btn secondary">Skip</button></div>
+            <div class="kpi"><div class="label">Next match</div><div class="body">Week of 12 May</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

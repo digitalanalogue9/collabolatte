@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Collabolatte — Design Direction Mockups</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f5f2;
+      --surface: #ffffff;
+      --border: #e6e4df;
+      --text: #1f2428;
+      --subtle: #4f5b61;
+      --muted: #f0ede7;
+      --chip-bg: #f5f2ed;
+      --accent: #3a7f6c;
+      --accent-border: #5d9a89;
+      --accent-muted: #6a9486;
+      --accent-contrast: #ffffff;
+      --focus: #7ea99a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      margin: 0; background: var(--bg); color: var(--text);
+      font-size: 14px; line-height: 1.6;
+    }
+    .wrap { max-width: 1200px; margin: 28px auto; padding: 0 20px 60px; }
+    h1 { font-size: 24px; margin: 8px 0 6px; }
+    h2 { font-size: 16px; margin: 0 0 8px; }
+    p { color: var(--subtle); margin: 6px 0 18px; }
+    .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+    .card {
+      border-radius: 14px; padding: 16px; background: var(--surface);
+      border: 1px solid var(--border); box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .mockup {
+      border-radius: 12px; border: 1px solid var(--border); background: var(--surface);
+      padding: 14px; display: grid; gap: 12px;
+    }
+    .ui {
+      border-radius: 10px; background: var(--bg); padding: 12px; border: 1px solid var(--border);
+      display: grid; gap: 10px;
+    }
+    .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .chip {
+      padding: 4px 8px; border-radius: 999px; background: var(--chip-bg);
+      color: var(--subtle); font-size: 12px; border: 1px solid var(--border);
+    }
+    .btn {
+      padding: 8px 12px; border-radius: 8px; border: 1px solid var(--accent-border);
+      background: var(--accent); color: var(--accent-contrast); font-weight: 600; font-size: 13px;
+      min-height: 34px;
+    }
+    .btn.secondary { background: transparent; color: var(--accent-muted); border-color: var(--accent-muted); }
+    .label { font-size: 12px; color: var(--subtle); }
+    .title { font-size: 16px; color: var(--text); font-weight: 600; }
+    .body { font-size: 14px; color: var(--text); }
+    .kpi { display: grid; gap: 4px; background: var(--surface); border: 1px dashed var(--border); padding: 8px; border-radius: 8px; }
+    .list { display: grid; gap: 8px; }
+    .divider { height: 1px; background: var(--border); margin: 6px 0; }
+    .aside {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px;
+    }
+    .post { font-size: 11px; color: var(--subtle); text-transform: uppercase; letter-spacing: 0.04em; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Collabolatte — Design Direction Mockups</h1>
+    <p>Theme A foundation applied. Six calm directions exploring hierarchy and layout. MVP remains dominant. Post‑MVP programme list shown only as a subdued placeholder.</p>
+
+    <div class="grid">
+      <!-- Direction 1: Single-screen primary -->
+      <div class="card">
+        <h2>Direction 1 — Single‑Screen Calm</h2>
+        <div class="mockup">
+          <div class="ui">
+            <div class="row"><div class="chip">Optional</div><div class="chip">No tracking</div></div>
+            <div class="title">You’ve been matched with Samira</div>
+            <div class="body">If you’d like, say hello and propose a short coffee chat. Skipping is fine.</div>
+            <div class="row"><button class="btn">Introduce yourself</button><button class="btn secondary">Skip</button></div>
+            <div class="kpi"><div class="label">Next match</div><div class="body">Week of 12 May</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direction 2: Single-screen with quiet context -->
+      <div class="card">
+        <h2>Direction 2 — Single‑Screen + Quiet Context</h2>
+        <div class="mockup">
+          <div class="ui">
+            <div class="row"><div class="chip">Optional</div><div class="chip">Easy to leave</div></div>
+            <div class="title">You’ve been matched with Tomás</div>
+            <div class="body">A short coffee chat, if you want it. No obligation either way.</div>
+            <div class="row"><button class="btn">Send hello</button><button class="btn secondary">Later</button></div>
+            <div class="divider"></div>
+            <div class="label">What happens next</div>
+            <div class="body">Nothing required. You’ll be matched again on the next cadence.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direction 3: Card-based MVP programme view -->
+      <div class="card">
+        <h2>Direction 3 — MVP Programme Card</h2>
+        <div class="mockup">
+          <div class="ui">
+            <div class="title">Collabolatte (MVP)</div>
+            <div class="body">Casual cross‑team coffees once a month. Optional. No tracking.</div>
+            <div class="row"><button class="btn">Join</button><button class="btn secondary">Pause</button></div>
+            <div class="kpi"><div class="label">Next match</div><div class="body">Week of 12 May</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direction 4: Card list MVP with subdued post-MVP placeholder -->
+      <div class="card">
+        <h2>Direction 4 — MVP Card + Post‑MVP Placeholder</h2>
+        <div class="mockup">
+          <div class="ui">
+            <div class="title">Programme</div>
+            <div class="list">
+              <div class="aside">
+                <div class="title">Collabolatte (MVP)</div>
+                <div class="body">Monthly, optional cross‑team coffees.</div>
+                <div class="row"><button class="btn">Join</button><button class="btn secondary">Leave</button></div>
+              </div>
+              <div class="aside" style="background:var(--muted)">
+                <div class="post">Post‑MVP</div>
+                <div class="body">Programme list will appear here. Invitation‑first, no metrics.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direction 5: Two-panel calm (main + secondary info) -->
+      <div class="card">
+        <h2>Direction 5 — Two‑Panel Calm</h2>
+        <div class="mockup">
+          <div class="ui" style="display:grid; grid-template-columns: 2fr 1fr; gap: 10px;">
+            <div class="aside" style="background:var(--bg)">
+              <div class="row"><div class="chip">Optional</div><div class="chip">No obligation</div></div>
+              <div class="title">You’ve been matched with Jess</div>
+              <div class="body">If you’d like, introduce yourself and suggest a quick coffee. Skipping is fine.</div>
+              <div class="row"><button class="btn">Introduce</button><button class="btn secondary">Skip</button></div>
+            </div>
+            <div class="aside">
+              <div class="label">Next match</div>
+              <div class="body">Week of 12 May</div>
+              <div class="divider"></div>
+              <div class="label">What we do</div>
+              <div class="body">Match people. No tracking. No reporting.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direction 6: Minimal join-first screen -->
+      <div class="card">
+        <h2>Direction 6 — Minimal Join‑First</h2>
+        <div class="mockup">
+          <div class="ui">
+            <div class="title">Join Collabolatte</div>
+            <div class="body">One programme, monthly matches, optional participation. You can leave anytime.</div>
+            <div class="row"><button class="btn">Join</button><button class="btn secondary">Not now</button></div>
+            <div class="label">No tracking. No obligation. Easy to skip.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
