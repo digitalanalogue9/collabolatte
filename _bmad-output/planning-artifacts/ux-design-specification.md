@@ -1,4 +1,10 @@
 ---
+stepsCompleted: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+inputDocuments:
+  - '_bmad-output/planning-artifacts/prd.md'
+  - '_bmad-output/planning-artifacts/product-brief-collabolatte-2026-01-12.md'
+  - '_bmad-output/project-context.md'
+------
 stepsCompleted: [, 3]
 inputDocuments:
   - '_bmad-output/planning-artifacts/prd.md'
@@ -308,4 +314,206 @@ Six calm directions were explored using Theme A: single-screen match focus, quie
 - Rename any KPI-like blocks to neutral labels (e.g., “Next match”).
 - Keep chips consistent across screens; keep Skip/Later placement stable.
 - No iconography yet; text carries the meaning.
+
+## User Journey Flows
+
+### Journey 1: New Joiner — First Coffee Match (Tomás)
+**Goal:** Join with minimal effort, receive first match, understand no-pressure expectations.
+
+```mermaid
+graph TD
+  A[Discovery: hears about Collabolatte] --> B[Land on Join screen]
+  B --> C{Join?}
+  C -->|Join| D[Joined state: Optional, no tracking]
+  C -->|Not now| B
+  D --> E[Wait for cadence]
+  E --> F[Match notification delivered]
+  F --> G[Light framing: “We match across teams”]
+  G --> H{Engage?}
+  H -->|Yes| I[Introduce self via Teams/email]
+  H -->|No| J[No action; no penalty]
+  I --> K[Coffee chat happens]
+  J --> L[Next cadence arrives]
+  K --> L[Next cadence arrives]
+  L --> M[Stays opted in]
+```
+
+**Success Criteria:** Instant comprehension, safe invitation, no-penalty skip, predictable cadence.
+
+### Journey 2: Sceptic — Tests the Waters (Marcus)
+**Goal:** Validate trust and low-obligation framing; avoid churn.
+
+```mermaid
+graph TD
+  A[Discovery: hears about Collabolatte] --> B[Join screen with reassurance]
+  B --> C{Join?}
+  C -->|Join| D[Joined: no tracking, optional]
+  C -->|Not now| B
+  D --> E[Match notification]
+  E --> F[Light framing: “We match across teams”]
+  F --> G{Feels pressured?}
+  G -->|No| H[Optional intro sent]
+  G -->|Yes| I[Ignore / opt-out]
+  H --> J[Conversation happens]
+  I --> K[Exit quietly (one click)]
+  J --> L[Next cadence arrives]
+  L --> M[Stays opted in]
+```
+
+**Success Criteria:** Zero obligation signals; easy opt-out; optional action feels safe; explicit “ignoring has no consequences.”
+
+### Journey 3: Dormant User — Returns After Inactivity
+**Goal:** Re-engage without guilt or re-onboarding.
+
+```mermaid
+graph TD
+  A[User inactive for ≥2 cycles] --> B[Next match notification arrives]
+  B --> C[Copy acknowledges return: no pressure]
+  C --> D[Light framing: “We match across teams”]
+  D --> E{Engage?}
+  E -->|Yes| F[Intro sent]
+  E -->|No| G[No action]
+  F --> H[Conversation happens]
+  G --> I[Remains opted in]
+  H --> I[Remains opted in]
+  I --> J[Next cadence arrives]
+```
+
+**Success Criteria:** Neutral tone, no guilt, easy return, continuity without re-setup.
+
+### Journey Patterns
+- **Invitation-first:** All journeys begin with a low-pressure invite.
+- **Silence is valid:** Non-response is an explicit path with no penalty.
+- **Predictable cadence:** Time-based rhythm is the stability anchor.
+- **Single-step actions:** Join, Introduce, Skip; no multi-step flows.
+
+### Flow Optimization Principles
+- Minimise decision points and keep copy consistent.
+- Avoid reminders that imply obligation.
+- Use the same “optional/no tracking” reassurance in every journey.
+- Keep outcomes invisible; the system does not ask for feedback.
+- **Operational note:** if a notification fails, recover silently on the next cadence.
+
+## Component Strategy
+
+### Design System Components
+**Selected system:** MUI (Material UI)
+
+Use default MUI components with minimal styling (spacing, borders, typography). No bespoke component library for MVP.
+
+**Primary components:**
+- Match notification: `Card` + `CardContent` + `CardActions`
+- Chips: `Chip` (outlined or subtle filled variant)
+- “What happens next” block: `Paper` with heading, or neutral `Alert`
+- Join screen panel: `Paper` or `Card`
+- Next match info: `Typography` + `Divider` inside `Paper`
+
+### Custom Components
+None required for MVP. Optional tiny wrappers only if reused more than once:
+- Consistent card spacing wrapper
+- Consistent chip group layout
+
+### Component Implementation Strategy
+- Theme MUI fully (typography scale, border radius, spacing, Sage Calm palette).
+- Keep layout minimal: one dominant card, generous whitespace, no navigation in MVP.
+- Use microcopy as the differentiator; avoid enterprise jargon.
+- Do not override MUI into a new system; restraint is the product.
+
+### Implementation Roadmap
+**Phase 1 — Core:** Match card, join panel, chips, next-match block, neutral context block.
+**Phase 2 — Supporting:** Optional wrappers for spacing/consistency if reused.
+**Phase 3 — Post‑MVP:** Programme list card patterns (invitation‑first, no metrics).
+
+### Accessibility & Interaction Rules
+- Visible `:focus-visible` on all interactive elements; no hover-only affordances.
+- No colour-only signalling; text must carry meaning.
+- Explicit verb labels on buttons.
+- Respect reduced-motion; no animation-dependent meaning.
+- Avoid disabled-as-default; hide or explain unavailable actions.
+
+### Uniqueness Without Custom Components
+- Unique tone through copy, spacing, and restraint.
+- Signature patterns: match card layout, calm “what happens next” block, consistent optional action styling.
+- Minimal illustration usage (sparingly, one per screen max).
+
+## UX Consistency Patterns
+
+### Button Hierarchy
+- One clear primary action per screen.
+- Secondary actions (Skip/Later/Leave) are always visible and safe.
+- Never hide or de-emphasise the optional path.
+- Labels are explicit verbs; avoid vague actions.
+
+### Feedback Patterns
+- No celebratory success states; keep outcomes quiet.
+- Errors explain what happened and what did not happen, with next step.
+- Info messages are neutral and reassuring, not alarmist.
+
+### Empty & Loading States
+- Empty states explain why nothing is happening and when it will.
+- Loading states are brief, honest, and calm.
+- Silence is acceptable; confusion is not.
+
+### Navigation Patterns
+- Minimal navigation; no persistent side nav.
+- Clear “where am I” without deep hierarchy.
+- Default to single-screen flows.
+
+### Modal / Overlay Patterns
+- Use sparingly; only for true confirmations or essential explanations.
+- Avoid interrupting users unless necessary.
+
+### Additional Patterns
+- Forms: minimal presence; validation is forgiving and explanatory.
+- Search/Filter: intentionally absent in MVP to avoid optimisation pressure.
+
+**Guiding Principle:** If a pattern introduces urgency, choice anxiety, or performance cues, it is the wrong pattern. If it makes it obvious that nothing bad will happen, it is the right one.
+
+## Responsive Design & Accessibility
+
+### Responsive Strategy
+- Desktop-first build; mobile-safe by design for the core loop.
+- Desktop is the primary working surface; mobile is a first-class consumption surface for match notifications.
+- Mobile: single-column layouts; no two-panel layouts below tablet.
+- Primary CTA visible without scrolling where possible.
+- Secondary content collapsible on mobile (e.g., “What happens next”).
+- Enforce copy length/truncation rules to preserve CTA visibility on small screens.
+
+### Breakpoint Strategy
+- **360px** small mobile (minimum supported)
+- **768px** tablet
+- **1024px** small laptop
+- **1280px** desktop
+
+### Accessibility Strategy
+- WCAG 2.1 AA.
+- Sufficient contrast without brightening the UI.
+- Clear `:focus-visible` states.
+- Keyboard-first navigation across all screens.
+- No colour-only meaning; text carries semantics.
+- Plain English, short sentences, no idioms.
+
+### Testing Strategy
+**Automated**
+- Playwright for E2E journeys and trust-critical flows (join, match view, skip).
+- Playwright MCP to replay key journeys and guard tone/interaction.
+- Axe-core (or equivalent) integrated in Playwright for accessibility checks.
+- Explicit 360px viewport tests for CTA visibility and spacing.
+- Avoid brittle visual diffs unless they add clear value.
+
+**Manual**
+- Keyboard-only walkthroughs of critical journeys.
+- Screen reader spot-checks on join and match screens.
+- Visual contrast checks for primary surfaces and actions.
+
+**Mobile Testing**
+- Playwright at mobile viewport for join, match view, act/skip flow, and “what we store” page.
+
+### Implementation Guidelines
+- Respect reduced-motion preferences.
+- Ensure comfortable touch targets and spacing between primary/secondary actions.
+- Keep match-link screen calm, readable, and low-effort.
+- Keep assets and bundles lightweight for managed corporate environments.
+- Tests assert behaviour and intent; flaky tests are fixed or removed.
+
 
