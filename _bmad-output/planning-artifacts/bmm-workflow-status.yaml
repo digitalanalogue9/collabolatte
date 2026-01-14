@@ -58,6 +58,16 @@ workflow_status:
         selected: true
         completed: "2026-01-12"
 
+      - id: "internal-pitch"
+        name: "Internal Pitch Materials"
+        status: "_bmad-output/planning-artifacts/internal-pitch-1-pager.md"
+        agent: "analyst"
+        artifacts:
+          - "_bmad-output/planning-artifacts/internal-pitch-1-pager.md"
+          - "_bmad-output/planning-artifacts/internal-pitch-faq.md"
+        selected: true
+        completed: "2026-01-14"
+
   # Phase 2: Planning
   - phase: 2
     name: "Planning"
