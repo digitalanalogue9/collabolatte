@@ -1,6 +1,6 @@
 # Story 1.0: Document Infrastructure Provisioning (Bicep)
 
-Status: ready-for-dev
+Status: review
 
 ## Story
 
@@ -23,37 +23,37 @@ So that we can provision Azure consistently when we are ready.
 
 ## Tasks / Subtasks
 
-- [ ] Task 1: Create /infra directory structure (AC: 1, 2)
-  - [ ] Create /infra/README.md as the main documentation file
-  - [ ] Create /infra/parameters/ directory for environment parameter files (future)
+- [x] Task 1: Create /infra directory structure (AC: 1, 2)
+  - [x] Create /infra/README.md as the main documentation file
+  - [x] Create /infra/parameters/ directory for environment parameter files (future)
 
-- [ ] Task 2: Document Azure Resource Definitions (AC: 1)
-  - [ ] Document Azure Static Web App (app+api) resource requirements
-  - [ ] Document Azure Static Web App (marketing) resource requirements
-  - [ ] Document Azure Storage Account resource requirements
-  - [ ] Document Azure Communication Services resource requirements
+- [x] Task 2: Document Azure Resource Definitions (AC: 1)
+  - [x] Document Azure Static Web App (app+api) resource requirements
+  - [x] Document Azure Static Web App (marketing) resource requirements
+  - [x] Document Azure Storage Account resource requirements
+  - [x] Document Azure Communication Services resource requirements
 
-- [ ] Task 3: Define Naming Conventions (AC: 1)
-  - [ ] Document Azure resource naming rules and constraints
-  - [ ] Define naming pattern: `{project}-{environment}-{resource}-{identifier}`
-  - [ ] Document character limits and allowed characters per resource type
+- [x] Task 3: Define Naming Conventions (AC: 1)
+  - [x] Document Azure resource naming rules and constraints
+  - [x] Define naming pattern: `{project}-{environment}-{resource}-{identifier}`
+  - [x] Document character limits and allowed characters per resource type
 
-- [ ] Task 4: Document Required Parameters (AC: 1)
-  - [ ] Define `project` parameter (collabolatte)
-  - [ ] Define `environment` parameter (dev, staging, prod)
-  - [ ] Define `region` parameter (default: uksouth)
-  - [ ] Define `identifier` parameter (unique suffix for global resources)
+- [x] Task 4: Document Required Parameters (AC: 1)
+  - [x] Define `project` parameter (collabolatte)
+  - [x] Define `environment` parameter (dev, staging, prod)
+  - [x] Define `region` parameter (default: uksouth)
+  - [x] Define `identifier` parameter (unique suffix for global resources)
 
-- [ ] Task 5: Document Entra ID and EasyAuth Setup (AC: 1)
-  - [ ] Document Entra ID app registration steps
-  - [ ] Document EasyAuth configuration for SWA
-  - [ ] Document required API permissions and scopes
-  - [ ] Document redirect URIs configuration
+- [x] Task 5: Document Entra ID and EasyAuth Setup (AC: 1)
+  - [x] Document Entra ID app registration steps
+  - [x] Document EasyAuth configuration for SWA
+  - [x] Document required API permissions and scopes
+  - [x] Document redirect URIs configuration
 
-- [ ] Task 6: Document Resource Dependencies (AC: 2)
-  - [ ] Create dependency diagram (text-based)
-  - [ ] Document deployment order requirements
-  - [ ] Document post-deployment configuration steps
+- [x] Task 6: Document Resource Dependencies (AC: 2)
+  - [x] Create dependency diagram (text-based)
+  - [x] Document deployment order requirements
+  - [x] Document post-deployment configuration steps
 
 ## Dev Notes
 
@@ -192,26 +192,41 @@ While this is an infrastructure story, documentation must note:
 
 ### Definition of Done
 
-- [ ] /infra/README.md exists and is comprehensive
-- [ ] All Azure resources are documented with naming conventions
-- [ ] Entra ID setup steps are clear and complete
-- [ ] A developer can read the document and implement Bicep without asking questions
-- [ ] Document reviewed for accuracy against Architecture decisions
+- [x] /infra/README.md exists and is comprehensive
+- [x] All Azure resources are documented with naming conventions
+- [x] Entra ID setup steps are clear and complete
+- [x] A developer can read the document and implement Bicep without asking questions
+- [x] Document reviewed for accuracy against Architecture decisions
 
 ## Dev Agent Record
 
 ### Agent Model Used
 
-(To be filled by implementing agent)
+Claude Opus 4.5 (claude-opus-4-5-20251101)
 
 ### Debug Log References
 
-(To be filled during implementation)
+No debug logs - documentation-only story with no code execution.
 
 ### Completion Notes List
 
-(To be filled during implementation)
+- Created comprehensive /infra/README.md with all Azure resource definitions
+- Documented naming conventions following Azure resource naming rules
+- Defined all required parameters (project, environment, location, identifier)
+- Documented complete Entra ID app registration and EasyAuth setup steps (8 steps)
+- Created text-based dependency diagram showing resource relationships
+- Documented deployment order (7-step sequence)
+- Documented post-deployment configuration steps (5 sections)
+- Included trust and privacy guardrails section
+- All acceptance criteria satisfied
+
+### Change Log
+
+| Date | Change |
+|------|--------|
+| 2026-01-15 | Initial implementation - created comprehensive infrastructure documentation |
 
 ### File List
 
-- /infra/README.md (to be created)
+- infra/README.md (created - comprehensive infrastructure documentation)
+- infra/parameters/ (directory created for future parameter files)
