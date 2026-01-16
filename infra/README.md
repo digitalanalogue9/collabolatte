@@ -147,7 +147,8 @@ Collabolatte is deployed as a serverless application on Azure using the followin
 - **Azure Communication Services** for email notifications
 - **Microsoft Entra ID** for authentication via EasyAuth
 
-All infrastructure is deployed using **Azure Verified Modules (AVM)** from the public registry, ensuring best practices and Microsoft-verified patterns.
+All infrastructure is deployed using **Azure Verified Modules (AVM)** from the public registry,
+ensuring best practices and Microsoft-verified patterns.
 
 ### MVP Cost Constraints (All-Free Tier)
 
@@ -676,26 +677,21 @@ The Bicep infrastructure-as-code is organized as follows:
 ```
 infra/
 ├── README.md                 # This documentation
-├── main.bicep               # Main orchestration template
-├── modules/                  # Reusable Bicep modules
-│   ├── storage.bicep        # Storage Account with Table Storage
-│   ├── acs.bicep            # Azure Communication Services (email)
-│   └── swa.bicep            # Static Web App (reusable for app + marketing)
+├── main.bicep               # Main orchestration template (uses AVM)
+├── main.json                # Generated ARM template
 └── parameters/               # Environment-specific parameters
     ├── dev.json             # Development environment
     ├── staging.json         # Staging environment
     └── prod.json            # Production environment
 ```
 
-**Module Descriptions:**
+**Template Description:**
 
-- **main.bicep**: Orchestrates all resources, defines parameters, calls modules, exports outputs
-- **modules/storage.bicep**: Deploys Storage Account (Standard_LRS, StorageV2, Hot tier) with Table
-  Storage service
-- **modules/acs.bicep**: Deploys Azure Communication Services for email notifications (UK data
-  location)
-- **modules/swa.bicep**: Reusable module for Static Web Apps - supports both app+api and marketing
-  site variants
+- **main.bicep**: Orchestrates all resources using Azure Verified Modules (AVM) from the public registry:
+  - `br/public:avm/res/storage/storage-account:0.14.3` - Storage Account with Table Storage
+  - `br/public:avm/res/communication/communication-service:0.3.0` - Azure Communication Services
+  - `br/public:avm/res/web/static-site:0.5.0` - Static Web Apps (both app and marketing)
+- **main.json**: ARM template generated from main.bicep via `az bicep build`
 
 **Parameter Files:**
 
@@ -720,10 +716,11 @@ Deployment outputs include:
 
 ## Version History
 
-| Date       | Version | Changes                                                          |
-| ---------- | ------- | ---------------------------------------------------------------- |
-| 2026-01-15 | 1.0.0   | Comprehensive documentation (Story 1.0)                          |
-| 2026-01-16 | 1.1.0   | Bicep templates implemented (Story 1.4) - main.bicep and modules |
+| Date       | Version | Changes                                                                  |
+| ---------- | ------- | ------------------------------------------------------------------------ |
+| 2026-01-15 | 1.0.0   | Comprehensive documentation (Story 1.0)                                  |
+| 2026-01-16 | 1.1.0   | Bicep templates implemented (Story 1.4) - main.bicep with custom modules |
+| 2026-01-16 | 2.0.0   | Refactored to Azure Verified Modules (AVM) and subscription scope        |
 
 ---
 
@@ -731,6 +728,7 @@ Deployment outputs include:
 
 - [Architecture Decision Document](../_bmad-output/planning-artifacts/architecture.md)
 - [Project Context](../_bmad-output/project-context.md)
+- [Azure Verified Modules](https://aka.ms/avm)
 - [Azure Static Web Apps Documentation](https://learn.microsoft.com/en-us/azure/static-web-apps/)
 - [Azure Table Storage Documentation](https://learn.microsoft.com/en-us/azure/storage/tables/)
 - [Azure Communication Services Email](https://learn.microsoft.com/en-us/azure/communication-services/concepts/email/email-overview)
