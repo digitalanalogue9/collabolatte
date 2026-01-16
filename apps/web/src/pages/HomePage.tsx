@@ -36,7 +36,8 @@ export function HomePage() {
           // Extract display name and email from claims
           const nameClaim = principal.claims?.find(
             (c: { typ: string; val: string }) =>
-              c.typ === 'name' || c.typ === 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
+              c.typ === 'name' ||
+              c.typ === 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
           );
           const emailClaim = principal.claims?.find(
             (c: { typ: string; val: string }) =>

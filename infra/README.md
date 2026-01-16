@@ -1,6 +1,7 @@
 # Collabolatte Infrastructure Documentation
 
-This document provides the complete infrastructure specification for provisioning Collabolatte on Azure. It serves as the authoritative reference for implementing Bicep templates.
+This document provides the complete infrastructure specification for provisioning Collabolatte on
+Azure. It serves as the authoritative reference for implementing Bicep templates.
 
 ## Table of Contents
 
@@ -21,6 +22,7 @@ This document provides the complete infrastructure specification for provisionin
 ### Prerequisites
 
 Before deploying, ensure you have:
+
 - Azure CLI installed (`az --version` should show 2.x or later)
 - Bicep CLI installed (included with Azure CLI)
 - Appropriate Azure permissions (Contributor role on subscription or resource group)
@@ -75,7 +77,8 @@ az deployment group show \
 
 **4. Configure Entra ID** (see [Entra ID and EasyAuth Setup](#entra-id-and-easyauth-setup))
 
-**5. Post-Deployment Configuration** (see [Post-Deployment Configuration](#post-deployment-configuration))
+**5. Post-Deployment Configuration** (see
+[Post-Deployment Configuration](#post-deployment-configuration))
 
 ### Deployment Commands
 
@@ -126,15 +129,19 @@ Before deploying, update the parameter files with your values:
 - `infra/parameters/prod.json` - Production environment
 
 **Required changes:**
+
 - `repositoryUrl`: Update with your GitHub repository URL
 - `repositoryBranch`: Usually `main` (default)
 - Custom domains (prod only): Update if you have custom domains configured
 
 ### Important Notes
 
-- **Entra ID Configuration**: App registration and client secret must be configured manually after deployment (see [Entra ID and EasyAuth Setup](#entra-id-and-easyauth-setup))
-- **Custom Domains**: DNS records must be configured separately (see [Post-Deployment Configuration](#post-deployment-configuration))
-- **Connection Strings**: Deployment outputs contain sensitive connection strings - store securely in GitHub Secrets or Azure Key Vault
+- **Entra ID Configuration**: App registration and client secret must be configured manually after
+  deployment (see [Entra ID and EasyAuth Setup](#entra-id-and-easyauth-setup))
+- **Custom Domains**: DNS records must be configured separately (see
+  [Post-Deployment Configuration](#post-deployment-configuration))
+- **Connection Strings**: Deployment outputs contain sensitive connection strings - store securely
+  in GitHub Secrets or Azure Key Vault
 - **Free Tier**: All resources use free tier by default to minimize costs
 - **Idempotency**: Deployments are idempotent - running multiple times is safe
 
@@ -151,12 +158,12 @@ Collabolatte is deployed as a serverless application on Azure using the followin
 
 ### MVP Cost Constraints (All-Free Tier)
 
-| Constraint | Decision |
-|------------|----------|
-| Static Web Apps | Free tier (both instances) |
-| Key Vault | Not used in MVP (use app settings + GitHub Secrets) |
-| Application Insights | Not used in MVP (basic platform logs only) |
-| Functions Plan | Windows Consumption (included with SWA) |
+| Constraint           | Decision                                            |
+| -------------------- | --------------------------------------------------- |
+| Static Web Apps      | Free tier (both instances)                          |
+| Key Vault            | Not used in MVP (use app settings + GitHub Secrets) |
+| Application Insights | Not used in MVP (basic platform logs only)          |
+| Functions Plan       | Windows Consumption (included with SWA)             |
 
 ---
 
@@ -164,81 +171,84 @@ Collabolatte is deployed as a serverless application on Azure using the followin
 
 ### Resource Group
 
-| Property | Value |
-|----------|-------|
-| Purpose | Contains all Collabolatte resources |
-| Location | UK South (default) |
-| Tags | `project: collabolatte`, `environment: {env}` |
+| Property | Value                                         |
+| -------- | --------------------------------------------- |
+| Purpose  | Contains all Collabolatte resources           |
+| Location | UK South (default)                            |
+| Tags     | `project: collabolatte`, `environment: {env}` |
 
 ### Static Web App - Application (SPA + API)
 
-| Property | Value |
-|----------|-------|
-| SKU | Free |
-| Location | UK South |
-| Custom Domain | `app.collabolatte.co.uk` |
-| Repository | GitHub (collabolatte repo) |
-| Branch | `main` |
-| Build Configuration | |
-| - app_location | `apps/web` |
-| - api_location | `apps/api` |
-| - output_location | `dist` |
-| Identity Provider | Microsoft Entra ID (EasyAuth) |
+| Property            | Value                         |
+| ------------------- | ----------------------------- |
+| SKU                 | Free                          |
+| Location            | UK South                      |
+| Custom Domain       | `app.collabolatte.co.uk`      |
+| Repository          | GitHub (collabolatte repo)    |
+| Branch              | `main`                        |
+| Build Configuration |                               |
+| - app_location      | `apps/web`                    |
+| - api_location      | `apps/api`                    |
+| - output_location   | `dist`                        |
+| Identity Provider   | Microsoft Entra ID (EasyAuth) |
 
 **Purpose:** Hosts the React SPA and Azure Functions API (.NET isolated worker).
 
 ### Static Web App - Marketing
 
-| Property | Value |
-|----------|-------|
-| SKU | Free |
-| Location | UK South |
-| Custom Domain | `www.collabolatte.co.uk` |
-| Repository | GitHub (collabolatte repo) |
-| Branch | `main` |
-| Build Configuration | |
-| - app_location | `apps/marketing` |
-| - output_location | `dist` |
-| Identity Provider | None (public site) |
+| Property            | Value                      |
+| ------------------- | -------------------------- |
+| SKU                 | Free                       |
+| Location            | UK South                   |
+| Custom Domain       | `www.collabolatte.co.uk`   |
+| Repository          | GitHub (collabolatte repo) |
+| Branch              | `main`                     |
+| Build Configuration |                            |
+| - app_location      | `apps/marketing`           |
+| - output_location   | `dist`                     |
+| Identity Provider   | None (public site)         |
 
 **Purpose:** Hosts the 11ty static marketing site.
 
 ### Storage Account
 
-| Property | Value |
-|----------|-------|
-| SKU | Standard_LRS |
-| Kind | StorageV2 |
-| Access Tier | Hot |
-| Minimum TLS Version | TLS1_2 |
-| Allow Blob Public Access | false |
-| HTTPS Only | true |
+| Property                 | Value        |
+| ------------------------ | ------------ |
+| SKU                      | Standard_LRS |
+| Kind                     | StorageV2    |
+| Access Tier              | Hot          |
+| Minimum TLS Version      | TLS1_2       |
+| Allow Blob Public Access | false        |
+| HTTPS Only               | true         |
 
 **Table Storage Entities:**
 
-| Table Name | PartitionKey | RowKey | Purpose |
-|------------|--------------|--------|---------|
-| Memberships | ProgrammeId | UserId | Programme membership records |
-| Cycles | ProgrammeId | CycleDate (ISO) | Matching cycle records |
-| Matches | ProgrammeId | MatchId (deterministic) | Match records |
-| Events | ProgrammeId | Timestamp+Guid | System event logs (optional) |
-| Roles | "roles" | UserId | Role allowlist (Admin, Programme Owner) |
+| Table Name  | PartitionKey | RowKey                  | Purpose                                 |
+| ----------- | ------------ | ----------------------- | --------------------------------------- |
+| Memberships | ProgrammeId  | UserId                  | Programme membership records            |
+| Cycles      | ProgrammeId  | CycleDate (ISO)         | Matching cycle records                  |
+| Matches     | ProgrammeId  | MatchId (deterministic) | Match records                           |
+| Events      | ProgrammeId  | Timestamp+Guid          | System event logs (optional)            |
+| Roles       | "roles"      | UserId                  | Role allowlist (Admin, Programme Owner) |
 
-**Data Isolation Rule:** Every query MUST include ProgrammeId as PartitionKey to enforce programme-level data isolation. Cross-partition scans are prohibited.
+**Data Isolation Rule:** Every query MUST include ProgrammeId as PartitionKey to enforce
+programme-level data isolation. Cross-partition scans are prohibited.
 
 ### Azure Communication Services
 
-| Property | Value |
-|----------|-------|
-| Data Location | UK |
-| Service Type | Email only |
-| SDK | Azure.Communication.Email 1.x |
+| Property      | Value                         |
+| ------------- | ----------------------------- |
+| Data Location | UK                            |
+| Service Type  | Email only                    |
+| SDK           | Azure.Communication.Email 1.x |
 
 **Email Domain Configuration:**
+
 - Configure a verified sender domain or use Azure-managed domain
 - Sender address: `noreply@collabolatte.co.uk` (or Azure-managed equivalent)
 
-**Note:** SMS is not used in MVP. Teams notifications are additive; email is the authoritative channel.
+**Note:** SMS is not used in MVP. Teams notifications are additive; email is the authoritative
+channel.
 
 ---
 
@@ -251,6 +261,7 @@ Collabolatte is deployed as a serverless application on Azure using the followin
 ```
 
 Where:
+
 - `{project}` = `collabolatte`
 - `{environment}` = `dev` | `staging` | `prod`
 - `{resource}` = Resource type abbreviation
@@ -258,23 +269,23 @@ Where:
 
 ### Resource Naming Rules
 
-| Resource Type | Abbreviation | Max Length | Allowed Characters | Scope | Example |
-|--------------|--------------|------------|-------------------|-------|---------|
-| Resource Group | `rg` | 90 | a-z, 0-9, -, _, ., () | Subscription | `collabolatte-dev-rg` |
-| Static Web App (app) | `swa-app` | 40 | a-z, 0-9, - | Resource Group | `collabolatte-dev-swa-app` |
-| Static Web App (www) | `swa-www` | 40 | a-z, 0-9, - | Resource Group | `collabolatte-dev-swa-www` |
-| Storage Account | `st` | 24 | a-z, 0-9 (NO hyphens) | Global | `collabolattedevst001` |
-| Communication Services | `acs` | 64 | a-z, 0-9, - | Resource Group | `collabolatte-dev-acs` |
+| Resource Type          | Abbreviation | Max Length | Allowed Characters     | Scope          | Example                    |
+| ---------------------- | ------------ | ---------- | ---------------------- | -------------- | -------------------------- |
+| Resource Group         | `rg`         | 90         | a-z, 0-9, -, \_, ., () | Subscription   | `collabolatte-dev-rg`      |
+| Static Web App (app)   | `swa-app`    | 40         | a-z, 0-9, -            | Resource Group | `collabolatte-dev-swa-app` |
+| Static Web App (www)   | `swa-www`    | 40         | a-z, 0-9, -            | Resource Group | `collabolatte-dev-swa-www` |
+| Storage Account        | `st`         | 24         | a-z, 0-9 (NO hyphens)  | Global         | `collabolattedevst001`     |
+| Communication Services | `acs`        | 64         | a-z, 0-9, -            | Resource Group | `collabolatte-dev-acs`     |
 
 ### Environment-Specific Names
 
-| Resource | Dev | Staging | Prod |
-|----------|-----|---------|------|
-| Resource Group | `collabolatte-dev-rg` | `collabolatte-staging-rg` | `collabolatte-prod-rg` |
-| SWA (App) | `collabolatte-dev-swa-app` | `collabolatte-staging-swa-app` | `collabolatte-prod-swa-app` |
-| SWA (Marketing) | `collabolatte-dev-swa-www` | `collabolatte-staging-swa-www` | `collabolatte-prod-swa-www` |
-| Storage Account | `collabolattedevst001` | `collabolattestagingst001` | `collabolatteprodst001` |
-| Communication Services | `collabolatte-dev-acs` | `collabolatte-staging-acs` | `collabolatte-prod-acs` |
+| Resource               | Dev                        | Staging                        | Prod                        |
+| ---------------------- | -------------------------- | ------------------------------ | --------------------------- |
+| Resource Group         | `collabolatte-dev-rg`      | `collabolatte-staging-rg`      | `collabolatte-prod-rg`      |
+| SWA (App)              | `collabolatte-dev-swa-app` | `collabolatte-staging-swa-app` | `collabolatte-prod-swa-app` |
+| SWA (Marketing)        | `collabolatte-dev-swa-www` | `collabolatte-staging-swa-www` | `collabolatte-prod-swa-www` |
+| Storage Account        | `collabolattedevst001`     | `collabolattestagingst001`     | `collabolatteprodst001`     |
+| Communication Services | `collabolatte-dev-acs`     | `collabolatte-staging-acs`     | `collabolatte-prod-acs`     |
 
 ---
 
@@ -282,21 +293,21 @@ Where:
 
 ### Required Parameters
 
-| Parameter | Type | Description | Default | Validation |
-|-----------|------|-------------|---------|------------|
-| `project` | string | Project name | `collabolatte` | lowercase, no spaces |
-| `environment` | string | Deployment environment | - | `dev` \| `staging` \| `prod` |
-| `location` | string | Azure region | `uksouth` | Valid Azure region |
-| `identifier` | string | Unique suffix for global resources | `001` | 3 alphanumeric chars |
+| Parameter     | Type   | Description                        | Default        | Validation                   |
+| ------------- | ------ | ---------------------------------- | -------------- | ---------------------------- |
+| `project`     | string | Project name                       | `collabolatte` | lowercase, no spaces         |
+| `environment` | string | Deployment environment             | -              | `dev` \| `staging` \| `prod` |
+| `location`    | string | Azure region                       | `uksouth`      | Valid Azure region           |
+| `identifier`  | string | Unique suffix for global resources | `001`          | 3 alphanumeric chars         |
 
 ### Optional Parameters
 
-| Parameter | Type | Description | Default |
-|-----------|------|-------------|---------|
-| `appCustomDomain` | string | Custom domain for app SWA | `app.collabolatte.co.uk` |
+| Parameter         | Type   | Description                     | Default                  |
+| ----------------- | ------ | ------------------------------- | ------------------------ |
+| `appCustomDomain` | string | Custom domain for app SWA       | `app.collabolatte.co.uk` |
 | `wwwCustomDomain` | string | Custom domain for marketing SWA | `www.collabolatte.co.uk` |
-| `entraClientId` | string | Entra ID app client ID | (from app registration) |
-| `entraTenantId` | string | Entra ID tenant ID | (organisation tenant) |
+| `entraClientId`   | string | Entra ID app client ID          | (from app registration)  |
+| `entraTenantId`   | string | Entra ID tenant ID              | (organisation tenant)    |
 
 ### Parameter Files Structure
 
@@ -348,12 +359,12 @@ infra/
 
 Add the following redirect URIs under **Authentication > Single-page application**:
 
-| Environment | Redirect URI |
-|-------------|--------------|
-| Production | `https://app.collabolatte.co.uk/.auth/login/aad/callback` |
-| Staging | `https://collabolatte-staging-swa-app.azurestaticapps.net/.auth/login/aad/callback` |
-| Development | `https://collabolatte-dev-swa-app.azurestaticapps.net/.auth/login/aad/callback` |
-| Local | `http://localhost:4280/.auth/login/aad/callback` |
+| Environment | Redirect URI                                                                        |
+| ----------- | ----------------------------------------------------------------------------------- |
+| Production  | `https://app.collabolatte.co.uk/.auth/login/aad/callback`                           |
+| Staging     | `https://collabolatte-staging-swa-app.azurestaticapps.net/.auth/login/aad/callback` |
+| Development | `https://collabolatte-dev-swa-app.azurestaticapps.net/.auth/login/aad/callback`     |
+| Local       | `http://localhost:4280/.auth/login/aad/callback`                                    |
 
 ### Step 3: Configure API Permissions
 
@@ -382,11 +393,11 @@ Add the following redirect URIs under **Authentication > Single-page application
 
 ### Step 6: Record Configuration Values
 
-| Value | Location | Store As |
-|-------|----------|----------|
-| Application (client) ID | Overview page | `AZURE_CLIENT_ID` |
-| Directory (tenant) ID | Overview page | `AZURE_TENANT_ID` |
-| Client Secret | Certificates & secrets | `AZURE_CLIENT_SECRET` |
+| Value                   | Location               | Store As              |
+| ----------------------- | ---------------------- | --------------------- |
+| Application (client) ID | Overview page          | `AZURE_CLIENT_ID`     |
+| Directory (tenant) ID   | Overview page          | `AZURE_TENANT_ID`     |
+| Client Secret           | Certificates & secrets | `AZURE_CLIENT_SECRET` |
 
 ### Step 7: Configure SWA EasyAuth
 
@@ -435,29 +446,33 @@ Create or update `staticwebapp.config.json` in the web app:
 
 ### Step 8: Configure SWA Application Settings
 
-Add these settings in the Azure Portal under **Static Web App > Configuration > Application settings**:
+Add these settings in the Azure Portal under **Static Web App > Configuration > Application
+settings**:
 
-| Setting Name | Value Source |
-|--------------|--------------|
-| `AZURE_CLIENT_ID` | App registration client ID |
+| Setting Name          | Value Source                   |
+| --------------------- | ------------------------------ |
+| `AZURE_CLIENT_ID`     | App registration client ID     |
 | `AZURE_CLIENT_SECRET` | App registration client secret |
 
 ---
 
 ## GitHub Actions Setup
 
-The infrastructure deployment is automated via GitHub Actions (`.github/workflows/infra-deploy.yml`). This workflow requires specific GitHub Secrets to authenticate with Azure and deploy Bicep templates.
+The infrastructure deployment is automated via GitHub Actions
+(`.github/workflows/infra-deploy.yml`). This workflow requires specific GitHub Secrets to
+authenticate with Azure and deploy Bicep templates.
 
 ### Required GitHub Secrets
 
-| Secret Name | Description | How to Obtain |
-|-------------|-------------|---------------|
-| `AZURE_CREDENTIALS` | Service principal credentials for Azure login | Create via Azure CLI (see below) |
-| `AZURE_SUBSCRIPTION_ID` | Azure subscription GUID | Find in Azure Portal under Subscriptions |
+| Secret Name             | Description                                   | How to Obtain                            |
+| ----------------------- | --------------------------------------------- | ---------------------------------------- |
+| `AZURE_CREDENTIALS`     | Service principal credentials for Azure login | Create via Azure CLI (see below)         |
+| `AZURE_SUBSCRIPTION_ID` | Azure subscription GUID                       | Find in Azure Portal under Subscriptions |
 
 ### Create Service Principal for GitHub Actions
 
-Run this Azure CLI command to create a service principal with Contributor access to the resource group:
+Run this Azure CLI command to create a service principal with Contributor access to the resource
+group:
 
 ```bash
 # For dev environment
@@ -514,7 +529,8 @@ The command outputs JSON in this format (example shown):
 The infrastructure deployment workflow runs:
 
 - **Manually**: Via Actions tab with environment selection (dev/staging/prod)
-- **Automatically**: On push to `main` branch when files in `infra/**` or `.github/workflows/infra-deploy.yml` change
+- **Automatically**: On push to `main` branch when files in `infra/**` or
+  `.github/workflows/infra-deploy.yml` change
 
 ### Deployment Process
 
@@ -576,15 +592,15 @@ The workflow performs these steps:
 
 Resources must be deployed in this order due to dependencies:
 
-| Order | Resource | Depends On | Notes |
-|-------|----------|------------|-------|
-| 1 | Resource Group | - | Container for all resources |
-| 2 | Storage Account | Resource Group | Required for API data access |
-| 3 | Communication Services | Resource Group | Required for email notifications |
-| 4 | Entra ID App Registration | - | External (portal or CLI) |
-| 5 | Static Web App (App) | Storage, ACS, Entra | Requires connection strings and auth config |
-| 6 | Static Web App (Marketing) | Resource Group | No dependencies on other resources |
-| 7 | Custom Domains | SWAs | DNS must be configured first |
+| Order | Resource                   | Depends On          | Notes                                       |
+| ----- | -------------------------- | ------------------- | ------------------------------------------- |
+| 1     | Resource Group             | -                   | Container for all resources                 |
+| 2     | Storage Account            | Resource Group      | Required for API data access                |
+| 3     | Communication Services     | Resource Group      | Required for email notifications            |
+| 4     | Entra ID App Registration  | -                   | External (portal or CLI)                    |
+| 5     | Static Web App (App)       | Storage, ACS, Entra | Requires connection strings and auth config |
+| 6     | Static Web App (Marketing) | Resource Group      | No dependencies on other resources          |
+| 7     | Custom Domains             | SWAs                | DNS must be configured first                |
 
 ---
 
@@ -639,9 +655,9 @@ az storage table create --name Roles --account-name collabolatte{env}st001
 
 Add these secrets to the GitHub repository:
 
-| Secret Name | Description |
-|-------------|-------------|
-| `AZURE_STATIC_WEB_APPS_API_TOKEN_APP` | Deployment token for app SWA |
+| Secret Name                           | Description                        |
+| ------------------------------------- | ---------------------------------- |
+| `AZURE_STATIC_WEB_APPS_API_TOKEN_APP` | Deployment token for app SWA       |
 | `AZURE_STATIC_WEB_APPS_API_TOKEN_WWW` | Deployment token for marketing SWA |
 
 ---
@@ -655,7 +671,8 @@ This infrastructure documentation explicitly excludes:
 - **Individual-level analytics resources** - Trust contract prohibits surveillance
 - **Cross-programme data access** - Storage partitioning enforces isolation
 
-Any future additions must be reviewed against the trust contract defined in the architecture document.
+Any future additions must be reviewed against the trust contract defined in the architecture
+document.
 
 ---
 
@@ -680,13 +697,17 @@ infra/
 **Module Descriptions:**
 
 - **main.bicep**: Orchestrates all resources, defines parameters, calls modules, exports outputs
-- **modules/storage.bicep**: Deploys Storage Account (Standard_LRS, StorageV2, Hot tier) with Table Storage service
-- **modules/acs.bicep**: Deploys Azure Communication Services for email notifications (UK data location)
-- **modules/swa.bicep**: Reusable module for Static Web Apps - supports both app+api and marketing site variants
+- **modules/storage.bicep**: Deploys Storage Account (Standard_LRS, StorageV2, Hot tier) with Table
+  Storage service
+- **modules/acs.bicep**: Deploys Azure Communication Services for email notifications (UK data
+  location)
+- **modules/swa.bicep**: Reusable module for Static Web Apps - supports both app+api and marketing
+  site variants
 
 **Parameter Files:**
 
 Each environment has its own parameter file with:
+
 - Project name and environment identifier
 - Azure region (default: uksouth)
 - Unique identifier for global resources
@@ -696,6 +717,7 @@ Each environment has its own parameter file with:
 **Outputs:**
 
 Deployment outputs include:
+
 - Storage account name and connection string
 - ACS connection string and endpoint
 - SWA hostnames, URLs, and deployment tokens
@@ -705,10 +727,10 @@ Deployment outputs include:
 
 ## Version History
 
-| Date | Version | Changes |
-|------|---------|---------|
-| 2026-01-15 | 1.0.0 | Comprehensive documentation (Story 1.0) |
-| 2026-01-16 | 1.1.0 | Bicep templates implemented (Story 1.4) - main.bicep and modules |
+| Date       | Version | Changes                                                          |
+| ---------- | ------- | ---------------------------------------------------------------- |
+| 2026-01-15 | 1.0.0   | Comprehensive documentation (Story 1.0)                          |
+| 2026-01-16 | 1.1.0   | Bicep templates implemented (Story 1.4) - main.bicep and modules |
 
 ---
 

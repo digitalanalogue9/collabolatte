@@ -4,17 +4,29 @@ Status: in-progress
 
 ## Story
 
-As a delivery team, I want to deploy a minimal "hello world" application to the provisioned infrastructure, So that we can verify the end-to-end pipeline works before Epic 2 feature development.
+As a delivery team, I want to deploy a minimal "hello world" application to the provisioned
+infrastructure, So that we can verify the end-to-end pipeline works before Epic 2 feature
+development.
 
 ## Acceptance Criteria
 
-1. **Given** infrastructure is provisioned (Story 1.5), **When** we push code to the main branch, **Then** the SWA deployment workflows (from Story 1.1) deploy successfully, **And** both app+api and marketing sites are deployed, **And** deployment logs show no errors.
+1. **Given** infrastructure is provisioned (Story 1.5), **When** we push code to the main branch,
+   **Then** the SWA deployment workflows (from Story 1.1) deploy successfully, **And** both app+api
+   and marketing sites are deployed, **And** deployment logs show no errors.
 
-2. **Given** the application is deployed, **When** we access the deployed app URL, **Then** we can authenticate via Entra ID (EasyAuth), **And** we see a minimal "hello world" page confirming deployment, **And** the authenticated state is visible (user name/email displayed).
+2. **Given** the application is deployed, **When** we access the deployed app URL, **Then** we can
+   authenticate via Entra ID (EasyAuth), **And** we see a minimal "hello world" page confirming
+   deployment, **And** the authenticated state is visible (user name/email displayed).
 
-3. **Given** the deployment is verified, **When** we test API connectivity, **Then** an authenticated API endpoint responds successfully, **And** the API can connect to Table Storage (connection test, no data operations yet), **And** the API can verify ACS configuration (configuration test, no actual email sent).
+3. **Given** the deployment is verified, **When** we test API connectivity, **Then** an
+   authenticated API endpoint responds successfully, **And** the API can connect to Table Storage
+   (connection test, no data operations yet), **And** the API can verify ACS configuration
+   (configuration test, no actual email sent).
 
-4. **Given** all verification tests pass, **When** we review the deployment, **Then** all infrastructure costs remain within free tier limits, **And** the deployment matches architecture specifications, **And** developers can now work on Epic 2 features without infrastructure blockers.
+4. **Given** all verification tests pass, **When** we review the deployment, **Then** all
+   infrastructure costs remain within free tier limits, **And** the deployment matches architecture
+   specifications, **And** developers can now work on Epic 2 features without infrastructure
+   blockers.
 
 ## Tasks / Subtasks
 
@@ -62,7 +74,8 @@ As a delivery team, I want to deploy a minimal "hello world" application to the 
 
 ### Story Context
 
-This story proves the end-to-end deployment pipeline works before starting feature development. It's purely infrastructure validation—no user-facing features yet.
+This story proves the end-to-end deployment pipeline works before starting feature development. It's
+purely infrastructure validation—no user-facing features yet.
 
 ### Critical Architecture Constraints
 
@@ -71,7 +84,8 @@ This story proves the end-to-end deployment pipeline works before starting featu
 #### Authentication Flow
 
 - **EasyAuth at Platform Level**: No custom auth code in application
-- **User Claims via Headers**: `x-ms-client-principal-name`, `x-ms-client-principal-id`, `x-ms-client-principal`
+- **User Claims via Headers**: `x-ms-client-principal-name`, `x-ms-client-principal-id`,
+  `x-ms-client-principal`
 - **Validation Required**: User claims from headers are untrusted—validate at API boundaries
 
 #### Minimal Verification Requirements
@@ -83,39 +97,45 @@ This story proves the end-to-end deployment pipeline works before starting featu
 
 ### Technology Versions
 
-| Technology | Version | Notes |
-|------------|---------|-------|
-| React | 18.x | From Story 1.1 scaffolding |
-| .NET | 10.x | Azure Functions isolated worker |
-| Azure Functions Core Tools | 4.x | For local testing |
-| Azure Static Web Apps CLI | Latest | For local SWA emulation |
+| Technology                 | Version | Notes                           |
+| -------------------------- | ------- | ------------------------------- |
+| React                      | 18.x    | From Story 1.1 scaffolding      |
+| .NET                       | 10.x    | Azure Functions isolated worker |
+| Azure Functions Core Tools | 4.x     | For local testing               |
+| Azure Static Web Apps CLI  | Latest  | For local SWA emulation         |
 
 ### Implementation Notes
 
 **Web App Changes:**
+
 - Update `apps/web/src/pages/HomePage.tsx` (or create if needed)
 - Use `AppLayout`, `AppHeader` components from Story 1.3
 - Display user info from EasyAuth claims
 - Simple, calm design matching Sage Calm theme
 
 **API Changes:**
+
 - Create `apps/api/src/Functions/StatusFunction.cs`
 - Return JSON with connection test results
 - Use Azure.Data.Tables SDK for Storage test
 - Use Azure.Communication.Email SDK for ACS test
 
 **Connection Strings:**
+
 - Storage: `AzureWebJobsStorage` environment variable (set by SWA)
 - ACS: `ACS_CONNECTION_STRING` environment variable (configure in SWA settings)
 
 ### Testing Strategy
 
 **Local Testing:**
-- Use SWA CLI to test locally: `swa start http://localhost:5173 --api-location http://localhost:7071`
+
+- Use SWA CLI to test locally:
+  `swa start http://localhost:5173 --api-location http://localhost:7071`
 - Use Functions emulator: `func start` in `apps/api/src`
 - Use local.settings.json for connection strings (not committed)
 
 **Deployed Testing:**
+
 - Manual verification of deployed URLs
 - Test authentication flow end-to-end
 - Verify API responds to authenticated requests

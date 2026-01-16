@@ -4,15 +4,25 @@ Status: incomplete
 
 ## Story
 
-As a delivery team, I want to deploy Azure infrastructure using Bicep via a GitHub Actions workflow, So that infrastructure changes are version-controlled and automated.
+As a delivery team, I want to deploy Azure infrastructure using Bicep via a GitHub Actions workflow,
+So that infrastructure changes are version-controlled and automated.
 
 ## Acceptance Criteria
 
-1. **Given** Bicep templates exist (Story 1.4), **When** we create the infrastructure deployment workflow, **Then** `.github/workflows/infra-deploy.yml` exists, **And** it uses Azure CLI to deploy Bicep templates, **And** it is triggered manually or on changes to `/infra/**`, **And** it uses a service principal configured in GitHub Secrets.
+1. **Given** Bicep templates exist (Story 1.4), **When** we create the infrastructure deployment
+   workflow, **Then** `.github/workflows/infra-deploy.yml` exists, **And** it uses Azure CLI to
+   deploy Bicep templates, **And** it is triggered manually or on changes to `/infra/**`, **And** it
+   uses a service principal configured in GitHub Secrets.
 
-2. **Given** the workflow is configured, **When** we deploy to the dev environment, **Then** all Azure resources are provisioned successfully, **And** resources follow documented naming conventions, **And** deployment outputs are captured and displayed, **And** deployment is idempotent (can be run multiple times safely).
+2. **Given** the workflow is configured, **When** we deploy to the dev environment, **Then** all
+   Azure resources are provisioned successfully, **And** resources follow documented naming
+   conventions, **And** deployment outputs are captured and displayed, **And** deployment is
+   idempotent (can be run multiple times safely).
 
-3. **Given** infrastructure is deployed, **When** we complete manual Entra ID app registration, **Then** the app registration is documented in `/infra/README.md`, **And** Client ID, Client Secret, and Tenant ID are added to GitHub Secrets, **And** SWA app settings are configured with Entra ID values.
+3. **Given** infrastructure is deployed, **When** we complete manual Entra ID app registration,
+   **Then** the app registration is documented in `/infra/README.md`, **And** Client ID, Client
+   Secret, and Tenant ID are added to GitHub Secrets, **And** SWA app settings are configured with
+   Entra ID values.
 
 ## Tasks / Subtasks
 
@@ -59,7 +69,9 @@ As a delivery team, I want to deploy Azure infrastructure using Bicep via a GitH
 
 ### Story Context
 
-This story deploys the infrastructure defined in Story 1.4 using GitHub Actions automation. It creates a repeatable, version-controlled infrastructure deployment process separate from application deployment.
+This story deploys the infrastructure defined in Story 1.4 using GitHub Actions automation. It
+creates a repeatable, version-controlled infrastructure deployment process separate from application
+deployment.
 
 ### Critical Architecture Constraints
 
@@ -67,7 +79,8 @@ This story deploys the infrastructure defined in Story 1.4 using GitHub Actions 
 
 #### Infrastructure Deployment Pattern
 
-- **Separation of Concerns**: Infrastructure deployment (Story 1.5) is separate from application deployment (Story 1.6)
+- **Separation of Concerns**: Infrastructure deployment (Story 1.5) is separate from application
+  deployment (Story 1.6)
 - **Idempotency**: Bicep deployments can be run multiple times safely
 - **Service Principal**: GitHub Actions uses Azure service principal for authentication
 - **Manual Steps**: Entra ID app registration cannot be fully automated via Bicep
@@ -81,18 +94,18 @@ This story deploys the infrastructure defined in Story 1.4 using GitHub Actions 
 
 ### Technology Versions
 
-| Technology | Version | Notes |
-|------------|---------|-------|
-| Azure CLI | Latest | Included in GitHub-hosted runners |
-| Bicep | Latest | Via Azure CLI |
-| GitHub Actions | N/A | GitHub-hosted runners (ubuntu-latest) |
+| Technology     | Version | Notes                                 |
+| -------------- | ------- | ------------------------------------- |
+| Azure CLI      | Latest  | Included in GitHub-hosted runners     |
+| Bicep          | Latest  | Via Azure CLI                         |
+| GitHub Actions | N/A     | GitHub-hosted runners (ubuntu-latest) |
 
 ### Workflow Structure
 
 ```yaml
 name: Deploy Infrastructure
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch: # Manual trigger
     inputs:
       environment:
         description: 'Environment to deploy'
@@ -112,13 +125,13 @@ on:
 
 ### Required GitHub Secrets
 
-| Secret Name | Description | Source |
-|-------------|-------------|--------|
-| `AZURE_CREDENTIALS` | Service principal JSON | Azure Portal (App Registration) |
-| `AZURE_SUBSCRIPTION_ID` | Azure subscription ID | Azure Portal |
-| `AZURE_TENANT_ID` | Entra ID tenant ID | Azure Portal |
-| `ENTRA_CLIENT_ID` | Entra ID app client ID | Manual app registration |
-| `ENTRA_CLIENT_SECRET` | Entra ID app client secret | Manual app registration |
+| Secret Name             | Description                | Source                          |
+| ----------------------- | -------------------------- | ------------------------------- |
+| `AZURE_CREDENTIALS`     | Service principal JSON     | Azure Portal (App Registration) |
+| `AZURE_SUBSCRIPTION_ID` | Azure subscription ID      | Azure Portal                    |
+| `AZURE_TENANT_ID`       | Entra ID tenant ID         | Azure Portal                    |
+| `ENTRA_CLIENT_ID`       | Entra ID app client ID     | Manual app registration         |
+| `ENTRA_CLIENT_SECRET`   | Entra ID app client secret | Manual app registration         |
 
 ### Deployment Command
 
@@ -133,11 +146,13 @@ az deployment group create \
 ### Testing Notes
 
 **Local Testing (Optional):**
+
 - Can test Bicep syntax with `az bicep build --file infra/main.bicep`
 - Cannot test actual deployment locally (requires Azure permissions)
 - Use what-if mode: `az deployment group what-if ...`
 
 **CI Testing:**
+
 - Workflow will fail if service principal lacks permissions
 - Workflow will fail if Bicep templates have errors
 - First deployment creates resources; subsequent runs update them
@@ -177,8 +192,8 @@ N/A
 
 ### Change Log
 
-| Date | Change |
-|------|--------|
+| Date       | Change                                    |
+| ---------- | ----------------------------------------- |
 | 2026-01-16 | Story 1.5 implementation artifact created |
 
 ### File List
