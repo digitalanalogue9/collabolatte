@@ -1,4 +1,5 @@
 # Epic 2: Get Matched
+
 Participants reliably receive predictable, random matches on the agreed cadence.
 **FRs covered:** FR11, FR12, FR13, FR14, FR15
 **NFR Focus:** NFR2 (no real-time), NFR13-14 (clear failure behavior, atomic matching).
@@ -119,4 +120,3 @@ So that trust in the system is preserved.
 **Given** a matching run fails,
 **When** the system recovers for the next cycle,
 **Then** the participant experience remains calm and unchanged.
-

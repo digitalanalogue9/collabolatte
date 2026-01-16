@@ -96,4 +96,3 @@
 **Design Principle:** These NFRs are deliberately boring. Security is non-negotiable. Everything else is right-sized for a trust-first internal pilot where the goal is learning, not perfection.
 
 ---
-

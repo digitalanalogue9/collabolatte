@@ -9,4 +9,3 @@
 | **Aisha (Dormant User)** | Graceful inactivity, no guilt, re-engagement logging, "We waited" emotional contract |
 
 ---
-

@@ -1,4 +1,5 @@
 # Epic 4: Stay Opted-In
+
 Participants can pause, leave, and return without penalty, and see their own history.
 **FRs covered:** FR4, FR7, FR8, FR9, FR10
 **NFR Focus:** NFR7 (least-privilege access), NFR9 (no dark telemetry).
@@ -6,6 +7,7 @@ Participants can pause, leave, and return without penalty, and see their own his
 **Epic 4 Clarification:** Ignoring a match is not treated as a pause or leave. Non-response does not change participation state.
 
 **Epic 4 Anti-stories:**
+
 - No are you sure friction
 - No warnings about missing opportunities
 - No manager visibility into status
@@ -94,4 +96,3 @@ So that I can remember my involvement without performance pressure.
 **Given** I view my history,
 **When** I review it,
 **Then** it does not include counts, streaks, or engagement indicators.
-

@@ -134,6 +134,7 @@ This isn't just a hunch. The concept is grounded in:
 ## Questions?
 
 Happy to discuss:
+
 - Technical approach
 - Privacy safeguards
 - How participants would experience it

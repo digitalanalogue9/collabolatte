@@ -10,4 +10,3 @@
    - "Opt-in, no tracking, no consequences if you ignore."
 5. What is the smallest irreversible harm?
    - Any exposure of individual participation or match history to hierarchy.
-

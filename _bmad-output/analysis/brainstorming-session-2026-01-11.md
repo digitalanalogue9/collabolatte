@@ -19,6 +19,7 @@ context_file: ''
 **Topic:** Collabolatte - an internal matching and session platform for regular, opt-in small-group "curiosity coffee" connections (2-3 people) on configurable cadence, aimed at increasing cross-team interaction and organisational value.
 
 **Goals:**
+
 - Clear, testable MVP concept that validates core hypothesis (not a full social platform)
 - Defined user flows: creating programmes, joining, matching, lightweight feedback loop
 - Explicit assumptions and risks to test during pilot
@@ -39,11 +40,13 @@ The purpose of this product is to create low-friction, opt-in opportunities for 
 ### Validation Focus
 
 **Success measured by:**
+
 - Whether people actually meet
 - Whether participants report personal value
 - Whether interactions surface ideas, insights, or follow-ups with potential organisational benefit
 
 **Failure modes to watch:**
+
 - High scheduling but low meeting follow-through
 - Perceived obligation rather than curiosity
 - Over-engineering reducing participation
@@ -103,6 +106,7 @@ In-app optional for iteration; executive interviews for narrative. Comms lead as
 | Passive metrics | Extensive surveys |
 
 ### Key Insight
+
 Collabolatte solves a **scale problem** (impossible to know everyone), not a **courage problem** (people too shy). The throughline: remove friction from cross-boundary connection while staying radically simple.
 
 ---
@@ -112,6 +116,7 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 ### ⚪ White Hat - Facts & Information
 
 **[White Hat #1]**: Participant Flow
+
 1. Sign up → write bio, choose/add interests
 2. Browse public sessions (filtered by interest tags)
 3. Join a session
@@ -120,6 +125,7 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 6. They meet
 
 **[White Hat #2]**: Programme Creator Flow
+
 1. Create programme → name, description
 2. Configure matching → algorithm choice(s), group size
 3. Set cadence → first match date, frequency
@@ -128,6 +134,7 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 6. Publish
 
 **[White Hat #3]**: Two Usage Patterns
+
 - **Power users**: Create private/niche programmes for their team or interest group
 - **Most users**: Join established public programmes set up by central team
 
@@ -140,6 +147,7 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 | Time has passed | Outcomes or follow-ups |
 
 **[White Hat #5]**: Feedback Philosophy
+
 - **Default**: Nothing asked, nothing required. Attending = end of obligation.
 - **Passive signals**: Continued opt-in, pause/leave patterns, participation over time
 - **Explicit signals**: Single ignorable prompt ("Worth it" / "Not for me"), no reminders, no expectation
@@ -181,6 +189,7 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 ### 🟡 Yellow Hat - Benefits & Value
 
 **[Yellow Hat #1]**: Participant Success
+
 - Lightweight and safe - low friction preserved through real usage
 - Human, not transactional - curiosity framing held
 - No pressure to justify - "shots taken" philosophy working
@@ -190,6 +199,7 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 *Key phrase: "The occasional genuinely useful connection makes the misses tolerable."*
 
 **[Yellow Hat #2]**: Programme Creator Success
+
 - Simple, low-risk creation - choice architecture working
 - Programmes stabilise - self-sustaining, not high-maintenance
 - Basic "alive" signals - passive metrics sufficient
@@ -199,6 +209,7 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 *Key phrase: "They don't feel like they are running an initiative, just setting conditions."*
 
 **[Yellow Hat #3]**: Organisation Success
+
 - Cross-team connections without formal programmes
 - Ideas/intros emerge informally, outside official channels
 - Steady hum, not spike of hype - sustainable
@@ -214,30 +225,36 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 ### 🟢 Green Hat - Creativity & Alternatives
 
 **Signup & Onboarding Ideas:**
+
 - **[Green #1]** No Bio, Just Facts - name, department, location only. Conversation is the discovery.
 - **[Green #5]** Practice Coffee - first match framed as "warm-up, low stakes, just try it"
 
 **Conversation Support Ideas:**
+
 - **[Green #2]** System-Suggested Conversation Starter - "You both listed sustainability - maybe start there?"
 - **[Green #11]** Icebreaker Card - quirky question with match: "What's something you've changed your mind about recently?"
 
 **Match Mechanics Ideas:**
+
 - **[Green #3]** Match Expiry Window - meet within 2 weeks or match dissolves. Gentle urgency.
 - **[Green #4]** One Free Pass Per Cycle - skip a match, no questions asked. Explicit safety valve.
 - **[Green #8]** Coffee Roulette Mode - one-click, instant match, meet this week. For the spontaneous.
 
 **Programme Design Ideas:**
+
 - **[Green #7]** Programme Personalities - "The Randomiser" / "Bridge Builder" / "Deep Dive"
 - **[Green #9]** Optional Ripple Connections - "You met X, they know Y - want an intro?"
 - **[Green #12]** Programme Hibernate - pause and resume later. No guilt, no death.
 - **[Green #13]** Graceful Programme Closure - "47 connections created. Thank you."
 
 **Adoption & Spread Ideas:**
+
 - **[Green #14]** Gift a Match - "I think you'd enjoy meeting X - here's a Collabolatte invite"
 - **[Green #15]** Bring a Sceptic Challenge - playful viral conversion
 - **[Green #16]** Time-Boxed Team Experiment - 4-week trial with built-in end date
 
 **Recognition Ideas:**
+
 - **[Green #10]** Quiet Milestones - "You've had 5 Collabolattes" - private, not public
 
 **Design Pattern Combinations:**
@@ -283,12 +300,14 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 ### Assumptions to Test
 
 **Core Value Hypothesis:**
+
 - **[Q1]** We assume people want more cross-team connections. *But what if most feel sufficiently connected already?*
 - **[Q2]** We assume opt-in curiosity correlates with perceived value. *But what if curiosity doesn't translate into meaningful conversations?*
 - **[Q3]** We assume increasing connections increases chance of value. *But how would we know if volume is helping rather than diluting attention?*
 - **[Q5]** We assume serendipitous matches surface useful insights. *But how would we know whether those insights would have emerged anyway?*
 
 **Participation Mechanics:**
+
 - **[Q4]** We assume low-risk framing removes social friction. *But what if ambiguity creates inertia instead?*
 - **[Q6]** We assume small groups (2-3) are the right unit. *But what if pairs are too intense or triads too easy to ignore?*
 - **[Q7]** We assume people will self-coordinate meetings. *But what if coordination effort outweighs perceived benefit?*
@@ -296,22 +315,26 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 - **[Q19]** We assume busy people will protect 30 minutes for a stranger. *But what if calendar pressure always wins?*
 
 **Measurement Paradox:**
+
 - **[Q11]** We assume passive signals like retention are sufficient. *But what if people stay opted in out of politeness rather than value?*
 - **[Q12]** We assume not asking for feedback preserves trust. *But what if lack of reflection reduces perceived importance?*
 - **[Q13]** We assume simplicity drives adoption. *But what if too little structure makes the experience forgettable?*
 
 **Organisational Value Chain:**
+
 - **[Q9]** We assume personal value precedes organisational value. *But how would we know if individual benefit ever translates into broader impact?*
 - **[Q10]** We assume innovation signals can emerge informally. *But what if they remain invisible to the organisation?*
 - **[Q14]** We assume this works across roles and seniority. *But what if value is concentrated in specific cohorts only?*
 
 **Pilot Design:**
+
 - **[Q15]** We assume six months is enough to see signal. *But how would we know if we're stopping too early or too late?*
 - **[Q17]** We assume programme creators will set sensible configurations. *But what if early misconfigured programmes poison perception?*
 - **[Q18]** We assume one public programme is enough to start. *But what if a single programme feels too generic?*
 - **[Q20]** We assume "practice coffee" framing lowers stakes. *But what if labelling something as "practice" signals it's not worth taking seriously?*
 
 **Cultural Factors:**
+
 - **[Q16]** We assume the "first move" problem is solvable with clear framing. *But what if cultural norms override any framing?*
 
 ---
@@ -341,20 +364,24 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 | **Question Storming** | 20 testable assumptions, 5 critical 8-week validation questions |
 
 ### Core Insight
+
 *"Collabolatte removes structural friction that stops curious people from ever meeting. The value comes from increasing low-risk opportunities, not optimising each interaction."*
 
 ### Four Themes
+
 1. **Friction is the enemy** - every interaction cost must justify itself
 2. **Trust over measurement** - ease beats data; participation beats precision
 3. **Conditions over outcomes** - set up, step back, let it happen
 4. **Graceful edges** - make it easy to pause, pass, leave, or fail without drama
 
 ### MVP Scope
+
 **Must-Have:** Minimal signup, one-click join, match notification with clear first move, match expiry, one public programme
 
 **Should-Have:** Conversation starter, practice coffee framing, free pass, quiet milestones
 
 ### Next Steps
+
 1. **Research** - validate assumptions with desk research or competitor analysis
 2. **Product Brief** - formalise vision, scope, and success criteria
 3. **PRD** - detailed requirements for MVP build

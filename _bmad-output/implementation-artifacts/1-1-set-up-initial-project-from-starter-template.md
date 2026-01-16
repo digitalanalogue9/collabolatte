@@ -132,6 +132,7 @@ collabolatte/
 #### Commands Reference
 
 **Web App (Vite React TypeScript):**
+
 ```bash
 pnpm create vite apps/web --template react-ts
 cd apps/web
@@ -139,11 +140,13 @@ pnpm add @mui/material @emotion/react @emotion/styled
 ```
 
 **API (Azure Functions .NET isolated):**
+
 ```bash
 func init apps/api --worker-runtime dotnet-isolated
 ```
 
 **Marketing (11ty):**
+
 ```bash
 cd apps/marketing
 pnpm init
@@ -288,12 +291,14 @@ ACS_CONNECTION_STRING=your-acs-connection-string-here
 ### Dependencies on Story 1.0
 
 This story depends on the infrastructure documentation created in Story 1.0:
+
 - `/infra/README.md` contains naming conventions and configuration details
 - EasyAuth configuration values reference the Entra ID setup steps documented there
 
 ### Testing Notes
 
 This story creates scaffolding only - no application tests are written. Verification is:
+
 1. Web dev server starts without errors
 2. API Functions host starts without errors
 3. 11ty builds without errors

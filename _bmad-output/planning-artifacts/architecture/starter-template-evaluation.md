@@ -13,21 +13,25 @@ Monorepo with three components:
 1. **Official Vite React TypeScript template** (for the web app)
 
 - Command (official):
+
   ```bash
   pnpm create vite
   ```
+
   Then select React + TypeScript in prompts, or specify `--template react-ts`.
 
-2. **Azure Functions Core Tools init** (for the API)
+1. **Azure Functions Core Tools init** (for the API)
 
 - Command:
+
   ```bash
   func init collabolatte-api --worker-runtime dotnet-isolated
   ```
 
-3. **Eleventy (11ty) local install** (for the marketing site)
+1. **Eleventy (11ty) local install** (for the marketing site)
 
 - Commands (official):
+
   ```bash
   pnpm init
   pnpm install @11ty/eleventy

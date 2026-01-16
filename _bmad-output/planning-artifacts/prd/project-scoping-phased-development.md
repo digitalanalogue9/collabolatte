@@ -71,6 +71,7 @@
 | Framing copy refinement | "Most chats will be fine. A few will be useful." |
 
 **User Journeys Enhanced:**
+
 - Tomás – improved onboarding experience
 - Priya – full Programme Owner journey with dashboard
 
@@ -94,6 +95,7 @@
 | Coffee roulette mode | Instant match for power users |
 
 **User Journeys Enhanced:**
+
 - Helena – full executive reporting with cross-org view
 - New journey: IT Admin (multi-tenant management)
 
@@ -151,4 +153,3 @@ The MVP is complete when:
 - [ ] First match cycle completes successfully
 
 ---
-

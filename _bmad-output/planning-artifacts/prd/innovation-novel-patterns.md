@@ -11,6 +11,7 @@ This is genuinely novel framing. Existing tools (RandomCoffee, CoffeePals) posit
 #### 2. Anti-Measurement as Product Philosophy
 
 Most enterprise tools optimise for measurability. Collabolatte explicitly optimises for **unmeasurability**:
+
 - "Opportunity creation, not outcome attribution"
 - "Trust over measurement"
 - "If learning competes with ease of use, ease of use wins"
@@ -68,4 +69,3 @@ The innovation is primarily **philosophical/framing**, not technological. Valida
 | Randomness produces bad experiences | Add light constraint (cross-boundary) to prevent sibling-team matches |
 
 ---
-

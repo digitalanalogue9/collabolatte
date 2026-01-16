@@ -59,6 +59,7 @@ When in doubt, return to these:
 ### "What data are you collecting?"
 
 > "Minimal:
+>
 > - Name (from Entra ID)
 > - Email (for notifications)
 > - Department/location (for cross-boundary matching)
@@ -73,6 +74,7 @@ When in doubt, return to these:
 ### "Is this GDPR compliant?"
 
 > "By design, yes:
+>
 > - Lawful basis: consent (opt-in)
 > - Data minimisation: only what's needed
 > - Right to erasure: users can leave anytime, data deleted
@@ -147,6 +149,7 @@ When in doubt, return to these:
 ### "What happens when you leave the company?"
 
 > "Good question. Options:
+>
 > - Hand it over to someone else who wants to run it
 > - Open-source the code so anyone can continue
 > - Shut it down cleanly

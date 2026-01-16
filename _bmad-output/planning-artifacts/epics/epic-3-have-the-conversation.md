@@ -1,4 +1,5 @@
 # Epic 3: Have the Conversation
+
 Participants get a low-effort, low-pressure invitation that makes the first move easy.
 **FRs covered:** FR16, FR17, FR18
 **NFR Focus:** NFR15-17 (email delivery reliability).
@@ -71,4 +72,3 @@ So that I never feel pressured to engage.
 **Given** I take no action,
 **When** the next cycle runs,
 **Then** the system proceeds normally without calling out my inactivity.
-

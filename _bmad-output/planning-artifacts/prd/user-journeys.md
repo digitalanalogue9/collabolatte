@@ -49,4 +49,3 @@ Marcus doesn't report anything. He simply stays opted in. The next month, he get
 Marcus tells a colleague: "It's not a waste of time. Low stakes. Occasionally useful."
 
 ---
-

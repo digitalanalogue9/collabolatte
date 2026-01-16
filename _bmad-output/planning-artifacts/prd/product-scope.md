@@ -14,6 +14,7 @@
 | **Expected behaviour** | Meet or ignore, with no consequence |
 
 **Explicitly Excluded from MVP:**
+
 - Match expiry window (introduces edge cases and policy decisions too early)
 - Quiet milestones (nice but not required to validate core loop)
 - Multiple algorithms
@@ -30,6 +31,7 @@
 5. **Growth mechanics** – gift a match; time‑boxed experiments.
 
 ---
+
 ### Scope Summary
 
 | Tier | Purpose |
@@ -40,4 +42,3 @@
 | **Vision** | Keep private until behaviour is proven |
 
 ---
-

@@ -50,4 +50,3 @@ If it erodes trust, it doesn't ship.
 **Anti-Mandate Principle:** Programme Owners must never position Collabolatte as required, expected, or tied to performance. Violation of this principle erodes trust and defeats the product's purpose.
 
 ---
-

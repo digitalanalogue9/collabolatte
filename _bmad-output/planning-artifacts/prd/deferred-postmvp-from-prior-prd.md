@@ -1,13 +1,11 @@
 # Deferred / Post‑MVP (from prior PRD)
+
 ### Deferred Notification Enhancements
 
 - FR19 Conversation starter selection (post‑MVP conversation support)
 - FR20 Reminder per match cycle (not in MVP; risks obligation)
 
-
-
 These sections were removed from the MVP‑aligned PRD but preserved here for future phases.
-
 
 ### Journey 3: Priya – The Programme Creator Sets Conditions
 
@@ -44,6 +42,7 @@ Helena is the CHRO. She approved the Collabolatte pilot because the pitch was lo
 **Rising Action:**
 
 At the six-month mark, Priya sends a summary:
+
 - The system ran predictably (monthly cycles completed as scheduled)
 - Notification delivery remained reliable (failures were visible and fixed quickly)
 - Trust posture held (no complaints, no escalations)
@@ -90,4 +89,3 @@ The system didn't punish her absence. It waited.
 **Dormant User Re-engagement Guidance:** When a user returns after ≥2 missed cycles, match notification should include subtle acknowledgment: "Good to see you back" or equivalent. No guilt, no metrics—just warmth.
 
 ---
-

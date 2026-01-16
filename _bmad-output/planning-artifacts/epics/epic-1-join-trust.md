@@ -1,4 +1,5 @@
 # Epic 1: Join & Trust
+
 Participants can safely opt in, understand what is happening, and trust the system from the first touch.
 **FRs covered:** FR1, FR2, FR3, FR5, FR6, FR41
 **NFR Focus:** NFR1 (baseline performance), NFR6 (Entra ID only), NFR18-21 (accessibility basics).
@@ -6,6 +7,7 @@ Participants can safely opt in, understand what is happening, and trust the syst
 **Epic 1 Prerequisites:** Minimal project scaffolding and Azure foundations are in place (repo structure, SWA config stubs, Entra ID auth wiring baseline, and storage connection placeholders).
 
 **Azure Setup Note (pre-Story 1.0):**
+
 - Create Azure Static Web Apps resources (app+api, marketing)
 - Configure Entra ID app registration and EasyAuth for SWA
 - Create Storage Account (Table Storage)
@@ -163,4 +165,3 @@ So that I do not feel pressure or role confusion.
 **Given** I am a standard participant,
 **When** I use the app,
 **Then** my default role is participant only.
-

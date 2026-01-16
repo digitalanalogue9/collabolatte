@@ -3,6 +3,7 @@
 ## Tier 1: Market Leaders
 
 ### Donut
+
 - **Positioning:** Market leader, employee experience platform
 - **Founded:** San Francisco, USA
 - **Key clients:** Wide SMB and enterprise adoption
@@ -13,6 +14,7 @@
 [Source: Donut](https://www.donut.com/)
 
 ### RandomCoffee
+
 - **Positioning:** Enterprise-focused, global scale
 - **Founded:** France
 - **Key clients:** Uber, EY, Total, Warner Bros, TikTok, Deloitte, KPMG, Schneider Electric
@@ -26,6 +28,7 @@
 ## Tier 2: Established Players
 
 ### Mystery Coffee (Mystery Minds)
+
 - **Positioning:** GDPR-strong, hybrid/remote focus
 - **Founded:** 2013, Munich, Germany
 - **Platform:** Multi-platform
@@ -37,6 +40,7 @@
 [Source: Mystery Coffee](https://www.mysteryminds.com/en/products/mystery-coffee)
 
 ### CoffeePals
+
 - **Positioning:** Teams-native specialist
 - **Platform:** Microsoft Teams (native add-on)
 - **Features:** Virtual coffee matching, water cooler channels
@@ -46,6 +50,7 @@
 [Source: CoffeePals](https://www.coffeepals.com/)
 
 ### Together Platform
+
 - **Positioning:** Mentoring platform with coffee chats
 - **Features:** Roulette-style matching, customisable rules (timezone, skills, departments), calendar integrations
 - **Integrations:** Teams, Slack, Zoom, Google Calendar, HRIS (Namely, BambooHR, Workday)

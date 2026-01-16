@@ -84,6 +84,7 @@ MVP functional requirements have been aligned to the product brief (single progr
 **Traceability:** Every remaining MVP FR links to an MVP‑scope journey and success criteria.
 
 **Party Mode Refinements Applied:**
+
 - FR4: Clarified "own" data access
 - FR7: Added mid-cycle leave handling
 - FR12: Clarified MVP scope (no boundary filtering yet)
@@ -95,9 +96,9 @@ MVP functional requirements have been aligned to the product brief (single progr
 - FR29a: Added admin dashboard requirement (new)
 
 **Pre-mortem Additions (2026-01-11):**
+
 - FR41: User-facing transparency page
 - FR42: Cycle completion notification to Programme Owner
 - Anti-Mandate Principle added to Cultural Risk Mitigations
 
 ---
-

@@ -1,6 +1,7 @@
 # User Journey Flows
 
 ## Journey 1: New Joiner — First Coffee Match (Tomás)
+
 **Goal:** Join with minimal effort, receive first match, understand no-pressure expectations.
 
 ```mermaid
@@ -24,6 +25,7 @@ graph TD
 **Success Criteria:** Instant comprehension, safe invitation, no-penalty skip, predictable cadence.
 
 ## Journey 2: Sceptic — Tests the Waters (Marcus)
+
 **Goal:** Validate trust and low-obligation framing; avoid churn.
 
 ```mermaid
@@ -46,6 +48,7 @@ graph TD
 **Success Criteria:** Zero obligation signals; easy opt-out; optional action feels safe; explicit “ignoring has no consequences.”
 
 ## Journey 3: Dormant User — Returns After Inactivity
+
 **Goal:** Re-engage without guilt or re-onboarding.
 
 ```mermaid
@@ -65,12 +68,14 @@ graph TD
 **Success Criteria:** Neutral tone, no guilt, easy return, continuity without re-setup.
 
 ## Journey Patterns
+
 - **Invitation-first:** All journeys begin with a low-pressure invite.
 - **Silence is valid:** Non-response is an explicit path with no penalty.
 - **Predictable cadence:** Time-based rhythm is the stability anchor.
 - **Single-step actions:** Join, Introduce, Skip; no multi-step flows.
 
 ## Flow Optimization Principles
+
 - Minimise decision points and keep copy consistent.
 - Avoid reminders that imply obligation.
 - Use the same “optional/no tracking” reassurance in every journey.

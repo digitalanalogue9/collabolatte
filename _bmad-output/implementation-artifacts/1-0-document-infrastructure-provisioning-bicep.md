@@ -186,6 +186,7 @@ collabolatte/
 ### Trust & Privacy Considerations
 
 While this is an infrastructure story, documentation must note:
+
 - No individual-level analytics resources should be provisioned
 - Storage account access must enforce programme-level isolation
 - No behavioural tracking infrastructure
