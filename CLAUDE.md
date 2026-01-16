@@ -65,10 +65,13 @@ The file `_bmad-output/project-context.md` contains **183 implementation rules**
 - **Notifications**: Azure Communication Services Email
 
 ### Trust-Critical Rules
-1. **No surveillance**: No individual-level analytics, participation tracking, or manager visibility
-2. **Data isolation**: Every Table Storage query must enforce ProgrammeId as PartitionKey
-3. **Anti-mandate**: Participation is never required; opt-out is always easy
-4. **Visibility limits**: Sponsors see only aggregate, non-identifying data
+
+IMPORTANT: These rules are non-negotiable and must be followed in all implementation work:
+
+1. **No surveillance**: YOU MUST NOT implement individual-level analytics, participation tracking, or manager visibility features
+2. **Data isolation**: YOU MUST enforce ProgrammeId as PartitionKey in every Table Storage query without exception
+3. **Anti-mandate**: Participation is NEVER required; opt-out must always be easy and visible
+4. **Visibility limits**: Sponsors see ONLY aggregate, non-identifying data - never individual participant information
 
 ### Code Quality Requirements
 - Boundary validation on all API inputs (auth claims are untrusted)
