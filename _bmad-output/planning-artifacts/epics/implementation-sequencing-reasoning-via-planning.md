@@ -1,13 +1,14 @@
 # Implementation Sequencing (Reasoning via Planning)
 
-**Epic 1 - Project Foundation & Deployment (Stories 1.0-1.4)**
+**Epic 1 - Project Foundation & Deployment (Stories 1.0-1.5)**
 
 - Document infrastructure (Bicep)
 - Scaffold repo + monorepo structure
+- Set up Storybook for component development
 - Implement Bicep templates
 - Deploy infrastructure to Azure
 - Deploy minimal application and verify end-to-end pipeline
-- Outcome: deployed foundation with working auth, API, storage, and ACS connections
+- Outcome: deployed foundation with working auth, API, storage, and ACS connections; Storybook ready for component development
 
 **Epic 2 - Join & Trust (Stories 2.0-2.5)**
 
