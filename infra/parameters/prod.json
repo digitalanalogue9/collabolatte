@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "project": {
+      "value": "collabolatte"
+    },
+    "environment": {
+      "value": "prod"
+    },
+    "location": {
+      "value": "uksouth"
+    },
+    "identifier": {
+      "value": "001"
+    },
+    "repositoryUrl": {
+      "value": "https://github.com/yourusername/collabolatte"
+    },
+    "repositoryBranch": {
+      "value": "main"
+    },
+    "appCustomDomain": {
+      "value": "app.collabolatte.co.uk"
+    },
+    "wwwCustomDomain": {
+      "value": "www.collabolatte.co.uk"
+    }
+  }
+}
