@@ -18,7 +18,10 @@
       "Bash(pnpm add:*)",
       "Bash(func:*)",
       "Bash(pnpm build:*)",
-      "Bash(dotnet build:*)"
+      "Bash(dotnet build:*)",
+      "Bash(npx @kayvan/markdown-tree-parser:*)",
+      "Bash(wc:*)",
+      "Bash(grep:*)"
     ]
   }
 }
