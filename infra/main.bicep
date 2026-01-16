@@ -11,6 +11,10 @@ targetScope = 'subscription'
 @description('Project name (lowercase, no spaces)')
 param project string = 'collabolatte'
 
+@description('Project name (lowercase, no spaces)')
+param projectStorage string = 'collab'
+
+
 @description('Environment (dev, staging, prod)')
 @allowed([
   'dev'
@@ -65,7 +69,7 @@ module storage 'br/public:avm/res/storage/storage-account:0.14.3' = {
   scope: rg
   name: 'storage-deployment'
   params: {
-    name: toLower('st${project}${environment}${identifier}')
+    name: toLower('st${projectStorage}${environment}${identifier}')
     location: location
     skuName: 'Standard_LRS'
     kind: 'StorageV2'

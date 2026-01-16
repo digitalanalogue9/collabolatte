@@ -26,7 +26,8 @@
       "Bash(npx markdownlint-cli:*)",
       "Bash(git mv:*)",
       "Bash(az bicep build:*)",
-      "Bash(az bicep lint:*)"
+      "Bash(az bicep lint:*)",
+      "Bash(find:*)"
     ]
   }
 }
