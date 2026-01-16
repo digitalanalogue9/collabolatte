@@ -65,7 +65,7 @@ module storage 'br/public:avm/res/storage/storage-account:0.14.3' = {
   scope: rg
   name: 'storage-deployment'
   params: {
-    name: toLower('${project}${environment}st${identifier}')
+    name: toLower('st${project}${environment}${identifier}')
     location: location
     skuName: 'Standard_LRS'
     kind: 'StorageV2'
@@ -91,7 +91,7 @@ module storage 'br/public:avm/res/storage/storage-account:0.14.3' = {
 // Reference to deployed storage account for listKeys
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
   scope: rg
-  name: toLower('${project}${environment}st${identifier}')
+  name: toLower('st${project}${environment}${identifier}')
   dependsOn: [
     storage
   ]
@@ -100,7 +100,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing 
 // Reference to deployed ACS for listKeys
 resource communicationService 'Microsoft.Communication/communicationServices@2023-04-01' existing = {
   scope: rg
-  name: '${project}-${environment}-acs'
+  name: 'acs-${project}-${environment}-${location}'
   dependsOn: [
     acs
   ]
@@ -109,7 +109,7 @@ resource communicationService 'Microsoft.Communication/communicationServices@202
 // Reference to deployed app SWA for listSecrets
 resource staticWebAppApp 'Microsoft.Web/staticSites@2023-01-01' existing = {
   scope: rg
-  name: '${project}-${environment}-swa-app'
+  name: 'stapp-${project}-app-${environment}-${location}'
   dependsOn: [
     swaApp
   ]
@@ -118,7 +118,7 @@ resource staticWebAppApp 'Microsoft.Web/staticSites@2023-01-01' existing = {
 // Reference to deployed marketing SWA for listSecrets
 resource staticWebAppMarketing 'Microsoft.Web/staticSites@2023-01-01' existing = {
   scope: rg
-  name: '${project}-${environment}-swa-www'
+  name: 'stapp-${project}-www-${environment}-${location}'
   dependsOn: [
     swaMarketing
   ]
@@ -129,7 +129,7 @@ module acs 'br/public:avm/res/communication/communication-service:0.3.0' = {
   scope: rg
   name: 'acs-deployment'
   params: {
-    name: '${project}-${environment}-acs'
+    name: 'acs-${project}-${environment}-${location}'
     dataLocation: 'UK'
     tags: union(tags, {
       project: project
@@ -143,7 +143,7 @@ module swaApp 'br/public:avm/res/web/static-site:0.5.0' = {
   scope: rg
   name: 'swa-app-deployment'
   params: {
-    name: '${project}-${environment}-swa-app'
+    name: 'stapp-${project}-app-${environment}-${location}'
     location: location
     sku: 'Free'
     repositoryUrl: repositoryUrl
@@ -174,7 +174,7 @@ module swaMarketing 'br/public:avm/res/web/static-site:0.5.0' = {
   scope: rg
   name: 'swa-marketing-deployment'
   params: {
-    name: '${project}-${environment}-swa-www'
+    name: 'stapp-${project}-www-${environment}-${location}'
     location: location
     sku: 'Free'
     repositoryUrl: repositoryUrl

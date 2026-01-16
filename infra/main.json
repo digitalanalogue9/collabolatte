@@ -6,7 +6,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.37.4.10188",
-      "templateHash": "12833683826317113639"
+      "templateHash": "6571280418067460310"
     }
   },
   "parameters": {
@@ -95,7 +95,7 @@
       "type": "Microsoft.Storage/storageAccounts",
       "apiVersion": "2023-01-01",
       "resourceGroup": "[format('rg-{0}-{1}-{2}', parameters('project'), parameters('environment'), parameters('location'))]",
-      "name": "[toLower(format('{0}{1}st{2}', parameters('project'), parameters('environment'), parameters('identifier')))]",
+      "name": "[toLower(format('st{0}{1}{2}', parameters('project'), parameters('environment'), parameters('identifier')))]",
       "dependsOn": [
         "rg",
         "storage"
@@ -106,7 +106,7 @@
       "type": "Microsoft.Communication/communicationServices",
       "apiVersion": "2023-04-01",
       "resourceGroup": "[format('rg-{0}-{1}-{2}', parameters('project'), parameters('environment'), parameters('location'))]",
-      "name": "[format('{0}-{1}-acs', parameters('project'), parameters('environment'))]",
+      "name": "[format('acs-{0}-{1}-{2}', parameters('project'), parameters('environment'), parameters('location'))]",
       "dependsOn": [
         "acs",
         "rg"
@@ -117,7 +117,7 @@
       "type": "Microsoft.Web/staticSites",
       "apiVersion": "2023-01-01",
       "resourceGroup": "[format('rg-{0}-{1}-{2}', parameters('project'), parameters('environment'), parameters('location'))]",
-      "name": "[format('{0}-{1}-swa-app', parameters('project'), parameters('environment'))]",
+      "name": "[format('stapp-{0}-app-{1}-{2}', parameters('project'), parameters('environment'), parameters('location'))]",
       "dependsOn": [
         "rg",
         "swaApp"
@@ -128,7 +128,7 @@
       "type": "Microsoft.Web/staticSites",
       "apiVersion": "2023-01-01",
       "resourceGroup": "[format('rg-{0}-{1}-{2}', parameters('project'), parameters('environment'), parameters('location'))]",
-      "name": "[format('{0}-{1}-swa-www', parameters('project'), parameters('environment'))]",
+      "name": "[format('stapp-{0}-www-{1}-{2}', parameters('project'), parameters('environment'), parameters('location'))]",
       "dependsOn": [
         "rg",
         "swaMarketing"
@@ -146,7 +146,7 @@
         "mode": "Incremental",
         "parameters": {
           "name": {
-            "value": "[toLower(format('{0}{1}st{2}', parameters('project'), parameters('environment'), parameters('identifier')))]"
+            "value": "[toLower(format('st{0}{1}{2}', parameters('project'), parameters('environment'), parameters('identifier')))]"
           },
           "location": {
             "value": "[parameters('location')]"
@@ -5485,7 +5485,7 @@
         "mode": "Incremental",
         "parameters": {
           "name": {
-            "value": "[format('{0}-{1}-acs', parameters('project'), parameters('environment'))]"
+            "value": "[format('acs-{0}-{1}-{2}', parameters('project'), parameters('environment'), parameters('location'))]"
           },
           "dataLocation": {
             "value": "UK"
@@ -6006,7 +6006,7 @@
         "mode": "Incremental",
         "parameters": {
           "name": {
-            "value": "[format('{0}-{1}-swa-app', parameters('project'), parameters('environment'))]"
+            "value": "[format('stapp-{0}-app-{1}-{2}', parameters('project'), parameters('environment'), parameters('location'))]"
           },
           "location": {
             "value": "[parameters('location')]"
@@ -7895,7 +7895,7 @@
         "mode": "Incremental",
         "parameters": {
           "name": {
-            "value": "[format('{0}-{1}-swa-www', parameters('project'), parameters('environment'))]"
+            "value": "[format('stapp-{0}-www-{1}-{2}', parameters('project'), parameters('environment'), parameters('location'))]"
           },
           "location": {
             "value": "[parameters('location')]"

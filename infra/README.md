@@ -248,38 +248,47 @@ channel.
 
 ## Naming Conventions
 
+**Naming Standard**: All resources follow the
+[Azure Cloud Adoption Framework (CAF)](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming)
+naming conventions and
+[abbreviation recommendations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations).
+
 ### Pattern
 
 ```
-{project}-{environment}-{resource}-{identifier}
+{abbreviation}-{project}-{variant/component}-{environment}-{region}
 ```
 
 Where:
 
+- `{abbreviation}` = Azure CAF resource abbreviation (e.g., `rg`, `stapp`, `st`, `acs`)
 - `{project}` = `collabolatte`
+- `{variant/component}` = `app` | `www` (for Static Web Apps only)
 - `{environment}` = `dev` | `staging` | `prod`
-- `{resource}` = Resource type abbreviation
-- `{identifier}` = Optional unique suffix (required for globally-scoped resources)
+- `{region}` = `uksouth` (UK South)
+
+**Note**: Storage accounts cannot use hyphens, so the pattern is
+`st{project}{environment}{identifier}`
 
 ### Resource Naming Rules
 
-| Resource Type          | Abbreviation | Max Length | Allowed Characters     | Scope          | Example                    |
-| ---------------------- | ------------ | ---------- | ---------------------- | -------------- | -------------------------- |
-| Resource Group         | `rg`         | 90         | a-z, 0-9, -, \_, ., () | Subscription   | `collabolatte-dev-rg`      |
-| Static Web App (app)   | `swa-app`    | 40         | a-z, 0-9, -            | Resource Group | `collabolatte-dev-swa-app` |
-| Static Web App (www)   | `swa-www`    | 40         | a-z, 0-9, -            | Resource Group | `collabolatte-dev-swa-www` |
-| Storage Account        | `st`         | 24         | a-z, 0-9 (NO hyphens)  | Global         | `collabolattedevst001`     |
-| Communication Services | `acs`        | 64         | a-z, 0-9, -            | Resource Group | `collabolatte-dev-acs`     |
+| Resource Type          | Abbreviation | Max Length | Allowed Characters     | Scope        | Example                              |
+| ---------------------- | ------------ | ---------- | ---------------------- | ------------ | ------------------------------------ |
+| Resource Group         | `rg`         | 90         | a-z, 0-9, -, \_, ., () | Subscription | `rg-collabolatte-dev-uksouth`        |
+| Static Web App (app)   | `stapp`      | 60         | a-z, 0-9, -            | Global       | `stapp-collabolatte-app-dev-uksouth` |
+| Static Web App (www)   | `stapp`      | 60         | a-z, 0-9, -            | Global       | `stapp-collabolatte-www-dev-uksouth` |
+| Storage Account        | `st`         | 24         | a-z, 0-9 (NO hyphens)  | Global       | `stcollabolattedev001`               |
+| Communication Services | `acs`        | 64         | a-z, 0-9, -            | Global       | `acs-collabolatte-dev-uksouth`       |
 
 ### Environment-Specific Names
 
-| Resource               | Dev                        | Staging                        | Prod                        |
-| ---------------------- | -------------------------- | ------------------------------ | --------------------------- |
-| Resource Group         | `collabolatte-dev-rg`      | `collabolatte-staging-rg`      | `collabolatte-prod-rg`      |
-| SWA (App)              | `collabolatte-dev-swa-app` | `collabolatte-staging-swa-app` | `collabolatte-prod-swa-app` |
-| SWA (Marketing)        | `collabolatte-dev-swa-www` | `collabolatte-staging-swa-www` | `collabolatte-prod-swa-www` |
-| Storage Account        | `collabolattedevst001`     | `collabolattestagingst001`     | `collabolatteprodst001`     |
-| Communication Services | `collabolatte-dev-acs`     | `collabolatte-staging-acs`     | `collabolatte-prod-acs`     |
+| Resource               | Dev                                  | Staging                                  | Prod                                  |
+| ---------------------- | ------------------------------------ | ---------------------------------------- | ------------------------------------- |
+| Resource Group         | `rg-collabolatte-dev-uksouth`        | `rg-collabolatte-staging-uksouth`        | `rg-collabolatte-prod-uksouth`        |
+| SWA (App)              | `stapp-collabolatte-app-dev-uksouth` | `stapp-collabolatte-app-staging-uksouth` | `stapp-collabolatte-app-prod-uksouth` |
+| SWA (Marketing)        | `stapp-collabolatte-www-dev-uksouth` | `stapp-collabolatte-www-staging-uksouth` | `stapp-collabolatte-www-prod-uksouth` |
+| Storage Account        | `stcollabolattedev001`               | `stcollabolattestaging001`               | `stcollabolatteprod001`               |
+| Communication Services | `acs-collabolatte-dev-uksouth`       | `acs-collabolatte-staging-uksouth`       | `acs-collabolatte-prod-uksouth`       |
 
 ---
 
@@ -353,12 +362,12 @@ infra/
 
 Add the following redirect URIs under **Authentication > Single-page application**:
 
-| Environment | Redirect URI                                                                        |
-| ----------- | ----------------------------------------------------------------------------------- |
-| Production  | `https://app.collabolatte.co.uk/.auth/login/aad/callback`                           |
-| Staging     | `https://collabolatte-staging-swa-app.azurestaticapps.net/.auth/login/aad/callback` |
-| Development | `https://collabolatte-dev-swa-app.azurestaticapps.net/.auth/login/aad/callback`     |
-| Local       | `http://localhost:4280/.auth/login/aad/callback`                                    |
+| Environment | Redirect URI                                                                                  |
+| ----------- | --------------------------------------------------------------------------------------------- |
+| Production  | `https://app.collabolatte.co.uk/.auth/login/aad/callback`                                     |
+| Staging     | `https://stapp-collabolatte-app-staging-uksouth.azurestaticapps.net/.auth/login/aad/callback` |
+| Development | `https://stapp-collabolatte-app-dev-uksouth.azurestaticapps.net/.auth/login/aad/callback`     |
+| Local       | `http://localhost:4280/.auth/login/aad/callback`                                              |
 
 ### Step 3: Configure API Permissions
 
@@ -465,33 +474,22 @@ authenticate with Azure and deploy Bicep templates.
 
 ### Create Service Principal for GitHub Actions
 
-Run this Azure CLI command to create a service principal with Contributor access to the resource
-group:
+Since deployment uses subscription scope, create a single service principal with Contributor access
+to the subscription:
 
 ```bash
-# For dev environment
+# Create subscription-scoped service principal for all environments
 az ad sp create-for-rbac \
-  --name "collabolatte-github-actions-dev" \
+  --name "collabolatte-github-actions" \
   --role Contributor \
-  --scopes /subscriptions/{subscription-id}/resourceGroups/collabolatte-dev-rg \
-  --sdk-auth
-
-# For staging environment
-az ad sp create-for-rbac \
-  --name "collabolatte-github-actions-staging" \
-  --role Contributor \
-  --scopes /subscriptions/{subscription-id}/resourceGroups/collabolatte-staging-rg \
-  --sdk-auth
-
-# For prod environment
-az ad sp create-for-rbac \
-  --name "collabolatte-github-actions-prod" \
-  --role Contributor \
-  --scopes /subscriptions/{subscription-id}/resourceGroups/collabolatte-prod-rg \
+  --scopes /subscriptions/{subscription-id} \
   --sdk-auth
 ```
 
 **Important:** Replace `{subscription-id}` with your actual Azure subscription ID.
+
+**Note**: This service principal can deploy to all environments (dev, staging, prod) since resource
+groups are created automatically per environment.
 
 The command outputs JSON in this format (example shown):
 
@@ -607,8 +605,8 @@ After Bicep deployment completes, these manual steps are required:
 ```bash
 # For App SWA
 az staticwebapp appsettings set \
-  --name collabolatte-{env}-swa-app \
-  --resource-group collabolatte-{env}-rg \
+  --name stapp-collabolatte-app-{env}-uksouth \
+  --resource-group rg-collabolatte-{env}-uksouth \
   --setting-names \
     AZURE_CLIENT_ID="{client-id}" \
     AZURE_CLIENT_SECRET="{client-secret}" \
@@ -620,11 +618,11 @@ az staticwebapp appsettings set \
 
 ```bash
 # Using Azure CLI
-az storage table create --name Memberships --account-name collabolatte{env}st001
-az storage table create --name Cycles --account-name collabolatte{env}st001
-az storage table create --name Matches --account-name collabolatte{env}st001
-az storage table create --name Events --account-name collabolatte{env}st001
-az storage table create --name Roles --account-name collabolatte{env}st001
+az storage table create --name Memberships --account-name stcollabolatte{env}001
+az storage table create --name Cycles --account-name stcollabolatte{env}001
+az storage table create --name Matches --account-name stcollabolatte{env}001
+az storage table create --name Events --account-name stcollabolatte{env}001
+az storage table create --name Roles --account-name stcollabolatte{env}001
 ```
 
 ### 3. Seed Initial Admin Role
@@ -638,8 +636,8 @@ az storage table create --name Roles --account-name collabolatte{env}st001
 ### 4. Configure Custom Domains
 
 1. Add CNAME records in DNS:
-   - `app.collabolatte.co.uk` -> `collabolatte-{env}-swa-app.azurestaticapps.net`
-   - `www.collabolatte.co.uk` -> `collabolatte-{env}-swa-www.azurestaticapps.net`
+   - `app.collabolatte.co.uk` -> `stapp-collabolatte-app-{env}-uksouth.azurestaticapps.net`
+   - `www.collabolatte.co.uk` -> `stapp-collabolatte-www-{env}-uksouth.azurestaticapps.net`
 
 2. Validate domain ownership in Azure Portal
 
