@@ -30,7 +30,7 @@ Before deploying, ensure you have:
 
 ### Quick Start
 
-**1. Create Resource Group**
+**1. Deploy Infrastructure (creates resource group automatically)**
 
 ```bash
 # Set environment (dev, staging, or prod)
@@ -38,25 +38,15 @@ ENVIRONMENT=dev
 PROJECT=collabolatte
 LOCATION=uksouth
 
-# Create resource group
-az group create \
-  --name ${PROJECT}-${ENVIRONMENT}-rg \
+# Deploy using parameter file (resource group created automatically)
+az deployment sub create \
   --location ${LOCATION} \
-  --tags project=${PROJECT} environment=${ENVIRONMENT}
-```
-
-**2. Deploy Infrastructure**
-
-```bash
-# Deploy using parameter file
-az deployment group create \
-  --resource-group ${PROJECT}-${ENVIRONMENT}-rg \
   --template-file infra/main.bicep \
   --parameters infra/parameters/${ENVIRONMENT}.json
 
 # OR deploy with inline parameters
-az deployment group create \
-  --resource-group ${PROJECT}-${ENVIRONMENT}-rg \
+az deployment sub create \
+  --location ${LOCATION} \
   --template-file infra/main.bicep \
   --parameters \
     project=${PROJECT} \
@@ -65,19 +55,19 @@ az deployment group create \
     identifier=001
 ```
 
-**3. Review Deployment Outputs**
+**2. Review Deployment Outputs**
 
 ```bash
 # Get deployment outputs (includes connection strings and URLs)
-az deployment group show \
-  --resource-group ${PROJECT}-${ENVIRONMENT}-rg \
+az deployment sub show \
+  --location ${LOCATION} \
   --name main \
   --query properties.outputs
 ```
 
-**4. Configure Entra ID** (see [Entra ID and EasyAuth Setup](#entra-id-and-easyauth-setup))
+**3. Configure Entra ID** (see [Entra ID and EasyAuth Setup](#entra-id-and-easyauth-setup))
 
-**5. Post-Deployment Configuration** (see
+**4. Post-Deployment Configuration** (see
 [Post-Deployment Configuration](#post-deployment-configuration))
 
 ### Deployment Commands
@@ -92,8 +82,8 @@ az bicep build --file infra/main.bicep
 az bicep lint --file infra/main.bicep
 
 # Preview changes (what-if)
-az deployment group what-if \
-  --resource-group ${PROJECT}-${ENVIRONMENT}-rg \
+az deployment sub what-if \
+  --location ${LOCATION} \
   --template-file infra/main.bicep \
   --parameters infra/parameters/${ENVIRONMENT}.json
 ```
@@ -102,20 +92,20 @@ az deployment group what-if \
 
 ```bash
 # Development
-az deployment group create \
-  --resource-group collabolatte-dev-rg \
+az deployment sub create \
+  --location uksouth \
   --template-file infra/main.bicep \
   --parameters infra/parameters/dev.json
 
 # Staging
-az deployment group create \
-  --resource-group collabolatte-staging-rg \
+az deployment sub create \
+  --location uksouth \
   --template-file infra/main.bicep \
   --parameters infra/parameters/staging.json
 
 # Production
-az deployment group create \
-  --resource-group collabolatte-prod-rg \
+az deployment sub create \
+  --location uksouth \
   --template-file infra/main.bicep \
   --parameters infra/parameters/prod.json
 ```
@@ -151,10 +141,13 @@ Before deploying, update the parameter files with your values:
 
 Collabolatte is deployed as a serverless application on Azure using the following architecture:
 
+- **Resource Group** (created automatically per environment)
 - **Two Azure Static Web Apps** (Free tier) for hosting the SPA + API and marketing site
 - **Azure Storage Account** with Table Storage for data persistence
 - **Azure Communication Services** for email notifications
 - **Microsoft Entra ID** for authentication via EasyAuth
+
+All infrastructure is deployed using **Azure Verified Modules (AVM)** from the public registry, ensuring best practices and Microsoft-verified patterns.
 
 ### MVP Cost Constraints (All-Free Tier)
 

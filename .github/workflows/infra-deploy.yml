@@ -56,8 +56,8 @@ jobs:
             - name: Preview deployment changes (What-If)
               run: |
                   echo "Running deployment preview..."
-                  az deployment group what-if \
-                    --resource-group rg-collabolatte-${{ env.ENVIRONMENT }}-uks \
+                  az deployment sub what-if \
+                    --location uksouth \
                     --template-file infra/main.bicep \
                     --parameters infra/parameters/${{ env.ENVIRONMENT }}.bicepparam \
                     --verbose
@@ -66,8 +66,8 @@ jobs:
               id: deploy
               run: |
                   echo "Deploying infrastructure to ${{ env.ENVIRONMENT }}..."
-                  az deployment group create \
-                    --resource-group rg-collabolatte-${{ env.ENVIRONMENT }}-uks \
+                  az deployment sub create \
+                    --location uksouth \
                     --template-file infra/main.bicep \
                     --parameters infra/parameters/${{ env.ENVIRONMENT }}.bicepparam \
                     --verbose \
@@ -113,7 +113,7 @@ jobs:
 #   az ad sp create-for-rbac \
 #     --name "github-actions-collabolatte" \
 #     --role contributor \
-#     --scopes /subscriptions/{subscription-id}/resourceGroups/rg-collabolatte-{env}-uks \
+#     --scopes /subscriptions/{subscription-id} \
 #     --sdk-auth
 #
 # ============================================================================
@@ -124,5 +124,5 @@ jobs:
 # - Application deployment happens via separate SWA workflows
 # - Entra ID app registration must be completed manually (see /infra/README.md)
 # - Deployment is idempotent and can be run multiple times safely
-# - Resource group must exist before running this workflow
+# - Creates resource group automatically as part of deployment
 #
