@@ -82,6 +82,33 @@ The file `_bmad-output/project-context.md` contains **183 implementation rules**
 - **User**: DA9
 - **Output folder**: `_bmad-output/`
 
+## Development Commands
+
+**Setup:**
+```bash
+pnpm install                    # Install dependencies (monorepo)
+```
+
+**Frontend (apps/web):**
+```bash
+pnpm --filter web dev           # Start dev server (Vite)
+pnpm --filter web build         # Production build
+pnpm --filter web test          # Run tests
+pnpm --filter web test:e2e      # Playwright E2E tests
+```
+
+**Backend (apps/api):**
+```bash
+func start                      # Start Azure Functions locally
+dotnet build                    # Build .NET project
+dotnet test                     # Run tests
+```
+
+**Commits:**
+- Use aggressive commit strategy: commit each accepted change
+- Commits will be squashed when merging feature branches
+- Follow conventional commits format (`feat:`, `fix:`, `docs:`, etc.)
+
 ## Current Project Status
 
 **Current Phase**: Implementation (Phase 4)
