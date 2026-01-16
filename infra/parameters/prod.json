@@ -6,16 +6,19 @@
       "value": "collabolatte"
     },
     "environment": {
-      "value": "prod"
+      "value": "prd"
     },
     "location": {
       "value": "westeurope"
+    },
+    "locationShort": {
+      "value": "we"
     },
     "identifier": {
       "value": "001"
     },
     "repositoryUrl": {
-      "value": "https://github.com/yourusername/collabolatte"
+      "value": "https://github.com/digitalanogue9/collabolatte"
     },
     "repositoryBranch": {
       "value": "main"

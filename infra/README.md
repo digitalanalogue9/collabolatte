@@ -277,7 +277,7 @@ Where:
 | Resource Group         | `rg`         | 90         | a-z, 0-9, -, \_, ., () | Subscription | `rg-collabolatte-dev-westeurope`        |
 | Static Web App (app)   | `stapp`      | 60         | a-z, 0-9, -            | Global       | `stapp-collabolatte-app-dev-westeurope` |
 | Static Web App (www)   | `stapp`      | 60         | a-z, 0-9, -            | Global       | `stapp-collabolatte-www-dev-westeurope` |
-| Storage Account        | `st`         | 24         | a-z, 0-9 (NO hyphens)  | Global       | `stcollabolattedev001`                  |
+| Storage Account        | `st`         | 24         | a-z, 0-9 (NO hyphens)  | Global       | `stcollabdevwe001`                      |
 | Communication Services | `acs`        | 64         | a-z, 0-9, -            | Global       | `acs-collabolatte-dev-westeurope`       |
 
 ### Environment-Specific Names
@@ -287,7 +287,7 @@ Where:
 | Resource Group         | `rg-collabolatte-dev-westeurope`        | `rg-collabolatte-staging-westeurope`        | `rg-collabolatte-prod-westeurope`        |
 | SWA (App)              | `stapp-collabolatte-app-dev-westeurope` | `stapp-collabolatte-app-staging-westeurope` | `stapp-collabolatte-app-prod-westeurope` |
 | SWA (Marketing)        | `stapp-collabolatte-www-dev-westeurope` | `stapp-collabolatte-www-staging-westeurope` | `stapp-collabolatte-www-prod-westeurope` |
-| Storage Account        | `stcollabolattedev001`                  | `stcollabolattestaging001`                  | `stcollabolatteprod001`                  |
+| Storage Account        | `stcollabdevwe001`                      | `stcollabstgwe001`                          | `stcollabprdwe001`                       |
 | Communication Services | `acs-collabolatte-dev-westeurope`       | `acs-collabolatte-staging-westeurope`       | `acs-collabolatte-prod-westeurope`       |
 
 ---

@@ -26,6 +26,9 @@ param environment string
 @description('Azure region for deployment')
 param location string = 'westeurope'
 
+@description('Azure region for deployment')
+param locationShort string = 'we'
+
 @description('Unique identifier for globally-scoped resources (3 alphanumeric chars)')
 @maxLength(3)
 param identifier string = '001'
@@ -69,7 +72,7 @@ module storage 'br/public:avm/res/storage/storage-account:0.14.3' = {
   scope: rg
   name: 'storage-deployment'
   params: {
-    name: toLower('st${projectStorage}${environment}${identifier}')
+    name: toLower('st${projectStorage}${environment}${locationShort}${identifier}')
     location: location
     skuName: 'Standard_LRS'
     kind: 'StorageV2'
@@ -95,7 +98,7 @@ module storage 'br/public:avm/res/storage/storage-account:0.14.3' = {
 // Reference to deployed storage account for listKeys
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
   scope: rg
-  name: toLower('st${project}${environment}${identifier}')
+  name: toLower('st${projectStorage}${environment}${locationShort}${identifier}')
   dependsOn: [
     storage
   ]
