@@ -8,7 +8,8 @@
       "Bash(git -C \"C:\\\\repos\\\\collabolatte\" commit -m \"$\\(cat <<''EOF''\nadd CLAUDE.md with project guidance for AI agents\n\nDocuments BMAD methodology, key workflows, directory structure,\ntechnology stack, and trust-critical implementation rules.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git -C \"C:\\\\repos\\\\collabolatte\" status)",
       "Bash(git -C \"C:\\\\repos\\\\collabolatte\" pull --rebase)",
-      "Bash(git -C \"C:\\\\repos\\\\collabolatte\" push)"
+      "Bash(git -C \"C:\\\\repos\\\\collabolatte\" push)",
+      "Bash(npx @kayvan/markdown-tree-parser:*)"
     ]
   }
 }
