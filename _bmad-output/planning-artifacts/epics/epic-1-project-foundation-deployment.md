@@ -10,6 +10,7 @@ Establish the technical foundation, deploy to Azure, and verify the end-to-end p
 **Success Criteria:**
 
 - Monorepo structure is established with web (React/Vite), API (.NET Functions), and marketing (11ty) apps
+- Storybook is set up for component development and testing in isolation
 - Azure infrastructure is provisioned (2x Static Web Apps, Storage Account, Azure Communication Services)
 - Entra ID authentication is configured at the platform level
 - CI/CD pipelines deploy to Azure successfully
@@ -70,7 +71,56 @@ So that Join & Trust stories can be implemented without blocking setup work.
 
 ---
 
-## Story 1.2: Implement Bicep templates
+## Story 1.2: Set up Storybook for component development
+
+As a delivery team,
+I want to set up Storybook for the web app,
+So that components can be developed, documented, and tested in isolation before Epic 2 feature work begins.
+
+**Acceptance Criteria:**
+
+**Given** the project scaffolding exists (Story 1.1),
+**When** Storybook is installed and configured,
+**Then** Storybook runs successfully with `pnpm --filter web storybook`,
+**And** it is configured for React 18 and TypeScript,
+**And** it supports the MUI theme from `packages/theme`.
+
+**Given** Storybook is configured,
+**When** we create example stories,
+**Then** at least one example component story exists to verify setup,
+**And** the story demonstrates MUI theme integration,
+**And** the story includes basic controls/args for interactive testing.
+
+**Given** Storybook is working,
+**When** we review the configuration,
+**Then** it includes add-ons for accessibility, viewport testing, and controls,
+**And** it is configured to use the project's TypeScript settings,
+**And** a script exists in `apps/web/package.json` to run Storybook.
+
+**Technical Notes:**
+
+- Use `npm create storybook@latest` as per architecture decisions
+- Configure for Vite + React + TypeScript
+- Add essential add-ons: @storybook/addon-essentials, @storybook/addon-a11y
+- Import theme from `packages/theme/muiTheme.ts`
+- Create a simple Button or Card component story as example
+- Storybook runs on port 6006 by default (doesn't conflict with Vite dev server)
+- This can be done in parallel with infrastructure work (Stories 1.3-1.4)
+
+**Definition of Done:**
+
+- Storybook installed and configured in `apps/web`
+- Runs with `pnpm --filter web storybook`
+- Example component story exists and renders correctly
+- MUI theme is applied in Storybook preview
+- Accessibility addon is active
+- Documentation on using Storybook added to project README or apps/web/README
+
+**Status:** ⏸️ Not Started
+
+---
+
+## Story 1.3: Implement Bicep templates
 
 As a delivery team,
 I want to convert the infrastructure documentation into Bicep templates,
@@ -119,7 +169,7 @@ So that Azure resources can be provisioned consistently via infrastructure-as-co
 
 ---
 
-## Story 1.3: Deploy infrastructure via Bicep
+## Story 1.4: Deploy infrastructure via Bicep
 
 As a delivery team,
 I want to deploy Azure infrastructure using Bicep via a GitHub Actions workflow,
@@ -127,7 +177,7 @@ So that infrastructure changes are version-controlled and automated.
 
 **Acceptance Criteria:**
 
-**Given** Bicep templates exist (Story 1.2),
+**Given** Bicep templates exist (Story 1.3),
 **When** we create the infrastructure deployment workflow,
 **Then** `.github/workflows/infra-deploy.yml` exists,
 **And** it uses Azure CLI to deploy Bicep templates,
@@ -168,7 +218,7 @@ So that infrastructure changes are version-controlled and automated.
 
 ---
 
-## Story 1.4: Deploy and verify minimal application
+## Story 1.5: Deploy and verify minimal application
 
 As a delivery team,
 I want to deploy a minimal "hello world" application to the provisioned infrastructure,
@@ -176,7 +226,7 @@ So that we can verify the end-to-end pipeline works before Epic 2 feature develo
 
 **Acceptance Criteria:**
 
-**Given** infrastructure is provisioned (Story 1.3),
+**Given** infrastructure is provisioned (Story 1.4),
 **When** we push code to the main branch,
 **Then** the SWA deployment workflows (from Story 1.1) deploy successfully,
 **And** both app+api and marketing sites are deployed,
@@ -225,10 +275,11 @@ So that we can verify the end-to-end pipeline works before Epic 2 feature develo
 
 - [x] Infrastructure documented (Story 1.0)
 - [ ] Project scaffolding complete (Story 1.1)
-- [ ] Bicep templates implemented (Story 1.2)
-- [ ] Infrastructure deployed via Bicep workflow (Story 1.3)
-- [ ] Minimal app deployed and verified (Story 1.4)
-- [ ] End-to-end pipeline proven (Story 1.4)
+- [ ] Storybook set up for component development (Story 1.2)
+- [ ] Bicep templates implemented (Story 1.3)
+- [ ] Infrastructure deployed via Bicep workflow (Story 1.4)
+- [ ] Minimal app deployed and verified (Story 1.5)
+- [ ] End-to-end pipeline proven (Story 1.5)
 - [ ] Developers can work on Epic 2 without infrastructure blockers
 
 ---
