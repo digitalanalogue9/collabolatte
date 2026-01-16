@@ -57,7 +57,7 @@ jobs:
               run: |
                   echo "Running deployment preview..."
                   az deployment sub what-if \
-                    --location uksouth \
+                    --location westeurope \
                     --template-file infra/main.bicep \
                     --parameters infra/parameters/${{ env.ENVIRONMENT }}.bicepparam \
                     --verbose
@@ -67,7 +67,7 @@ jobs:
               run: |
                   echo "Deploying infrastructure to ${{ env.ENVIRONMENT }}..."
                   az deployment sub create \
-                    --location uksouth \
+                    --location westeurope \
                     --template-file infra/main.bicep \
                     --parameters infra/parameters/${{ env.ENVIRONMENT }}.bicepparam \
                     --verbose \

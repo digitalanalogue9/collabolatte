@@ -4,22 +4,19 @@ Status: review
 
 ## Story
 
-As a delivery team,
-I want a documented Bicep-based infrastructure plan in /infra,
-So that we can provision Azure consistently when we are ready.
+As a delivery team, I want a documented Bicep-based infrastructure plan in /infra, So that we can
+provision Azure consistently when we are ready.
 
 ## Acceptance Criteria
 
-1. **Given** infrastructure is not yet provisioned,
-   **When** the /infra documentation is created,
-   **Then** it defines the resources required for MVP (2x SWA, Storage Account, ACS),
-   **And** it specifies naming conventions per Azure resource rules,
-   **And** it lists required parameters (project, environment, region, identifier),
-   **And** it documents Entra ID and EasyAuth setup steps.
+1. **Given** infrastructure is not yet provisioned, **When** the /infra documentation is created,
+   **Then** it defines the resources required for MVP (2x SWA, Storage Account, ACS), **And** it
+   specifies naming conventions per Azure resource rules, **And** it lists required parameters
+   (project, environment, region, identifier), **And** it documents Entra ID and EasyAuth setup
+   steps.
 
-2. **Given** the document exists,
-   **When** a developer reviews /infra/README.md,
-   **Then** they can follow it to implement Bicep later without ambiguity.
+2. **Given** the document exists, **When** a developer reviews /infra/README.md, **Then** they can
+   follow it to implement Bicep later without ambiguity.
 
 ## Tasks / Subtasks
 
@@ -41,7 +38,7 @@ So that we can provision Azure consistently when we are ready.
 - [x] Task 4: Document Required Parameters (AC: 1)
   - [x] Define `project` parameter (collabolatte)
   - [x] Define `environment` parameter (dev, staging, prod)
-  - [x] Define `region` parameter (default: uksouth)
+  - [x] Define `region` parameter (default: westeurope)
   - [x] Define `identifier` parameter (unique suffix for global resources)
 
 - [x] Task 5: Document Entra ID and EasyAuth Setup (AC: 1)
@@ -59,7 +56,8 @@ So that we can provision Azure consistently when we are ready.
 
 ### Story Context
 
-This is a **documentation-only** story. No Bicep code is written; the output is a comprehensive README.md that allows future implementation of Bicep templates without ambiguity.
+This is a **documentation-only** story. No Bicep code is written; the output is a comprehensive
+README.md that allows future implementation of Bicep templates without ambiguity.
 
 ### Critical Architecture Constraints
 
@@ -91,12 +89,12 @@ This is a **documentation-only** story. No Bicep code is written; the output is 
 
 ### Azure Resource Naming Rules Reference
 
-| Resource Type | Max Length | Allowed Characters | Scope |
-|--------------|-----------|-------------------|-------|
-| Static Web App | 40 | a-z, 0-9, - | Resource Group |
-| Storage Account | 24 | a-z, 0-9 (no hyphens) | Global |
-| Communication Services | 64 | a-z, 0-9, - | Resource Group |
-| Resource Group | 90 | alphanumeric, -, _, ., () | Subscription |
+| Resource Type          | Max Length | Allowed Characters         | Scope          |
+| ---------------------- | ---------- | -------------------------- | -------------- |
+| Static Web App         | 40         | a-z, 0-9, -                | Resource Group |
+| Storage Account        | 24         | a-z, 0-9 (no hyphens)      | Global         |
+| Communication Services | 64         | a-z, 0-9, -                | Resource Group |
+| Resource Group         | 90         | alphanumeric, -, \_, ., () | Subscription   |
 
 ### Suggested Naming Pattern
 
@@ -158,7 +156,8 @@ The `staticwebapp.config.json` must include:
 
 **Output Location:** `/infra/README.md`
 
-This documentation will be created at the repository root level, not within the `/apps` directory structure.
+This documentation will be created at the repository root level, not within the `/apps` directory
+structure.
 
 ```
 collabolatte/
@@ -223,8 +222,8 @@ No debug logs - documentation-only story with no code execution.
 
 ### Change Log
 
-| Date | Change |
-|------|--------|
+| Date       | Change                                                                      |
+| ---------- | --------------------------------------------------------------------------- |
 | 2026-01-15 | Initial implementation - created comprehensive infrastructure documentation |
 
 ### File List

@@ -36,7 +36,7 @@ Before deploying, ensure you have:
 # Set environment (dev, staging, or prod)
 ENVIRONMENT=dev
 PROJECT=collabolatte
-LOCATION=uksouth
+LOCATION=westeurope
 
 # Deploy using parameter file (resource group created automatically)
 az deployment sub create \
@@ -93,19 +93,19 @@ az deployment sub what-if \
 ```bash
 # Development
 az deployment sub create \
-  --location uksouth \
+  --location westeurope \
   --template-file infra/main.bicep \
   --parameters infra/parameters/dev.json
 
 # Staging
 az deployment sub create \
-  --location uksouth \
+  --location westeurope \
   --template-file infra/main.bicep \
   --parameters infra/parameters/staging.json
 
 # Production
 az deployment sub create \
-  --location uksouth \
+  --location westeurope \
   --template-file infra/main.bicep \
   --parameters infra/parameters/prod.json
 ```
@@ -265,30 +265,30 @@ Where:
 - `{project}` = `collabolatte`
 - `{variant/component}` = `app` | `www` (for Static Web Apps only)
 - `{environment}` = `dev` | `staging` | `prod`
-- `{region}` = `uksouth` (UK South)
+- `{region}` = `westeurope` (UK South)
 
 **Note**: Storage accounts cannot use hyphens, so the pattern is
 `st{project}{environment}{identifier}`
 
 ### Resource Naming Rules
 
-| Resource Type          | Abbreviation | Max Length | Allowed Characters     | Scope        | Example                              |
-| ---------------------- | ------------ | ---------- | ---------------------- | ------------ | ------------------------------------ |
-| Resource Group         | `rg`         | 90         | a-z, 0-9, -, \_, ., () | Subscription | `rg-collabolatte-dev-uksouth`        |
-| Static Web App (app)   | `stapp`      | 60         | a-z, 0-9, -            | Global       | `stapp-collabolatte-app-dev-uksouth` |
-| Static Web App (www)   | `stapp`      | 60         | a-z, 0-9, -            | Global       | `stapp-collabolatte-www-dev-uksouth` |
-| Storage Account        | `st`         | 24         | a-z, 0-9 (NO hyphens)  | Global       | `stcollabolattedev001`               |
-| Communication Services | `acs`        | 64         | a-z, 0-9, -            | Global       | `acs-collabolatte-dev-uksouth`       |
+| Resource Type          | Abbreviation | Max Length | Allowed Characters     | Scope        | Example                                 |
+| ---------------------- | ------------ | ---------- | ---------------------- | ------------ | --------------------------------------- |
+| Resource Group         | `rg`         | 90         | a-z, 0-9, -, \_, ., () | Subscription | `rg-collabolatte-dev-westeurope`        |
+| Static Web App (app)   | `stapp`      | 60         | a-z, 0-9, -            | Global       | `stapp-collabolatte-app-dev-westeurope` |
+| Static Web App (www)   | `stapp`      | 60         | a-z, 0-9, -            | Global       | `stapp-collabolatte-www-dev-westeurope` |
+| Storage Account        | `st`         | 24         | a-z, 0-9 (NO hyphens)  | Global       | `stcollabolattedev001`                  |
+| Communication Services | `acs`        | 64         | a-z, 0-9, -            | Global       | `acs-collabolatte-dev-westeurope`       |
 
 ### Environment-Specific Names
 
-| Resource               | Dev                                  | Staging                                  | Prod                                  |
-| ---------------------- | ------------------------------------ | ---------------------------------------- | ------------------------------------- |
-| Resource Group         | `rg-collabolatte-dev-uksouth`        | `rg-collabolatte-staging-uksouth`        | `rg-collabolatte-prod-uksouth`        |
-| SWA (App)              | `stapp-collabolatte-app-dev-uksouth` | `stapp-collabolatte-app-staging-uksouth` | `stapp-collabolatte-app-prod-uksouth` |
-| SWA (Marketing)        | `stapp-collabolatte-www-dev-uksouth` | `stapp-collabolatte-www-staging-uksouth` | `stapp-collabolatte-www-prod-uksouth` |
-| Storage Account        | `stcollabolattedev001`               | `stcollabolattestaging001`               | `stcollabolatteprod001`               |
-| Communication Services | `acs-collabolatte-dev-uksouth`       | `acs-collabolatte-staging-uksouth`       | `acs-collabolatte-prod-uksouth`       |
+| Resource               | Dev                                     | Staging                                     | Prod                                     |
+| ---------------------- | --------------------------------------- | ------------------------------------------- | ---------------------------------------- |
+| Resource Group         | `rg-collabolatte-dev-westeurope`        | `rg-collabolatte-staging-westeurope`        | `rg-collabolatte-prod-westeurope`        |
+| SWA (App)              | `stapp-collabolatte-app-dev-westeurope` | `stapp-collabolatte-app-staging-westeurope` | `stapp-collabolatte-app-prod-westeurope` |
+| SWA (Marketing)        | `stapp-collabolatte-www-dev-westeurope` | `stapp-collabolatte-www-staging-westeurope` | `stapp-collabolatte-www-prod-westeurope` |
+| Storage Account        | `stcollabolattedev001`                  | `stcollabolattestaging001`                  | `stcollabolatteprod001`                  |
+| Communication Services | `acs-collabolatte-dev-westeurope`       | `acs-collabolatte-staging-westeurope`       | `acs-collabolatte-prod-westeurope`       |
 
 ---
 
@@ -300,7 +300,7 @@ Where:
 | ------------- | ------ | ---------------------------------- | -------------- | ---------------------------- |
 | `project`     | string | Project name                       | `collabolatte` | lowercase, no spaces         |
 | `environment` | string | Deployment environment             | -              | `dev` \| `staging` \| `prod` |
-| `location`    | string | Azure region                       | `uksouth`      | Valid Azure region           |
+| `location`    | string | Azure region                       | `westeurope`   | Valid Azure region           |
 | `identifier`  | string | Unique suffix for global resources | `001`          | 3 alphanumeric chars         |
 
 ### Optional Parameters
@@ -336,7 +336,7 @@ infra/
       "value": "dev"
     },
     "location": {
-      "value": "uksouth"
+      "value": "westeurope"
     },
     "identifier": {
       "value": "001"
@@ -362,12 +362,12 @@ infra/
 
 Add the following redirect URIs under **Authentication > Single-page application**:
 
-| Environment | Redirect URI                                                                                  |
-| ----------- | --------------------------------------------------------------------------------------------- |
-| Production  | `https://app.collabolatte.co.uk/.auth/login/aad/callback`                                     |
-| Staging     | `https://stapp-collabolatte-app-staging-uksouth.azurestaticapps.net/.auth/login/aad/callback` |
-| Development | `https://stapp-collabolatte-app-dev-uksouth.azurestaticapps.net/.auth/login/aad/callback`     |
-| Local       | `http://localhost:4280/.auth/login/aad/callback`                                              |
+| Environment | Redirect URI                                                                                     |
+| ----------- | ------------------------------------------------------------------------------------------------ |
+| Production  | `https://app.collabolatte.co.uk/.auth/login/aad/callback`                                        |
+| Staging     | `https://stapp-collabolatte-app-staging-westeurope.azurestaticapps.net/.auth/login/aad/callback` |
+| Development | `https://stapp-collabolatte-app-dev-westeurope.azurestaticapps.net/.auth/login/aad/callback`     |
+| Local       | `http://localhost:4280/.auth/login/aad/callback`                                                 |
 
 ### Step 3: Configure API Permissions
 
@@ -605,8 +605,8 @@ After Bicep deployment completes, these manual steps are required:
 ```bash
 # For App SWA
 az staticwebapp appsettings set \
-  --name stapp-collabolatte-app-{env}-uksouth \
-  --resource-group rg-collabolatte-{env}-uksouth \
+  --name stapp-collabolatte-app-{env}-westeurope \
+  --resource-group rg-collabolatte-{env}-westeurope \
   --setting-names \
     AZURE_CLIENT_ID="{client-id}" \
     AZURE_CLIENT_SECRET="{client-secret}" \
@@ -636,8 +636,8 @@ az storage table create --name Roles --account-name stcollabolatte{env}001
 ### 4. Configure Custom Domains
 
 1. Add CNAME records in DNS:
-   - `app.collabolatte.co.uk` -> `stapp-collabolatte-app-{env}-uksouth.azurestaticapps.net`
-   - `www.collabolatte.co.uk` -> `stapp-collabolatte-www-{env}-uksouth.azurestaticapps.net`
+   - `app.collabolatte.co.uk` -> `stapp-collabolatte-app-{env}-westeurope.azurestaticapps.net`
+   - `www.collabolatte.co.uk` -> `stapp-collabolatte-www-{env}-westeurope.azurestaticapps.net`
 
 2. Validate domain ownership in Azure Portal
 
@@ -697,7 +697,7 @@ infra/
 Each environment has its own parameter file with:
 
 - Project name and environment identifier
-- Azure region (default: uksouth)
+- Azure region (default: westeurope)
 - Unique identifier for global resources
 - GitHub repository URL for SWA integration
 - Custom domain settings (prod only)

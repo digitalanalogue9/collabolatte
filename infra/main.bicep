@@ -24,7 +24,7 @@ param projectStorage string = 'collab'
 param environment string
 
 @description('Azure region for deployment')
-param location string = 'uksouth'
+param location string = 'westeurope'
 
 @description('Unique identifier for globally-scoped resources (3 alphanumeric chars)')
 @maxLength(3)
