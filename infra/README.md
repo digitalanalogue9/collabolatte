@@ -687,7 +687,8 @@ infra/
 
 **Template Description:**
 
-- **main.bicep**: Orchestrates all resources using Azure Verified Modules (AVM) from the public registry:
+- **main.bicep**: Orchestrates all resources using Azure Verified Modules (AVM) from the public
+  registry:
   - `br/public:avm/res/storage/storage-account:0.14.3` - Storage Account with Table Storage
   - `br/public:avm/res/communication/communication-service:0.3.0` - Azure Communication Services
   - `br/public:avm/res/web/static-site:0.5.0` - Static Web Apps (both app and marketing)
