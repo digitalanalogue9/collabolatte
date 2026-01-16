@@ -1,0 +1,128 @@
+name: Deploy Infrastructure
+
+on:
+  # Manual trigger with environment selection
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy (dev, staging, prod)'
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+        default: 'dev'
+      
+  # Automatic trigger on infrastructure changes to main branch
+  push:
+    branches:
+      - main
+    paths:
+      - 'infra/**'
+      - '.github/workflows/infra-deploy.yml'
+
+permissions:
+  contents: read
+  id-token: write  # Required for Azure OIDC authentication
+
+jobs:
+  deploy-infrastructure:
+    name: Deploy to ${{ inputs.environment || 'dev' }}
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment || 'dev' }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: Set environment variables
+        run: |
+          ENV="${{ inputs.environment || 'dev' }}"
+          echo "ENVIRONMENT=$ENV" >> $GITHUB_ENV
+          echo "Deploying to environment: $ENV"
+      
+      - name: Validate Bicep templates
+        run: |
+          echo "Validating Bicep syntax..."
+          az bicep build --file infra/main.bicep
+          echo "✓ Bicep syntax validation passed"
+      
+      - name: Preview deployment changes (What-If)
+        run: |
+          echo "Running deployment preview..."
+          az deployment group what-if \
+            --resource-group rg-collabolatte-${{ env.ENVIRONMENT }}-uks \
+            --template-file infra/main.bicep \
+            --parameters infra/parameters/${{ env.ENVIRONMENT }}.bicepparam \
+            --verbose
+      
+      - name: Deploy infrastructure
+        id: deploy
+        run: |
+          echo "Deploying infrastructure to ${{ env.ENVIRONMENT }}..."
+          az deployment group create \
+            --resource-group rg-collabolatte-${{ env.ENVIRONMENT }}-uks \
+            --template-file infra/main.bicep \
+            --parameters infra/parameters/${{ env.ENVIRONMENT }}.bicepparam \
+            --verbose \
+            --output json > deployment-output.json
+          
+          echo "✓ Deployment completed"
+          
+          # Extract and display outputs
+          echo "## Deployment Outputs" >> $GITHUB_STEP_SUMMARY
+          cat deployment-output.json | jq -r '.properties.outputs | to_entries[] | "- **\(.key)**: \(.value.value)"' >> $GITHUB_STEP_SUMMARY
+      
+      - name: Upload deployment artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-output-${{ env.ENVIRONMENT }}
+          path: deployment-output.json
+          retention-days: 30
+      
+      - name: Deployment summary
+        if: success()
+        run: |
+          echo "✅ Infrastructure deployment to ${{ env.ENVIRONMENT }} completed successfully" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
+          echo "1. Complete Entra ID app registration (see /infra/README.md)" >> $GITHUB_STEP_SUMMARY
+          echo "2. Configure GitHub Secrets with Entra ID values" >> $GITHUB_STEP_SUMMARY
+          echo "3. Deploy application via SWA workflows" >> $GITHUB_STEP_SUMMARY
+
+# ============================================================================
+# Required GitHub Secrets:
+# ============================================================================
+#
+# AZURE_CREDENTIALS: Service principal credentials in JSON format
+#   {
+#     "clientId": "<service-principal-client-id>",
+#     "clientSecret": "<service-principal-client-secret>",
+#     "subscriptionId": "<azure-subscription-id>",
+#     "tenantId": "<azure-tenant-id>"
+#   }
+#
+# To create service principal:
+#   az ad sp create-for-rbac \
+#     --name "github-actions-collabolatte" \
+#     --role contributor \
+#     --scopes /subscriptions/{subscription-id}/resourceGroups/rg-collabolatte-{env}-uks \
+#     --sdk-auth
+#
+# ============================================================================
+# Notes:
+# ============================================================================
+#
+# - This workflow deploys ONLY infrastructure (no application code)
+# - Application deployment happens via separate SWA workflows
+# - Entra ID app registration must be completed manually (see /infra/README.md)
+# - Deployment is idempotent and can be run multiple times safely
+# - Resource group must exist before running this workflow
+#

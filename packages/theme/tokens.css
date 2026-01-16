@@ -4,48 +4,52 @@
  */
 
 :root {
-  /* Primary Colors */
-  --color-primary: #6B4EFF;
-  --color-primary-light: #8B73FF;
-  --color-primary-dark: #5A3EE0;
-  
-  /* Secondary Colors */
-  --color-secondary: #FF6B6B;
-  --color-secondary-light: #FF8E8E;
-  --color-secondary-dark: #E05A5A;
-  
+  /* Sage Calm Color Palette */
+  --color-primary: #3a7f6c;
+  --color-primary-light: #5d9a89;
+  --color-primary-dark: #2d6355;
+  --color-primary-muted: #6a9486;
+  --color-primary-focus: #7ea99a;
+
   /* Neutral Colors */
-  --color-background: #FAFAFA;
-  --color-surface: #FFFFFF;
-  --color-text-primary: #333333;
-  --color-text-secondary: #666666;
-  --color-text-disabled: #9E9E9E;
-  --color-divider: #E0E0E0;
-  
-  /* Semantic Colors */
-  --color-success: #4CAF50;
-  --color-warning: #FF9800;
-  --color-error: #F44336;
-  --color-info: #2196F3;
-  
-  /* Typography */
-  --font-family-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --color-background: #f6f5f2;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f0ede7;
+  --color-border: #e6e4df;
+  --color-chip-bg: #f5f2ed;
+  --color-text-primary: #1f2428;
+  --color-text-secondary: #4f5b61;
+  --color-text-disabled: #9e9e9e;
+  --color-divider: #e6e4df;
+
+  /* Semantic Colors (minimal, avoid urgency) */
+  --color-success: #4caf50;
+  --color-warning: #ff9800;
+  --color-error: #f44336;
+  --color-info: #2196f3;
+
+  /* Typography (14px base, calm hierarchy) */
+  --font-family-primary:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   --font-family-mono: 'SF Mono', 'Fira Code', Consolas, monospace;
-  
+
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
+  --font-size-base: 0.875rem;
   --font-size-md: 1rem;
   --font-size-lg: 1.125rem;
   --font-size-xl: 1.25rem;
   --font-size-2xl: 1.5rem;
-  --font-size-3xl: 2rem;
-  --font-size-4xl: 3rem;
-  
+
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.75;
+
   /* Spacing */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -54,19 +58,20 @@
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
   --spacing-3xl: 4rem;
-  
-  /* Border Radius */
+
+  /* Border Radius (calm, rounded) */
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
-  --radius-full: 9999px;
-  
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-card: 14px;
+  --radius-full: 999px;
+
+  /* Shadows (minimal depth) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.08);
+
   /* Transitions */
   --transition-fast: 150ms ease-in-out;
   --transition-normal: 250ms ease-in-out;

@@ -23,7 +23,10 @@
       "Bash(wc:*)",
       "Bash(grep:*)",
       "Bash(git stash drop:*)",
-      "Bash(npx markdownlint-cli:*)"
+      "Bash(npx markdownlint-cli:*)",
+      "Bash(git mv:*)",
+      "Bash(az bicep build:*)",
+      "Bash(az bicep lint:*)"
     ]
   }
 }

@@ -444,6 +444,90 @@ Add these settings in the Azure Portal under **Static Web App > Configuration > 
 
 ---
 
+## GitHub Actions Setup
+
+The infrastructure deployment is automated via GitHub Actions (`.github/workflows/infra-deploy.yml`). This workflow requires specific GitHub Secrets to authenticate with Azure and deploy Bicep templates.
+
+### Required GitHub Secrets
+
+| Secret Name | Description | How to Obtain |
+|-------------|-------------|---------------|
+| `AZURE_CREDENTIALS` | Service principal credentials for Azure login | Create via Azure CLI (see below) |
+| `AZURE_SUBSCRIPTION_ID` | Azure subscription GUID | Find in Azure Portal under Subscriptions |
+
+### Create Service Principal for GitHub Actions
+
+Run this Azure CLI command to create a service principal with Contributor access to the resource group:
+
+```bash
+# For dev environment
+az ad sp create-for-rbac \
+  --name "collabolatte-github-actions-dev" \
+  --role Contributor \
+  --scopes /subscriptions/{subscription-id}/resourceGroups/collabolatte-dev-rg \
+  --sdk-auth
+
+# For staging environment
+az ad sp create-for-rbac \
+  --name "collabolatte-github-actions-staging" \
+  --role Contributor \
+  --scopes /subscriptions/{subscription-id}/resourceGroups/collabolatte-staging-rg \
+  --sdk-auth
+
+# For prod environment
+az ad sp create-for-rbac \
+  --name "collabolatte-github-actions-prod" \
+  --role Contributor \
+  --scopes /subscriptions/{subscription-id}/resourceGroups/collabolatte-prod-rg \
+  --sdk-auth
+```
+
+**Important:** Replace `{subscription-id}` with your actual Azure subscription ID.
+
+The command outputs JSON in this format (example shown):
+
+```json
+{
+  "clientId": "00000000-0000-0000-0000-000000000000",
+  "clientSecret": "YOUR_CLIENT_SECRET",
+  "subscriptionId": "00000000-0000-0000-0000-000000000000",
+  "tenantId": "00000000-0000-0000-0000-000000000000",
+  "activeDirectoryEndpointUrl": "https://login.microsoftonline.com",
+  "resourceManagerEndpointUrl": "https://management.azure.com/",
+  "activeDirectoryGraphResourceId": "https://graph.windows.net/",
+  "sqlManagementEndpointUrl": "https://management.core.windows.net:8443/",
+  "galleryEndpointUrl": "https://gallery.azure.com/",
+  "managementEndpointUrl": "https://management.core.windows.net/"
+}
+```
+
+### Add Secrets to GitHub
+
+1. Navigate to your GitHub repository
+2. Go to **Settings > Secrets and variables > Actions**
+3. Click **New repository secret**
+4. Add `AZURE_CREDENTIALS` with the full JSON output from the `az ad sp create-for-rbac` command
+5. Add `AZURE_SUBSCRIPTION_ID` with your subscription GUID
+
+### Workflow Triggers
+
+The infrastructure deployment workflow runs:
+
+- **Manually**: Via Actions tab with environment selection (dev/staging/prod)
+- **Automatically**: On push to `main` branch when files in `infra/**` or `.github/workflows/infra-deploy.yml` change
+
+### Deployment Process
+
+The workflow performs these steps:
+
+1. **Azure Login**: Authenticates using service principal from `AZURE_CREDENTIALS`
+2. **Bicep Validation**: Runs `az bicep build` to check template syntax
+3. **What-If Preview**: Shows what changes will be made without deploying
+4. **Deployment**: Deploys to the specified environment using parameter files
+5. **Output Capture**: Saves deployment outputs as JSON artifacts (30-day retention)
+
+---
+
 ## Resource Dependencies
 
 ### Dependency Diagram

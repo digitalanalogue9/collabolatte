@@ -1,0 +1,855 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "languageVersion": "2.0",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.37.4.10188",
+      "templateHash": "17333781457226767546"
+    }
+  },
+  "parameters": {
+    "project": {
+      "type": "string",
+      "defaultValue": "collabolatte",
+      "metadata": {
+        "description": "Project name (lowercase, no spaces)"
+      }
+    },
+    "environment": {
+      "type": "string",
+      "allowedValues": [
+        "dev",
+        "staging",
+        "prod"
+      ],
+      "metadata": {
+        "description": "Environment (dev, staging, prod)"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Azure region for deployment"
+      }
+    },
+    "identifier": {
+      "type": "string",
+      "defaultValue": "001",
+      "maxLength": 3,
+      "metadata": {
+        "description": "Unique identifier for globally-scoped resources (3 alphanumeric chars)"
+      }
+    },
+    "repositoryUrl": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "GitHub repository URL (optional, for SWA)"
+      }
+    },
+    "repositoryBranch": {
+      "type": "string",
+      "defaultValue": "main",
+      "metadata": {
+        "description": "GitHub repository branch"
+      }
+    },
+    "appCustomDomain": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Custom domain for app SWA (optional)"
+      }
+    },
+    "wwwCustomDomain": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Custom domain for marketing SWA (optional)"
+      }
+    },
+    "tags": {
+      "type": "object",
+      "defaultValue": {
+        "project": "collabolatte",
+        "managedBy": "bicep"
+      },
+      "metadata": {
+        "description": "Resource tags"
+      }
+    }
+  },
+  "resources": {
+    "storage": {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "storage-deployment",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "project": {
+            "value": "[parameters('project')]"
+          },
+          "environment": {
+            "value": "[parameters('environment')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "identifier": {
+            "value": "[parameters('identifier')]"
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.37.4.10188",
+              "templateHash": "813973887445243082"
+            }
+          },
+          "parameters": {
+            "project": {
+              "type": "string",
+              "defaultValue": "collabolatte",
+              "metadata": {
+                "description": "Project name (lowercase, no spaces)"
+              }
+            },
+            "environment": {
+              "type": "string",
+              "allowedValues": [
+                "dev",
+                "staging",
+                "prod"
+              ],
+              "metadata": {
+                "description": "Environment (dev, staging, prod)"
+              }
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Azure region for deployment"
+              }
+            },
+            "identifier": {
+              "type": "string",
+              "defaultValue": "001",
+              "maxLength": 3,
+              "metadata": {
+                "description": "Unique identifier for globally-scoped resources (3 alphanumeric chars)"
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Resource tags"
+              }
+            }
+          },
+          "variables": {
+            "storageAccountName": "[toLower(format('{0}{1}st{2}', parameters('project'), parameters('environment'), parameters('identifier')))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Storage/storageAccounts",
+              "apiVersion": "2023-01-01",
+              "name": "[variables('storageAccountName')]",
+              "location": "[parameters('location')]",
+              "tags": "[union(parameters('tags'), createObject('project', parameters('project'), 'environment', parameters('environment')))]",
+              "sku": {
+                "name": "Standard_LRS"
+              },
+              "kind": "StorageV2",
+              "properties": {
+                "accessTier": "Hot",
+                "minimumTlsVersion": "TLS1_2",
+                "supportsHttpsTrafficOnly": true,
+                "allowBlobPublicAccess": false,
+                "allowSharedKeyAccess": true,
+                "networkAcls": {
+                  "defaultAction": "Allow",
+                  "bypass": "AzureServices"
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/tableServices",
+              "apiVersion": "2023-01-01",
+              "name": "[format('{0}/{1}', variables('storageAccountName'), 'default')]",
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "storageAccountId": {
+              "type": "string",
+              "metadata": {
+                "description": "Storage account resource ID"
+              },
+              "value": "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+            },
+            "storageAccountName": {
+              "type": "string",
+              "metadata": {
+                "description": "Storage account name"
+              },
+              "value": "[variables('storageAccountName')]"
+            },
+            "storageAccountEndpoints": {
+              "type": "object",
+              "metadata": {
+                "description": "Storage account primary endpoints"
+              },
+              "value": "[reference(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2023-01-01').primaryEndpoints]"
+            },
+            "storageConnectionString": {
+              "type": "string",
+              "metadata": {
+                "description": "Storage connection string (includes account key - sensitive)"
+              },
+              "value": "[format('DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1};EndpointSuffix={2}', variables('storageAccountName'), listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2023-01-01').keys[0].value, environment().suffixes.storage)]"
+            }
+          }
+        }
+      }
+    },
+    "acs": {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "acs-deployment",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "project": {
+            "value": "[parameters('project')]"
+          },
+          "environment": {
+            "value": "[parameters('environment')]"
+          },
+          "dataLocation": {
+            "value": "UK"
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.37.4.10188",
+              "templateHash": "15082848509449182370"
+            }
+          },
+          "parameters": {
+            "project": {
+              "type": "string",
+              "defaultValue": "collabolatte",
+              "metadata": {
+                "description": "Project name (lowercase, no spaces)"
+              }
+            },
+            "environment": {
+              "type": "string",
+              "allowedValues": [
+                "dev",
+                "staging",
+                "prod"
+              ],
+              "metadata": {
+                "description": "Environment (dev, staging, prod)"
+              }
+            },
+            "dataLocation": {
+              "type": "string",
+              "defaultValue": "UK",
+              "metadata": {
+                "description": "Data location for ACS (UK for compliance)"
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Resource tags"
+              }
+            }
+          },
+          "variables": {
+            "acsName": "[format('{0}-{1}-acs', parameters('project'), parameters('environment'))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Communication/communicationServices",
+              "apiVersion": "2023-04-01",
+              "name": "[variables('acsName')]",
+              "location": "global",
+              "tags": "[union(parameters('tags'), createObject('project', parameters('project'), 'environment', parameters('environment')))]",
+              "properties": {
+                "dataLocation": "[parameters('dataLocation')]"
+              }
+            }
+          ],
+          "outputs": {
+            "acsId": {
+              "type": "string",
+              "metadata": {
+                "description": "ACS resource ID"
+              },
+              "value": "[resourceId('Microsoft.Communication/communicationServices', variables('acsName'))]"
+            },
+            "acsName": {
+              "type": "string",
+              "metadata": {
+                "description": "ACS resource name"
+              },
+              "value": "[variables('acsName')]"
+            },
+            "acsConnectionString": {
+              "type": "string",
+              "metadata": {
+                "description": "ACS primary connection string (sensitive)"
+              },
+              "value": "[listKeys(resourceId('Microsoft.Communication/communicationServices', variables('acsName')), '2023-04-01').primaryConnectionString]"
+            },
+            "acsEndpoint": {
+              "type": "string",
+              "metadata": {
+                "description": "ACS endpoint"
+              },
+              "value": "[reference(resourceId('Microsoft.Communication/communicationServices', variables('acsName')), '2023-04-01').hostName]"
+            }
+          }
+        }
+      }
+    },
+    "swaApp": {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "swa-app-deployment",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "project": {
+            "value": "[parameters('project')]"
+          },
+          "environment": {
+            "value": "[parameters('environment')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "variant": {
+            "value": "app"
+          },
+          "repositoryUrl": {
+            "value": "[parameters('repositoryUrl')]"
+          },
+          "repositoryBranch": {
+            "value": "[parameters('repositoryBranch')]"
+          },
+          "customDomain": {
+            "value": "[parameters('appCustomDomain')]"
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.37.4.10188",
+              "templateHash": "2314706617193146900"
+            }
+          },
+          "parameters": {
+            "project": {
+              "type": "string",
+              "defaultValue": "collabolatte",
+              "metadata": {
+                "description": "Project name (lowercase, no spaces)"
+              }
+            },
+            "environment": {
+              "type": "string",
+              "allowedValues": [
+                "dev",
+                "staging",
+                "prod"
+              ],
+              "metadata": {
+                "description": "Environment (dev, staging, prod)"
+              }
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Azure region for deployment"
+              }
+            },
+            "variant": {
+              "type": "string",
+              "allowedValues": [
+                "app",
+                "www"
+              ],
+              "metadata": {
+                "description": "SWA variant (app or www)"
+              }
+            },
+            "repositoryUrl": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "GitHub repository URL (optional)"
+              }
+            },
+            "repositoryBranch": {
+              "type": "string",
+              "defaultValue": "main",
+              "metadata": {
+                "description": "GitHub repository branch"
+              }
+            },
+            "customDomain": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Custom domain (optional)"
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Resource tags"
+              }
+            }
+          },
+          "variables": {
+            "swaName": "[format('{0}-{1}-swa-{2}', parameters('project'), parameters('environment'), parameters('variant'))]",
+            "buildProperties": "[if(equals(parameters('variant'), 'app'), createObject('appLocation', '/apps/web', 'apiLocation', '/apps/api', 'outputLocation', 'dist'), createObject('appLocation', '/apps/marketing', 'outputLocation', 'dist'))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Web/staticSites",
+              "apiVersion": "2023-01-01",
+              "name": "[variables('swaName')]",
+              "location": "[parameters('location')]",
+              "tags": "[union(parameters('tags'), createObject('project', parameters('project'), 'environment', parameters('environment'), 'variant', parameters('variant')))]",
+              "sku": {
+                "name": "Free",
+                "tier": "Free"
+              },
+              "properties": {
+                "repositoryUrl": "[parameters('repositoryUrl')]",
+                "branch": "[parameters('repositoryBranch')]",
+                "buildProperties": "[variables('buildProperties')]",
+                "stagingEnvironmentPolicy": "Enabled",
+                "allowConfigFileUpdates": true,
+                "provider": "GitHub"
+              }
+            },
+            {
+              "condition": "[not(empty(parameters('customDomain')))]",
+              "type": "Microsoft.Web/staticSites/customDomains",
+              "apiVersion": "2023-01-01",
+              "name": "[format('{0}/{1}', variables('swaName'), parameters('customDomain'))]",
+              "properties": {},
+              "dependsOn": [
+                "[resourceId('Microsoft.Web/staticSites', variables('swaName'))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "swaId": {
+              "type": "string",
+              "metadata": {
+                "description": "SWA resource ID"
+              },
+              "value": "[resourceId('Microsoft.Web/staticSites', variables('swaName'))]"
+            },
+            "swaName": {
+              "type": "string",
+              "metadata": {
+                "description": "SWA resource name"
+              },
+              "value": "[variables('swaName')]"
+            },
+            "swaHostname": {
+              "type": "string",
+              "metadata": {
+                "description": "SWA default hostname"
+              },
+              "value": "[reference(resourceId('Microsoft.Web/staticSites', variables('swaName')), '2023-01-01').defaultHostname]"
+            },
+            "swaDeploymentToken": {
+              "type": "string",
+              "metadata": {
+                "description": "SWA deployment token (sensitive - used for GitHub Actions)"
+              },
+              "value": "[listSecrets(resourceId('Microsoft.Web/staticSites', variables('swaName')), '2023-01-01').properties.apiKey]"
+            },
+            "swaUrl": {
+              "type": "string",
+              "metadata": {
+                "description": "SWA URL"
+              },
+              "value": "[format('https://{0}', reference(resourceId('Microsoft.Web/staticSites', variables('swaName')), '2023-01-01').defaultHostname)]"
+            }
+          }
+        }
+      }
+    },
+    "swaMarketing": {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "swa-marketing-deployment",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "project": {
+            "value": "[parameters('project')]"
+          },
+          "environment": {
+            "value": "[parameters('environment')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "variant": {
+            "value": "www"
+          },
+          "repositoryUrl": {
+            "value": "[parameters('repositoryUrl')]"
+          },
+          "repositoryBranch": {
+            "value": "[parameters('repositoryBranch')]"
+          },
+          "customDomain": {
+            "value": "[parameters('wwwCustomDomain')]"
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.37.4.10188",
+              "templateHash": "2314706617193146900"
+            }
+          },
+          "parameters": {
+            "project": {
+              "type": "string",
+              "defaultValue": "collabolatte",
+              "metadata": {
+                "description": "Project name (lowercase, no spaces)"
+              }
+            },
+            "environment": {
+              "type": "string",
+              "allowedValues": [
+                "dev",
+                "staging",
+                "prod"
+              ],
+              "metadata": {
+                "description": "Environment (dev, staging, prod)"
+              }
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Azure region for deployment"
+              }
+            },
+            "variant": {
+              "type": "string",
+              "allowedValues": [
+                "app",
+                "www"
+              ],
+              "metadata": {
+                "description": "SWA variant (app or www)"
+              }
+            },
+            "repositoryUrl": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "GitHub repository URL (optional)"
+              }
+            },
+            "repositoryBranch": {
+              "type": "string",
+              "defaultValue": "main",
+              "metadata": {
+                "description": "GitHub repository branch"
+              }
+            },
+            "customDomain": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Custom domain (optional)"
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Resource tags"
+              }
+            }
+          },
+          "variables": {
+            "swaName": "[format('{0}-{1}-swa-{2}', parameters('project'), parameters('environment'), parameters('variant'))]",
+            "buildProperties": "[if(equals(parameters('variant'), 'app'), createObject('appLocation', '/apps/web', 'apiLocation', '/apps/api', 'outputLocation', 'dist'), createObject('appLocation', '/apps/marketing', 'outputLocation', 'dist'))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Web/staticSites",
+              "apiVersion": "2023-01-01",
+              "name": "[variables('swaName')]",
+              "location": "[parameters('location')]",
+              "tags": "[union(parameters('tags'), createObject('project', parameters('project'), 'environment', parameters('environment'), 'variant', parameters('variant')))]",
+              "sku": {
+                "name": "Free",
+                "tier": "Free"
+              },
+              "properties": {
+                "repositoryUrl": "[parameters('repositoryUrl')]",
+                "branch": "[parameters('repositoryBranch')]",
+                "buildProperties": "[variables('buildProperties')]",
+                "stagingEnvironmentPolicy": "Enabled",
+                "allowConfigFileUpdates": true,
+                "provider": "GitHub"
+              }
+            },
+            {
+              "condition": "[not(empty(parameters('customDomain')))]",
+              "type": "Microsoft.Web/staticSites/customDomains",
+              "apiVersion": "2023-01-01",
+              "name": "[format('{0}/{1}', variables('swaName'), parameters('customDomain'))]",
+              "properties": {},
+              "dependsOn": [
+                "[resourceId('Microsoft.Web/staticSites', variables('swaName'))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "swaId": {
+              "type": "string",
+              "metadata": {
+                "description": "SWA resource ID"
+              },
+              "value": "[resourceId('Microsoft.Web/staticSites', variables('swaName'))]"
+            },
+            "swaName": {
+              "type": "string",
+              "metadata": {
+                "description": "SWA resource name"
+              },
+              "value": "[variables('swaName')]"
+            },
+            "swaHostname": {
+              "type": "string",
+              "metadata": {
+                "description": "SWA default hostname"
+              },
+              "value": "[reference(resourceId('Microsoft.Web/staticSites', variables('swaName')), '2023-01-01').defaultHostname]"
+            },
+            "swaDeploymentToken": {
+              "type": "string",
+              "metadata": {
+                "description": "SWA deployment token (sensitive - used for GitHub Actions)"
+              },
+              "value": "[listSecrets(resourceId('Microsoft.Web/staticSites', variables('swaName')), '2023-01-01').properties.apiKey]"
+            },
+            "swaUrl": {
+              "type": "string",
+              "metadata": {
+                "description": "SWA URL"
+              },
+              "value": "[format('https://{0}', reference(resourceId('Microsoft.Web/staticSites', variables('swaName')), '2023-01-01').defaultHostname)]"
+            }
+          }
+        }
+      }
+    }
+  },
+  "outputs": {
+    "storageAccountId": {
+      "type": "string",
+      "metadata": {
+        "description": "Storage account resource ID"
+      },
+      "value": "[reference('storage').outputs.storageAccountId.value]"
+    },
+    "storageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "Storage account name"
+      },
+      "value": "[reference('storage').outputs.storageAccountName.value]"
+    },
+    "storageConnectionString": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Storage connection string (sensitive)"
+      },
+      "value": "[reference('storage').outputs.storageConnectionString.value]"
+    },
+    "acsId": {
+      "type": "string",
+      "metadata": {
+        "description": "ACS resource ID"
+      },
+      "value": "[reference('acs').outputs.acsId.value]"
+    },
+    "acsName": {
+      "type": "string",
+      "metadata": {
+        "description": "ACS resource name"
+      },
+      "value": "[reference('acs').outputs.acsName.value]"
+    },
+    "acsConnectionString": {
+      "type": "securestring",
+      "metadata": {
+        "description": "ACS connection string (sensitive)"
+      },
+      "value": "[reference('acs').outputs.acsConnectionString.value]"
+    },
+    "acsEndpoint": {
+      "type": "string",
+      "metadata": {
+        "description": "ACS endpoint"
+      },
+      "value": "[reference('acs').outputs.acsEndpoint.value]"
+    },
+    "appSwaId": {
+      "type": "string",
+      "metadata": {
+        "description": "App SWA resource ID"
+      },
+      "value": "[reference('swaApp').outputs.swaId.value]"
+    },
+    "appSwaName": {
+      "type": "string",
+      "metadata": {
+        "description": "App SWA name"
+      },
+      "value": "[reference('swaApp').outputs.swaName.value]"
+    },
+    "appSwaHostname": {
+      "type": "string",
+      "metadata": {
+        "description": "App SWA hostname"
+      },
+      "value": "[reference('swaApp').outputs.swaHostname.value]"
+    },
+    "appSwaUrl": {
+      "type": "string",
+      "metadata": {
+        "description": "App SWA URL"
+      },
+      "value": "[reference('swaApp').outputs.swaUrl.value]"
+    },
+    "appSwaDeploymentToken": {
+      "type": "securestring",
+      "metadata": {
+        "description": "App SWA deployment token (sensitive)"
+      },
+      "value": "[reference('swaApp').outputs.swaDeploymentToken.value]"
+    },
+    "marketingSwaId": {
+      "type": "string",
+      "metadata": {
+        "description": "Marketing SWA resource ID"
+      },
+      "value": "[reference('swaMarketing').outputs.swaId.value]"
+    },
+    "marketingSwaName": {
+      "type": "string",
+      "metadata": {
+        "description": "Marketing SWA name"
+      },
+      "value": "[reference('swaMarketing').outputs.swaName.value]"
+    },
+    "marketingSwaHostname": {
+      "type": "string",
+      "metadata": {
+        "description": "Marketing SWA hostname"
+      },
+      "value": "[reference('swaMarketing').outputs.swaHostname.value]"
+    },
+    "marketingSwaUrl": {
+      "type": "string",
+      "metadata": {
+        "description": "Marketing SWA URL"
+      },
+      "value": "[reference('swaMarketing').outputs.swaUrl.value]"
+    },
+    "marketingSwaDeploymentToken": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Marketing SWA deployment token (sensitive)"
+      },
+      "value": "[reference('swaMarketing').outputs.swaDeploymentToken.value]"
+    },
+    "deploymentSummary": {
+      "type": "object",
+      "metadata": {
+        "description": "Deployment summary"
+      },
+      "value": {
+        "environment": "[parameters('environment')]",
+        "location": "[parameters('location')]",
+        "storageAccount": "[reference('storage').outputs.storageAccountName.value]",
+        "acs": "[reference('acs').outputs.acsName.value]",
+        "appSwa": "[reference('swaApp').outputs.swaName.value]",
+        "marketingSwa": "[reference('swaMarketing').outputs.swaName.value]",
+        "appUrl": "[reference('swaApp').outputs.swaUrl.value]",
+        "marketingUrl": "[reference('swaMarketing').outputs.swaUrl.value]"
+      }
+    }
+  }
+}

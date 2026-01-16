@@ -1,30 +1,26 @@
 # Story 1.1: Set Up Initial Project from Starter Template
 
-Status: in-progress
+Status: done
 
 ## Story
 
-As a delivery team,
-I want to set up the initial project from the approved starter templates,
-So that Join & Trust stories can be implemented without blocking setup work.
+As a delivery team, I want to set up the initial project from the approved starter templates, So
+that Join & Trust stories can be implemented without blocking setup work.
 
 ## Acceptance Criteria
 
-1. **Given** the starter templates are approved in Architecture,
-   **When** we initialise the project,
-   **Then** the repo is scaffolded as a monorepo with `/apps/web`, `/apps/api`, and `/apps/marketing`,
-   **And** the web app is created from the official Vite React TypeScript template,
-   **And** the API is initialised with Azure Functions (.NET isolated),
-   **And** the marketing site is initialised with 11ty.
+1. **Given** the starter templates are approved in Architecture, **When** we initialise the project,
+   **Then** the repo is scaffolded as a monorepo with `/apps/web`, `/apps/api`, and
+   `/apps/marketing`, **And** the web app is created from the official Vite React TypeScript
+   template, **And** the API is initialised with Azure Functions (.NET isolated), **And** the
+   marketing site is initialised with 11ty.
 
-2. **Given** the scaffolding exists,
-   **When** baseline configuration is applied,
-   **Then** `staticwebapp.config.json` and SWA workflow stubs exist for app+api and marketing,
-   **And** Entra ID auth wiring is configured at the platform level (no custom auth code),
-   **And** storage connection placeholders are defined for local and cloud environments.
+2. **Given** the scaffolding exists, **When** baseline configuration is applied, **Then**
+   `staticwebapp.config.json` and SWA workflow stubs exist for app+api and marketing, **And** Entra
+   ID auth wiring is configured at the platform level (no custom auth code), **And** storage
+   connection placeholders are defined for local and cloud environments.
 
-3. **Given** the foundations are in place,
-   **When** a developer starts work on Epic 1 stories,
+3. **Given** the foundations are in place, **When** a developer starts work on Epic 1 stories,
    **Then** they can run the web and API projects locally without additional scaffolding.
 
 ## Tasks / Subtasks
@@ -34,15 +30,15 @@ So that Join & Trust stories can be implemented without blocking setup work.
   - [x] Create root `package.json` with workspace scripts
   - [x] Add `.npmrc` with pnpm configuration
 
-- [ ] Task 2: Scaffold web app with Vite React TypeScript (AC: 1)
+- [x] Task 2: Scaffold web app with Vite React TypeScript (AC: 1)
   - [x] Run `pnpm create vite apps/web --template react-ts`
   - [x] Install MUI dependencies: `@mui/material @emotion/react @emotion/styled`
-  - [ ] Verify Vite dev server runs successfully
+  - [x] Verify Vite dev server runs successfully
 
-- [ ] Task 3: Initialise API with Azure Functions .NET isolated (AC: 1)
+- [x] Task 3: Initialise API with Azure Functions .NET isolated (AC: 1)
   - [x] Run `func init apps/api --worker-runtime dotnet-isolated`
   - [x] Create solution file `collabolatte-api.sln`
-  - [ ] Verify Functions host runs locally
+  - [x] Verify Functions host runs locally
 
 - [x] Task 4: Scaffold marketing site with 11ty (AC: 1)
   - [x] Initialise `apps/marketing` with `pnpm init`
@@ -70,16 +66,17 @@ So that Join & Trust stories can be implemented without blocking setup work.
   - [x] Create `apps/api/local.settings.json` with placeholders
   - [x] Document environment variable requirements
 
-- [ ] Task 9: Verify local development works (AC: 3)
-  - [ ] Run web app dev server and verify it loads
-  - [ ] Run API functions host and verify it starts
-  - [ ] Run 11ty build and verify marketing site builds
+- [x] Task 9: Verify local development works (AC: 3)
+  - [x] Run web app dev server and verify it loads
+  - [x] Run API functions host and verify it starts
+  - [x] Run 11ty build and verify marketing site builds
 
 ## Dev Notes
 
 ### Story Context
 
-This is a **scaffolding story** that creates the complete monorepo structure. It is foundational - all subsequent stories depend on this structure being in place.
+This is a **scaffolding story** that creates the complete monorepo structure. It is foundational -
+all subsequent stories depend on this structure being in place.
 
 ### Critical Architecture Constraints
 
@@ -228,7 +225,9 @@ on:
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if:
+      github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action !=
+      'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
@@ -241,10 +240,10 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_APP }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: "upload"
-          app_location: "apps/web"
-          api_location: "apps/api"
-          output_location: "dist"
+          action: 'upload'
+          app_location: 'apps/web'
+          api_location: 'apps/api'
+          output_location: 'dist'
 ```
 
 #### Environment Variables (.env.example)
@@ -278,15 +277,15 @@ ACS_CONNECTION_STRING=your-acs-connection-string-here
 
 ### Technology Versions
 
-| Technology | Version | Notes |
-|------------|---------|-------|
-| Node.js | 20.x LTS | Required for Vite and 11ty |
-| pnpm | 9.x | Workspace package manager |
-| .NET | 10.x | Azure Functions runtime |
-| Azure Functions Core Tools | 4.x | Local development |
-| React | 18.x | Via Vite template |
-| TypeScript | 5.x | Via Vite template |
-| 11ty | 2.x | Static site generator |
+| Technology                 | Version  | Notes                      |
+| -------------------------- | -------- | -------------------------- |
+| Node.js                    | 20.x LTS | Required for Vite and 11ty |
+| pnpm                       | 9.x      | Workspace package manager  |
+| .NET                       | 10.x     | Azure Functions runtime    |
+| Azure Functions Core Tools | 4.x      | Local development          |
+| React                      | 18.x     | Via Vite template          |
+| TypeScript                 | 5.x      | Via Vite template          |
+| 11ty                       | 2.x      | Static site generator      |
 
 ### Dependencies on Story 1.0
 
@@ -312,9 +311,9 @@ This story creates scaffolding only - no application tests are written. Verifica
 ### Definition of Done
 
 - [x] pnpm workspace configured and working
-- [ ] Web app runs with `pnpm dev` in apps/web
-- [ ] API runs with `func start` in apps/api
-- [ ] Marketing site builds with `npx @11ty/eleventy` in apps/marketing
+- [x] Web app runs with `pnpm dev` in apps/web
+- [x] API runs with `func start` in apps/api
+- [x] Marketing site builds with `eleventy` in apps/marketing
 - [x] staticwebapp.config.json includes EasyAuth configuration
 - [x] GitHub Actions workflows exist (stubs, not tested)
 - [x] Environment configuration documented
@@ -334,7 +333,12 @@ N/A (no persistent debug log captured in this run)
 - Aligned API layout to `apps/api/src/Collabolatte.Api` as per architecture tree
 - Made root workspace scripts resilient via `pnpm -r --if-present`
 - Made marketing `clean` script Windows-friendly
-- Left runtime verification (Task 9) pending
+- Fixed 11ty configuration: Removed `"type": "module"` from marketing package.json to enable proper
+  config loading with Eleventy 2.0
+- Verified all three apps run/build successfully:
+  - Web app: Vite dev server runs on http://localhost:3000/
+  - API: Functions host starts successfully (no functions defined yet, as expected)
+  - Marketing: Eleventy builds successfully, outputs to dist/
 
 ### Change Log
 

@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'apps/marketing/**'
-      - 'packages/theme/**'
+      - "apps/marketing/**"
+      - "packages/theme/**"
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -31,11 +31,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'pnpm'
+          node-version: "20"
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Build theme package
+        run: pnpm --filter @collabolatte/theme build
 
       - name: Build marketing site
         run: pnpm --filter @collabolatte/marketing build
@@ -64,5 +67,6 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WWW }}
           action: "close"
+          app_location: "apps/marketing"
         env:
           SKIP_DEPLOY_ON_MISSING_SECRETS: true

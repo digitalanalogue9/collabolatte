@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
     "test": "vitest run",
     "test:watch": "vitest",
     "type-check": "tsc --noEmit --skipLibCheck",
@@ -15,6 +17,7 @@
   "dependencies": {
     "@azure/msal-browser": "^3.7.0",
     "@azure/msal-react": "^2.0.12",
+    "@collabolatte/theme": "workspace:*",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^5.15.6",
@@ -26,10 +29,16 @@
     "react-router-dom": "^6.21.3"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^8.6.14",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
+    "@storybook/test": "^8.6.14",
     "@types/node": "20.19.30",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@vitejs/plugin-react": "^5.1.1",
+    "storybook": "^8.6.14",
     "vite": "^7.2.4",
     "vitest": "^1.2.1"
   }

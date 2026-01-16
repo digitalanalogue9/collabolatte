@@ -1,15 +1,15 @@
-module.exports = function(eleventyConfig) {
+module.exports = function (eleventyConfig) {
   // Copy static assets
-  eleventyConfig.addPassthroughCopy("src/assets");
-  
+  eleventyConfig.addPassthroughCopy('src/assets');
+
   return {
     dir: {
-      input: "src",
-      output: "dist",
-      includes: "_includes",
-      data: "_data"
+      input: 'src',
+      output: 'dist',
+      includes: '_includes',
+      data: '_data',
     },
-    markdownTemplateEngine: "njk",
-    htmlTemplateEngine: "njk"
+    markdownTemplateEngine: 'njk',
+    htmlTemplateEngine: 'njk',
   };
 };

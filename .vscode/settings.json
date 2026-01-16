@@ -31,5 +31,9 @@
     },
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "chat.tools.terminal.autoApprove": {
+        "Set-Location": true,
+        "tsc": true
     }
 }

@@ -2,7 +2,6 @@
   "name": "@collabolatte/marketing",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "description": "Collabolatte marketing site",
   "scripts": {
     "dev": "eleventy --serve",
@@ -10,6 +9,7 @@
     "clean": "rm -rf _site node_modules"
   },
   "dependencies": {
+    "@collabolatte/theme": "workspace:*",
     "@11ty/eleventy": "^2.0.1"
   },
   "devDependencies": {
