@@ -9,7 +9,9 @@
       "Bash(git -C \"C:\\\\repos\\\\collabolatte\" status)",
       "Bash(git -C \"C:\\\\repos\\\\collabolatte\" pull --rebase)",
       "Bash(git -C \"C:\\\\repos\\\\collabolatte\" push)",
-      "Bash(npx @kayvan/markdown-tree-parser:*)"
+      "Bash(npx @kayvan/markdown-tree-parser:*)",
+      "Bash(wc:*)",
+      "Bash(grep:*)"
     ]
   }
 }
