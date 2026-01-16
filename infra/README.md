@@ -4,13 +4,139 @@ This document provides the complete infrastructure specification for provisionin
 
 ## Table of Contents
 
-1. [Overview](#overview)
-2. [Azure Resources](#azure-resources)
-3. [Naming Conventions](#naming-conventions)
-4. [Parameters](#parameters)
-5. [Entra ID and EasyAuth Setup](#entra-id-and-easyauth-setup)
-6. [Resource Dependencies](#resource-dependencies)
-7. [Post-Deployment Configuration](#post-deployment-configuration)
+1. [Deployment Instructions](#deployment-instructions)
+2. [Overview](#overview)
+3. [Azure Resources](#azure-resources)
+4. [Naming Conventions](#naming-conventions)
+5. [Parameters](#parameters)
+6. [Entra ID and EasyAuth Setup](#entra-id-and-easyauth-setup)
+7. [Resource Dependencies](#resource-dependencies)
+8. [Post-Deployment Configuration](#post-deployment-configuration)
+9. [Bicep Structure](#bicep-structure)
+
+---
+
+## Deployment Instructions
+
+### Prerequisites
+
+Before deploying, ensure you have:
+- Azure CLI installed (`az --version` should show 2.x or later)
+- Bicep CLI installed (included with Azure CLI)
+- Appropriate Azure permissions (Contributor role on subscription or resource group)
+- An Azure subscription
+
+### Quick Start
+
+**1. Create Resource Group**
+
+```bash
+# Set environment (dev, staging, or prod)
+ENVIRONMENT=dev
+PROJECT=collabolatte
+LOCATION=uksouth
+
+# Create resource group
+az group create \
+  --name ${PROJECT}-${ENVIRONMENT}-rg \
+  --location ${LOCATION} \
+  --tags project=${PROJECT} environment=${ENVIRONMENT}
+```
+
+**2. Deploy Infrastructure**
+
+```bash
+# Deploy using parameter file
+az deployment group create \
+  --resource-group ${PROJECT}-${ENVIRONMENT}-rg \
+  --template-file infra/main.bicep \
+  --parameters infra/parameters/${ENVIRONMENT}.json
+
+# OR deploy with inline parameters
+az deployment group create \
+  --resource-group ${PROJECT}-${ENVIRONMENT}-rg \
+  --template-file infra/main.bicep \
+  --parameters \
+    project=${PROJECT} \
+    environment=${ENVIRONMENT} \
+    location=${LOCATION} \
+    identifier=001
+```
+
+**3. Review Deployment Outputs**
+
+```bash
+# Get deployment outputs (includes connection strings and URLs)
+az deployment group show \
+  --resource-group ${PROJECT}-${ENVIRONMENT}-rg \
+  --name main \
+  --query properties.outputs
+```
+
+**4. Configure Entra ID** (see [Entra ID and EasyAuth Setup](#entra-id-and-easyauth-setup))
+
+**5. Post-Deployment Configuration** (see [Post-Deployment Configuration](#post-deployment-configuration))
+
+### Deployment Commands
+
+#### Validate Before Deploying
+
+```bash
+# Validate Bicep syntax
+az bicep build --file infra/main.bicep
+
+# Lint for best practices
+az bicep lint --file infra/main.bicep
+
+# Preview changes (what-if)
+az deployment group what-if \
+  --resource-group ${PROJECT}-${ENVIRONMENT}-rg \
+  --template-file infra/main.bicep \
+  --parameters infra/parameters/${ENVIRONMENT}.json
+```
+
+#### Deploy to Specific Environments
+
+```bash
+# Development
+az deployment group create \
+  --resource-group collabolatte-dev-rg \
+  --template-file infra/main.bicep \
+  --parameters infra/parameters/dev.json
+
+# Staging
+az deployment group create \
+  --resource-group collabolatte-staging-rg \
+  --template-file infra/main.bicep \
+  --parameters infra/parameters/staging.json
+
+# Production
+az deployment group create \
+  --resource-group collabolatte-prod-rg \
+  --template-file infra/main.bicep \
+  --parameters infra/parameters/prod.json
+```
+
+#### Update Parameter Files
+
+Before deploying, update the parameter files with your values:
+
+- `infra/parameters/dev.json` - Development environment
+- `infra/parameters/staging.json` - Staging environment
+- `infra/parameters/prod.json` - Production environment
+
+**Required changes:**
+- `repositoryUrl`: Update with your GitHub repository URL
+- `repositoryBranch`: Usually `main` (default)
+- Custom domains (prod only): Update if you have custom domains configured
+
+### Important Notes
+
+- **Entra ID Configuration**: App registration and client secret must be configured manually after deployment (see [Entra ID and EasyAuth Setup](#entra-id-and-easyauth-setup))
+- **Custom Domains**: DNS records must be configured separately (see [Post-Deployment Configuration](#post-deployment-configuration))
+- **Connection Strings**: Deployment outputs contain sensitive connection strings - store securely in GitHub Secrets or Azure Key Vault
+- **Free Tier**: All resources use free tier by default to minimize costs
+- **Idempotency**: Deployments are idempotent - running multiple times is safe
 
 ---
 
@@ -449,23 +575,47 @@ Any future additions must be reviewed against the trust contract defined in the 
 
 ---
 
-## Planned Bicep Structure
+## Bicep Structure
 
-When implementing Bicep templates, use the following structure:
+The Bicep infrastructure-as-code is organized as follows:
 
 ```
 infra/
 ├── README.md                 # This documentation
-├── main.bicep               # Main deployment template
-├── modules/
-│   ├── swa.bicep            # Static Web App module
-│   ├── storage.bicep        # Storage Account module
-│   └── acs.bicep            # Communication Services module
-└── parameters/
-    ├── dev.json             # Development parameters
-    ├── staging.json         # Staging parameters
-    └── prod.json            # Production parameters
+├── main.bicep               # Main orchestration template
+├── modules/                  # Reusable Bicep modules
+│   ├── storage.bicep        # Storage Account with Table Storage
+│   ├── acs.bicep            # Azure Communication Services (email)
+│   └── swa.bicep            # Static Web App (reusable for app + marketing)
+└── parameters/               # Environment-specific parameters
+    ├── dev.json             # Development environment
+    ├── staging.json         # Staging environment
+    └── prod.json            # Production environment
 ```
+
+**Module Descriptions:**
+
+- **main.bicep**: Orchestrates all resources, defines parameters, calls modules, exports outputs
+- **modules/storage.bicep**: Deploys Storage Account (Standard_LRS, StorageV2, Hot tier) with Table Storage service
+- **modules/acs.bicep**: Deploys Azure Communication Services for email notifications (UK data location)
+- **modules/swa.bicep**: Reusable module for Static Web Apps - supports both app+api and marketing site variants
+
+**Parameter Files:**
+
+Each environment has its own parameter file with:
+- Project name and environment identifier
+- Azure region (default: uksouth)
+- Unique identifier for global resources
+- GitHub repository URL for SWA integration
+- Custom domain settings (prod only)
+
+**Outputs:**
+
+Deployment outputs include:
+- Storage account name and connection string
+- ACS connection string and endpoint
+- SWA hostnames, URLs, and deployment tokens
+- Deployment summary object
 
 ---
 
@@ -474,6 +624,7 @@ infra/
 | Date | Version | Changes |
 |------|---------|---------|
 | 2026-01-15 | 1.0.0 | Comprehensive documentation (Story 1.0) |
+| 2026-01-16 | 1.1.0 | Bicep templates implemented (Story 1.4) - main.bicep and modules |
 
 ---
 
