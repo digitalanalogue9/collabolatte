@@ -11,12 +11,13 @@ context_file: ''
 
 # Brainstorming Session Results
 
-**Facilitator:** DA9
-**Date:** 2026-01-11
+**Facilitator:** DA9 **Date:** 2026-01-11
 
 ## Session Overview
 
-**Topic:** Collabolatte - an internal matching and session platform for regular, opt-in small-group "curiosity coffee" connections (2-3 people) on configurable cadence, aimed at increasing cross-team interaction and organisational value.
+**Topic:** Collabolatte - an internal matching and session platform for regular, opt-in small-group
+"curiosity coffee" connections (2-3 people) on configurable cadence, aimed at increasing cross-team
+interaction and organisational value.
 
 **Goals:**
 
@@ -27,7 +28,10 @@ context_file: ''
 
 ### Framing Statement
 
-The purpose of this product is to create low-friction, opt-in opportunities for serendipitous connections. Not every interaction will be valuable, and that is expected. Value emerges from increasing the number of safe, lightweight "shots taken" rather than optimising for perfect outcomes.
+The purpose of this product is to create low-friction, opt-in opportunities for serendipitous
+connections. Not every interaction will be valuable, and that is expected. Value emerges from
+increasing the number of safe, lightweight "shots taken" rather than optimising for perfect
+outcomes.
 
 ### Core Principles
 
@@ -55,16 +59,21 @@ The purpose of this product is to create low-friction, opt-in opportunities for 
 
 ## Technique Selection
 
-**Approach:** AI-Recommended Techniques
-**Analysis Context:** Collabolatte MVP with focus on testable concept, user flows, assumptions/risks, success metrics
+**Approach:** AI-Recommended Techniques **Analysis Context:** Collabolatte MVP with focus on
+testable concept, user flows, assumptions/risks, success metrics
 
 **Recommended Techniques:**
 
-1. **First Principles Thinking:** Strip away social platform assumptions to find irreducible MVP essence
-2. **Six Thinking Hats:** Systematic exploration of flows, risks, benefits through six distinct lenses
+1. **First Principles Thinking:** Strip away social platform assumptions to find irreducible MVP
+   essence
+2. **Six Thinking Hats:** Systematic exploration of flows, risks, benefits through six distinct
+   lenses
 3. **Question Storming:** Surface testable assumptions and pilot validation questions
 
-**AI Rationale:** Session goals emphasise validation over feature accumulation. User's "simplicity first" principle and "shots taken" framing suggest first-principles approach. Explicit request for assumptions/risks maps directly to Question Storming output. Six Thinking Hats provides structured coverage without over-engineering ideation.
+**AI Rationale:** Session goals emphasise validation over feature accumulation. User's "simplicity
+first" principle and "shots taken" framing suggest first-principles approach. Explicit request for
+assumptions/risks maps directly to Question Storming output. Six Thinking Hats provides structured
+coverage without over-engineering ideation.
 
 ---
 
@@ -72,42 +81,47 @@ The purpose of this product is to create low-friction, opt-in opportunities for 
 
 ### First Principles Discovered
 
-**[FP1] Nudge + Shared Risk for Connections Beyond Reach**
-The system surfaces connections that wouldn't happen organically - not because people lack courage, but because it's impossible to know everyone at a firm. The match creates a nudge (system initiates) and shares the risk (both matched, neither solely responsible). You never know who might spark something.
+**[FP1] Nudge + Shared Risk for Connections Beyond Reach** The system surfaces connections that
+wouldn't happen organically - not because people lack courage, but because it's impossible to know
+everyone at a firm. The match creates a nudge (system initiates) and shares the risk (both matched,
+neither solely responsible). You never know who might spark something.
 
-**[FP2] Opt-In as Curiosity Filter**
-Voluntary participation self-selects for curious people. The signup action demonstrates curiosity - no screening needed.
+**[FP2] Opt-In as Curiosity Filter** Voluntary participation self-selects for curious people. The
+signup action demonstrates curiosity - no screening needed.
 
-**[FP3] Bio as Conversation Seed, Not Just Matching Input**
-Profile information serves the participants first ("here's what they're curious about"), algorithm second. Reduces first-meeting friction.
+**[FP3] Bio as Conversation Seed, Not Just Matching Input** Profile information serves the
+participants first ("here's what they're curious about"), algorithm second. Reduces first-meeting
+friction.
 
-**[FP4] Choice Architecture Over Feature Completeness**
-Expose the framework (random / rules / AI), deliver incrementally. Validates demand without over-building.
+**[FP4] Choice Architecture Over Feature Completeness** Expose the framework (random / rules / AI),
+deliver incrementally. Validates demand without over-building.
 
-**[FP5] Trial Framing as Feedback Permission**
-6-month experiment with binary outcome. "Help us decide" = co-ownership, not surveillance.
+**[FP5] Trial Framing as Feedback Permission** 6-month experiment with binary outcome. "Help us
+decide" = co-ownership, not surveillance.
 
-**[FP6] Passive Metrics Before Active Feedback**
-Observe first (sessions, attendance, return rate), ask second. Behaviour beats surveys.
+**[FP6] Passive Metrics Before Active Feedback** Observe first (sessions, attendance, return rate),
+ask second. Behaviour beats surveys.
 
-**[FP7] Multi-Channel Feedback Strategy**
-In-app optional for iteration; executive interviews for narrative. Comms lead as ally.
+**[FP7] Multi-Channel Feedback Strategy** In-app optional for iteration; executive interviews for
+narrative. Comms lead as ally.
 
 ### Essential vs Not Essential (Yet)
 
-| Essential | Not Essential (Yet) |
-|-----------|---------------------|
-| Nudge + shared risk to reach out | In-app messaging |
-| Opt-in participation | Curiosity screening |
+| Essential                          | Not Essential (Yet)            |
+| ---------------------------------- | ------------------------------ |
+| Nudge + shared risk to reach out   | In-app messaging               |
+| Opt-in participation               | Curiosity screening            |
 | Basic profile as conversation seed | Sophisticated profile matching |
-| Choice architecture visible | All algorithms functional |
-| Cross-boundary discovery | Calendar integration |
-| Trial framing (6 months) | Permanent platform mindset |
-| Passive metrics | Extensive surveys |
+| Choice architecture visible        | All algorithms functional      |
+| Cross-boundary discovery           | Calendar integration           |
+| Trial framing (6 months)           | Permanent platform mindset     |
+| Passive metrics                    | Extensive surveys              |
 
 ### Key Insight
 
-Collabolatte solves a **scale problem** (impossible to know everyone), not a **courage problem** (people too shy). The throughline: remove friction from cross-boundary connection while staying radically simple.
+Collabolatte solves a **scale problem** (impossible to know everyone), not a **courage problem**
+(people too shy). The throughline: remove friction from cross-boundary connection while staying
+radically simple.
 
 ---
 
@@ -140,20 +154,21 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 
 **[White Hat #4]**: Post-Coffee Data Model
 
-| System Knows | System Doesn't Know |
-|--------------|---------------------|
-| Match was created | Whether meeting happened |
-| Participants notified | Quality of conversation |
-| Time has passed | Outcomes or follow-ups |
+| System Knows          | System Doesn't Know      |
+| --------------------- | ------------------------ |
+| Match was created     | Whether meeting happened |
+| Participants notified | Quality of conversation  |
+| Time has passed       | Outcomes or follow-ups   |
 
 **[White Hat #5]**: Feedback Philosophy
 
 - **Default**: Nothing asked, nothing required. Attending = end of obligation.
 - **Passive signals**: Continued opt-in, pause/leave patterns, participation over time
-- **Explicit signals**: Single ignorable prompt ("Worth it" / "Not for me"), no reminders, no expectation
+- **Explicit signals**: Single ignorable prompt ("Worth it" / "Not for me"), no reminders, no
+  expectation
 
-**[White Hat #6]**: Learning vs Ease Trade-off
-*"If learning competes with ease of use, ease of use wins."*
+**[White Hat #6]**: Learning vs Ease Trade-off _"If learning competes with ease of use, ease of use
+wins."_
 
 ---
 
@@ -161,28 +176,28 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 
 **[Black Hat #1]**: Risk Map by Stage
 
-| Stage | Key Risks |
-|-------|-----------|
-| **Signup** | Bio feels like work; too many fields; unclear value → "I'll try later" |
-| **Discovery** | Choice paralysis; noisy tags; joining for politeness not curiosity |
-| **Programme creation** | Algorithm choices feel abstract; over-config; private = silos |
-| **Matching** | Bad timing; large groups = coordination burden; repeat matches |
-| **Self-coordination** | No clear "first move"; threads die quietly; timezone friction |
-| **After meeting** | No closure; mediocre experience → silent opt-out |
-| **System-level** | Over-engineer = unapproachable; Under-measure = can't justify to sponsors |
+| Stage                  | Key Risks                                                                 |
+| ---------------------- | ------------------------------------------------------------------------- |
+| **Signup**             | Bio feels like work; too many fields; unclear value → "I'll try later"    |
+| **Discovery**          | Choice paralysis; noisy tags; joining for politeness not curiosity        |
+| **Programme creation** | Algorithm choices feel abstract; over-config; private = silos             |
+| **Matching**           | Bad timing; large groups = coordination burden; repeat matches            |
+| **Self-coordination**  | No clear "first move"; threads die quietly; timezone friction             |
+| **After meeting**      | No closure; mediocre experience → silent opt-out                          |
+| **System-level**       | Over-engineer = unapproachable; Under-measure = can't justify to sponsors |
 
-**[Black Hat #2]**: The Meta-Risk
-*"The system technically works, but socially fails to create momentum or psychological safety, leading to passive disengagement rather than explicit rejection."*
+**[Black Hat #2]**: The Meta-Risk _"The system technically works, but socially fails to create
+momentum or psychological safety, leading to passive disengagement rather than explicit rejection."_
 
 **[Black Hat #3]**: MVP-Critical Risks (Existential)
 
-| Risk | Learning Blocked |
-|------|------------------|
-| **Early friction at signup** | No data |
-| **Failed first meetings** | Poison future cycles |
+| Risk                                | Learning Blocked        |
+| ----------------------------------- | ----------------------- |
+| **Early friction at signup**        | No data                 |
+| **Failed first meetings**           | Poison future cycles    |
 | **Obligation-driven participation** | Hides true value signal |
 
-*"Everything else is secondary and can be tuned later."*
+_"Everything else is secondary and can be tuned later."_
 
 ---
 
@@ -196,7 +211,7 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 - Staying opted in despite misses - value/cost ratio feels right
 - "I met someone interesting through Collabolatte" - organic word-of-mouth
 
-*Key phrase: "The occasional genuinely useful connection makes the misses tolerable."*
+_Key phrase: "The occasional genuinely useful connection makes the misses tolerable."_
 
 **[Yellow Hat #2]**: Programme Creator Success
 
@@ -206,7 +221,7 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 - Less managing, more letting it run - simplicity-first validated
 - Anecdotal stories without chasing metrics - value surfaces organically
 
-*Key phrase: "They don't feel like they are running an initiative, just setting conditions."*
+_Key phrase: "They don't feel like they are running an initiative, just setting conditions."_
 
 **[Yellow Hat #3]**: Organisation Success
 
@@ -216,9 +231,11 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 - Optional utility, not HR tooling - trust preserved
 - Fewer "we didn't know X were doing Y" moments
 
-*Key phrase: "A growing number of small, unplanned connections that would not have happened otherwise."*
+_Key phrase: "A growing number of small, unplanned connections that would not have happened
+otherwise."_
 
-**Success Throughline:** Success is quiet. No fanfare, no dashboards, no forced testimonials. Just more connection than before.
+**Success Throughline:** Success is quiet. No fanfare, no dashboards, no forced testimonials. Just
+more connection than before.
 
 ---
 
@@ -226,19 +243,23 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 
 **Signup & Onboarding Ideas:**
 
-- **[Green #1]** No Bio, Just Facts - name, department, location only. Conversation is the discovery.
+- **[Green #1]** No Bio, Just Facts - name, department, location only. Conversation is the
+  discovery.
 - **[Green #5]** Practice Coffee - first match framed as "warm-up, low stakes, just try it"
 
 **Conversation Support Ideas:**
 
-- **[Green #2]** System-Suggested Conversation Starter - "You both listed sustainability - maybe start there?"
-- **[Green #11]** Icebreaker Card - quirky question with match: "What's something you've changed your mind about recently?"
+- **[Green #2]** System-Suggested Conversation Starter - "You both listed sustainability - maybe
+  start there?"
+- **[Green #11]** Icebreaker Card - quirky question with match: "What's something you've changed
+  your mind about recently?"
 
 **Match Mechanics Ideas:**
 
 - **[Green #3]** Match Expiry Window - meet within 2 weeks or match dissolves. Gentle urgency.
 - **[Green #4]** One Free Pass Per Cycle - skip a match, no questions asked. Explicit safety valve.
-- **[Green #8]** Coffee Roulette Mode - one-click, instant match, meet this week. For the spontaneous.
+- **[Green #8]** Coffee Roulette Mode - one-click, instant match, meet this week. For the
+  spontaneous.
 
 **Programme Design Ideas:**
 
@@ -259,39 +280,44 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 
 **Design Pattern Combinations:**
 
-| Pattern | Combination | Effect |
-|---------|-------------|--------|
-| **Effortless Onboarding** | No bio + practice coffee | Zero friction entry |
-| **Guided Serendipity** | Minimal profile + conversation starter | System does discovery |
-| **Gentle Momentum** | Match expiry + free pass | Urgency without pressure |
-| **Progressive Comfort** | Practice coffee → starter → regular | Stakes increase with confidence |
+| Pattern                   | Combination                            | Effect                          |
+| ------------------------- | -------------------------------------- | ------------------------------- |
+| **Effortless Onboarding** | No bio + practice coffee               | Zero friction entry             |
+| **Guided Serendipity**    | Minimal profile + conversation starter | System does discovery           |
+| **Gentle Momentum**       | Match expiry + free pass               | Urgency without pressure        |
+| **Progressive Comfort**   | Practice coffee → starter → regular    | Stakes increase with confidence |
 
 ---
 
 ### 🔵 Blue Hat - Process & Overview
 
-**[Blue Hat #1]**: Core Insight
-*"Collabolatte removes structural friction that stops curious people from ever meeting. The value comes from increasing low-risk opportunities, not optimising each interaction."*
+**[Blue Hat #1]**: Core Insight _"Collabolatte removes structural friction that stops curious people
+from ever meeting. The value comes from increasing low-risk opportunities, not optimising each
+interaction."_
 
-**[Blue Hat #2]**: 30-Second Explanation
-*"An opt-in internal matching tool that quietly creates chances for people to meet outside their usual circles. Pairs small groups on a regular cadence and gets out of the way. No performance, no obligation, no heavy measurement. Most conversations will be fine, some forgettable, a meaningful few will spark insight or connection that wouldn't have happened otherwise. Over time, increases cross-team awareness and innovation without feeling like a programme."*
+**[Blue Hat #2]**: 30-Second Explanation _"An opt-in internal matching tool that quietly creates
+chances for people to meet outside their usual circles. Pairs small groups on a regular cadence and
+gets out of the way. No performance, no obligation, no heavy measurement. Most conversations will be
+fine, some forgettable, a meaningful few will spark insight or connection that wouldn't have
+happened otherwise. Over time, increases cross-team awareness and innovation without feeling like a
+programme."_
 
 **[Blue Hat #3]**: Four Core Themes
 
-| Theme | Principle |
-|-------|-----------|
-| **Friction is the enemy** | Every interaction cost must justify itself |
-| **Trust over measurement** | Ease beats data; participation beats precision |
-| **Conditions over outcomes** | Set up, step back, let it happen |
-| **Graceful edges** | Make it easy to pause, pass, leave, or fail without drama |
+| Theme                        | Principle                                                 |
+| ---------------------------- | --------------------------------------------------------- |
+| **Friction is the enemy**    | Every interaction cost must justify itself                |
+| **Trust over measurement**   | Ease beats data; participation beats precision            |
+| **Conditions over outcomes** | Set up, step back, let it happen                          |
+| **Graceful edges**           | Make it easy to pause, pass, leave, or fail without drama |
 
 **[Blue Hat #4]**: MVP Prioritisation
 
-| Priority | Features |
-|----------|----------|
-| **Must-Have** | Minimal signup, one-click join, match notification with clear first move, match expiry, one public programme |
-| **Should-Have** | Conversation starter, practice coffee framing, free pass, quiet milestones |
-| **Post-MVP** | Multiple algorithms, programme creation by anyone, ripple connections, coffee roulette, gift a match |
+| Priority        | Features                                                                                                     |
+| --------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Must-Have**   | Minimal signup, one-click join, match notification with clear first move, match expiry, one public programme |
+| **Should-Have** | Conversation starter, practice coffee framing, free pass, quiet milestones                                   |
+| **Post-MVP**    | Multiple algorithms, programme creation by anyone, ripple connections, coffee roulette, gift a match         |
 
 ---
 
@@ -301,53 +327,73 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 
 **Core Value Hypothesis:**
 
-- **[Q1]** We assume people want more cross-team connections. *But what if most feel sufficiently connected already?*
-- **[Q2]** We assume opt-in curiosity correlates with perceived value. *But what if curiosity doesn't translate into meaningful conversations?*
-- **[Q3]** We assume increasing connections increases chance of value. *But how would we know if volume is helping rather than diluting attention?*
-- **[Q5]** We assume serendipitous matches surface useful insights. *But how would we know whether those insights would have emerged anyway?*
+- **[Q1]** We assume people want more cross-team connections. _But what if most feel sufficiently
+  connected already?_
+- **[Q2]** We assume opt-in curiosity correlates with perceived value. _But what if curiosity
+  doesn't translate into meaningful conversations?_
+- **[Q3]** We assume increasing connections increases chance of value. _But how would we know if
+  volume is helping rather than diluting attention?_
+- **[Q5]** We assume serendipitous matches surface useful insights. _But how would we know whether
+  those insights would have emerged anyway?_
 
 **Participation Mechanics:**
 
-- **[Q4]** We assume low-risk framing removes social friction. *But what if ambiguity creates inertia instead?*
-- **[Q6]** We assume small groups (2-3) are the right unit. *But what if pairs are too intense or triads too easy to ignore?*
-- **[Q7]** We assume people will self-coordinate meetings. *But what if coordination effort outweighs perceived benefit?*
-- **[Q8]** We assume missing some meetings is acceptable. *But what if early misses disproportionately reduce future engagement?*
-- **[Q19]** We assume busy people will protect 30 minutes for a stranger. *But what if calendar pressure always wins?*
+- **[Q4]** We assume low-risk framing removes social friction. _But what if ambiguity creates
+  inertia instead?_
+- **[Q6]** We assume small groups (2-3) are the right unit. _But what if pairs are too intense or
+  triads too easy to ignore?_
+- **[Q7]** We assume people will self-coordinate meetings. _But what if coordination effort
+  outweighs perceived benefit?_
+- **[Q8]** We assume missing some meetings is acceptable. _But what if early misses
+  disproportionately reduce future engagement?_
+- **[Q19]** We assume busy people will protect 30 minutes for a stranger. _But what if calendar
+  pressure always wins?_
 
 **Measurement Paradox:**
 
-- **[Q11]** We assume passive signals like retention are sufficient. *But what if people stay opted in out of politeness rather than value?*
-- **[Q12]** We assume not asking for feedback preserves trust. *But what if lack of reflection reduces perceived importance?*
-- **[Q13]** We assume simplicity drives adoption. *But what if too little structure makes the experience forgettable?*
+- **[Q11]** We assume passive signals like retention are sufficient. _But what if people stay opted
+  in out of politeness rather than value?_
+- **[Q12]** We assume not asking for feedback preserves trust. _But what if lack of reflection
+  reduces perceived importance?_
+- **[Q13]** We assume simplicity drives adoption. _But what if too little structure makes the
+  experience forgettable?_
 
 **Organisational Value Chain:**
 
-- **[Q9]** We assume personal value precedes organisational value. *But how would we know if individual benefit ever translates into broader impact?*
-- **[Q10]** We assume innovation signals can emerge informally. *But what if they remain invisible to the organisation?*
-- **[Q14]** We assume this works across roles and seniority. *But what if value is concentrated in specific cohorts only?*
+- **[Q9]** We assume personal value precedes organisational value. _But how would we know if
+  individual benefit ever translates into broader impact?_
+- **[Q10]** We assume innovation signals can emerge informally. _But what if they remain invisible
+  to the organisation?_
+- **[Q14]** We assume this works across roles and seniority. _But what if value is concentrated in
+  specific cohorts only?_
 
 **Pilot Design:**
 
-- **[Q15]** We assume six months is enough to see signal. *But how would we know if we're stopping too early or too late?*
-- **[Q17]** We assume programme creators will set sensible configurations. *But what if early misconfigured programmes poison perception?*
-- **[Q18]** We assume one public programme is enough to start. *But what if a single programme feels too generic?*
-- **[Q20]** We assume "practice coffee" framing lowers stakes. *But what if labelling something as "practice" signals it's not worth taking seriously?*
+- **[Q15]** We assume six months is enough to see signal. _But how would we know if we're stopping
+  too early or too late?_
+- **[Q17]** We assume programme creators will set sensible configurations. _But what if early
+  misconfigured programmes poison perception?_
+- **[Q18]** We assume one public programme is enough to start. _But what if a single programme feels
+  too generic?_
+- **[Q20]** We assume "practice coffee" framing lowers stakes. _But what if labelling something as
+  "practice" signals it's not worth taking seriously?_
 
 **Cultural Factors:**
 
-- **[Q16]** We assume the "first move" problem is solvable with clear framing. *But what if cultural norms override any framing?*
+- **[Q16]** We assume the "first move" problem is solvable with clear framing. _But what if cultural
+  norms override any framing?_
 
 ---
 
 ### First 8 Weeks - Critical Questions
 
-| Priority | Question | Why First |
-|----------|----------|-----------|
-| **1** | Do meetings actually happen once matched? | If no meetings, no signal is trustworthy |
-| **2** | Does low-risk framing work, or create inertia? | Early drift kills momentum before learning |
-| **3** | Does volume increase value, or dilute attention? | Tests core "shots taken" thesis |
-| **4** | Is retention genuine value or polite compliance? | Distinguishes signal from noise |
-| **5** | Does personal value translate to org value? | Determines if product justifies existence |
+| Priority | Question                                         | Why First                                  |
+| -------- | ------------------------------------------------ | ------------------------------------------ |
+| **1**    | Do meetings actually happen once matched?        | If no meetings, no signal is trustworthy   |
+| **2**    | Does low-risk framing work, or create inertia?   | Early drift kills momentum before learning |
+| **3**    | Does volume increase value, or dilute attention? | Tests core "shots taken" thesis            |
+| **4**    | Is retention genuine value or polite compliance? | Distinguishes signal from noise            |
+| **5**    | Does personal value translate to org value?      | Determines if product justifies existence  |
 
 **Decision Framework:** Answer these in 8 weeks → clear continue, pivot, or stop.
 
@@ -357,15 +403,16 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 
 ### What We Built
 
-| Technique | Output |
-|-----------|--------|
-| **First Principles Thinking** | 7 foundational principles defining what Collabolatte is and isn't |
-| **Six Thinking Hats** | Mapped flows, risks, success pictures, 16 creative ideas, 4 core themes, MVP prioritisation |
-| **Question Storming** | 20 testable assumptions, 5 critical 8-week validation questions |
+| Technique                     | Output                                                                                      |
+| ----------------------------- | ------------------------------------------------------------------------------------------- |
+| **First Principles Thinking** | 7 foundational principles defining what Collabolatte is and isn't                           |
+| **Six Thinking Hats**         | Mapped flows, risks, success pictures, 16 creative ideas, 4 core themes, MVP prioritisation |
+| **Question Storming**         | 20 testable assumptions, 5 critical 8-week validation questions                             |
 
 ### Core Insight
 
-*"Collabolatte removes structural friction that stops curious people from ever meeting. The value comes from increasing low-risk opportunities, not optimising each interaction."*
+_"Collabolatte removes structural friction that stops curious people from ever meeting. The value
+comes from increasing low-risk opportunities, not optimising each interaction."_
 
 ### Four Themes
 
@@ -376,7 +423,8 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 
 ### MVP Scope
 
-**Must-Have:** Minimal signup, one-click join, match notification with clear first move, match expiry, one public programme
+**Must-Have:** Minimal signup, one-click join, match notification with clear first move, match
+expiry, one public programme
 
 **Should-Have:** Conversation starter, practice coffee framing, free pass, quiet milestones
 
@@ -388,6 +436,5 @@ Collabolatte solves a **scale problem** (impossible to know everyone), not a **c
 
 ---
 
-**Session Complete.**
-*Brainstorming session facilitated: 2026-01-11*
-*Techniques used: First Principles Thinking, Six Thinking Hats, Question Storming*
+**Session Complete.** _Brainstorming session facilitated: 2026-01-11_ _Techniques used: First
+Principles Thinking, Six Thinking Hats, Question Storming_

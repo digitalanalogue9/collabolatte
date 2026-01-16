@@ -21,7 +21,9 @@
       "Bash(dotnet build:*)",
       "Bash(npx @kayvan/markdown-tree-parser:*)",
       "Bash(wc:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(git stash drop:*)",
+      "Bash(npx markdownlint-cli:*)"
     ]
   }
 }
