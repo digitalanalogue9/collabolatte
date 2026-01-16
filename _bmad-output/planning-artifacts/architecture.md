@@ -25,6 +25,7 @@ _This document builds collaboratively through step-by-step discovery. Sections a
 ### Requirements Overview
 
 **Functional Requirements:**
+
 - Identity & access: Entra ID (EasyAuth) sign-in, minimal profile capture, and user-only data access.
 - Programme participation: join/leave/pause with single-programme MVP; opt-in only and no penalties.
 - Matching: scheduled cadence, random/lightly constrained matching, avoid repeats, odd-participant handling, idempotent cycles.
@@ -33,6 +34,7 @@ _This document builds collaboratively through step-by-step discovery. Sections a
 - Administration: role assignment, programme lifecycle controls, aggregate programme health only.
 
 **Non-Functional Requirements:**
+
 - Security & privacy: TLS, encryption at rest, least-privilege access, no surveillance analytics, GDPR/UK GDPR/CCPA compliance.
 - Reliability: predictable matching execution, atomic runs, clear failure behaviour, idempotent retries.
 - Performance: basic web performance expectations (sub-3s load), no real-time constraints.
@@ -41,6 +43,7 @@ _This document builds collaboratively through step-by-step discovery. Sections a
 - Email delivery: retry logic, delivery logging, within-60-minute window post-match.
 
 **Scale & Complexity:**
+
 - Primary domain: SPA + serverless API + scheduled jobs
 - Complexity level: Medium (trust/privacy constraints dominate)
 - Estimated architectural components: 6-8 (SPA, auth, API, matching worker, data store, notification service, logging/monitoring, CI/CD)
@@ -136,26 +139,30 @@ _This document builds collaboratively through step-by-step discovery. Sections a
 ### Primary Technology Domain
 
 Monorepo with three components:
+
 - Web SPA (React/Vite)
 - Serverless API (Azure Functions .NET isolated)
 - Marketing site (11ty)
 
 ### Starter Options Considered
 
-1) **Official Vite React TypeScript template** (for the web app)
+1. **Official Vite React TypeScript template** (for the web app)
+
 - Command (official):
   ```bash
   pnpm create vite
   ```
   Then select React + TypeScript in prompts, or specify `--template react-ts`.
 
-2) **Azure Functions Core Tools init** (for the API)
+2. **Azure Functions Core Tools init** (for the API)
+
 - Command:
   ```bash
   func init collabolatte-api --worker-runtime dotnet-isolated
   ```
 
-3) **Eleventy (11ty) local install** (for the marketing site)
+3. **Eleventy (11ty) local install** (for the marketing site)
+
 - Commands (official):
   ```bash
   pnpm init
@@ -166,6 +173,7 @@ Monorepo with three components:
 ### Selected Starter: Official Vite + Functions Core Tools + 11ty
 
 **Rationale for Selection:**
+
 - Minimal and predictable, aligns with the trust-first, low surface area ethos.
 - Keeps UI and content decisions in our control.
 - Monorepo enables shared theming assets for both app and marketing site.
@@ -193,16 +201,19 @@ Monorepo with three components:
 ### Tooling Additions (confirmed)
 
 **MUI (web app):**
+
 ```bash
 pnpm add @mui/material @emotion/react @emotion/styled
 ```
 
 **Playwright (E2E):**
+
 ```bash
 npm init playwright@latest
 ```
 
 **Storybook (component workshop):**
+
 ```bash
 npm create storybook@latest
 ```
@@ -225,24 +236,30 @@ npm create storybook@latest
 ### Architectural Decisions Provided by Starter
 
 **Language & Runtime:**
+
 - React + TypeScript via Vite scaffold.
 - Azure Functions .NET isolated worker model for the API.
 - 11ty for the marketing site.
 
 **Styling Solution:**
+
 - MUI + Emotion in the web app.
 - Shared CSS variables/tokens package for 11ty and MUI.
 
 **Testing Framework:**
+
 - Playwright for E2E.
 
 **Component Workshop:**
+
 - Storybook for isolated UI development.
 
 **Code Organisation:**
+
 - pnpm workspaces with `/apps` and `/packages` to share theming across SPA and marketing site.
 
 **Development Experience:**
+
 - Vite dev server for the SPA.
 - 11ty local build via npx.
 - Storybook for UI states and docs.
@@ -270,12 +287,12 @@ npm create storybook@latest
 
 ### Comparative Analysis Matrix (Starter & Deployment)
 
-| Option | Maintainability | Trust/Privacy Fit | Delivery Speed | Complexity | Score |
-|---|---:|---:|---:|---:|---:|
-| **Chosen:** Official Vite + Functions + 11ty, pnpm, 2x SWA | 5 | 5 | 4 | 4 | **18** |
-| Single SWA for app + marketing | 3 | 3 | 4 | 3 | 13 |
-| MUI-opinionated starter | 3 | 4 | 4 | 3 | 14 |
-| npm workspaces instead of pnpm | 4 | 5 | 4 | 4 | 17 |
+| Option                                                     | Maintainability | Trust/Privacy Fit | Delivery Speed | Complexity |  Score |
+| ---------------------------------------------------------- | --------------: | ----------------: | -------------: | ---------: | -----: |
+| **Chosen:** Official Vite + Functions + 11ty, pnpm, 2x SWA |               5 |                 5 |              4 |          4 | **18** |
+| Single SWA for app + marketing                             |               3 |                 3 |              4 |          3 |     13 |
+| MUI-opinionated starter                                    |               3 |                 4 |              4 |          3 |     14 |
+| npm workspaces instead of pnpm                             |               4 |                 5 |              4 |          4 |     17 |
 
 ### Pre-mortem (What Could Go Wrong)
 
@@ -305,16 +322,19 @@ npm create storybook@latest
 
 **Decision Priority:** Critical (blocks implementation)
 
-**Database Choice:** Azure Table Storage (Azure.Data.Tables SDK, latest verified 12.11.0).
-**Rationale:** Aligns with MVP constraints, cost, and simplicity.
+**Database Choice:** Azure Cosmos DB (NoSQL API).
+**Rationale:** Aligns with MVP constraints while providing better scalability and query flexibility than Table Storage. Free tier covers MVP usage.
+**SDK:** Azure.Cosmos SDK (latest)
 
-**Data Modelling Approach (Table per entity):**
-- **Memberships**: `PartitionKey = ProgrammeId`, `RowKey = UserId`
-- **Cycles**: `PartitionKey = ProgrammeId`, `RowKey = CycleDate` (ISO, programme TZ)
-- **Matches**: `PartitionKey = ProgrammeId`, `RowKey = MatchId` (deterministic from ProgrammeId + CycleDate + sorted UserIds)
-- **Events (optional MVP)**: `PartitionKey = ProgrammeId`, `RowKey = Timestamp + Guid` (only if needed)
+**Data Modelling Approach (Container per entity):**
+
+- **Memberships**: `partitionKey = /programmeId`, `id = {programmeId}_{userId}`
+- **Cycles**: `partitionKey = /programmeId`, `id = {programmeId}_{cycleDate}`
+- **Matches**: `partitionKey = /programmeId`, `id = {programmeId}_{matchId}`
+- **Events (optional MVP)**: `partitionKey = /programmeId`, `id = {timestamp}_{guid}` (only if needed)
 
 **Validation Strategy:** Separate schemas per layer.
+
 - Web: Zod validation.
 - API: explicit validation at Functions boundaries.
 - No shared schema package in MVP.
@@ -324,6 +344,7 @@ npm create storybook@latest
 **Caching:** None in MVP (prioritise observability and simplicity).
 
 **Implications / Cascading Decisions:**
+
 - Deterministic MatchId requires stable canonicalisation of participant IDs.
 - CycleDate timezone handling must align with programme TZ decision.
 - Event table is optional; if deferred, logging must still satisfy audit requirements.
@@ -333,38 +354,45 @@ npm create storybook@latest
 **Decision Priority:** Critical (blocks implementation)
 
 **Authorisation Pattern:** Role-based, enforced server-side per route.
+
 - Roles: Participant, Programme Owner, Admin.
 - Executive Sponsor has no separate role in MVP (same visibility as Programme Owner).
 - Role enforcement via `staticwebapp.config.json` and API checks.
 
 **Identity & Claims Handling:**
+
 - EasyAuth for identity; validate claims on every request, deny-by-default.
 - Never trust client-provided identity; decode SWA client principal header as untrusted input.
 
 **Encryption & Secrets:**
-- Azure Storage encryption at rest by default; rely on it for Table Storage data.
+
+- Azure Cosmos DB encryption at rest by default.
 - No Key Vault in MVP; use SWA/Functions app settings (environment variables) and GitHub Secrets for deployment.
 - **Upgrade hook:** SecretsProvider abstraction so Key Vault can be added later without refactoring callers.
 
 **Role Handling (All-Free constraint):**
+
 - Keep the concept of roles in API logic, but implement minimal role handling:
   - Default everyone to Participant.
-  - Programme Owner/Admin via small allowlist (Entra Object IDs) in Table Storage or app settings.
+  - Programme Owner/Admin via small allowlist (Entra Object IDs) in Cosmos DB or app settings.
   - No dynamic role management UI in MVP.
 - No manager visibility remains non-negotiable.
 - **Upgrade hook:** RolesProvider abstraction to support dynamic role management later.
 
 **API Security:**
+
 - Explicit allowlist per route.
 - Reject missing/malformed claims; return 401/403.
 - No custom auth flows.
 
 **Audit / Event Logging:**
+
 - Immutable system-event log only (no user behaviour analytics).
 - Log: matching run start/complete, notification attempts/failures, admin config changes.
 - Include correlation IDs for debugging.
 
 **Implications / Cascading Decisions:**
+
 - Role allowlist source must be documented (Table vs app settings) and secured.
 
 ### API & Communication Patterns
@@ -372,22 +400,27 @@ npm create storybook@latest
 **Decision Priority:** Critical (blocks implementation)
 
 **API Design:** RESTful JSON, noun-based routes.
+
 - Keep route surface small and predictable.
 - DTOs only at the boundary.
 
 **API Documentation:** OpenAPI.NET generated specs as the source of truth.
+
 - Must stay aligned with DTOs and contract tests.
 - Use Microsoft.OpenApi (latest verified 3.1.2).
 
 **Error Handling Standard:** Problem Details JSON (RFC 9457, obsoletes 7807).
+
 - Same shape everywhere.
 - Human-readable `title` and `detail`.
 - Correlation ID included for support/debug.
 
 **Rate Limiting:** None in MVP.
+
 - If abuse appears, add a basic per-user throttle later.
 
 **Implications / Cascading Decisions:**
+
 - Standardise error envelope and ensure correlation ID is generated per request.
 - OpenAPI specs must be regenerated when DTOs change.
 
@@ -398,6 +431,7 @@ npm create storybook@latest
 **State Management:** React hooks + Context only. No global state library in MVP.
 
 **Routing:** React Router v6 with minimal route guards.
+
 - Guards only for auth-required vs public routes.
 - Clean redirect back to intended page after EasyAuth.
 - No client-side permission logic beyond auth presence (server remains authoritative).
@@ -407,6 +441,7 @@ npm create storybook@latest
 **Performance:** Keep simple; no explicit code-splitting beyond Vite defaults.
 
 **Implications / Cascading Decisions:**
+
 - Auth guard UX must avoid loops and preserve return URLs safely.
 - Any future state library must justify added complexity.
 
@@ -415,25 +450,30 @@ npm create storybook@latest
 **Decision Priority:** Important (shapes implementation)
 
 **CI/CD:** Standard Azure Static Web Apps GitHub Actions workflows.
+
 - One workflow for app+API SWA.
 - One workflow for marketing SWA.
 
 **Environment Configuration:**
+
 - `.env` for local dev.
 - SWA app settings for deploy-time config.
 - No Key Vault in MVP; use app settings and GitHub Secrets.
 - **Upgrade hook:** SecretsProvider abstraction to enable Key Vault later.
 
 **Monitoring:**
+
 - No Application Insights in MVP; basic platform logs only.
 - Log errors and matching-run outcomes only.
 - **Upgrade hook:** TelemetryProvider abstraction so App Insights can be enabled later with capped logging.
 - Minimal alerting if enabled later: matching run failures, notification send failures, auth failures spike, storage errors.
 
 **Scaling:**
+
 - Default consumption/serverless only; no pre-provisioned scaling controls for MVP.
 
 **Implications / Cascading Decisions:**
+
 - Alert thresholds and routing must be defined (team email/Slack).
 - App settings must be documented per SWA (app vs marketing).
 
@@ -447,15 +487,19 @@ Naming, file structure, API formats, date handling, error/loading patterns.
 ### Naming Patterns
 
 **Database Naming Conventions:**
-- **Tables:** PascalCase (`Memberships`, `Cycles`, `Matches`, `Events`)
-- **Entity properties:** camelCase (`programmeId`, `cycleDate`, `createdAt`)
+
+- **Containers:** PascalCase (`Memberships`, `Cycles`, `Matches`, `Events`)
+- **Document properties:** camelCase (`programmeId`, `cycleDate`, `createdAt`)
+- **Partition keys:** lowercase with leading slash (`/programmeId`)
 
 **API Naming Conventions:**
+
 - **Routes:** plural, noun-based (`/programmes`, `/matches`, `/me`)
 - **Route params:** `{id}` (`/programmes/{programmeId}`)
 - **JSON fields:** camelCase (`matchedUserId`, `cycleDate`)
 
 **Code Naming Conventions:**
+
 - **Components:** PascalCase (`MatchCard`)
 - **Frontend files:** kebab-case (`match-card.tsx`)
 - **Functions/vars:** camelCase (`getProgrammeById`, `userId`)
@@ -463,19 +507,23 @@ Naming, file structure, API formats, date handling, error/loading patterns.
 ### Structure Patterns
 
 **Project Organization:**
+
 - Components organised **by feature** (`/features/...`)
 - Shared utilities in `/lib`
 
 **Tests:**
+
 - Co-located `*.test.ts` / `*.test.tsx` alongside source files
 
 ### Format Patterns
 
 **API Response Formats:**
+
 - **Direct payloads** only (no `{ data, error }` wrapper)
 - **Problem Details** is the only standard error wrapper shape
 
 **Data Exchange Formats:**
+
 - JSON fields: camelCase
 - Dates: ISO 8601 strings with timezone offsets where relevant
   - Cycle date uses programme TZ
@@ -483,16 +531,19 @@ Naming, file structure, API formats, date handling, error/loading patterns.
 ### Communication Patterns
 
 **Events (if/when event log used):**
+
 - Event rows use programme-scoped PartitionKey
 - Event payload fields in camelCase
 
 ### Process Patterns
 
 **Error Handling Patterns:**
+
 - Global error boundary for unexpected UI crashes
 - Per-call handling for API errors (show inline error states)
 
 **Loading State Patterns:**
+
 - Local component state only (no shared loading context)
 
 ### Pattern Risks
@@ -525,22 +576,26 @@ Naming, file structure, API formats, date handling, error/loading patterns.
 ### Enforcement Guidelines
 
 **All AI Agents MUST:**
+
 - Use PascalCase table names and camelCase for entity/JSON fields.
 - Use plural, noun-based API routes with `{id}` params.
 - Keep frontend files kebab-case and components PascalCase.
 - Use ISO 8601 date strings; Problem Details only for errors.
 
 **Pattern Enforcement:**
+
 - Add contract tests for ISO 8601 dates and Problem Details error shape.
 - Review checklist includes naming/format rules; deviations require explicit approval.
 
 ### Pattern Examples (Condensed)
 
 **Good:**
+
 - `GET /programmes/{programmeId}` -> `{ programmeId, cadence, cycleDate }`
 - `features/matches/match-card.tsx` exports `MatchCard`
 
 **Anti-Patterns:**
+
 - `/programme/123`
 - `match_card.tsx`
 - `{ data: {...} }` wrapper for success
@@ -549,25 +604,38 @@ Naming, file structure, API formats, date handling, error/loading patterns.
 ## Project Structure & Boundaries
 
 ### Complete Project Directory Structure
+
 ```
 collabolatte/
 ├── README.md
 ├── pnpm-workspace.yaml
 ├── package.json
+├── tsconfig.base.json            # shared TypeScript config
+├── .nvmrc                         # Node version lock (20.11.0)
+├── .eslintrc.cjs                  # ESLint config
+├── .prettierrc                    # Prettier config
 ├── .gitignore
 ├── .env.example
 ├── .github/
 │   └── workflows/
 │       ├── swa-app.yml           # app+api SWA
-│       └── swa-marketing.yml     # marketing SWA
+│       ├── swa-marketing.yml     # marketing SWA
+│       └── e2e.yml               # Playwright E2E tests
+├── .vscode/
+│   ├── settings.json
+│   ├── extensions.json
+│   └── tasks.json
 ├── apps/
 │   ├── web/
 │   │   ├── package.json
 │   │   ├── vite.config.ts
 │   │   ├── tsconfig.json
-│   │   ├── staticwebapp.config.json
+│   │   ├── tsconfig.app.json
+│   │   ├── tsconfig.node.json
+│   │   ├── public/
+│   │   │   └── staticwebapp.config.json  # SWA config in public/
 │   │   ├── src/
-│   │   │   ├── app.tsx
+│   │   │   ├── App.tsx
 │   │   │   ├── main.tsx
 │   │   │   ├── routes/
 │   │   │   ├── features/
@@ -581,28 +649,33 @@ collabolatte/
 │   │   │   │   └── utils/
 │   │   │   ├── components/
 │   │   │   └── styles/
-│   │   └── tests/                # co-located tests under feature folders
+│   │   └── tests/                # co-located tests
 │   ├── api/
-│   │   ├── collabolatte-api.sln
+│   │   ├── README.md
+│   │   ├── Collabolatte.Api.sln
 │   │   ├── src/
-│   │   │   ├── Collabolatte.Api/
-│   │   │   │   ├── Program.cs
-│   │   │   │   ├── Functions/
-│   │   │   │   │   ├── Programmes/
-│   │   │   │   │   ├── Matches/
-│   │   │   │   │   ├── Participation/
-│   │   │   │   │   └── Admin/
-│   │   │   │   ├── Contracts/
-│   │   │   │   ├── Services/
-│   │   │   │   ├── Repositories/
-│   │   │   │   ├── Models/
-│   │   │   │   ├── Validation/
-│   │   │   │   └── Logging/
-│   │   │   └── Collabolatte.Api.Tests/
-│   │   │       ├── Functions/        # contract tests live here
-│   │   │       ├── Services/
-│   │   │       └── Repositories/
-│   │   └── host.json
+│   │   │   ├── Collabolatte.Api.csproj
+│   │   │   ├── Program.cs
+│   │   │   ├── host.json
+│   │   │   ├── local.settings.json
+│   │   │   ├── Properties/
+│   │   │   ├── Functions/
+│   │   │   │   ├── Programmes/
+│   │   │   │   ├── Matches/
+│   │   │   │   ├── Participation/
+│   │   │   │   └── Admin/
+│   │   │   ├── Contracts/
+│   │   │   ├── Services/
+│   │   │   ├── Repositories/
+│   │   │   ├── Models/
+│   │   │   ├── Validation/
+│   │   │   └── Logging/
+│   │   └── tests/
+│   │       ├── README.md
+│   │       ├── Collabolatte.Api.Tests.csproj
+│   │       ├── GlobalUsings.cs
+│   │       ├── Unit/              # TUnit tests
+│   │       └── Integration/
 │   └── marketing/
 │       ├── package.json
 │       ├── .eleventy.js
@@ -616,91 +689,114 @@ collabolatte/
 ├── packages/
 │   └── theme/
 │       ├── package.json
-│       ├── tokens.css
-│       └── muiTheme.ts
+│       ├── tsconfig.json
+│       └── src/
+│           ├── index.ts
+│           ├── tokens.ts
+│           ├── muiTheme.ts
+│           └── cssExport.ts
 └── tests/
+    ├── README.md
+    ├── playwright.config.ts
     └── e2e/
-        ├── playwright.config.ts
-        └── specs/
+        └── home.spec.ts
 ```
 
 ### Architectural Boundaries
 
 **API Boundaries:**
+
 - REST endpoints exposed in `apps/api/src/Collabolatte.Api/Functions/*`
 - Auth boundary enforced per Function (EasyAuth claims validation)
 
 **Component Boundaries:**
+
 - Frontend features isolated under `apps/web/src/features/*`
 - Shared UI in `apps/web/src/components`
 - Shared utilities in `apps/web/src/lib`
 
-**Service Boundaries:**
-- Domain services in `apps/api/src/Collabolatte.Api/Services`
+**Service Boundaries:**Services`
+
+- Data access via `apps/api/srcApi/Services`
 - Data access via `apps/api/src/Collabolatte.Api/Repositories`
 
 **Data Boundaries:**
-- Table Storage entities under `apps/api/src/Collabolatte.Api/Models`
-- Partition rules enforced in repositories
+
+- Cosmos DB documents under `apps/api/src/Models`
+- Partition key rules enforced in repositories
 
 ### Requirements to Structure Mapping
 
 **Feature Mapping (from FR categories):**
-- **Identity & Access:** `apps/web/src/features/account`, `apps/api/src/Collabolatte.Api/Functions/Account`
-- **Programme Participation:** `apps/web/src/features/programmes`, `apps/api/src/Collabolatte.Api/Functions/Participation`
-- **Matching:** `apps/web/src/features/matches`, `apps/api/src/Collabolatte.Api/Functions/Matches`
-- **Notifications:** `apps/api/src/Collabolatte.Api/Services/Notifications`
-- **Administration:** `apps/web/src/features/admin`, `apps/api/src/Collabolatte.Api/Functions/Admin`
+
+- **Identity & Access:** `apps/web/src/features/account`, `apps/api/src/Functions/Account`
+- **Programme Participation:** `apps/web/src/features/programmes`, `apps/api/src/Functions/Participation`
+- **Matching:** `apps/web/src/features/matches`, `apps/api/src/Functions/Matches`
+- **Notifications:** `apps/api/src/Services/Notifications`
+- **Administration:** `apps/web/src/features/admin`, `apps/api/src/Functions/Admin`
 - **Transparency Page:** `apps/web/src/features/account`
 
 **Cross-Cutting Concerns:**
-- Auth/claims validation: `apps/api/src/Collabolatte.Api/Validation`
-- Logging/event records: `apps/api/src/Collabolatte.Api/Logging`
+
+- Auth/claims validation: `apps/api/src/Validation`
+- Logging/event records: `apps/api/src/Logging`
 
 ### Integration Points
 
 **Internal Communication:**
-- Web app calls API endpoints under `/api/*`.
+
+- Web app calls APICosmos DBder `/api/*`.
 - API reads/writes Table Storage and sends email via ACS.
 
 **External Integrations:**
+
 - EasyAuth (SWA) for identity.
 - Azure Communication Services for email delivery.
 
-**Data Flow:**
+**Data Flow:**Cosmos DB
+
 - Client -> API -> Table Storage
 - Scheduler -> Matching service -> Notifications
 
 ### File Organization Patterns
 
 **Configuration Files:**
+
 - `staticwebapp.config.json` must be emitted into the web build output root.
 - `.env.example` at repo root.
 
 **Source Organization:**
+
 - Feature-first in web; feature-grouped Functions in API.
 
 **Test Organization:**
-- Co-located tests in web and API.
-- Contract tests under `apps/api/src/Collabolatte.Api.Tests/Functions/`.
+
+- Co-located tests in web (`apps/web/tests/`).
+- API tests in `apps/api/tests/` using TUnit framework.
+- Contract tests under `apps/api/tests/Unit/`.
+- Integration tests under `apps/api/tests/Integration/`.
 - Playwright E2E in `/tests/e2e`.
 
 **Asset Organization:**
+
 - Web assets in `apps/web/src/styles`
 - Marketing assets in `apps/marketing/src/assets`
 
 ### Development Workflow Integration
 
 **Development Server Structure:**
+
 - `apps/web` runs Vite dev server.
 - `apps/api` runs Functions host locally.
 - `apps/marketing` runs 11ty build/watch.
 
 **Build Process Structure:**
+
 - App SWA builds `apps/web` with API path `apps/api`.
 - Marketing SWA builds `apps/marketing` output to `dist`.
 
 **Deployment Structure:**
+
 - `app.collabolatte.co.uk` SWA: `app_location=apps/web`, `api_location=apps/api`.
 - `www.collabolatte.co.uk` SWA: `app_location=apps/marketing`, `output_location=dist`.
 
@@ -720,7 +816,56 @@ collabolatte/
 ### Structure Risks
 
 - **Theme package drift:** shared tokens not updated across apps -> add a simple version bump/checklist.
-- **API feature sprawl:** Functions folders diverge from routes -> enforce mapping in OpenAPI + tests.
+
+### Implementation Notes (Updated 2026-01-15)
+
+**Actual Technology Versions (as implemented):**
+
+- **Node.js:** 22.x (locked via `.nvmrc`) - Active LTS until April 2027
+- **TypeScript:** 5.6.3 (updated from 5.3.3 for Vite 7 compatibility)
+- **React:** 18.2.0 (using React 18 for MUI compatibility)
+- **MUI:** 5.15.6 (MUI v5 for React 18 support)
+- **Vite:** 7.2.4
+- **.NET:** 10.0
+- **Azure Functions:** v4 (Worker 2.51.0, Extensions 2.1.0, SDK 2.0.7)
+- **TUnit:** 0.3.\* (testing framework for API)
+- **FluentAssertions:** 7.0.0
+- **Moq:** 4.20.72
+- **Playwright:** 1.40.0
+
+**API Test Framework:**
+
+- Using **TUnit** (modern alternative to xUnit)
+- TUnit.Assertions for test assertions
+- FluentAssertions for readable assertions
+- Moq for mocking
+
+**Configuration Management:**
+
+- Root-level shared configs: `tsconfig.base.json`, `.eslintrc.cjs`, `.prettierrc`
+- VS Code workspace settings in `.vscode/settings.json`
+- Recommended extensions in `.vscode/extensions.json`
+- Build/test tasks in `.vscode/tasks.json`
+
+**Package Management:**
+
+- pnpm workspaces (`pnpm-workspace.yaml`)
+- Shared dev dependencies at root level
+- App-specific dependencies in respective `package.json` files
+
+**Build Scripts (in root package.json):**
+
+- `pnpm build` - Build all apps including API
+- `pnpm build:api` - Build API solution
+- `pnpm test` - Run all tests (unit + API + E2E)
+- `pnpm test:api` - Run API tests only
+- `pnpm test:api:watch` - Run API tests in watch mode
+- `pnpm test:e2e` - Run Playwright E2E tests
+
+**SWA Configuration:**
+
+- `staticwebapp.config.json` located in `apps/web/public/` (copied to build output by Vite)
+- VS Code Azure Functions extension configured to use `apps/api/src` as project path- **API feature sprawl:** Functions folders diverge from routes -> enforce mapping in OpenAPI + tests.
 - **Marketing build output mismatch:** 11ty output path doesn't match SWA config -> keep `dist/` consistent and documented.
 
 ## Architecture Validation Results
@@ -761,14 +906,16 @@ Conflict points are addressed with concrete conventions and enforcement rules.
 ### Gap Analysis Results
 
 **Important Gap (Resolved):**
-- **Role allowlist source:** Table Storage is the source of truth (auditable, changeable without redeploys).
+
+- **Role allowlist source:** Cosmos DB is the source of truth (auditable, changeable without redeploys).
 
 **Nice-to-Have:**
+
 - Correlation ID format defined as GUID for logs and Problem Details.
 
 ### Validation Issues Addressed
 
-- Role allowlist source resolved: **Table Storage**.
+- Role allowlist source resolved: **Cosmos DB**.
 - Correlation ID format locked: **GUID**.
 - Contract tests for ISO 8601 dates and Problem Details are mandatory gates.
 
@@ -808,23 +955,27 @@ Conflict points are addressed with concrete conventions and enforcement rules.
 **Confidence Level:** High
 
 **Key Strengths:**
+
 - Trust-first architecture with clear boundaries
 - Minimal, consistent conventions to prevent agent drift
 - Cost-aware deployment plan with upgrade hooks
 
 **Areas for Future Enhancement:**
+
 - Optional Key Vault / App Insights enablement
 - Role management UI (post-MVP)
 
 ### Implementation Handoff
 
 **AI Agent Guidelines:**
+
 - Follow all architectural decisions exactly as documented
 - Use implementation patterns consistently across all components
 - Respect project structure and boundaries
 - Refer to this document for all architectural questions
 
 **First Implementation Priority:**
+
 - Initialise monorepo structure + scaffolding per starter decisions
 
 ## Architecture Completion Summary
@@ -834,7 +985,7 @@ Conflict points are addressed with concrete conventions and enforcement rules.
 **Architecture Decision Workflow:** COMPLETED ✅  
 **Total Steps Completed:** 8  
 **Date Completed:** 2026-01-14  
-**Document Location:** _bmad-output/planning-artifacts/architecture.md
+**Document Location:** \_bmad-output/planning-artifacts/architecture.md
 
 ### Final Architecture Deliverables
 

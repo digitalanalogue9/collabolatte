@@ -1,6 +1,6 @@
 # Story 1.1: Set Up Initial Project from Starter Template
 
-Status: ready-for-dev
+Status: in-progress
 
 ## Story
 
@@ -29,46 +29,46 @@ So that Join & Trust stories can be implemented without blocking setup work.
 
 ## Tasks / Subtasks
 
-- [ ] Task 1: Initialise pnpm workspace at repo root (AC: 1)
-  - [ ] Create `pnpm-workspace.yaml` defining workspace packages
-  - [ ] Create root `package.json` with workspace scripts
-  - [ ] Add `.npmrc` with pnpm configuration
+- [x] Task 1: Initialise pnpm workspace at repo root (AC: 1)
+  - [x] Create `pnpm-workspace.yaml` defining workspace packages
+  - [x] Create root `package.json` with workspace scripts
+  - [x] Add `.npmrc` with pnpm configuration
 
 - [ ] Task 2: Scaffold web app with Vite React TypeScript (AC: 1)
-  - [ ] Run `pnpm create vite apps/web --template react-ts`
-  - [ ] Install MUI dependencies: `@mui/material @emotion/react @emotion/styled`
+  - [x] Run `pnpm create vite apps/web --template react-ts`
+  - [x] Install MUI dependencies: `@mui/material @emotion/react @emotion/styled`
   - [ ] Verify Vite dev server runs successfully
 
 - [ ] Task 3: Initialise API with Azure Functions .NET isolated (AC: 1)
-  - [ ] Run `func init apps/api --worker-runtime dotnet-isolated`
-  - [ ] Create solution file `collabolatte-api.sln`
+  - [x] Run `func init apps/api --worker-runtime dotnet-isolated`
+  - [x] Create solution file `collabolatte-api.sln`
   - [ ] Verify Functions host runs locally
 
-- [ ] Task 4: Scaffold marketing site with 11ty (AC: 1)
-  - [ ] Initialise `apps/marketing` with `pnpm init`
-  - [ ] Install 11ty: `pnpm add @11ty/eleventy`
-  - [ ] Create minimal `.eleventy.js` configuration
-  - [ ] Create basic `src/` structure with index page
+- [x] Task 4: Scaffold marketing site with 11ty (AC: 1)
+  - [x] Initialise `apps/marketing` with `pnpm init`
+  - [x] Install 11ty: `pnpm add @11ty/eleventy`
+  - [x] Create minimal `.eleventy.js` configuration
+  - [x] Create basic `src/` structure with index page
 
-- [ ] Task 5: Create shared theme package (AC: 1)
-  - [ ] Create `packages/theme/package.json`
-  - [ ] Create `packages/theme/tokens.css` with CSS variables
-  - [ ] Create `packages/theme/muiTheme.ts` exporting MUI theme
+- [x] Task 5: Create shared theme package (AC: 1)
+  - [x] Create `packages/theme/package.json`
+  - [x] Create `packages/theme/tokens.css` with CSS variables
+  - [x] Create `packages/theme/muiTheme.ts` exporting MUI theme
 
-- [ ] Task 6: Configure staticwebapp.config.json for app SWA (AC: 2)
-  - [ ] Create `apps/web/staticwebapp.config.json` with EasyAuth routes
-  - [ ] Configure Entra ID identity provider settings
-  - [ ] Add security headers and route protection
+- [x] Task 6: Configure staticwebapp.config.json for app SWA (AC: 2)
+  - [x] Create `apps/web/staticwebapp.config.json` with EasyAuth routes
+  - [x] Configure Entra ID identity provider settings
+  - [x] Add security headers and route protection
 
-- [ ] Task 7: Create GitHub Actions workflow stubs (AC: 2)
-  - [ ] Create `.github/workflows/swa-app.yml` for app+api deployment
-  - [ ] Create `.github/workflows/swa-marketing.yml` for marketing deployment
-  - [ ] Configure build paths per architecture document
+- [x] Task 7: Create GitHub Actions workflow stubs (AC: 2)
+  - [x] Create `.github/workflows/swa-app.yml` for app+api deployment
+  - [x] Create `.github/workflows/swa-marketing.yml` for marketing deployment
+  - [x] Configure build paths per architecture document
 
-- [ ] Task 8: Set up environment configuration (AC: 2)
-  - [ ] Create `.env.example` with all required variables
-  - [ ] Create `apps/api/local.settings.json` with placeholders
-  - [ ] Document environment variable requirements
+- [x] Task 8: Set up environment configuration (AC: 2)
+  - [x] Create `.env.example` with all required variables
+  - [x] Create `apps/api/local.settings.json` with placeholders
+  - [x] Document environment variable requirements
 
 - [ ] Task 9: Verify local development works (AC: 3)
   - [ ] Run web app dev server and verify it loads
@@ -306,32 +306,46 @@ This story creates scaffolding only - no application tests are written. Verifica
 
 ### Definition of Done
 
-- [ ] pnpm workspace configured and working
+- [x] pnpm workspace configured and working
 - [ ] Web app runs with `pnpm dev` in apps/web
 - [ ] API runs with `func start` in apps/api
 - [ ] Marketing site builds with `npx @11ty/eleventy` in apps/marketing
-- [ ] staticwebapp.config.json includes EasyAuth configuration
-- [ ] GitHub Actions workflows exist (stubs, not tested)
-- [ ] Environment configuration documented
+- [x] staticwebapp.config.json includes EasyAuth configuration
+- [x] GitHub Actions workflows exist (stubs, not tested)
+- [x] Environment configuration documented
 
 ## Dev Agent Record
 
 ### Agent Model Used
 
-(To be filled by implementing agent)
+GPT-5.2 (Codex CLI)
 
 ### Debug Log References
 
-(To be filled during implementation)
+N/A (no persistent debug log captured in this run)
 
 ### Completion Notes List
 
-(To be filled during implementation)
+- Aligned API layout to `apps/api/src/Collabolatte.Api` as per architecture tree
+- Made root workspace scripts resilient via `pnpm -r --if-present`
+- Made marketing `clean` script Windows-friendly
+- Left runtime verification (Task 9) pending
 
 ### Change Log
 
-(To be filled during implementation)
+- Restructured Azure Functions project into `apps/api/src/Collabolatte.Api`
+- Updated `apps/api/collabolatte-api.sln` project path
+- Updated root `package.json` scripts for safer monorepo runs
+- Updated `apps/marketing/package.json` clean script
+- Updated root `.gitignore` for nested API build outputs
 
 ### File List
 
-(To be filled during implementation)
+- `_bmad-output/implementation-artifacts/1-1-set-up-initial-project-from-starter-template.md`
+- `apps/api/collabolatte-api.sln`
+- `apps/api/src/Collabolatte.Api/Collabolatte.Api.csproj`
+- `apps/api/src/Collabolatte.Api/Program.cs`
+- `apps/api/src/Collabolatte.Api/Properties/launchSettings.json`
+- `package.json`
+- `apps/marketing/package.json`
+- `.gitignore`

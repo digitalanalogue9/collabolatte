@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Environment files (keep .env.example)
+.env
+.env.local
+.env.*.local
+
+# Azure Functions
+apps/api/local.settings.json
+apps/api/**/bin/
+apps/api/**/obj/
+
+# IDE
+.idea/
+*.suo
+*.user
+*.sln.docstates
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Vite
+*.local
+
+# TypeScript
+*.tsbuildinfo
+
+# Misc
+.cache/
+.temp/

@@ -1,0 +1,30 @@
+{
+  "name": "@collabolatte/theme",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared design tokens and theme for Collabolatte",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist node_modules"
+  },
+  "peerDependencies": {
+    "@mui/material": "^5.0.0"
+  },
+  "devDependencies": {
+    "@mui/material": "^5.15.6",
+    "@types/node": "^20.11.0"
+  }
+}

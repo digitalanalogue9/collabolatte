@@ -1,0 +1,28 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collabolatte.Api", "src\Collabolatte.Api.csproj", "{038275F1-FFE0-4A61-8DE6-70B735FF17FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collabolatte.Api.Tests", "tests\Collabolatte.Api.Tests.csproj", "{B8F3D9C2-8A5E-4F1A-9C3D-1E2F4A5B6C7D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{038275F1-FFE0-4A61-8DE6-70B735FF17FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{038275F1-FFE0-4A61-8DE6-70B735FF17FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{038275F1-FFE0-4A61-8DE6-70B735FF17FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{038275F1-FFE0-4A61-8DE6-70B735FF17FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8F3D9C2-8A5E-4F1A-9C3D-1E2F4A5B6C7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8F3D9C2-8A5E-4F1A-9C3D-1E2F4A5B6C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8F3D9C2-8A5E-4F1A-9C3D-1E2F4A5B6C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8F3D9C2-8A5E-4F1A-9C3D-1E2F4A5B6C7D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

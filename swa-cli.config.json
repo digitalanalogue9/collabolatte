@@ -1,0 +1,16 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "collabolatte": {
+      "appLocation": "apps\\web",
+      "apiLocation": "apps\\api\\src",
+      "outputLocation": "dist",
+      "apiLanguage": "dotnetisolated",
+      "apiVersion": "10.0",
+      "appBuildCommand": "npm run build",
+      "apiBuildCommand": "dotnet publish -c Release",
+      "run": "npm run dev",
+      "appDevserverUrl": "http://localhost:5173"
+    }
+  }
+}
