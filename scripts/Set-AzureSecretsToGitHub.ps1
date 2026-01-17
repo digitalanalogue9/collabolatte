@@ -132,6 +132,44 @@ try {
     exit 1
 }
 
+Write-Host "`nFetching Azure connection strings..." -ForegroundColor Yellow
+
+# Construct resource names
+$resourceGroup = "rg-${Project}-${Environment}-${Location}"
+$storageAccountName = "st" + $Project.Replace('-', '') + "${Environment}we001"
+$acsName = "acs-${Project}-${Environment}-${Location}"
+
+# Get Storage Connection String
+Write-Host "  → Retrieving storage connection string: $storageAccountName" -ForegroundColor Gray
+try {
+    $storageAccount = az storage account list --resource-group $resourceGroup --query "[?name=='$storageAccountName'].name" -o tsv 2>$null
+    if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($storageAccount)) {
+        throw "Storage account not found"
+    }
+    $storageKey = az storage account keys list --account-name $storageAccount --resource-group $resourceGroup --query "[0].value" -o tsv 2>$null
+    if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($storageKey)) {
+        throw "Failed to retrieve storage key"
+    }
+    $storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=$storageAccount;AccountKey=$storageKey;EndpointSuffix=core.windows.net"
+    Write-Host "    ✓ Storage connection string retrieved" -ForegroundColor Green
+} catch {
+    Write-Error "Failed to get storage connection string. Ensure storage account exists in '$resourceGroup'."
+    exit 1
+}
+
+# Get ACS Connection String
+Write-Host "  → Retrieving ACS connection string: $acsName" -ForegroundColor Gray
+try {
+    $acsConnectionString = az communication list-key --name $acsName --resource-group $resourceGroup --query "primaryConnectionString" -o tsv 2>$null
+    if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($acsConnectionString)) {
+        throw "Failed to retrieve ACS connection string"
+    }
+    Write-Host "    ✓ ACS connection string retrieved" -ForegroundColor Green
+} catch {
+    Write-Error "Failed to get ACS connection string. Ensure ACS resource '$acsName' exists in '$resourceGroup'."
+    exit 1
+}
+
 Write-Host "`nSetting GitHub repository secrets..." -ForegroundColor Yellow
 
 # Set App token as GitHub secret
@@ -156,9 +194,33 @@ try {
     exit 1
 }
 
+# Set Storage Connection String as GitHub secret
+Write-Host "  → Setting STORAGE_CONNECTION_STRING" -ForegroundColor Gray
+try {
+    $storageConnectionString | gh secret set STORAGE_CONNECTION_STRING 2>$null
+    if ($LASTEXITCODE -ne 0) { throw }
+    Write-Host "    ✓ Secret set successfully" -ForegroundColor Green
+} catch {
+    Write-Error "Failed to set STORAGE_CONNECTION_STRING. Ensure you have admin access to the repository."
+    exit 1
+}
+
+# Set ACS Connection String as GitHub secret
+Write-Host "  → Setting ACS_CONNECTION_STRING" -ForegroundColor Gray
+try {
+    $acsConnectionString | gh secret set ACS_CONNECTION_STRING 2>$null
+    if ($LASTEXITCODE -ne 0) { throw }
+    Write-Host "    ✓ Secret set successfully" -ForegroundColor Green
+} catch {
+    Write-Error "Failed to set ACS_CONNECTION_STRING. Ensure you have admin access to the repository."
+    exit 1
+}
+
 Write-Host "`n✅ Configuration complete!" -ForegroundColor Green
 Write-Host "`nGitHub secrets have been set:" -ForegroundColor Cyan
 Write-Host "  • AZURE_STATIC_WEB_APPS_API_TOKEN_APP" -ForegroundColor White
 Write-Host "  • AZURE_STATIC_WEB_APPS_API_TOKEN_WWW" -ForegroundColor White
+Write-Host "  • STORAGE_CONNECTION_STRING" -ForegroundColor White
+Write-Host "  • ACS_CONNECTION_STRING" -ForegroundColor White
 Write-Host "`nYour GitHub Actions workflows should now be able to deploy to Azure Static Web Apps." -ForegroundColor Cyan
 Write-Host ""
