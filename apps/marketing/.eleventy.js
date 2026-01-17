@@ -2,6 +2,9 @@ module.exports = function (eleventyConfig) {
   // Copy static assets
   eleventyConfig.addPassthroughCopy('src/assets');
 
+  // Copy Azure Static Web Apps configuration
+  eleventyConfig.addPassthroughCopy('src/staticwebapp.config.json');
+
   return {
     dir: {
       input: 'src',

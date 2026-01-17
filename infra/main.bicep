@@ -157,7 +157,7 @@ module swaApp 'br/public:avm/res/web/static-site:0.5.0' = {
     branch: repositoryBranch  // Correct parameter name is 'branch' not 'repositoryBranch'
     buildProperties: {
       appLocation: '/apps/web'
-      apiLocation: '/apps/api'
+      apiLocation: '/api-publish'  // Pre-built .NET publish output
       outputLocation: 'dist'
     }
     stagingEnvironmentPolicy: 'Enabled'
@@ -187,8 +187,8 @@ module swaMarketing 'br/public:avm/res/web/static-site:0.5.0' = {
     repositoryUrl: repositoryUrl
     branch: repositoryBranch  // Correct parameter name is 'branch' not 'repositoryBranch'
     buildProperties: {
-      appLocation: '/apps/marketing'
-      outputLocation: 'dist'
+      appLocation: '/apps/marketing/dist'  // Pre-built 11ty output
+      outputLocation: '.'
     }
     stagingEnvironmentPolicy: 'Enabled'
     allowConfigFileUpdates: true
