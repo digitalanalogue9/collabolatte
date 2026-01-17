@@ -49,6 +49,11 @@ jobs:
         run: |
           cd apps/api/src
           dotnet publish Collabolatte.Api.csproj -c Release -o ../../../api-publish
+          # Ensure host.json exists for SWA to detect the function runtime
+          if (!(Test-Path ../../../api-publish/host.json)) {
+            Write-Error "host.json not found in publish output"
+            exit 1
+          }
 
       - name: Build And Deploy
         id: builddeploy
