@@ -24,15 +24,15 @@
     "clean": "pnpm -r --if-present clean && dotnet clean apps/api/Collabolatte.Api.sln"
   },
   "devDependencies": {
-    "@playwright/test": "^1.40.0",
-    "@types/node": "^22.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.19.0",
-    "@typescript-eslint/parser": "^6.19.0",
-    "eslint": "^8.56.0",
-    "eslint-config-prettier": "^9.1.0",
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.9",
+    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/parser": "^8.53.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
     "markdownlint-cli": "^0.47.0",
-    "prettier": "^3.2.4",
-    "typescript": "~5.6.3"
+    "prettier": "^3.8.0",
+    "typescript": "~5.9.3"
   },
   "engines": {
     "node": ">=22.0.0",

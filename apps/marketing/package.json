@@ -9,10 +9,10 @@
     "clean": "rm -rf _site node_modules"
   },
   "dependencies": {
-    "@collabolatte/theme": "workspace:*",
-    "@11ty/eleventy": "^2.0.1"
+    "@11ty/eleventy": "^3.1.2",
+    "@collabolatte/theme": "workspace:*"
   },
   "devDependencies": {
-    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0"
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2"
   }
 }
