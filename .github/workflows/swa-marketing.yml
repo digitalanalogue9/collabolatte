@@ -49,12 +49,12 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WWW }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "apps/marketing/dist"
-          output_location: "."
+          app_location: "apps/marketing"
+          output_location: "dist"
           skip_app_build: true
           skip_api_build: true
         env:
-          SKIP_DEPLOY_ON_MISSING_SECRETS: true
+          SKIP_DEPLOY_ON_MISSING_SECRETS: false
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
