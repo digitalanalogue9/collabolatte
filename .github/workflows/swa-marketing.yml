@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-      
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -51,6 +51,7 @@ jobs:
           action: "upload"
           app_location: "apps/marketing"
           output_location: "dist"
+          skip_app_build: true
           skip_api_build: true
         env:
           SKIP_DEPLOY_ON_MISSING_SECRETS: true
