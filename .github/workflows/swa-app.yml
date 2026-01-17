@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-      
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -50,6 +50,7 @@ jobs:
           app_location: "apps/web"
           api_location: "apps/api"
           output_location: "dist"
+          skip_app_build: true
         env:
           SKIP_DEPLOY_ON_MISSING_SECRETS: true
 
