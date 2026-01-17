@@ -45,7 +45,7 @@ jobs:
         with:
           dotnet-version: "10.0.x"
 
-      - name: Build and Publish API
+      - name: Publish API
         run: |
           cd apps/api/src
           dotnet publish Collabolatte.Api.csproj -c Release -o ../../../api-publish
