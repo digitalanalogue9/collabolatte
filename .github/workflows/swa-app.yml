@@ -62,8 +62,12 @@ jobs:
           output_location: "dist"
           skip_app_build: true
           skip_api_build: true
+          production_branch: "main"
         env:
           SKIP_DEPLOY_ON_MISSING_SECRETS: true
+          FUNCTIONS_WORKER_RUNTIME: dotnet-isolated
+          STORAGE_CONNECTION_STRING: ${{ secrets.STORAGE_CONNECTION_STRING }}
+          ACS_CONNECTION_STRING: ${{ secrets.ACS_CONNECTION_STRING }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
