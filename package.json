@@ -16,8 +16,8 @@
     "build:web": "pnpm --filter @collabolatte/web... build",
     "build:api": "dotnet build apps/api/Collabolatte.Api.sln",
     "build:marketing": "pnpm --filter @collabolatte/marketing build",
-    "preview:web": "pnpm --filter @collabolatte/web preview -- --port 3000 --strictPort",
-    "preview:marketing": "pnpm --filter @collabolatte/marketing preview -- --port 8080",
+    "preview:web": "pnpm --filter @collabolatte/web preview --port 3000 --strictPort",
+    "preview:marketing": "pnpm --filter @collabolatte/marketing preview --port 8080",
     "test": "pnpm test:unit && pnpm test:api && pnpm test:e2e",
     "test:unit": "pnpm -r test",
     "test:api": "dotnet test apps/api/Collabolatte.Api.sln",
@@ -41,7 +41,8 @@
     "eslint-config-prettier": "^10.1.8",
     "markdownlint-cli": "^0.47.0",
     "prettier": "^3.8.0",
-    "typescript": "~5.9.3"
+    "typescript": "~5.9.3",
+    "wait-on": "^8.0.1"
   },
   "engines": {
     "node": ">=22.0.0",

@@ -1,58 +1,58 @@
 name: E2E Tests
 
 on:
-    pull_request:
-        branches: [main]
-    push:
-        branches: [main]
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
 
 jobs:
-    test:
-        timeout-minutes: 15
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
+  test:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-            - uses: actions/setup-node@v4
-              with:
-                  node-version-file: ".nvmrc"
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
 
-            - uses: pnpm/action-setup@v4
-              with:
-                  run_install: false
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
 
-            - name: Install dependencies
-              run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-            - name: Install Playwright Browsers
-              run: pnpm exec playwright install --with-deps
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
 
-            - name: Build apps
-              run: |
-                  pnpm build:web
-                  pnpm build:marketing
+      - name: Build apps
+        run: |
+          pnpm build:web
+          pnpm build:marketing
 
-            - name: Start preview servers
-              run: |
-                  pnpm preview:web &
-                  pnpm preview:marketing &
+      - name: Start preview servers
+        run: |
+          pnpm preview:web &
+          pnpm preview:marketing &
+          sleep 3
 
-            - name: Wait for preview servers
-              run: |
-                  for i in {1..30}; do
-                    curl -sSf http://localhost:3000 >/dev/null && curl -sSf http://localhost:8080 >/dev/null && break
-                    sleep 2
-                  done
+      - name: Wait for preview servers
+        run: |
+          echo "Waiting for servers to be ready..."
+          npx wait-on http://localhost:3000 http://localhost:8080 -t 60000 -i 1000
+        timeout-minutes: 2
 
-            - name: Run Playwright tests (web)
-              run: pnpm test:e2e:web
+      - name: Run Playwright tests (web)
+        run: pnpm test:e2e:web
 
-            - name: Run Playwright tests (marketing)
-              run: pnpm test:e2e:marketing
+      - name: Run Playwright tests (marketing)
+        run: pnpm test:e2e:marketing
 
-            - uses: actions/upload-artifact@v4
-              if: always()
-              with:
-                  name: playwright-report
-                  path: playwright-report/
-                  retention-days: 30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
