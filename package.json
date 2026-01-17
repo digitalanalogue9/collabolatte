@@ -9,7 +9,7 @@
     "dev:web": "pnpm --filter @collabolatte/web dev",
     "dev:marketing": "pnpm --filter @collabolatte/marketing dev",
     "build": "pnpm -r build && pnpm build:api",
-    "build:web": "pnpm --filter @collabolatte/web build",
+    "build:web": "pnpm --filter @collabolatte/web... build",
     "build:api": "dotnet build apps/api/Collabolatte.Api.sln",
     "build:marketing": "pnpm --filter @collabolatte/marketing build",
     "test": "pnpm test:unit && pnpm test:api && pnpm test:e2e",

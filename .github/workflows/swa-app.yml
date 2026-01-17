@@ -37,11 +37,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build theme package
-        run: pnpm --filter @collabolatte/theme build
-
-      - name: Build web app
-        run: pnpm --filter @collabolatte/web build
+      - name: Build web app (with deps)
+        run: pnpm build:web
 
       - name: Build And Deploy
         id: builddeploy
