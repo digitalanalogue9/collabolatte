@@ -1,0 +1,2 @@
+# Comma- or newline-separated list of fully qualified or short type names to ignore during coverage loop.
+# Lines beginning with # are treated as comments.

@@ -21,10 +21,10 @@
     "clean": "rm -rf dist node_modules"
   },
   "peerDependencies": {
-    "@mui/material": "^5.0.0"
+    "@mui/material": "^7.0.0"
   },
   "devDependencies": {
-    "@mui/material": "^5.15.6",
+    "@mui/material": "^7.3.7",
     "@types/node": "^20.11.0"
   }
 }

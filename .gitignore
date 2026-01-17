@@ -45,3 +45,7 @@ coverage/
 # Misc
 .cache/
 .temp/
+
+#Playwright
+playwright-report/
+test-results/

@@ -4,7 +4,7 @@ Azure Functions API for the Collabolatte platform.
 
 ## Project Structure
 
-```
+```text
 apps/api/
 ├── Collabolatte.Api.sln      # Solution file
 ├── src/                       # API source code
@@ -26,7 +26,7 @@ apps/api/
 
 - **.NET 10** - Latest .NET runtime
 - **Azure Functions v4** - Serverless compute
-- **Azure Cosmos DB** - NoSQL database
+- **Azure Storage** - Tables/Queues/Blobs for persistence
 - **TUnit** - Modern testing framework
 - **FluentAssertions** - Readable assertions
 - **Moq** - Mocking framework
@@ -89,19 +89,14 @@ Create or update `src/local.settings.json`:
   "IsEncrypted": false,
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "CosmosDb__AccountEndpoint": "https://localhost:8081",
-    "CosmosDb__AccountKey": "<emulator-key>",
-    "CosmosDb__DatabaseName": "collabolatte-dev"
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated"
   }
 }
 ```
 
 ### Environment Variables
 
-- `CosmosDb__AccountEndpoint` - Cosmos DB endpoint
-- `CosmosDb__AccountKey` - Cosmos DB key
-- `CosmosDb__DatabaseName` - Database name
+- `AzureWebJobsStorage` - Storage connection string
 
 ## API Endpoints
 
@@ -131,7 +126,7 @@ Create or update `src/local.settings.json`:
 
 - **Functions/** - HTTP triggers and function entry points
 - **Services/** - Business logic and orchestration
-- **Repositories/** - Data access layer (Cosmos DB interactions)
+- **Repositories/** - Data access layer (Azure Storage interactions)
 - **Models/** - DTOs, entities, and domain models
 - **Extensions/** - Extension methods and utilities
 
@@ -145,9 +140,9 @@ Create or update `src/local.settings.json`:
 
 1. **Use dependency injection** - Register services in `Program.cs`
 2. **Keep functions thin** - Move logic to services
-3. **Log diagnostics** - Use Cosmos DB diagnostics for monitoring
+3. **Log diagnostics** - Use Azure Storage diagnostics for monitoring
 4. **Handle errors gracefully** - Return appropriate HTTP status codes
-5. **Use partition keys wisely** - Follow Cosmos DB best practices
+5. **Partition keys** - Use efficient partitioning for Table Storage
 6. **Validate input** - Use FluentValidation for request validation
 
 ## Deployment
@@ -176,7 +171,7 @@ See `.github/workflows/swa-app.yml` for deployment configuration.
 
 ### Tests failing
 
-1. Ensure Cosmos DB emulator is running for integration tests
+1. Ensure Azure Storage Emulator or Azurite is running for integration tests
 2. Check test configuration in `Collabolatte.Api.Tests.csproj`
 3. Run `dotnet restore` to update packages
 
@@ -189,5 +184,5 @@ See `.github/workflows/swa-app.yml` for deployment configuration.
 ## Resources
 
 - [Azure Functions .NET Isolated Documentation](https://learn.microsoft.com/azure/azure-functions/dotnet-isolated-process-guide)
-- [Cosmos DB Best Practices](https://learn.microsoft.com/azure/cosmos-db/nosql/best-practice-dotnet)
+- [Azure Storage Tables documentation](https://learn.microsoft.com/azure/storage/tables/)
 - [TUnit Documentation](https://thomhurst.github.io/TUnit/)

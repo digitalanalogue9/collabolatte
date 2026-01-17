@@ -112,6 +112,7 @@ React SPA with:
 - **Routing:** React Router v6
 
 **Local dev:** http://localhost:3000
+**SWA CLI:** `swa build` uses `apps/web/dist` as `appLocation` to avoid npm workspace install issues.
 
 ### API (`apps/api`)
 
@@ -119,7 +120,7 @@ Azure Functions with:
 
 - **Runtime:** .NET 10 isolated
 - **Framework:** Azure Functions v4
-- **Storage:** Azure Cosmos DB
+- **Storage:** Azure Storage
 - **Auth:** Azure AD B2C + Azure Easy Auth
 - **Testing:** TUnit + FluentAssertions + Moq
 

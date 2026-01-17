@@ -4,6 +4,10 @@
   "private": true,
   "type": "module",
   "description": "Azure-native team collaboration platform",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "pnpm -r --parallel dev",
     "dev:web": "pnpm --filter @collabolatte/web dev",
@@ -12,11 +16,16 @@
     "build:web": "pnpm --filter @collabolatte/web... build",
     "build:api": "dotnet build apps/api/Collabolatte.Api.sln",
     "build:marketing": "pnpm --filter @collabolatte/marketing build",
+    "preview:web": "pnpm --filter @collabolatte/web preview -- --port 3000 --strictPort",
+    "preview:marketing": "pnpm --filter @collabolatte/marketing preview -- --port 8080",
     "test": "pnpm test:unit && pnpm test:api && pnpm test:e2e",
     "test:unit": "pnpm -r test",
     "test:api": "dotnet test apps/api/Collabolatte.Api.sln",
     "test:api:watch": "dotnet watch test --project apps/api/tests/Collabolatte.Api.Tests.csproj",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test --config tests/playwright.config.ts",
+    "test:e2e:web": "playwright test --config tests/playwright.config.ts --project web",
+    "test:e2e:marketing": "playwright test --config tests/playwright.config.ts --project marketing",
+    "test:e2e:local": "node scripts/run-e2e-local.mjs",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

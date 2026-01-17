@@ -28,10 +28,27 @@ jobs:
               run: pnpm exec playwright install --with-deps
 
             - name: Build apps
-              run: pnpm build:web
+              run: |
+                  pnpm build:web
+                  pnpm build:marketing
 
-            - name: Run Playwright tests
-              run: pnpm test:e2e
+            - name: Start preview servers
+              run: |
+                  pnpm preview:web &
+                  pnpm preview:marketing &
+
+            - name: Wait for preview servers
+              run: |
+                  for i in {1..30}; do
+                    curl -sSf http://localhost:3000 >/dev/null && curl -sSf http://localhost:8080 >/dev/null && break
+                    sleep 2
+                  done
+
+            - name: Run Playwright tests (web)
+              run: pnpm test:e2e:web
+
+            - name: Run Playwright tests (marketing)
+              run: pnpm test:e2e:marketing
 
             - uses: actions/upload-artifact@v4
               if: always()

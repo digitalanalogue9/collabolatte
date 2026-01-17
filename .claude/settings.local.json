@@ -27,7 +27,12 @@
       "Bash(git mv:*)",
       "Bash(az bicep build:*)",
       "Bash(az bicep lint:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(pnpm test:e2e:local:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(tasklist:*)",
+      "Bash(pnpm --filter @collabolatte/theme build:*)"
     ]
   }
 }

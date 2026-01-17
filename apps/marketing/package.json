@@ -5,6 +5,7 @@
   "description": "Collabolatte marketing site",
   "scripts": {
     "dev": "eleventy --serve",
+    "preview": "eleventy --serve",
     "build": "eleventy",
     "clean": "rm -rf _site node_modules"
   },

@@ -11,29 +11,43 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
 
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'web',
+      testMatch: /web\/.*\.spec\.ts/,
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: process.env.PLAYWRIGHT_WEB_BASE_URL ?? 'http://localhost:3000',
+      },
+      webServer: process.env.CI
+        ? undefined
+        : {
+            command: 'pnpm --filter @collabolatte/web dev',
+            url: process.env.PLAYWRIGHT_WEB_BASE_URL ?? 'http://localhost:3000',
+            reuseExistingServer: true,
+          },
     },
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: 'marketing',
+      testMatch: /marketing\/.*\.spec\.ts/,
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL:
+          process.env.PLAYWRIGHT_MARKETING_BASE_URL ?? 'http://localhost:8080',
+      },
+      webServer: process.env.CI
+        ? undefined
+        : {
+            command: 'pnpm --filter @collabolatte/marketing dev',
+            url:
+              process.env.PLAYWRIGHT_MARKETING_BASE_URL ??
+              'http://localhost:8080',
+            reuseExistingServer: true,
+          },
     },
   ],
-
-  webServer: {
-    command: 'pnpm --filter @collabolatte/web dev',
-    url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
-  },
 });

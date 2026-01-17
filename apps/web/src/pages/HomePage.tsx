@@ -17,7 +17,9 @@ interface UserInfo {
 }
 
 export function HomePage() {
-  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [userInfo, setUserInfo] = useState<UserInfo | null>({
+    clientPrincipal: null,
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,6 +29,10 @@ export function HomePage() {
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch user info');
+        }
+        const contentType = response.headers.get('content-type') ?? '';
+        if (!contentType.includes('application/json')) {
+          throw new Error('Unexpected response format');
         }
         return response.json();
       })
@@ -57,32 +63,27 @@ export function HomePage() {
         setLoading(false);
       })
       .catch((err) => {
-        setError(err.message);
+        setError(err.message ?? 'Error loading user info');
+        setUserInfo({ clientPrincipal: null });
         setLoading(false);
       });
   }, []);
-
-  if (loading) {
-    return (
-      <AppLayout header={<AppHeader />} footer={<AppFooter />}>
-        <Typography>Loading...</Typography>
-      </AppLayout>
-    );
-  }
-
-  if (error) {
-    return (
-      <AppLayout header={<AppHeader />} footer={<AppFooter />}>
-        <Alert severity="error">Error loading user info: {error}</Alert>
-      </AppLayout>
-    );
-  }
 
   const isAuthenticated = userInfo?.clientPrincipal !== null;
 
   return (
     <AppLayout header={<AppHeader userName={userInfo?.displayName} />} footer={<AppFooter />}>
       <Box sx={{ py: 4 }}>
+        {loading && (
+          <Alert severity="info" sx={{ mb: 3 }}>
+            Loading user info...
+          </Alert>
+        )}
+        {error && (
+          <Alert severity="error" sx={{ mb: 3 }}>
+            Error loading user info: {error}
+          </Alert>
+        )}
         <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 300 }}>
           Hello, World! 👋
         </Typography>

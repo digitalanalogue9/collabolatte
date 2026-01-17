@@ -11,14 +11,47 @@ import { tokens } from './tokens';
  */
 export const muiTheme = createTheme({
   palette: {
-    primary: tokens.colors.primary,
-    secondary: tokens.colors.secondary,
-    error: tokens.colors.error,
-    warning: tokens.colors.warning,
-    info: tokens.colors.info,
-    success: tokens.colors.success,
+    primary: {
+      main: tokens.colors.primary.main,
+      light: tokens.colors.primary.light,
+      dark: tokens.colors.primary.dark,
+      contrastText: tokens.colors.primary.contrastText,
+    },
+    secondary: {
+      main: tokens.colors.secondary.main,
+      light: tokens.colors.secondary.light,
+      dark: tokens.colors.secondary.dark,
+      contrastText: tokens.colors.secondary.contrastText,
+    },
+    error: {
+      main: tokens.colors.error.main,
+      light: tokens.colors.error.light,
+      dark: tokens.colors.error.dark,
+      contrastText: tokens.colors.error.contrastText,
+    },
+    warning: {
+      main: tokens.colors.warning.main,
+      light: tokens.colors.warning.light,
+      dark: tokens.colors.warning.dark,
+      contrastText: tokens.colors.warning.contrastText,
+    },
+    info: {
+      main: tokens.colors.info.main,
+      light: tokens.colors.info.light,
+      dark: tokens.colors.info.dark,
+      contrastText: tokens.colors.info.contrastText,
+    },
+    success: {
+      main: tokens.colors.success.main,
+      light: tokens.colors.success.light,
+      dark: tokens.colors.success.dark,
+      contrastText: tokens.colors.success.contrastText,
+    },
     grey: tokens.colors.grey,
-    background: tokens.colors.background,
+    background: {
+      default: tokens.colors.background.default,
+      paper: tokens.colors.background.paper,
+    },
     text: tokens.colors.text,
     divider: tokens.colors.border,
   },
