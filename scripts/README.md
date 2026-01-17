@@ -18,14 +18,17 @@ This directory contains utility scripts for development, testing, and deployment
 **Purpose:** Checks if required ports are available before starting development servers.
 
 **Usage:**
+
 ```powershell
 .\scripts\port-guard.ps1 -Ports 3000,8080,4173
 ```
 
 **Parameters:**
+
 - `-Ports` - Array of port numbers to check (default: 3000, 8080)
 
 **Example:**
+
 ```powershell
 # Check if web and marketing ports are available
 .\scripts\port-guard.ps1
@@ -46,6 +49,7 @@ Run before starting dev servers to avoid "port already in use" errors.
 **Purpose:** Orchestrates local end-to-end testing with Playwright by managing preview servers.
 
 **Usage:**
+
 ```bash
 node scripts/run-e2e-local.mjs
 # or
@@ -53,6 +57,7 @@ pnpm test:e2e:local
 ```
 
 **What it does:**
+
 1. Builds web and marketing apps
 2. Starts preview servers on ports 3000 and 8080
 3. Waits for servers to be ready
@@ -60,9 +65,11 @@ pnpm test:e2e:local
 5. Cleans up servers after tests complete
 
 **Environment Variables:**
+
 - `CI` - Set to `true` to enable CI mode behavior
 
 **Example:**
+
 ```bash
 # Run E2E tests locally with auto server management
 pnpm test:e2e:local
@@ -71,7 +78,8 @@ pnpm test:e2e:local
 CI=true node scripts/run-e2e-local.mjs
 ```
 
-**When to use:**  
+**When to use:**
+
 - Testing E2E flows locally without manually starting servers
 - Debugging CI failures locally
 - Running full integration tests before pushing
@@ -82,25 +90,30 @@ CI=true node scripts/run-e2e-local.mjs
 
 ### `Set-AzureSecretsToGitHub.ps1`
 
-**Purpose:** Retrieves Azure Static Web App deployment tokens and configures them as GitHub repository secrets.
+**Purpose:** Retrieves Azure Static Web App deployment tokens and configures them as GitHub
+repository secrets.
 
 **Usage:**
+
 ```powershell
 .\scripts\Set-AzureSecretsToGitHub.ps1 [-Environment <env>] [-Project <name>] [-Location <region>]
 ```
 
 **Parameters:**
+
 - `-Environment` - Target environment: `dev`, `staging`, or `prod` (default: `dev`)
 - `-Project` - Project name (default: `collabolatte`)
 - `-Location` - Azure region (default: `westeurope`)
 
 **Prerequisites:**
+
 - Azure CLI installed and logged in (`az login`)
 - GitHub CLI installed and authenticated (`gh auth login`)
 - Contributor access to Azure subscription
 - Admin access to GitHub repository
 
 **Examples:**
+
 ```powershell
 # Configure secrets for dev environment
 .\scripts\Set-AzureSecretsToGitHub.ps1
@@ -113,6 +126,7 @@ CI=true node scripts/run-e2e-local.mjs
 ```
 
 **What it does:**
+
 1. Validates prerequisites (Azure CLI, GitHub CLI, authentication)
 2. Fetches deployment tokens from Azure Static Web Apps
 3. Sets the following GitHub secrets:
@@ -120,6 +134,7 @@ CI=true node scripts/run-e2e-local.mjs
    - `AZURE_STATIC_WEB_APPS_API_TOKEN_WWW`
 
 **When to use:**
+
 - After deploying Azure infrastructure for the first time
 - When rotating deployment tokens
 - When setting up CI/CD for a new environment
@@ -129,27 +144,32 @@ CI=true node scripts/run-e2e-local.mjs
 
 ## Code Coverage Scripts
 
-Located in `code-coverage/` subdirectory. These scripts help analyze and visualize code coverage for the .NET API.
+Located in `code-coverage/` subdirectory. These scripts help analyze and visualize code coverage for
+the .NET API.
 
 ### `Update-CodeCoverageArtifacts.ps1`
 
 **Purpose:** Runs tests with coverage collection and generates coverage reports.
 
 **Usage:**
+
 ```powershell
 .\scripts\code-coverage\Update-CodeCoverageArtifacts.ps1 [-Force]
 ```
 
 **Parameters:**
+
 - `-Force` - Skip timestamp check and force regeneration of coverage
 
 **What it does:**
+
 1. Cleans existing test results
 2. Runs `dotnet test` with coverage collection
 3. Generates Cobertura XML and HTML reports
 4. Updates timestamp for freshness tracking
 
 **Example:**
+
 ```powershell
 # Update coverage (only if stale)
 .\scripts\code-coverage\Update-CodeCoverageArtifacts.ps1
@@ -162,9 +182,11 @@ Located in `code-coverage/` subdirectory. These scripts help analyze and visuali
 
 ### `New-CoverageSummary.ps1`
 
-**Purpose:** Generates comprehensive code coverage reports optimized for AI analysis and human review.
+**Purpose:** Generates comprehensive code coverage reports optimized for AI analysis and human
+review.
 
 **Usage:**
+
 ```powershell
 .\scripts\code-coverage\New-CoverageSummary.ps1 `
     [-MinimumCoverage <percentage>] `
@@ -174,16 +196,19 @@ Located in `code-coverage/` subdirectory. These scripts help analyze and visuali
 ```
 
 **Parameters:**
+
 - `-MinimumCoverage` - Minimum acceptable coverage percentage (default: 80)
 - `-OutputFormat` - Output format: `Markdown`, `Json`, or `Both` (default: `Both`)
 - `-CheckFreshness` - Warn if coverage data is older than 1 hour
 - `-CrapThreshold` - CRAP score threshold for hotspots (default: 30)
 
 **Outputs:**
+
 - `coverage-summary.md` - Human-readable markdown report
 - `coverage-summary.json` - Machine-readable JSON report
 
 **Examples:**
+
 ```powershell
 # Generate standard summary
 .\scripts\code-coverage\New-CoverageSummary.ps1
@@ -196,6 +221,7 @@ Located in `code-coverage/` subdirectory. These scripts help analyze and visuali
 ```
 
 **Report Includes:**
+
 - Overall coverage metrics (line, branch, method)
 - Files with low coverage (< 80%)
 - CRAP hotspots (complex, untested code)
@@ -208,20 +234,24 @@ Located in `code-coverage/` subdirectory. These scripts help analyze and visuali
 **Purpose:** Generates context-rich prompts for AI assistants to help improve test coverage.
 
 **Usage:**
+
 ```powershell
 .\scripts\code-coverage\New-CoveragePromptBuilder.ps1 [-TargetFile <path>]
 ```
 
 **Parameters:**
+
 - `-TargetFile` - Specific file to analyze (optional, prompts if not provided)
 
 **What it does:**
+
 1. Analyzes coverage report
 2. Identifies uncovered lines in target file
 3. Reads file contents and related test files
 4. Generates structured prompt with context
 
 **Example:**
+
 ```powershell
 # Interactive mode (prompts for file selection)
 .\scripts\code-coverage\New-CoveragePromptBuilder.ps1
@@ -240,6 +270,7 @@ Copy the generated prompt to Claude, ChatGPT, or GitHub Copilot to get targeted 
 **Purpose:** PowerShell module for parsing and analyzing CRAP (Change Risk Anti-Patterns) metrics.
 
 **Usage:**
+
 ```powershell
 Import-Module .\scripts\code-coverage\CrapReport.psm1
 
@@ -251,10 +282,12 @@ $critical = $hotspots | Where-Object { $_.CrapScore -gt 50 }
 ```
 
 **Functions:**
+
 - `Get-CrapHotspots` - Extracts methods with high CRAP scores
 - `Format-CrapReport` - Formats hotspots as readable text
 
 **CRAP Score Interpretation:**
+
 - **1-10:** Low risk - simple, well-tested code
 - **11-30:** Medium risk - consider refactoring or adding tests
 - **31+:** High risk - complex, untested code that's risky to change
@@ -269,6 +302,7 @@ $critical = $hotspots | Where-Object { $_.CrapScore -gt 50 }
 One type pattern per line, supports wildcards.
 
 **Example:**
+
 ```
 *Controller
 *Dto
@@ -360,22 +394,29 @@ When adding new scripts:
 ## Troubleshooting
 
 ### "Port already in use"
-Run `port-guard.ps1` to identify which process is using the port, then kill it or use a different port.
+
+Run `port-guard.ps1` to identify which process is using the port, then kill it or use a different
+port.
 
 ### "Azure CLI not found"
+
 Install Azure CLI: https://aka.ms/installazurecli
 
 ### "GitHub CLI not found"
+
 Install GitHub CLI: `winget install --id GitHub.cli`
 
 ### "Not authenticated"
+
 ```bash
 az login          # Azure
 gh auth login     # GitHub
 ```
 
 ### Coverage reports not generating
+
 Ensure you have .NET test coverage tools installed:
+
 ```bash
 dotnet tool install --global coverlet.console
 dotnet tool install --global dotnet-reportgenerator-globaltool
