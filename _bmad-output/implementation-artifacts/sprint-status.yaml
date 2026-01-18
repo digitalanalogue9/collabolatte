@@ -48,7 +48,7 @@ development_status:
   1-4-write-bicep-templates: done
   1-5-deploy-infrastructure-via-bicep: done
   1-6-deploy-and-verify-minimal-application: done
-  epic-1-retrospective: optional
+  epic-1-retrospective: done
   epic-2: backlog
   2-1-first-contact-feels-safe: backlog
   2-2-authenticate-without-friction: backlog
