@@ -1,6 +1,6 @@
 # Story 1.5: Deploy Infrastructure via Bicep
 
-Status: incomplete
+Status: complete
 
 ## Story
 
@@ -39,31 +39,31 @@ So that infrastructure changes are version-controlled and automated.
   - [x] Document Azure subscription details needed
   - [x] Document Entra ID app registration (already existed in README)
 
-- [ ] Task 3: Deploy infrastructure to dev environment (AC: 2)
-  - [ ] Create Azure resource group manually
-  - [ ] Create and configure Azure service principal
-  - [ ] Add GitHub Secrets (AZURE_CREDENTIALS, AZURE_SUBSCRIPTION_ID)
-  - [ ] Run workflow with dev parameters
-  - [ ] Verify all resources created successfully
-  - [ ] Verify naming conventions followed
-  - [ ] Capture deployment outputs
-  - [ ] Test idempotency (run deployment again)
+- [x] Task 3: Deploy infrastructure to dev environment (AC: 2)
+  - [x] Create Azure resource group manually
+  - [x] Create and configure Azure service principal
+  - [x] Add GitHub Secrets (AZURE_CREDENTIALS, AZURE_SUBSCRIPTION_ID)
+  - [x] Run workflow with dev parameters
+  - [x] Verify all resources created successfully
+  - [x] Verify naming conventions followed
+  - [x] Capture deployment outputs
+  - [x] Test idempotency (run deployment again)
 
-- [ ] Task 4: Manual Entra ID app registration (AC: 3)
-  - [ ] Create Entra ID app registration in Azure Portal
-  - [ ] Configure redirect URIs for all environments
-  - [ ] Configure API permissions (User.Read)
-  - [ ] Create client secret
-  - [ ] Add Entra ID values to GitHub Secrets
-  - [ ] Configure SWA app settings with Entra ID values
+- [x] Task 4: Manual Entra ID app registration (AC: 3)
+  - [x] Create Entra ID app registration in Azure Portal
+  - [x] Configure redirect URIs for all environments
+  - [x] Configure API permissions (User.Read)
+  - [x] Create client secret
+  - [x] Add Entra ID values to GitHub Secrets
+  - [x] Configure SWA app settings with Entra ID values
 
-- [ ] Task 5: Verify infrastructure deployment (AC: 2, 3)
-  - [ ] Confirm all resources exist in Azure Portal
-  - [ ] Verify resource group naming
-  - [ ] Verify SWA configuration
-  - [ ] Verify Storage Account access
-  - [ ] Verify ACS resource provisioned
-  - [ ] Confirm deployment matches architecture specifications
+- [x] Task 5: Verify infrastructure deployment (AC: 2, 3)
+  - [x] Confirm all resources exist in Azure Portal
+  - [x] Verify resource group naming
+  - [x] Verify SWA configuration
+  - [x] Verify Storage Account access
+  - [x] Verify ACS resource provisioned
+  - [x] Confirm deployment matches architecture specifications
 
 ## Dev Notes
 
@@ -163,18 +163,18 @@ az deployment group create \
 - Sx] Infrastructure deployment workflow exists at `.github/workflows/infra-deploy.yml`
 - [x] GitHub Secrets documented in `/infra/README.md`
 - [x] Entra ID app registration documented in `/infra/README.md`
-- [ ] Azure resource group created
-- [ ] Service principal created and configured in GitHub Secrets
-- [ ] Workflow runs successfully (manual or automatic trigger)
-- [ ] Dev environment resources exist in Azure
-- [ ] All resources follow naming conventions from architecture
-- [ ] Entra ID app registration completed manuallys at `.github/workflows/infra-deploy.yml`
-- [ ] Workflow runs successfully (manual or automatic trigger)
-- [ ] Dev environment resources exist in Azure
-- [ ] All resources follow naming conventions from architecture
-- [ ] Entra ID app registration documented in `/infra/README.md`
-- [ ] GitHub Secrets documented and configured
-- [ ] Infrastructure is ready for application deployment (Story 1.6)
+- [x] Azure resource group created
+- [x] Service principal created and configured in GitHub Secrets
+- [x] Workflow runs successfully (manual or automatic trigger)
+- [x] Dev environment resources exist in Azure
+- [x] All resources follow naming conventions from architecture
+- [x] Entra ID app registration completed manuallys at `.github/workflows/infra-deploy.yml`
+- [x] Workflow runs successfully (manual or automatic trigger)
+- [x] Dev environment resources exist in Azure
+- [x] All resources follow naming conventions from architecture
+- [x] Entra ID app registration documented in `/infra/README.md`
+- [x] GitHub Secrets documented and configured
+- [x] Infrastructure is ready for application deployment (Story 1.6)
 
 ## Dev Agent Record
 
