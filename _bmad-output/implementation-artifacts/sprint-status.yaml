@@ -44,10 +44,10 @@ development_status:
   1-0-document-infrastructure-provisioning-bicep: done
   1-1-set-up-initial-project-from-starter-template: done
   1-2-set-up-storybook-for-component-development: done
-  1-3-create-core-web-app-ui-components: in-progress
-  1-4-write-bicep-templates: backlog
-  1-5-deploy-infrastructure-via-bicep: backlog
-  1-6-deploy-and-verify-minimal-application: backlog
+  1-3-create-core-web-app-ui-components: done
+  1-4-write-bicep-templates: done
+  1-5-deploy-infrastructure-via-bicep: done
+  1-6-deploy-and-verify-minimal-application: in-progress
   epic-1-retrospective: optional
   epic-2: backlog
   2-1-first-contact-feels-safe: backlog
