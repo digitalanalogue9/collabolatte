@@ -127,9 +127,14 @@ dotnet test                     # Run tests
 
 `main` is protected: do not push directly.
 
-- Create a topic branch per change (prefer `ai/<topic>` for agent work).
+- Create a topic branch per change. Preferred naming:
+  - `epic/<epic-slug>` for epic-wide planning/implementation work (e.g., `epic/epic-2-join-trust`)
+  - `story/<story-key>-<slug>` for a single story implementation slice (e.g., `story/2-1-first-contact`)
+  - `ai/<topic>` for agent-only chores/docs/ops (e.g., `ai/sprint-status-refresh`)
 - Open a pull request for review; merge via PR only.
-- If any planning artefact says “push to main”, interpret it as “merge the PR into main”.
+- If any planning artefact says "push to main", interpret it as "merge the PR into main".
+
+Before running any BMAD workflow that writes files (for example `sprint-planning`, `dev-story`, or story/epic document generation), ensure you are on the correct topic branch. If you are on `main`, create/switch branches first.
 
 ### Sprint status updates
 

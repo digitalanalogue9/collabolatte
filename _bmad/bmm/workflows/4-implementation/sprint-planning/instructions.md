@@ -2,6 +2,11 @@
 
 <critical>The workflow execution engine is governed by: {project-root}/_bmad/core/tasks/workflow.xml</critical>
 <critical>You MUST have already loaded and processed: {project-root}/_bmad/bmm/workflows/4-implementation/sprint-planning/workflow.yaml</critical>
+<critical>Branching rule: If currently on `main`, you MUST create/switch to a topic branch BEFORE writing any files.</critical>
+
+## Git Hygiene (Mandatory)
+
+This workflow writes/updates `_bmad-output/implementation-artifacts/sprint-status.yaml`. To comply with repo rules, the change MUST land via PR from a topic branch (never by pushing directly to `main`).
 
 ## 📚 Document Discovery - Full Epic Loading
 
@@ -21,6 +26,16 @@
 **Fuzzy matching**: Be flexible with document names - users may use variations like `epics.md`, `bmm-epics.md`, `user-stories.md`, etc.
 
 <workflow>
+
+<step n="0" goal="Create branch before changes">
+<action>If `git branch --show-current` is `main`, create a topic branch and switch to it BEFORE modifying any files.</action>
+<action>Recommended branch names for sprint planning:</action>
+
+- `epic/<epic-slug>` (e.g., `epic/epic-2-join-trust`)
+- or `ai/<topic>` when the change is purely agent planning/ops (e.g., `ai/sprint-status-refresh`)
+
+<action>IF the working tree is dirty while on `main`, STOP and ask {user_name} how to proceed (stash, commit, or discard).</action>
+</step>
 
 <step n="1" goal="Parse epic files and extract all work items">
 <action>Communicate in {communication_language} with {user_name}</action>

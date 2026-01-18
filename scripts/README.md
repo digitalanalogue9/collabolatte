@@ -13,6 +13,28 @@ This directory contains utility scripts for development, testing, and deployment
 
 ## Development Scripts
 
+### `Start-BmadBranch.ps1`
+
+**Purpose:** Creates/switches to a topic branch before running BMAD workflows that write files
+(sprint planning, story generation, etc.).
+
+**Usage:**
+
+```powershell
+pwsh -File scripts/Start-BmadBranch.ps1 -Type epic -Name epic-2-join-trust
+pwsh -File scripts/Start-BmadBranch.ps1 -Type story -Name 2-1-first-contact
+pwsh -File scripts/Start-BmadBranch.ps1 -Branch epic/epic-2-join-trust
+```
+
+**Parameters:**
+
+- `-Type` / `-Name` - Build branch name as `<type>/<name>`
+- `-Branch` - Provide a full branch name (overrides `-Type`/`-Name`)
+- `-AllowDirty` - Allow switching/creating with uncommitted changes
+- `-Force` - Allow switching away from a non-`main` branch
+
+---
+
 ### `port-guard.ps1`
 
 **Purpose:** Checks if required ports are available before starting development servers.
