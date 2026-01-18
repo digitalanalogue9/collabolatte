@@ -98,7 +98,7 @@ README.md that allows future implementation of Bicep templates without ambiguity
 
 ### Suggested Naming Pattern
 
-```
+```text
 Pattern: {project}{env}{resource}{id}
 
 Examples:
@@ -159,7 +159,7 @@ The `staticwebapp.config.json` must include:
 This documentation will be created at the repository root level, not within the `/apps` directory
 structure.
 
-```
+```text
 collabolatte/
 ├── infra/
 │   ├── README.md           # Main infrastructure documentation (THIS STORY)

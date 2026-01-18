@@ -127,9 +127,18 @@ dotnet test                     # Run tests
 
 `main` is protected: do not push directly.
 
-- Create a topic branch per change (prefer `ai/<topic>` for agent work).
-- Open a pull request for review; merge via PR only.
-- If any planning artefact says “push to main”, interpret it as “merge the PR into main”.
+This repository uses an epic/story branching model designed for AI agents:
+
+- Epic integration branches: `epic/<epic-key>-<short-name>`
+- Story execution branches: `story/<epic-key>-<story-key>-<short-name>`
+
+Agents work on `story/*` branches only and open PRs into the corresponding `epic/*` branch. Humans
+merge `epic/*` into `main` when the epic is complete.
+
+Full workflow details live in:
+`_bmad-output/planning-artifacts/architecture/ai-agents-git-workflow.md`
+
+If any planning artefact says "push to main", interpret it as "merge the PR into main".
 
 ### Sprint status updates
 
