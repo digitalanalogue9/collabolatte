@@ -54,6 +54,9 @@ GitHub can only require checks that have run at least once for branches matching
 If the required-checks list is empty for `epic/*`, open a tiny PR into an `epic/*` branch to force
 workflows to report status checks, then return to ruleset configuration.
 
+If no checks run on a PR targeting `epic/*`, ensure your GitHub Actions workflows include `epic/*`
+in their `on.pull_request.branches` filters (many repos default to `main` only).
+
 Avoid requiring checks that only run on PR close (for example “Close Pull Request Job”), as they can
 block merges.
 
@@ -89,4 +92,3 @@ Every PR should answer:
 2. What acceptance criteria are met? (checkboxes)
 3. How was it tested? (commands + CI evidence)
 4. Rollout/feature flag notes and rollback risk
-
