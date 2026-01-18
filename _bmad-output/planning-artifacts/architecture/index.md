@@ -38,6 +38,7 @@
     - [API & Communication Patterns](./core-architectural-decisions.md#api-communication-patterns)
     - [Frontend Architecture](./core-architectural-decisions.md#frontend-architecture)
     - [Infrastructure & Deployment](./core-architectural-decisions.md#infrastructure-deployment)
+  - [AI Agents + Git Workflow (GitHub)](./ai-agents-git-workflow.md)
   - [Implementation Patterns & Consistency Rules](./implementation-patterns-consistency-rules.md)
     - [Pattern Categories Defined](./implementation-patterns-consistency-rules.md#pattern-categories-defined)
     - [Naming Patterns](./implementation-patterns-consistency-rules.md#naming-patterns)

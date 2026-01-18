@@ -82,8 +82,16 @@ infra/        # Bicep templates
 
 `main` is protected: never push directly to `main`.
 
-- Use a topic branch per change (prefer `ai/<topic>` for agent work).
-- Open a pull request and merge via PR only.
+Use an epic/story branching model:
+
+- `epic/<epic-key>-<short-name>`: epic integration branch (created from `main`)
+- `story/<epic-key>-<story-key>-<short-name>`: single-story execution branch (created from its epic)
+
+Agents work on `story/*` branches only and open PRs into the relevant `epic/*` branch. Humans merge
+`epic/*` into `main` when the epic is complete.
+
+Full workflow details:
+`_bmad-output/planning-artifacts/architecture/ai-agents-git-workflow.md`
 
 ### Sprint status updates
 
