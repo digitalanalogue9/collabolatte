@@ -36,7 +36,14 @@
       "WebFetch(domain:www.telerik.com)",
       "WebFetch(domain:anthonygiretti.com)",
       "WebFetch(domain:github.com)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(git checkout:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh run list:*)",
+      "Bash(git pull:*)",
+      "Skill(bmad:bmm:workflows:retrospective)"
     ]
   }
 }

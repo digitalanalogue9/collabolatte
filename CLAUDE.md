@@ -123,6 +123,33 @@ dotnet build                    # Build .NET project
 dotnet test                     # Run tests
 ```
 
+## Branching and Pull Requests
+
+`main` is protected: do not push directly.
+
+- Create a topic branch per change (prefer `ai/<topic>` for agent work).
+- Open a pull request for review; merge via PR only.
+- If any planning artefact says “push to main”, interpret it as “merge the PR into main”.
+
+### Sprint status updates
+
+To keep sprint tracking honest and to avoid status drift:
+
+- Update `_bmad-output/implementation-artifacts/sprint-status.yaml` only when the corresponding PR
+  is ready (or after it has merged).
+- Prefer a small follow-up PR that only updates sprint status, based on the latest `main`.
+
+### Epic completion gate
+
+Before starting the next epic, run:
+
+```bash
+pnpm validate:epic-gate
+```
+
+This fails if any previous epic/story artefacts are incomplete or out of sync with
+`sprint-status.yaml`.
+
 **Commits:**
 
 - Use aggressive commit strategy: commit each accepted change
