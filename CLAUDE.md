@@ -136,6 +136,11 @@ dotnet test                     # Run tests
 
 Before running any BMAD workflow that writes files (for example `sprint-planning`, `dev-story`, or story/epic document generation), ensure you are on the correct topic branch. If you are on `main`, create/switch branches first.
 
+When using an epic branch workflow (plan epic → implement stories), prefer:
+
+- `epic/<epic-slug>` for sprint planning and epic-wide planning changes
+- `story/<story-key>-<slug>` for implementing a single story, created from the epic branch
+
 ### Sprint status updates
 
 To keep sprint tracking honest and to avoid status drift:

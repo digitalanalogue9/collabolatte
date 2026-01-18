@@ -13,12 +13,10 @@
   <critical>Do NOT schedule a "next session" or request review pauses unless a HALT condition applies. Only Step 6 decides completion.</critical>
   <critical>User skill level ({user_skill_level}) affects conversation style ONLY, not code updates.</critical>
 
-  <step n="0" goal="Create branch before development begins" tag="git-hygiene">
-    <action>If `git branch --show-current` is `main`, create a topic branch and switch to it BEFORE modifying any files.</action>
-    <action>Recommended branch names for story implementation:</action>
-    <action>- `story/{{story_key}}-<short-slug>` (e.g., `story/2-1-first-contact`)</action>
-    <action>- or `epic/<epic-slug>` if implementing multiple stories intentionally</action>
-    <action>IF the working tree is dirty while on `main`, HALT and ask {user_name} how to proceed (stash, commit, or discard).</action>
+  <step n="0" goal="Ensure epic branch context before development" tag="git-hygiene">
+    <action>If `git branch --show-current` is `main`, HALT and ask {user_name} to first create/switch to the relevant `epic/<epic-slug>` branch (created during sprint planning) before starting story development.</action>
+    <action>Preferred flow: `epic/<epic-slug>` (sprint planning) → `story/<story_key>` (dev-story implementation).</action>
+    <action>Note: the story branch is created AFTER the story is selected (once {{story_key}} is known), but BEFORE any code or file changes.</action>
   </step>
 
   <step n="1" goal="Find next ready story and load it" tag="sprint-status">
@@ -125,6 +123,9 @@
     <action>Store the found story_key (e.g., "1-2-user-authentication") for later status updates</action>
     <action>Find matching story file in {story_dir} using story_key pattern: {{story_key}}.md</action>
     <action>Read COMPLETE story file from discovered path</action>
+    <action>Branching rule: If currently on an `epic/*` branch, create a dedicated story branch from it BEFORE making any changes: `git switch -c story/{{story_key}}`.</action>
+    <action>Branching rule: If already on `story/*`, continue (ensure the branch is based on the correct epic branch).</action>
+    <action>Branching rule: If on `main`, HALT and ask {user_name} to switch to the epic branch first.</action>
 
     <anchor id="task_check" />
 
