@@ -67,6 +67,20 @@ Naming, file structure, API formats, date handling, error/loading patterns.
 
 - Local component state only (no shared loading context)
 
+## Documentation Patterns
+
+**.NET API Documentation:**
+
+- Public API surface (Functions endpoints, DTOs, options, public services) must include XML doc comments.
+- Minimum required tags: `summary`, `param` (where applicable), `returns` (where applicable).
+- Side effects, auth/role requirements, and error conditions must be noted in `remarks`.
+
+**React App Documentation:**
+
+- Exported components, hooks, and shared utilities must include JSDoc/TSDoc.
+- Props/interfaces should include brief field descriptions when non-obvious.
+- Avoid documenting trivial private/internal helpers.
+
 ## Pattern Risks
 
 - **Route naming drift:** agents might reintroduce singular routes -> enforce in code review checklist.
@@ -93,6 +107,7 @@ Naming, file structure, API formats, date handling, error/loading patterns.
 - JSON fields and entity properties are camelCase everywhere.
 - Frontend file names are kebab-case; component names are PascalCase.
 - Problem Details is the only error wrapper; success responses are direct payloads.
+- Public .NET API surface has XML docs; exported React symbols have JSDoc/TSDoc.
 
 ## Enforcement Guidelines
 
@@ -102,11 +117,13 @@ Naming, file structure, API formats, date handling, error/loading patterns.
 - Use plural, noun-based API routes with `{id}` params.
 - Keep frontend files kebab-case and components PascalCase.
 - Use ISO 8601 date strings; Problem Details only for errors.
+- Document public .NET API surface with XML comments and exported React symbols with JSDoc/TSDoc.
 
 **Pattern Enforcement:**
 
 - Add contract tests for ISO 8601 dates and Problem Details error shape.
 - Review checklist includes naming/format rules; deviations require explicit approval.
+- Enable linting/compilers to flag missing docs on public/exported surfaces (CS1591 or analyzers for .NET; eslint jsdoc/tsdoc rules for React).
 
 ## Pattern Examples (Condensed)
 

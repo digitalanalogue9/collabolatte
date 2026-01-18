@@ -46,7 +46,7 @@ this project. Focus on unobvious details that agents might otherwise miss._
 - Azure Functions runtime `v4`
 - .NET isolated worker
 - Default: Windows Consumption (MVP)
-- **.NET SDK: `10.0.x` (LTS)**
+- **.NET SDK: `9.0.x` (current due to Azure Static Web Apps support; upgrade when available)**
 - **Plan rule: if plan changes away from Windows Consumption, revalidate .NET support matrix**
 - **Decision:** Windows Consumption keeps cost low and avoids Linux Consumption .NET constraints
 

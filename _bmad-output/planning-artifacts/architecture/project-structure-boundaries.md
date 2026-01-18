@@ -223,7 +223,7 @@ collabolatte/
 - **React:** 18.2.0 (using React 18 for MUI compatibility)
 - **MUI:** 5.15.6 (MUI v5 for React 18 support)
 - **Vite:** 7.2.4
-- **.NET:** 10.0
+- **.NET:** 9.0 (current due to Azure Static Web Apps support; upgrade when available)
 - **Azure Functions:** v4 (Worker 2.51.0, Extensions 2.1.0, SDK 2.0.7)
 - **TUnit:** 0.3.\* (testing framework for API)
 - **FluentAssertions:** 7.0.0

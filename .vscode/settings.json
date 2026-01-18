@@ -35,5 +35,8 @@
     "chat.tools.terminal.autoApprove": {
         "Set-Location": true,
         "tsc": true
+    },
+    "[xml]": {
+        "editor.defaultFormatter": "redhat.vscode-xml"
     }
 }

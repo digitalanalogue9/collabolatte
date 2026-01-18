@@ -24,7 +24,7 @@ apps/api/
 
 ## Technology Stack
 
-- **.NET 10** - Latest .NET runtime
+- **.NET 9** - Current target due to Azure Static Web Apps support (upgrade when supported)
 - **Azure Functions v4** - Serverless compute
 - **Azure Storage** - Tables/Queues/Blobs for persistence
 - **TUnit** - Modern testing framework
@@ -35,7 +35,7 @@ apps/api/
 
 ### Prerequisites
 
-- .NET 10 SDK
+- .NET 9 SDK
 - Azure Functions Core Tools v4
 - Azure Storage Emulator or Azurite
 
@@ -166,7 +166,7 @@ See `.github/workflows/swa-app.yml` for deployment configuration.
 
 1. Ensure Azure Storage Emulator or Azurite is running
 2. Check `local.settings.json` configuration
-3. Verify .NET 10 SDK is installed
+3. Verify .NET 9 SDK is installed
 4. Run `dotnet clean` then `dotnet build`
 
 ### Tests failing

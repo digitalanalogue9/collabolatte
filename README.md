@@ -29,7 +29,7 @@ collabolatte/
 
 - Node.js 22.x+ (use `nvm use` to switch)
 - pnpm 8.0.0+
-- .NET 10 SDK (for API)
+- .NET 9 SDK (for API)
 
 ### Installation
 
@@ -118,7 +118,7 @@ React SPA with:
 
 Azure Functions with:
 
-- **Runtime:** .NET 10 isolated
+- **Runtime:** .NET 9 isolated (current Azure Static Web Apps constraint; upgrade when supported)
 - **Framework:** Azure Functions v4
 - **Storage:** Azure Storage
 - **Auth:** Azure AD B2C + Azure Easy Auth

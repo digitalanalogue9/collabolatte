@@ -86,10 +86,19 @@
 - Keep route surface small and predictable.
 - DTOs only at the boundary.
 
-**API Documentation:** OpenAPI.NET generated specs as the source of truth.
+**API Documentation:** OpenAPI specification generated via Azure Functions OpenAPI extension.
 
 - Must stay aligned with DTOs and contract tests.
-- Use Microsoft.OpenApi (latest verified 3.1.2).
+- Use Microsoft.Azure.Functions.Worker.Extensions.OpenApi (v1.6.0+) for isolated worker model.
+- OpenAPI generation uses decorator attributes on HTTP trigger functions.
+- Add `<_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>` to .csproj to prevent DLL removal during publishing.
+- OpenAPI spec available at `/api/swagger.json` and Swagger UI at `/api/swagger/ui` when running locally.
+
+**Code Documentation Standards:**
+
+- .NET API: XML doc comments required on public API surface (Functions endpoints, DTOs, options, public services).
+- React app: JSDoc/TSDoc required on exported components, hooks, and shared utilities.
+- Documentation should capture behaviour, inputs/outputs, auth/role requirements, and non-obvious side effects.
 
 **Error Handling Standard:** Problem Details JSON (RFC 9457, obsoletes 7807).
 

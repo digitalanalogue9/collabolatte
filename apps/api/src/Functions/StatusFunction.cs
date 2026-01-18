@@ -3,19 +3,40 @@ using System.Text.Json;
 using Azure.Data.Tables;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
 
 namespace Collabolatte.Api.Functions;
 
+/// <summary>
+/// Provides a status endpoint for service health and configuration checks.
+/// </summary>
 public class StatusFunction
 {
     private readonly ILogger<StatusFunction> _logger;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="StatusFunction"/> class.
+    /// </summary>
+    /// <param name="logger">Logger for request-scoped diagnostics.</param>
     public StatusFunction(ILogger<StatusFunction> logger)
     {
         _logger = logger;
     }
 
+    /// <summary>
+    /// Returns a JSON payload describing service status and configuration checks.
+    /// </summary>
+    /// <param name="req">The incoming HTTP request.</param>
+    /// <returns>An HTTP 200 response containing the status payload.</returns>
+    [OpenApiOperation(operationId: "GetStatus", tags: new[] { "Health" },
+        Summary = "Service health and configuration status",
+        Description = "Returns service status including environment, authentication state, and connectivity checks for dependent services.")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK,
+        contentType: "application/json",
+        bodyType: typeof(StatusResponse),
+        Description = "Status information including timestamp, environment, authentication, and connection test results")]
     [Function("Status")]
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "status")] HttpRequestData req)
@@ -147,30 +168,78 @@ public class StatusFunction
     }
 }
 
+/// <summary>
+/// DTO describing the current service status snapshot.
+/// </summary>
 public record StatusResponse
 {
+    /// <summary>
+    /// UTC timestamp when the status was generated.
+    /// </summary>
     public DateTime Timestamp { get; init; }
+    /// <summary>
+    /// The runtime environment name as reported by the Functions host.
+    /// </summary>
     public string Environment { get; init; } = string.Empty;
+    /// <summary>
+    /// Authentication status derived from SWA EasyAuth headers.
+    /// </summary>
     public AuthenticationStatus Authentication { get; init; } = new();
+    /// <summary>
+    /// Connectivity checks for dependent services.
+    /// </summary>
     public ConnectionTests Connections { get; init; } = new();
 }
 
+/// <summary>
+/// DTO describing authentication state inferred from platform headers.
+/// </summary>
 public record AuthenticationStatus
 {
+    /// <summary>
+    /// Indicates whether the request is authenticated via EasyAuth.
+    /// </summary>
     public bool IsAuthenticated { get; init; }
+    /// <summary>
+    /// The authenticated user ID when available.
+    /// </summary>
     public string? UserId { get; init; }
+    /// <summary>
+    /// The authenticated user display name when available.
+    /// </summary>
     public string? UserName { get; init; }
+    /// <summary>
+    /// Human-readable authentication status message.
+    /// </summary>
     public string Message { get; init; } = string.Empty;
 }
 
+/// <summary>
+/// DTO containing connectivity test results.
+/// </summary>
 public record ConnectionTests
 {
+    /// <summary>
+    /// Table Storage connection test result.
+    /// </summary>
     public ConnectionTest TableStorage { get; set; } = new();
+    /// <summary>
+    /// Azure Communication Services configuration test result.
+    /// </summary>
     public ConnectionTest AzureCommunicationServices { get; set; } = new();
 }
 
+/// <summary>
+/// DTO representing a single connection test outcome.
+/// </summary>
 public record ConnectionTest
 {
+    /// <summary>
+    /// Status identifier (e.g., ok, warning, error).
+    /// </summary>
     public string Status { get; set; } = "unknown";
+    /// <summary>
+    /// Human-readable detail about the test outcome.
+    /// </summary>
     public string Message { get; set; } = string.Empty;
 }

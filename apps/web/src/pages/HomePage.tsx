@@ -16,6 +16,7 @@ interface UserInfo {
   email?: string;
 }
 
+/** Deployment verification and authentication status page. */
 export function HomePage() {
   const [userInfo, setUserInfo] = useState<UserInfo | null>({
     clientPrincipal: null,

@@ -59,7 +59,7 @@ The file `_bmad-output/project-context.md` contains **183 implementation rules**
 
 ### Technology Stack
 - **Frontend**: React 18.x + Vite 5.x (CSR SPA), TypeScript strict mode
-- **Backend**: Azure Functions v4 (.NET 10.x isolated worker)
+- **Backend**: Azure Functions v4 (.NET 9.x isolated worker)
 - **Auth**: Azure Static Web Apps EasyAuth with Microsoft Entra ID
 - **Data**: Azure Table Storage (partitioned by ProgrammeId)
 - **Notifications**: Azure Communication Services Email

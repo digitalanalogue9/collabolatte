@@ -32,7 +32,7 @@
 - Azure Functions v4 (.NET isolated) with explicit auth checks per handler.
 - Azure Table Storage partitioning by ProgrammeId; avoid cross-partition scans.
 - Idempotent matching runs keyed by ProgrammeId + CycleId.
-- OpenAPI.NET generated specs aligned to DTOs and contract tests.
+- OpenAPI specs generated via Microsoft.Azure.Functions.Worker.Extensions.OpenApi, aligned to DTOs and contract tests.
 - Email via Azure Communication Services; Teams is secondary.
 - Single-tenant MVP with future multi-tenant readiness.
 - React 18 + Vite 5 SPA; minimal routing; no state management library in MVP.

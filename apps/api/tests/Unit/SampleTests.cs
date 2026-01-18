@@ -5,6 +5,9 @@ namespace Collabolatte.Api.Tests.Unit;
 /// </summary>
 public class SampleTests
 {
+    /// <summary>
+    /// Verifies a basic equality assertion to confirm test harness wiring.
+    /// </summary>
     [Test]
     public async Task Example_Test_Should_Pass()
     {
@@ -18,6 +21,9 @@ public class SampleTests
         await Assert.That(actual).IsEqualTo(expected);
     }
 
+    /// <summary>
+    /// Verifies FluentAssertions is available and working as expected.
+    /// </summary>
     [Test]
     public async Task Example_FluentAssertions_Test()
     {

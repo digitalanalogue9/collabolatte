@@ -6,7 +6,7 @@
       "apiLocation": "apps\\api\\src",
       "outputLocation": ".",
       "apiLanguage": "dotnetisolated",
-      "apiVersion": "10.0",
+      "apiVersion": "9.0",
       "packageManager": "pnpm",
       "appBuildCommand": "pnpm --filter @collabolatte/web build",
       "apiBuildCommand": "dotnet publish -c Release",

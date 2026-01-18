@@ -32,7 +32,11 @@
       "Bash(netstat:*)",
       "Bash(findstr:*)",
       "Bash(tasklist:*)",
-      "Bash(pnpm --filter @collabolatte/theme build:*)"
+      "Bash(pnpm --filter @collabolatte/theme build:*)",
+      "WebFetch(domain:www.telerik.com)",
+      "WebFetch(domain:anthonygiretti.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl:*)"
     ]
   }
 }
