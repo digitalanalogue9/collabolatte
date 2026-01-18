@@ -30,5 +30,8 @@
     ".json": "application/json",
     ".js": "application/javascript",
     ".css": "text/css"
+  },
+  "platform": {
+    "apiRuntime": "dotnet-isolated:10.0"
   }
 }
