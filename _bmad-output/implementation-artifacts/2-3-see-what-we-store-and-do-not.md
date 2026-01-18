@@ -23,14 +23,14 @@ So that I can decide with confidence.
 
 ## Tasks / Subtasks
 
-- [ ] Create a Transparency page/route (“What we store”) in the web app
+- [ ] Create a Transparency page/route ("What we store") in the web app
 - [ ] Link to the Transparency page from the join/landing experience
 - [ ] Ensure copy follows the Trust Copy Checklist and remains consistent across pages
-- [ ] (Optional) Add an API “data preview” endpoint for authenticated users to view what is stored about them (without exposing internal IDs)
+- [ ] If any new reusable components are created in `apps/web/src/components`, add Storybook stories (`*.stories.tsx`)
+- [ ] (Optional) Add an API "data preview" endpoint for authenticated users to view what is stored about them (without exposing internal IDs)
 - [ ] Add basic tests for navigation to/from the Transparency page
 
 ## Dev Notes
 
 - Keep content plain English; avoid legal/compliance theatre.
 - Consider co-locating trust copy constants to prevent drift.
-

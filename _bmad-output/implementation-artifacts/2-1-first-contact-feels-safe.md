@@ -25,9 +25,10 @@ So that I can decide whether it feels safe and optional.
 
 ## Tasks / Subtasks
 
-- [ ] Replace the deployment-verification “Hello, World” content with a trust-first landing experience
+- [ ] Replace the deployment-verification "Hello, World" content with a trust-first landing experience
+- [ ] If any new reusable components are created in `apps/web/src/components`, add Storybook stories (`*.stories.tsx`)
 - [ ] Ensure the landing experience works unauthenticated and is the default route (`/`)
-- [ ] Add a calm link to “What we store” (transparency) without forcing sign-in
+- [ ] Add a calm link to "What we store" (transparency) without forcing sign-in
 - [ ] Confirm no behavioural analytics or tracking scripts are introduced (Trust Copy Checklist)
 - [ ] Add basic web tests (Vitest) for rendering key trust copy
 - [ ] Add an E2E smoke test to confirm anonymous landing copy is visible (Playwright)
@@ -37,4 +38,3 @@ So that I can decide whether it feels safe and optional.
 - Web UI lives in `apps/web/src/pages` and `apps/web/src/components`.
 - Prefer a single primary action per screen; avoid urgent CTAs.
 - Trust Copy Checklist: `_bmad-output/planning-artifacts/epics/trust-copy-checklist-single-source-of-truth.md`.
-

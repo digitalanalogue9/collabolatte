@@ -23,6 +23,7 @@ So that joining feels invisible and low-effort.
 ## Tasks / Subtasks
 
 - [ ] Provide a clear sign-in CTA that uses SWA EasyAuth (`/.auth/login/aad`)
+- [ ] If any new reusable components are created in `apps/web/src/components`, add Storybook stories (`*.stories.tsx`)
 - [ ] Add a signed-in state that shows a short reassurance message (data-minimisation, no tracking)
 - [ ] Add a signed-out state that stays useful without sign-in (no dead ends)
 - [ ] Add/extend an API endpoint that confirms authenticated identity (e.g., `GET /api/whoami` or extend `GET /api/status`)
@@ -32,4 +33,3 @@ So that joining feels invisible and low-effort.
 
 - API currently reads identity via headers (`x-ms-client-principal-id`, `x-ms-client-principal-name`) in `apps/api/src/Functions/StatusFunction.cs`.
 - Keep auth Entra-only (NFR6). Do not introduce custom account tables or signup flows.
-

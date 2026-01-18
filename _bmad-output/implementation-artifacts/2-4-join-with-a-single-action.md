@@ -27,6 +27,7 @@ So that joining feels low-stakes.
 - [ ] Add an authenticated API endpoint to create/enable participation (e.g., `POST /api/participation/join`)
 - [ ] Persist participation state in Table Storage (MVP), keyed by EasyAuth principal ID
 - [ ] Add a web action to call the join endpoint and show calm confirmation UI
+- [ ] If any new reusable components are created in `apps/web/src/components`, add Storybook stories (`*.stories.tsx`)
 - [ ] Ensure join is idempotent (repeated join does not error or create duplicates)
 - [ ] Add API tests covering: unauthenticated rejected, authenticated join creates entity, idempotent join
 - [ ] Add minimal E2E test: sign in -> join -> confirmation shown
@@ -35,4 +36,3 @@ So that joining feels low-stakes.
 
 - Table Storage is already validated in `apps/api/src/Functions/StatusFunction.cs`; reuse `AzureWebJobsStorage`.
 - Keep the data model minimal for Epic 2: `JoinedAt`, `Status=Joined`, `UserDisplayName?` if needed.
-
