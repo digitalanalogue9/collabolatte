@@ -1,9 +1,13 @@
 /* Collabolatte Marketing Site Styles */
+/* Using Sage Calm design tokens */
 :root {
-  --color-primary: #6B4EFF;
-  --color-background: #FAFAFA;
-  --color-text: #333333;
-  --color-text-secondary: #666666;
+  --color-primary: #3a7f6c;
+  --color-primary-light: #5d9a89;
+  --color-primary-dark: #2d6355;
+  --color-background: #f6f5f2;
+  --color-surface: #ffffff;
+  --color-text: #1f2428;
+  --color-text-secondary: #4f5b61;
 }
 
 * {
@@ -51,5 +55,5 @@ a {
 }
 
 a:hover {
-  background-color: #5A3EE0;
+  background-color: var(--color-primary-dark);
 }
