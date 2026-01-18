@@ -130,4 +130,3 @@ Guardrail: avoid duplicating the same behaviour across E2E and API tests unless 
 5. Establish email testing discipline:
    - Stub sender in CI by default; require explicit opt-in to send to allowlisted addresses.
    - Delivery logging contract tested (attempt/sent/fail) without bodies.
-

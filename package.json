@@ -1,0 +1,53 @@
+{
+  "name": "collabolatte",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Azure-native team collaboration platform",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "dev:web": "pnpm --filter @collabolatte/web dev",
+    "dev:marketing": "pnpm --filter @collabolatte/marketing dev",
+    "build": "pnpm -r build && pnpm build:api",
+    "build:web": "pnpm --filter @collabolatte/web... build",
+    "build:api": "dotnet build apps/api/Collabolatte.Api.sln",
+    "build:marketing": "pnpm --filter @collabolatte/marketing build",
+    "preview:web": "pnpm --filter @collabolatte/web preview --port 3000 --strictPort",
+    "preview:marketing": "pnpm --filter @collabolatte/marketing preview --port 8080",
+    "test": "pnpm test:unit && pnpm test:api && pnpm test:e2e",
+    "test:unit": "pnpm -r test",
+    "test:api": "dotnet test apps/api/Collabolatte.Api.sln",
+    "test:api:watch": "dotnet watch test --project apps/api/tests/Collabolatte.Api.Tests.csproj",
+    "test:e2e": "playwright test --config tests/playwright.config.ts",
+    "test:e2e:web": "playwright test --config tests/playwright.config.ts --project web",
+    "test:e2e:marketing": "playwright test --config tests/playwright.config.ts --project marketing",
+    "test:e2e:local": "node scripts/run-e2e-local.mjs",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "type-check": "pnpm -r type-check",
+    "clean": "pnpm -r --if-present clean && dotnet clean apps/api/Collabolatte.Api.sln"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.9",
+    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/parser": "^8.53.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jsdoc": "^50.0.0",
+    "markdownlint-cli": "^0.47.0",
+    "prettier": "^3.8.0",
+    "typescript": "~5.9.3",
+    "wait-on": "^8.0.1"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

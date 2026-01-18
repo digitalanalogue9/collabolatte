@@ -1,0 +1,57 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Web App (Edge)",
+            "type": "msedge",
+            "request": "launch",
+            "url": "http://localhost:4280",
+            "webRoot": "${workspaceFolder}/apps/web",
+            "sourceMaps": true,
+            "preLaunchTask": "swa start",
+            "serverReadyAction": {
+                "pattern": "Azure Static Web Apps emulator started",
+                "action": "debugWithEdge"
+            }
+        },
+        {
+            "name": "Debug Web App (Chrome)",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:4280",
+            "webRoot": "${workspaceFolder}/apps/web",
+            "sourceMaps": true,
+            "preLaunchTask": "swa start",
+            "serverReadyAction": {
+                "pattern": "Azure Static Web Apps emulator started",
+                "action": "debugWithChrome"
+            }
+        },
+        {
+            "name": "Attach to .NET Functions",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:azureFunctions.pickProcess}"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Debug Full Stack (Edge)",
+            "configurations": [
+                "Debug Web App (Edge)",
+                "Attach to .NET Functions"
+            ],
+            "stopAll": true,
+            "preLaunchTask": "swa start"
+        },
+        {
+            "name": "Debug Full Stack (Chrome)",
+            "configurations": [
+                "Debug Web App (Chrome)",
+                "Attach to .NET Functions"
+            ],
+            "stopAll": true,
+            "preLaunchTask": "swa start"
+        }
+    ]
+}

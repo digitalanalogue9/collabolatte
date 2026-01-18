@@ -1,0 +1,19 @@
+{
+  "name": "@collabolatte/marketing",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Collabolatte marketing site",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "preview": "eleventy --serve",
+    "build": "eleventy",
+    "clean": "rm -rf _site node_modules"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "@collabolatte/theme": "workspace:*"
+  },
+  "devDependencies": {
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2"
+  }
+}

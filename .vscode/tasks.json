@@ -1,0 +1,137 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "clean (functions)",
+			"command": "dotnet",
+			"args": [
+				"clean",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"type": "process",
+			"problemMatcher": "$msCompile",
+			"options": {
+				"cwd": "${workspaceFolder}\\apps\\api\\src"
+			}
+		},
+		{
+			"label": "build (functions)",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"type": "process",
+			"dependsOn": "clean (functions)",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": "$msCompile",
+			"options": {
+				"cwd": "${workspaceFolder}\\apps\\api\\src"
+			}
+		},
+		{
+			"label": "clean release (functions)",
+			"command": "dotnet",
+			"args": [
+				"clean",
+				"--configuration",
+				"Release",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"type": "process",
+			"problemMatcher": "$msCompile",
+			"options": {
+				"cwd": "${workspaceFolder}\\apps\\api\\src"
+			}
+		},
+		{
+			"label": "publish (functions)",
+			"command": "dotnet",
+			"args": [
+				"publish",
+				"--configuration",
+				"Release",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"type": "process",
+			"dependsOn": "clean release (functions)",
+			"problemMatcher": "$msCompile",
+			"options": {
+				"cwd": "${workspaceFolder}\\apps\\api\\src"
+			}
+		},
+		{
+			"type": "func",
+			"dependsOn": "build (functions)",
+			"options": {
+				"cwd": "${workspaceFolder}\\apps\\api\\src\\bin\\Debug\\net10.0"
+			},
+			"command": "host start",
+			"isBackground": true,
+			"problemMatcher": "$func-dotnet-watch"
+		},
+		{
+			"label": "test (api)",
+			"command": "dotnet",
+			"args": [
+				"test",
+				"--logger",
+				"console;verbosity=normal"
+			],
+			"type": "process",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"problemMatcher": "$msCompile",
+			"options": {
+				"cwd": "${workspaceFolder}\\apps\\api"
+			}
+		},
+		{
+			"label": "test (api) - watch",
+			"command": "dotnet",
+			"args": [
+				"watch",
+				"test",
+				"--project",
+				"tests\\Collabolatte.Api.Tests.csproj"
+			],
+			"type": "process",
+			"isBackground": true,
+			"problemMatcher": "$msCompile",
+			"options": {
+				"cwd": "${workspaceFolder}\\apps\\api"
+			}
+		},
+		{
+			"label": "swa start",
+			"type": "shell",
+			"command": "swa start",
+			"isBackground": true,
+			"problemMatcher": {
+				"pattern": {
+					"regexp": "^$",
+					"file": 1,
+					"location": 2,
+					"message": 3
+				},
+				"background": {
+					"activeOnStart": true,
+					"beginsPattern": "Azure Static Web Apps emulator started",
+					"endsPattern": "Azure Functions emulator is ready"
+				}
+			},
+			"options": {
+				"cwd": "${workspaceFolder}"
+			}
+		}
+	]
+}

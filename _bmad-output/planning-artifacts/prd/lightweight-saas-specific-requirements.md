@@ -20,6 +20,7 @@ Collabolatte is a **Ritual Engine / Lightweight SaaS**—not a traditional B2B p
 | **Hosting** | Azure Static Web Apps | Free tier |
 
 **Why This Stack:**
+
 - First-class integration between Static Web Apps, Functions, and Entra ID
 - Managed auth handles tokens, sessions, claims automatically
 - Strong typing with C# backend and typed Table Storage entities
@@ -99,6 +100,7 @@ Collabolatte is a **Ritual Engine / Lightweight SaaS**—not a traditional B2B p
 | **Event** | `{programmeId}` | `{timestamp}_{eventType}` | eventType, userId, metadata |
 
 **Design Principles:**
+
 - Partition keys aligned to query patterns
 - Denormalise where necessary (no joins)
 - Simple lookups: user by email, users in programme, matches for programme
@@ -118,11 +120,13 @@ Collabolatte is a **Ritual Engine / Lightweight SaaS**—not a traditional B2B p
 4. System logs: `match-sent`
 
 **Trade-offs Accepted:**
+
 - User types their intro (no bot-initiated message)
 - Can't detect `match-acknowledged` (no bot)
 - Acceptable for MVP—retention is the primary signal
 
 **Why This Works:**
+
 - No Bot Framework complexity
 - No IT permissions negotiation
 - Email is reliable and universal
@@ -192,4 +196,3 @@ Collabolatte is a **Ritual Engine / Lightweight SaaS**—not a traditional B2B p
 | **ISO 27001 / SOC 2** | Post-MVP | Not required to test hypothesis |
 
 ---
-

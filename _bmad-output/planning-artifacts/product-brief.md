@@ -42,6 +42,7 @@ Collabolatte creates a shared excuse to meet by pairing small groups of people o
 - **Low‑obligation design:** Misses are acceptable; participation remains voluntary and reversible.
 - **Trust‑preserving by design:** Minimal data, no performance framing, no surveillance signals.
 - **Quiet organisational value:** Improves knowledge flow and cross‑team awareness without heavy programmes or analytics.
+
 ## Target Users
 
 ### Primary Users
@@ -49,6 +50,7 @@ Collabolatte creates a shared excuse to meet by pairing small groups of people o
 **1) Cross‑Functional Individual Contributors (Primary)**
 
 **Persona: Alex**
+
 - **Role/Context:** Senior analyst/engineer/consultant in a specialist function within a large multinational. Works deeply within a small, familiar team; adjacent interactions are mostly formal.
 - **Motivations:** Do good work efficiently, avoid reinventing the wheel, stay curious without performative networking. Wants a broader mental map and a few trusted contacts outside their bubble.
 - **Problem Experience (Moment):** Realises mid‑project another team solved something similar months ago. Unsure who to contact; cold outreach feels awkward; manager intro feels like overkill; Teams post feels noisy. Proceeds alone, mildly frustrated.
@@ -57,6 +59,7 @@ Collabolatte creates a shared excuse to meet by pairing small groups of people o
 **2) New Joiners Post‑Onboarding (Primary)**
 
 **Persona: Sam**
+
 - **Role/Context:** Associate/PM/analyst, 3–6 months in. Onboarding is over; expected to deliver and “find their feet” in a still‑vast organisation.
 - **Motivations:** Build a working mental map: who does what, where expertise really sits, and who it’s appropriate to approach.
 - **Problem Experience (Moment):** Hears “X has done this before” in a meeting but doesn’t know who X is or if reaching out is appropriate. Teams/Slack feels intimidating; asking for intros feels needy. Works around the gap.
@@ -65,10 +68,12 @@ Collabolatte creates a shared excuse to meet by pairing small groups of people o
 ### Secondary Users
 
 **3) Hybrid and Remote Workers**
+
 - Weak ties decay fastest; fewer chance encounters, less visibility into other teams’ work.
 - Collabolatte replaces lost physical serendipity with low‑friction connections.
 
 **4) Programme Sponsors and Light‑Touch Organisers**
+
 - Enable adoption without running a heavy initiative.
 - Care about trust, participation, and anecdotal outcomes more than control or metrics.
 - Need a simple narrative that legitimises the programme without surveillance.
@@ -76,11 +81,13 @@ Collabolatte creates a shared excuse to meet by pairing small groups of people o
 **Tertiary / Contextual**
 
 **5) Managers and Leaders**
+
 - Not core users; may participate occasionally.
 - See second‑order effects (fewer blind spots, faster context sharing).
 - Role is to allow and legitimise, not manage or monitor.
 
 **Role Rule (to avoid confusion):**
+
 - **Participants** experience value.
 - **Sponsors** enable conditions.
 - **Managers** observe outcomes.
@@ -88,6 +95,7 @@ Collabolatte creates a shared excuse to meet by pairing small groups of people o
 ### User Journey
 
 **Alex (Cross‑Functional IC)**
+
 - **Discovery:** Hears from a peer in passing: “I had a surprisingly decent coffee with someone random last month — it was via this Collabolatte thing.”
 - **Onboarding:** Minimal signup; basic profile/interest tags; explicit opt‑in and low‑obligation framing.
 - **Core Usage:** Periodic small‑group matches; system initiates; Alex joins when timing works.
@@ -95,6 +103,7 @@ Collabolatte creates a shared excuse to meet by pairing small groups of people o
 - **Long‑term:** Stays opted‑in quietly; builds a small network of weak ties across functions.
 
 **Sam (New Joiner)**
+
 - **Discovery:** Sees a light Teams or onboarding follow‑up note: "Optional. Low effort. You'll get matched with a couple of people. No obligation."
 - **Onboarding:** Clear reassurance: no performance tracking; meeting is a safe intro.
 - **Core Usage:** Matches help decode who does what beyond org charts.
@@ -104,11 +113,13 @@ Collabolatte creates a shared excuse to meet by pairing small groups of people o
 **Rachel (Programme Sponsor)**
 
 **Persona:**
+
 - **Role/Context:** HR Director or Practice Lead sponsoring the pilot. Accountable for "employee engagement" but sceptical of heavy programmes. Has budget pressure and limited time.
 - **Motivations:** Low‑maintenance initiative that shows genuine care without creating administrative burden or surveillance optics.
 - **Problem Experience (Moment):** Asked to "do something about connection" post‑pandemic. Previous initiatives (mentoring schemes, social events) required constant pushing and faded. Worried about launching something that becomes another obligation.
 
 **Journey:**
+
 - **Discovery:** Hears about Collabolatte from a peer organisation or reads about "coffee lottery" concepts. Intrigued by the low‑touch promise.
 - **Onboarding:** Receives a one‑page brief explaining the trust contract (no individual tracking, no manager visibility). Sees example comms for launch.
 - **Launch:** Sends a single, calm announcement. No fanfare, no targets.
@@ -119,6 +130,7 @@ Collabolatte creates a shared excuse to meet by pairing small groups of people o
 ## Success Metrics
 
 ### User Success Outcomes (Behaviour‑First)
+
 - **Continued participation:** Users remain opted‑in across multiple cycles without reminders or incentives.
 - **Meetings that actually happen:** Enough matches result in real conversations to feel tangible, not theoretical.
 - **Low emotional/cognitive load:** Users don’t feel they must prepare, justify time, or extract value.
@@ -126,12 +138,14 @@ Collabolatte creates a shared excuse to meet by pairing small groups of people o
 - **Trust preserved:** Users feel safe skipping, pausing, or opting out; no sense of monitoring.
 
 **Behavioural signals:**
+
 - Users stay opted‑in after the 1st and 2nd cycles.
 - Users rejoin after a missed match.
 - Users mention the experience to peers without prompting.
 - Participation happens without escalation or complaints.
 
 **What not to measure at user level:**
+
 - Individual meeting frequency
 - Conversation quality scoring
 - Participation rankings
@@ -140,6 +154,7 @@ Collabolatte creates a shared excuse to meet by pairing small groups of people o
 ### Business Objectives
 
 **3‑Month Pilot Validation (Credibility, not scale)**
+
 - **Stability over growth:** A core group opts‑in and stays across at least two cycles.
 - **Cross‑boundary proof:** Matches and conversations cross real organisational boundaries.
 - **Zero backlash:** No complaints about time waste, surveillance, or obligation.
@@ -149,6 +164,7 @@ Collabolatte creates a shared excuse to meet by pairing small groups of people o
 “This is harmless, low‑cost, and doing something useful. Let’s keep it running.”
 
 **12‑Month Continuation/Expansion (Optionality, confidence)**
+
 - **Sustained participation:** Steady opt‑in without heavy comms.
 - **Organic spread:** People join via peer mention, not mandate.
 - **Boundary normalisation:** Cross‑team connections feel unremarkable.
@@ -170,14 +186,17 @@ Stability first, then breadth; depth is a by‑product, not a target.
 - **Sponsor decision KPI:** “Would you keep this running?” at 3 and 12 months.
 
 **Guardrail KPIs:**
+
 - Any rise in opt‑outs or privacy/surveillance complaints triggers review.
 - Meeting‑rate remains above a minimal threshold at cohort level (coarse signal only, no individual scoring).
 
 **Cost & qualitative outcomes**
+
 - Low operating cost vs traditional engagement initiatives
 - Reduced duplication via faster informal knowledge routing
 - Faster context‑building for new joiners and cross‑functional work
 - Cultural signal: permission to connect without a business case
+
 ## MVP Scope
 
 ### Core Features
@@ -205,7 +224,7 @@ _Example copy for the match notification email. Tone: calm, low-pressure, permis
 > Nothing, unless you'd like to. If you fancy a quick chat, here's a ready-to-send message:
 >
 > ---
-> *"Hi [Match Name], we've been matched through Collabolatte this cycle. Fancy a 15-minute virtual coffee sometime in the next couple of weeks? No agenda — just a chance to say hello. Let me know what works for you, or feel free to ignore this if it's not a good time."*
+> _"Hi [Match Name], we've been matched through Collabolatte this cycle. Fancy a 15-minute virtual coffee sometime in the next couple of weeks? No agenda — just a chance to say hello. Let me know what works for you, or feel free to ignore this if it's not a good time."_
 >
 > [Copy to clipboard] · [Open Teams chat]
 >
@@ -237,6 +256,7 @@ A single, opt‑in programme that periodically matches pairs across organisation
 ### MVP Success Criteria (Go / No‑Go)
 
 **Go signals (after 1–2 cycles):**
+
 - Meaningful proportion of participants stay opted‑in after cycle 2.
 - Some matches result in real conversations (not all, but enough).
 - Conversations cross genuine organisational boundaries.
@@ -244,6 +264,7 @@ A single, opt‑in programme that periodically matches pairs across organisation
 - At least one unprompted anecdote of value emerges.
 
 **No‑go signals:**
+
 - Sharp drop‑off after the first cycle.
 - Matches happen but meetings rarely do.
 - Participants stay opted‑in but disengage silently.
@@ -265,26 +286,31 @@ Nothing here changes the core idea; it reduces friction or expands reach once tr
 _Key technical decisions affecting product scope and delivery. See `architecture.md` for full details._
 
 ### Platform & Identity
+
 - **Azure Static Web Apps** with built‑in authentication (EasyAuth) — no custom login screens
 - **Microsoft Entra ID** (corporate SSO) is the only identity provider for MVP
 - **Single‑tenant deployment** — one organisation initially; multi‑tenant architecture deferred
 
 ### Data & Privacy
+
 - **Azure Table Storage** partitioned by programme — enforces data isolation at the infrastructure level
 - **Programme‑scoped queries only** — cross‑programme data access is architecturally blocked
 - **12‑month match retention** — user deletion requests honoured promptly
 
 ### Notifications
+
 - **Email is authoritative** (Azure Communication Services) — delivery logging and retry built in
 - **Teams is additive** — deep links in notifications, but email remains the guaranteed fallback
 - **No SMS** in MVP
 
 ### Cost & Scaling
+
 - **All‑Free tier deployment** — consumption‑based serverless; no pre‑provisioned capacity
 - **No Key Vault or Application Insights** in MVP — secrets via environment variables; basic platform logs only
 - **Upgrade hooks** in architecture for Key Vault, App Insights, and dynamic role management when needed
 
 ### Constraints Affecting Product Decisions
+
 - **No real‑time features** — matching runs on a scheduled cadence, not on‑demand
 - **Aggregate reporting only** — minimum‑N threshold of 5 to prevent re‑identification
 - **Role management via allowlist** — Programme Owner/Admin roles assigned manually (no self‑service UI)

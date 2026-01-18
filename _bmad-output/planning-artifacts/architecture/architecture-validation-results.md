@@ -1,6 +1,6 @@
 # Architecture Validation Results
 
-### Coherence Validation ✅
+## Coherence Validation ✅
 
 **Decision Compatibility:**
 All core choices are compatible: React/Vite + SWA EasyAuth + Functions (.NET isolated) + Table Storage + pnpm monorepo. The All-Free constraint is reflected in secrets/roles/monitoring choices.
@@ -11,7 +11,7 @@ Naming, routing, file structure, and error patterns align with the tech stack an
 **Structure Alignment:**
 Project structure supports the decisions (feature-first UI, feature-grouped Functions, shared theme package, co-located tests + E2E).
 
-### Requirements Coverage Validation ✅
+## Requirements Coverage Validation ✅
 
 **Epic/Feature Coverage:**
 FR categories map cleanly to `apps/web/src/features/*` and `apps/api/src/Collabolatte.Api/Functions/*`.
@@ -22,7 +22,7 @@ All FR categories (identity, participation, matching, notifications, admin, priv
 **Non-Functional Requirements Coverage:**
 Security, privacy, and trust constraints are reflected in auth patterns, data minimisation, and logging rules. Availability/performance constraints are consistent with serverless + simple UI.
 
-### Implementation Readiness Validation ✅
+## Implementation Readiness Validation ✅
 
 **Decision Completeness:**
 Critical decisions documented (data, auth, API, frontend, infra). Versions captured where relevant.
@@ -33,21 +33,23 @@ Directory tree is specific and complete across web, API, marketing, theme, and t
 **Pattern Completeness:**
 Conflict points are addressed with concrete conventions and enforcement rules.
 
-### Gap Analysis Results
+## Gap Analysis Results
 
 **Important Gap (Resolved):**
-- **Role allowlist source:** Table Storage is the source of truth (auditable, changeable without redeploys).
+
+- **Role allowlist source:** Cosmos DB is the source of truth (auditable, changeable without redeploys).
 
 **Nice-to-Have:**
+
 - Correlation ID format defined as GUID for logs and Problem Details.
 
-### Validation Issues Addressed
+## Validation Issues Addressed
 
-- Role allowlist source resolved: **Table Storage**.
+- Role allowlist source resolved: **Cosmos DB**.
 - Correlation ID format locked: **GUID**.
 - Contract tests for ISO 8601 dates and Problem Details are mandatory gates.
 
-### Architecture Completeness Checklist
+## Architecture Completeness Checklist
 
 **✅ Requirements Analysis**
 
@@ -77,28 +79,31 @@ Conflict points are addressed with concrete conventions and enforcement rules.
 - [x] Integration points mapped
 - [x] Requirements to structure mapping complete
 
-### Architecture Readiness Assessment
+## Architecture Readiness Assessment
 
 **Overall Status:** READY FOR IMPLEMENTATION  
 **Confidence Level:** High
 
 **Key Strengths:**
+
 - Trust-first architecture with clear boundaries
 - Minimal, consistent conventions to prevent agent drift
 - Cost-aware deployment plan with upgrade hooks
 
 **Areas for Future Enhancement:**
+
 - Optional Key Vault / App Insights enablement
 - Role management UI (post-MVP)
 
-### Implementation Handoff
+## Implementation Handoff
 
 **AI Agent Guidelines:**
+
 - Follow all architectural decisions exactly as documented
 - Use implementation patterns consistently across all components
 - Respect project structure and boundaries
 - Refer to this document for all architectural questions
 
 **First Implementation Priority:**
+
 - Initialise monorepo structure + scaffolding per starter decisions
-

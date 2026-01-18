@@ -1,0 +1,99 @@
+name: Azure Static Web Apps CI/CD (App)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/web/**"
+      - "apps/api/**"
+      - "packages/theme/**"
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          lfs: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build web app (with deps)
+        run: pnpm build:web
+      - name: Verify web build output
+        run: |
+          if [ ! -d apps/web/dist ]; then
+            echo "Error: apps/web/dist not found"
+            exit 1
+          fi
+          echo "Static file count: $(find apps/web/dist -type f | wc -l)"
+
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Publish API
+        run: |
+          cd apps/api/src
+          dotnet publish Collabolatte.Api.csproj -c Release -o ../../../api-publish
+          # Ensure host.json exists for SWA to detect the function runtime
+          if [ ! -f ../../../api-publish/host.json ]; then
+            echo "Error: host.json not found in publish output"
+            exit 1
+          fi
+
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_APP }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "apps/web/dist"
+          api_location: "api-publish"
+          skip_app_build: true
+          skip_api_build: true
+          production_branch: "main"
+        env:
+          SKIP_DEPLOY_ON_MISSING_SECRETS: true
+          FUNCTIONS_WORKER_RUNTIME: dotnet-isolated
+          STORAGE_CONNECTION_STRING: ${{ secrets.STORAGE_CONNECTION_STRING }}
+          ACS_CONNECTION_STRING: ${{ secrets.ACS_CONNECTION_STRING }}
+
+  close_pull_request_job:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_APP }}
+          action: "close"
+          app_location: "apps/web"
+        env:
+          SKIP_DEPLOY_ON_MISSING_SECRETS: true

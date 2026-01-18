@@ -62,4 +62,3 @@ In MVP, Collabolatte does **not** provide adoption/participation analytics. We p
 - **Operational errors**: error category counts for the cycle and correlation IDs for investigation.
 
 ---
-

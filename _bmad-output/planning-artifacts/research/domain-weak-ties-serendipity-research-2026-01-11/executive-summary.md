@@ -5,20 +5,22 @@ This research evaluates whether lightweight, opt-in internal connection mechanis
 Key conclusion: The hypothesis is plausible and evidence-aligned at the mechanism level, but validation should focus on near-term signals (opt-in persistence, cross-boundary connections formed, self-reported learning/value), not long-cycle innovation metrics.
 
 **Key Findings**
-- Weak ties bridge groups and support access to novel information. 
-  _Source: https://sociology.stanford.edu/publications/strength-weak-ties_
-- Hybrid work reduces weak ties; partial co-location restores some but not all. 
-  _Source: https://www.nature.com/articles/s41586-022-05564-3_
-- Structural holes and tie configurations are linked to innovation outcomes in organizational networks. 
-  _Source: https://www.sciencedirect.com/science/article/pii/S1751157724001482_
-- GDPR requires a lawful basis for processing personal data; employee data is in scope. 
-  _Source: https://gdpr-info.eu/art-6-gdpr/_
-- EU SCCs and UK IDTA/Addendum govern cross-border data transfers. 
-  _Sources: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en ; https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/international-transfers/international-data-transfer-agreement-and-guidance/_
-- In California, CCPA obligations apply to employee data as of 1 January 2023. 
-  _Sources: https://oag.ca.gov/news/press-releases/attorney-general-bonta-seeks-information-california-employers-compliance ; https://oag.ca.gov/privacy/ccpa/frequently-asked-questions_
+
+- Weak ties bridge groups and support access to novel information.
+  _Source: <https://sociology.stanford.edu/publications/strength-weak-ties>_
+- Hybrid work reduces weak ties; partial co-location restores some but not all.
+  _Source: <https://www.nature.com/articles/s41586-022-05564-3>_
+- Structural holes and tie configurations are linked to innovation outcomes in organizational networks.
+  _Source: <https://www.sciencedirect.com/science/article/pii/S1751157724001482>_
+- GDPR requires a lawful basis for processing personal data; employee data is in scope.
+  _Source: <https://gdpr-info.eu/art-6-gdpr/>_
+- EU SCCs and UK IDTA/Addendum govern cross-border data transfers.
+  _Sources: <https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en> ; <https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/international-transfers/international-data-transfer-agreement-and-guidance/>_
+- In California, CCPA obligations apply to employee data as of 1 January 2023.
+  _Sources: <https://oag.ca.gov/news/press-releases/attorney-general-bonta-seeks-information-california-employers-compliance> ; <https://oag.ca.gov/privacy/ccpa/frequently-asked-questions>_
 
 **Strategic Recommendations**
+
 - Validate early value signals with minimal measurement: opt-in retention, cross-boundary tie formation, and short self-reported value prompts.
 - Use privacy-by-design: data minimization, purpose limitation, and DPIA-style risk assessment for worker data.
 - Preserve opt-in framing to reduce cultural resistance in conservative corporate environments.

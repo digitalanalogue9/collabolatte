@@ -1,4 +1,5 @@
 # Epic 5: Operate Safely
+
 Programme Owners and Admins can run the system safely with strict trust guardrails and operational controls.
 **FRs covered:** FR21, FR22, FR23, FR24, FR25, FR26, FR27, FR28, FR29, FR29a (Growth), FR30, FR31, FR32, FR33, FR34, FR35, FR36, FR37, FR38, FR39, FR42
 **NFR Focus:** NFR4-10 (security/privacy/retention), NFR25-27 (logging and monitoring).
@@ -6,6 +7,7 @@ Programme Owners and Admins can run the system safely with strict trust guardrai
 **Epic 5 Clarification:** Programme Owners are enablers, not operators. They cannot intervene in individual matches, view individual participation, or influence outcomes.
 
 **Epic 5 Anti-stories:**
+
 - No individual-level reporting
 - No engagement scoring
 - No nudges or reminders triggered by metrics

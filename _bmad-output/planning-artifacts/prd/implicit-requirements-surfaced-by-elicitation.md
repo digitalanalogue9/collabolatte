@@ -47,4 +47,3 @@
 | FR29a | Admin can view ops‑only programme health (cycle status, notification delivery health, trust guardrails status, operational errors with correlation IDs) gated behind minimum‑N ≥5 | MVP | Should | Helena |
 
 ---
-

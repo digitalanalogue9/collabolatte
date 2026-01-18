@@ -28,37 +28,46 @@ includedFiles:
 ### PRD Files Found
 
 **Whole Documents:**
+
 - `prd.md` (50,730 bytes, modified 2026-01-14 22:15 UTC)
 
 **Sharded Documents:**
+
 - None found
 
 ### Architecture Files Found
 
 **Whole Documents:**
+
 - `architecture.md` (38,937 bytes, modified 2026-01-14 21:10 UTC)
 
 **Sharded Documents:**
+
 - None found
 
 ### Epics & Stories Files Found
 
 **Whole Documents:**
+
 - `epics.md` (35,950 bytes, modified 2026-01-14 22:16 UTC)
 
 **Sharded Documents:**
+
 - None found
 
 ### UX Design Files Found
 
 **Whole Documents:**
+
 - `ux-design-specification.md` (25,925 bytes, modified 2026-01-14 21:10 UTC)
 
 **Additional UX artefacts (non-Markdown):**
+
 - `ux-design-directions.html` (8,033 bytes, modified 2026-01-14 06:32 UTC)
 - `ux-visual-themes.html` (6,951 bytes, modified 2026-01-14 22:54 UTC)
 
 **Sharded Documents:**
+
 - None found
 
 ### Issues Found
@@ -150,6 +159,7 @@ Total NFRs: 27
 ### Additional Requirements
 
 **MVP Definition of Done (as stated in PRD):**
+
 - Users can authenticate via Entra ID
 - Users can join the pilot programme
 - Matching runs on schedule (weekly)
@@ -158,6 +168,7 @@ Total NFRs: 27
 - First match cycle completes successfully
 
 **Compliance & Regulatory (as stated in PRD):**
+
 - GDPR (EU): Lawful basis likely legitimate interests with transparency (consent problematic in employment)
 - UK GDPR: ICO worker monitoring guidance applies (transparency + proportionality)
 - CCPA (California): Employee data in scope as of January 2023 (notice and rights obligations)
@@ -166,6 +177,7 @@ Total NFRs: 27
 - Retention Policy: Match history retained for 12 months, then anonymised; users can request deletion at any time (GDPR Article 17)
 
 **Technical Constraints (Privacy-by-Design) (as stated in PRD):**
+
 - Data minimisation: Capture only what's needed for matching (name, function, location); no profile richness beyond that
 - Purpose limitation: Participation data cannot be repurposed for performance evaluation or surveillance
 - Retention limits: Match history retention should be time-bounded; define retention period
@@ -173,6 +185,7 @@ Total NFRs: 27
 - Audit trail: Log what the system does (match-sent, match-acknowledged), not what users do
 
 **Implicit Requirements (Surfaced by Elicitation) (as stated in PRD):**
+
 - Directory/SSO integration (MVP - hard dependency): Pre-fill signup, reduce friction
 - One-click introduction action (MVP): Reduce first-move friction
 - Conversation starter prompt (MVP): Tips awkwardness toward usefulness
@@ -183,6 +196,7 @@ Total NFRs: 27
 - Optional story capture channel (Post-MVP or manual workaround): Surface anecdotes for Helena
 
 **Integration Requirements (as stated in PRD):**
+
 - SSO/Directory integration (MVP): Pre-fill signup, reduce friction, ensure identity
 - Teams/Slack integration (MVP): Notification delivery and one-click introduction
 - HRIS integration (Post-MVP): For cross-boundary constraint validation (function, region)
@@ -248,10 +262,12 @@ Total NFRs: 27
 #### Critical Missing FRs
 
 FR19: Conversation starter selection (post‑MVP conversation support)  
+
 - Impact: Post‑MVP capability is not traceable to an epic/story location; risk of accidental omission when planning Growth work.
 - Recommendation: Add an explicit “Post‑MVP / Deferred” epic (or clearly labelled backlog section) and trace FR19 to it.
 
 FR20: Reminder per match cycle (not in MVP; risks obligation)  
+
 - Impact: As above; additionally, reminder behaviour has trust/obligation implications and should be explicitly designed rather than “sneaking in”.
 - Recommendation: Place under a “Post‑MVP / Deferred” epic with explicit trust guardrails and opt-out language.
 
@@ -266,6 +282,7 @@ FR20: Reminder per match cycle (not in MVP; risks obligation)
 ### UX Document Status
 
 Found:
+
 - `ux-design-specification.md`
 - Additional UX artefacts (non-Markdown): `ux-design-directions.html`, `ux-visual-themes.html`
 
