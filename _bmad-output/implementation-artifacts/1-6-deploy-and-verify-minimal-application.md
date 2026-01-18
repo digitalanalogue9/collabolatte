@@ -1,6 +1,6 @@
 # Story 1.6: Deploy and Verify Minimal Application
 
-Status: in-progress
+Status: complete
 
 ## Story
 
@@ -30,45 +30,45 @@ development.
 
 ## Tasks / Subtasks
 
-- [ ] Task 1: Create minimal web app page showing auth status (AC: 2)
-  - [ ] Update HomePage to display authenticated user info
-  - [ ] Show user name/email from EasyAuth headers
-  - [ ] Add "Hello World" confirmation message
-  - [ ] Style using Sage Calm theme components
+- [x] Task 1: Create minimal web app page showing auth status (AC: 2)
+  - [x] Update HomePage to display authenticated user info
+  - [x] Show user name/email from EasyAuth headers
+  - [x] Add "Hello World" confirmation message
+  - [x] Style using Sage Calm theme components
 
-- [ ] Task 2: Create API health/status endpoint (AC: 3)
-  - [ ] Create /api/status function endpoint
-  - [ ] Verify authentication via EasyAuth headers
-  - [ ] Test Table Storage connection
-  - [ ] Test ACS configuration
-  - [ ] Return status JSON response
+- [x] Task 2: Create API health/status endpoint (AC: 3)
+  - [x] Create /api/status function endpoint
+  - [x] Verify authentication via EasyAuth headers
+  - [x] Test Table Storage connection
+  - [x] Test ACS configuration
+  - [x] Return status JSON response
 
-- [ ] Task 3: Review and update SWA deployment workflows (AC: 1)
-  - [ ] Verify app+api workflow exists from Story 1.1
-  - [ ] Verify marketing workflow exists from Story 1.1
-  - [ ] Add environment variables for Storage/ACS connections
-  - [ ] Ensure workflows trigger on push to main
+- [x] Task 3: Review and update SWA deployment workflows (AC: 1)
+  - [x] Verify app+api workflow exists from Story 1.1
+  - [x] Verify marketing workflow exists from Story 1.1
+  - [x] Add environment variables for Storage/ACS connections
+  - [x] Ensure workflows trigger on push to main
 
-- [ ] Task 4: Deploy to dev environment (AC: 1)
-  - [ ] Push changes to main branch
-  - [ ] Monitor GitHub Actions workflow execution
-  - [ ] Verify app+api deployment succeeds
-  - [ ] Verify marketing deployment succeeds
-  - [ ] Capture deployment URLs
+- [x] Task 4: Deploy to dev environment (AC: 1)
+  - [x] Push changes to main branch
+  - [x] Monitor GitHub Actions workflow execution
+  - [x] Verify app+api deployment succeeds
+  - [x] Verify marketing deployment succeeds
+  - [x] Capture deployment URLs
 
-- [ ] Task 5: Manual verification testing (AC: 2, 3)
-  - [ ] Access deployed app URL
-  - [ ] Authenticate via Entra ID
-  - [ ] Verify user info displayed correctly
-  - [ ] Test /api/status endpoint
-  - [ ] Verify Table Storage connection test passes
-  - [ ] Verify ACS configuration test passes
+- [x] Task 5: Manual verification testing (AC: 2, 3)
+  - [x] Access deployed app URL
+  - [x] Authenticate via Entra ID
+  - [x] Verify user info displayed correctly
+  - [x] Test /api/status endpoint
+  - [x] Verify Table Storage connection test passes
+  - [x] Verify ACS configuration test passes
 
-- [ ] Task 6: Document deployment verification (AC: 4)
-  - [ ] Document deployment URLs
-  - [ ] Confirm free tier usage
-  - [ ] Update epic status to complete
-  - [ ] Confirm Epic 2 is unblocked
+- [x] Task 6: Document deployment verification (AC: 4)
+  - [x] Document deployment URLs
+  - [x] Confirm free tier usage
+  - [x] Update epic status to complete
+  - [x] Confirm Epic 2 is unblocked
 
 ## Dev Notes
 
@@ -146,17 +146,46 @@ purely infrastructure validation—no user-facing features yet.
 - [x] Minimal web page created showing authenticated user info
 - [x] API status endpoint created and tested locally
 - [x] SWA workflows verified and updated with environment variables
-- [ ] Application deployed successfully to dev environment
-- [ ] Manual verification tests pass:
-  - [ ] Can authenticate via Entra ID
-  - [ ] User info displayed correctly
-  - [ ] API status endpoint responds
-  - [ ] Table Storage connection verified
-  - [ ] ACS configuration verified
-- [ ] Deployment matches architecture specifications
-- [ ] Free tier costs confirmed
-- [ ] Epic 1 marked complete
-- [ ] Epic 2 confirmed unblocked
+- [x] Application deployed successfully to dev environment
+- [x] Manual verification tests pass:
+  - [x] Can authenticate via Entra ID
+  - [x] User info displayed correctly
+  - [x] API status endpoint responds
+  - [x] Table Storage connection verified
+  - [x] ACS configuration verified
+- [x] Deployment matches architecture specifications
+- [x] Free tier costs confirmed
+- [x] Epic 1 marked complete
+- [x] Epic 2 confirmed unblocked
+
+## Deployment Record
+
+**Completed:** 2026-01-18
+
+### Deployed URLs
+
+| Site | URL |
+|------|-----|
+| App + API | https://purple-ocean-0c85fbd03.6.azurestaticapps.net |
+| Marketing | https://green-pebble-0850a8f03.4.azurestaticapps.net |
+
+### GitHub Secrets Configured
+
+- `AZURE_CLIENT_ID` - Entra ID app registration
+- `AZURE_TENANT_ID` - Entra ID tenant
+- `AZURE_SUBSCRIPTION_ID` - Azure subscription
+- `ACS_CONNECTION_STRING` - Azure Communication Services
+- `AZURE_STATIC_WEB_APPS_API_TOKEN_APP` - SWA deployment token (app)
+- `AZURE_STATIC_WEB_APPS_API_TOKEN_WWW` - SWA deployment token (marketing)
+- `STORAGE_CONNECTION_STRING` - Azure Table Storage
+
+### Verification Results
+
+- **Authentication**: EasyAuth redirects to Entra ID login, user claims displayed correctly
+- **API Protection**: `/api/*` routes require authentication (302 redirect to login)
+- **Marketing Site**: Renders with Sage Calm branding (green primary colour)
+- **App Site**: Full-width layout with MUI components
+- **Free Tier**: All resources within Azure free tier limits
 
 ## References
 
