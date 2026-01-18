@@ -42,6 +42,13 @@ jobs:
 
       - name: Build web app (with deps)
         run: pnpm build:web
+      - name: Verify web build output
+        run: |
+          if [ ! -d apps/web/dist ]; then
+            echo "Error: apps/web/dist not found"
+            exit 1
+          fi
+          echo "Static file count: $(find apps/web/dist -type f | wc -l)"
 
       - name: Setup .NET 9
         uses: actions/setup-dotnet@v4
@@ -65,9 +72,8 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_APP }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "apps/web"
+          app_location: "apps/web/dist"
           api_location: "api-publish"
-          output_location: "dist"
           skip_app_build: true
           skip_api_build: true
           production_branch: "main"
