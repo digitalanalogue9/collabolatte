@@ -1,22 +1,33 @@
 <workflow>
-  <critical>The workflow execution engine is governed by: {project-root}/_bmad/core/tasks/workflow.xml</critical>
+  <critical>The workflow execution engine is governed by:
+    {project-root}/_bmad/core/tasks/workflow.xml</critical>
   <critical>You MUST have already loaded and processed: {installed_path}/workflow.yaml</critical>
-  <critical>Communicate all responses in {communication_language} and language MUST be tailored to {user_skill_level}</critical>
+  <critical>Communicate all responses in {communication_language} and language MUST be tailored to
+    {user_skill_level}</critical>
   <critical>Generate all documents in {document_output_language}</critical>
-  <critical>Branching rule: If currently on `main`, you MUST create/switch to a topic branch BEFORE writing any files.</critical>
-  <critical>Only modify the story file in these areas: Tasks/Subtasks checkboxes, Dev Agent Record (Debug Log, Completion Notes), File List,
+  <critical>Branching rule: If currently on `main`, you MUST create/switch to a topic branch BEFORE
+    writing any files.</critical>
+  <critical>Only modify the story file in these areas: Tasks/Subtasks checkboxes, Dev Agent Record
+    (Debug Log, Completion Notes), File List,
     Change Log, and Status</critical>
   <critical>Execute ALL steps in exact order; do NOT skip steps</critical>
-  <critical>Absolutely DO NOT stop because of "milestones", "significant progress", or "session boundaries". Continue in a single execution
-    until the story is COMPLETE (all ACs satisfied and all tasks/subtasks checked) UNLESS a HALT condition is triggered or the USER gives
+  <critical>Absolutely DO NOT stop because of "milestones", "significant progress", or "session
+    boundaries". Continue in a single execution
+    until the story is COMPLETE (all ACs satisfied and all tasks/subtasks checked) UNLESS a HALT
+    condition is triggered or the USER gives
     other instruction.</critical>
-  <critical>Do NOT schedule a "next session" or request review pauses unless a HALT condition applies. Only Step 6 decides completion.</critical>
+  <critical>Do NOT schedule a "next session" or request review pauses unless a HALT condition
+    applies. Only Step 6 decides completion.</critical>
   <critical>User skill level ({user_skill_level}) affects conversation style ONLY, not code updates.</critical>
 
   <step n="0" goal="Ensure epic branch context before development" tag="git-hygiene">
-    <action>If `git branch --show-current` is `main`, HALT and ask {user_name} to first create/switch to the relevant `epic/<epic-slug>` branch (created during sprint planning) before starting story development.</action>
-    <action>Preferred flow: `epic/<epic-slug>` (sprint planning) → `story/<story_key>` (dev-story implementation).</action>
-    <action>Note: the story branch is created AFTER the story is selected (once {{story_key}} is known), but BEFORE any code or file changes.</action>
+    <action>If `git branch --show-current` is `main`, HALT and ask {user_name} to first
+      create/switch to the relevant `epic/{{epic-slug}}` branch (created during sprint planning)
+      before starting story development.</action>
+    <action>Preferred flow: `epic/{{epic-slug}}` (sprint planning) → `story/{{story_key}}`
+      (dev-story implementation).</action>
+    <action>Note: the story branch is created AFTER the story is selected (once {{story_key}} is
+      known), but BEFORE any code or file changes.</action>
   </step>
 
   <step n="1" goal="Find next ready story and load it" tag="sprint-status">
@@ -47,11 +58,13 @@
 
           **What would you like to do?**
           1. Run `create-story` to create next story from epics with comprehensive context
-          2. Run `*validate-create-story` to improve existing stories before development (recommended quality check)
+          2. Run `*validate-create-story` to improve existing stories before development
+          (recommended quality check)
           3. Specify a particular story file to develop (provide full path)
           4. Check {{sprint_status}} file to see current sprint status
 
-          💡 **Tip:** Stories in `ready-for-dev` may not have been validated. Consider running `validate-create-story` first for a quality
+          💡 **Tip:** Stories in `ready-for-dev` may not have been validated. Consider running
+          `validate-create-story` first for a quality
           check.
         </output>
         <ask>Choose option [1], [2], [3], or [4], or specify story file path:</ask>
@@ -109,7 +122,8 @@
         </check>
 
         <check if="user chooses '3'">
-          <ask>It's unclear what story you want developed. Please provide the full path to the story file:</ask>
+          <ask>It's unclear what story you want developed. Please provide the full path to the story
+            file:</ask>
           <action>Store user-provided story path as {{story_path}}</action>
           <action>Continue with provided story file</action>
         </check>
@@ -123,16 +137,21 @@
     <action>Store the found story_key (e.g., "1-2-user-authentication") for later status updates</action>
     <action>Find matching story file in {story_dir} using story_key pattern: {{story_key}}.md</action>
     <action>Read COMPLETE story file from discovered path</action>
-    <action>Branching rule: If currently on an `epic/*` branch, create a dedicated story branch from it BEFORE making any changes: `git switch -c story/{{story_key}}`.</action>
-    <action>Branching rule: If already on `story/*`, continue (ensure the branch is based on the correct epic branch).</action>
-    <action>Branching rule: If on `main`, HALT and ask {user_name} to switch to the epic branch first.</action>
+    <action>Branching rule: If currently on an `epic/*` branch, create a dedicated story branch from
+      it BEFORE making any changes: `git switch -c story/{{story_key}}`.</action>
+    <action>Branching rule: If already on `story/*`, continue (ensure the branch is based on the
+      correct epic branch).</action>
+    <action>Branching rule: If on `main`, HALT and ask {user_name} to switch to the epic branch
+      first.</action>
 
     <anchor id="task_check" />
 
-    <action>Parse sections: Story, Acceptance Criteria, Tasks/Subtasks, Dev Notes, Dev Agent Record, File List, Change Log, Status</action>
+    <action>Parse sections: Story, Acceptance Criteria, Tasks/Subtasks, Dev Notes, Dev Agent Record,
+      File List, Change Log, Status</action>
 
     <action>Load comprehensive context from story file's Dev Notes section</action>
-    <action>Extract developer guidance from Dev Notes: architecture requirements, previous learnings, technical specifications</action>
+    <action>Extract developer guidance from Dev Notes: architecture requirements, previous
+      learnings, technical specifications</action>
     <action>Use enhanced story context to inform implementation decisions and approaches</action>
 
     <action>Identify first incomplete task (unchecked [ ]) in Tasks/Subtasks</action>
@@ -148,9 +167,11 @@
     <critical>Load all available context to inform implementation</critical>
 
     <action>Load {project_context} for coding standards and project-wide patterns (if exists)</action>
-    <action>Parse sections: Story, Acceptance Criteria, Tasks/Subtasks, Dev Notes, Dev Agent Record, File List, Change Log, Status</action>
+    <action>Parse sections: Story, Acceptance Criteria, Tasks/Subtasks, Dev Notes, Dev Agent Record,
+      File List, Change Log, Status</action>
     <action>Load comprehensive context from story file's Dev Notes section</action>
-    <action>Extract developer guidance from Dev Notes: architecture requirements, previous learnings, technical specifications</action>
+    <action>Extract developer guidance from Dev Notes: architecture requirements, previous
+      learnings, technical specifications</action>
     <action>Use enhanced story context to inform implementation decisions and approaches</action>
     <output>✅ **Context Loaded**
       Story and project context available for implementation
@@ -180,7 +201,8 @@
         **Action Items:** {{unchecked_review_count}} remaining to address
         **Priorities:** {{high_count}} High, {{med_count}} Medium, {{low_count}} Low
 
-        **Strategy:** Will prioritize review follow-up tasks (marked [AI-Review]) before continuing with regular tasks.
+        **Strategy:** Will prioritize review follow-up tasks (marked [AI-Review]) before continuing
+        with regular tasks.
       </output>
     </check>
 
@@ -234,7 +256,8 @@
   <step n="5" goal="Implement task following red-green-refactor cycle">
     <critical>FOLLOW THE STORY FILE TASKS/SUBTASKS SEQUENCE EXACTLY AS WRITTEN - NO DEVIATION</critical>
 
-    <action>Review the current task/subtask from the story file - this is your authoritative implementation guide</action>
+    <action>Review the current task/subtask from the story file - this is your authoritative
+      implementation guide</action>
     <action>Plan implementation following red-green-refactor cycle</action>
 
     <!-- RED PHASE -->
@@ -252,18 +275,22 @@
 
     <action>Document technical approach and decisions in Dev Agent Record → Implementation Plan</action>
 
-    <action if="new dependencies required beyond story specifications">HALT: "Additional dependencies need user approval"</action>
+    <action if="new dependencies required beyond story specifications">HALT: "Additional
+      dependencies need user approval"</action>
     <action if="3 consecutive implementation failures occur">HALT and request guidance</action>
-    <action if="required configuration is missing">HALT: "Cannot proceed without necessary configuration files"</action>
+    <action if="required configuration is missing">HALT: "Cannot proceed without necessary
+      configuration files"</action>
 
     <critical>NEVER implement anything not mapped to a specific task/subtask in the story file</critical>
     <critical>NEVER proceed to next task until current task/subtask is complete AND tests pass</critical>
-    <critical>Execute continuously without pausing until all tasks/subtasks are complete or explicit HALT condition</critical>
+    <critical>Execute continuously without pausing until all tasks/subtasks are complete or explicit
+      HALT condition</critical>
     <critical>Do NOT propose to pause for review until Step 9 completion gates are satisfied</critical>
   </step>
 
   <step n="6" goal="Author comprehensive tests">
-    <action>Create unit tests for business logic and core functionality introduced/changed by the task</action>
+    <action>Create unit tests for business logic and core functionality introduced/changed by the
+      task</action>
     <action>Add integration tests for component interactions specified in story requirements</action>
     <action>Include end-to-end tests for critical user flows when story requirements demand them</action>
     <action>Cover edge cases and error handling scenarios identified in story Dev Notes</action>
@@ -274,8 +301,10 @@
     <action>Run all existing tests to ensure no regressions</action>
     <action>Run the new tests to verify implementation correctness</action>
     <action>Run linting and code quality checks if configured in project</action>
-    <action>Validate implementation meets ALL story acceptance criteria; enforce quantitative thresholds explicitly</action>
-    <action if="regression tests fail">STOP and fix before continuing - identify breaking changes immediately</action>
+    <action>Validate implementation meets ALL story acceptance criteria; enforce quantitative
+      thresholds explicitly</action>
+    <action if="regression tests fail">STOP and fix before continuing - identify breaking changes
+      immediately</action>
     <action if="new tests fail">STOP and fix before continuing - ensure implementation correctness</action>
   </step>
 
@@ -284,7 +313,8 @@
 
     <!-- VALIDATION GATES -->
     <action>Verify ALL tests for this task/subtask ACTUALLY EXIST and PASS 100%</action>
-    <action>Confirm implementation matches EXACTLY what the task/subtask specifies - no extra features</action>
+    <action>Confirm implementation matches EXACTLY what the task/subtask specifies - no extra
+      features</action>
     <action>Validate that ALL acceptance criteria related to this task are satisfied</action>
     <action>Run full test suite to ensure NO regressions introduced</action>
 
@@ -297,17 +327,21 @@
       <action>Mark task checkbox [x] in "Tasks/Subtasks → Review Follow-ups (AI)" section</action>
 
       <!-- CRITICAL: Also mark corresponding action item in review section -->
-      <action>Find matching action item in "Senior Developer Review (AI) → Action Items" section by matching description</action>
+      <action>Find matching action item in "Senior Developer Review (AI) → Action Items" section by
+        matching description</action>
       <action>Mark that action item checkbox [x] as resolved</action>
 
-      <action>Add to Dev Agent Record → Completion Notes: "✅ Resolved review finding [{{severity}}]: {{description}}"</action>
+      <action>Add to Dev Agent Record → Completion Notes: "✅ Resolved review finding [{{severity}}]:
+        {{description}}"</action>
     </check>
 
     <!-- ONLY MARK COMPLETE IF ALL VALIDATION PASS -->
     <check if="ALL validation gates pass AND tests ACTUALLY exist and pass">
       <action>ONLY THEN mark the task (and subtasks) checkbox with [x]</action>
-      <action>Update File List section with ALL new, modified, or deleted files (paths relative to repo root)</action>
-      <action>Add completion notes to Dev Agent Record summarizing what was ACTUALLY implemented and tested</action>
+      <action>Update File List section with ALL new, modified, or deleted files (paths relative to
+        repo root)</action>
+      <action>Add completion notes to Dev Agent Record summarizing what was ACTUALLY implemented and
+        tested</action>
     </check>
 
     <check if="ANY validation fails">
@@ -317,7 +351,8 @@
 
     <check if="review_continuation == true and {{resolved_review_items}} is not empty">
       <action>Count total resolved review items in this session</action>
-      <action>Add Change Log entry: "Addressed code review findings - {{resolved_count}} items resolved (Date: {{date}})"</action>
+      <action>Add Change Log entry: "Addressed code review findings - {{resolved_count}} items
+        resolved (Date: {{date}})"</action>
     </check>
 
     <action>Save the story file</action>
@@ -362,7 +397,8 @@
       <output>✅ Story status updated to "review" in sprint-status.yaml</output>
     </check>
 
-    <check if="{sprint_status} file does NOT exist OR {{current_sprint_status}} == 'no-sprint-tracking'">
+    <check
+      if="{sprint_status} file does NOT exist OR {{current_sprint_status}} == 'no-sprint-tracking'">
       <output>ℹ️ Story status updated to "review" in story file (no sprint tracking configured)</output>
     </check>
 
@@ -374,7 +410,8 @@
     </check>
 
     <!-- Final validation gates -->
-    <action if="any task is incomplete">HALT - Complete remaining tasks before marking ready for review</action>
+    <action if="any task is incomplete">HALT - Complete remaining tasks before marking ready for
+      review</action>
     <action if="regression failures exist">HALT - Fix regression issues before completing</action>
     <action if="File List is incomplete">HALT - Update File List with all changed files</action>
     <action if="definition-of-done validation fails">HALT - Address DoD failures before completing</action>
@@ -385,7 +422,8 @@
     <action>Prepare a concise summary in Dev Agent Record → Completion Notes</action>
 
     <action>Communicate to {user_name} that story implementation is complete and ready for review</action>
-    <action>Summarize key accomplishments: story ID, story key, title, key changes made, tests added, files modified</action>
+    <action>Summarize key accomplishments: story ID, story key, title, key changes made, tests
+      added, files modified</action>
     <action>Provide the story file path and current status (now "review")</action>
 
     <action>Based on {user_skill_level}, ask if user needs any explanations about:
@@ -401,7 +439,8 @@
       <action>Use examples and references to specific code when helpful</action>
     </check>
 
-    <action>Once explanations are complete (or user indicates no questions), suggest logical next steps</action>
+    <action>Once explanations are complete (or user indicates no questions), suggest logical next
+      steps</action>
     <action>Recommended next steps (flexible based on project setup):
       - Review the implemented story and test the changes
       - Verify all acceptance criteria are met
@@ -410,7 +449,8 @@
       - Optional: Run TEA `*automate` to expand guardrail tests
     </action>
 
-    <output>💡 **Tip:** For best results, run `code-review` using a **different** LLM than the one that implemented this story.</output>
+    <output>💡 **Tip:** For best results, run `code-review` using a **different** LLM than the one
+      that implemented this story.</output>
     <check if="{sprint_status} file exists">
       <action>Suggest checking {sprint_status} to see project progress</action>
     </check>
