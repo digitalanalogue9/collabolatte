@@ -24,6 +24,7 @@ validation-rules:
 
 ## 📋 Context & Requirements Validation
 
+- [ ] **Git Hygiene:** Work was performed on a topic branch (never directly on `main`) and is ready to merge via PR
 - [ ] **Story Context Completeness:** Dev Notes contains ALL necessary technical requirements, architecture patterns, and implementation guidance
 - [ ] **Architecture Compliance:** Implementation follows all architectural requirements specified in Dev Notes
 - [ ] **Technical Specifications:** All technical specifications (libraries, frameworks, versions) from Dev Notes are implemented correctly

@@ -3,6 +3,7 @@
   <critical>You MUST have already loaded and processed: {installed_path}/workflow.yaml</critical>
   <critical>Communicate all responses in {communication_language} and language MUST be tailored to {user_skill_level}</critical>
   <critical>Generate all documents in {document_output_language}</critical>
+  <critical>Branching rule: If currently on `main`, you MUST create/switch to a topic branch BEFORE writing any files.</critical>
   <critical>Only modify the story file in these areas: Tasks/Subtasks checkboxes, Dev Agent Record (Debug Log, Completion Notes), File List,
     Change Log, and Status</critical>
   <critical>Execute ALL steps in exact order; do NOT skip steps</critical>
@@ -11,6 +12,14 @@
     other instruction.</critical>
   <critical>Do NOT schedule a "next session" or request review pauses unless a HALT condition applies. Only Step 6 decides completion.</critical>
   <critical>User skill level ({user_skill_level}) affects conversation style ONLY, not code updates.</critical>
+
+  <step n="0" goal="Create branch before development begins" tag="git-hygiene">
+    <action>If `git branch --show-current` is `main`, create a topic branch and switch to it BEFORE modifying any files.</action>
+    <action>Recommended branch names for story implementation:</action>
+    <action>- `story/{{story_key}}-<short-slug>` (e.g., `story/2-1-first-contact`)</action>
+    <action>- or `epic/<epic-slug>` if implementing multiple stories intentionally</action>
+    <action>IF the working tree is dirty while on `main`, HALT and ask {user_name} how to proceed (stash, commit, or discard).</action>
+  </step>
 
   <step n="1" goal="Find next ready story and load it" tag="sprint-status">
     <check if="{{story_path}} is provided">
