@@ -1,6 +1,6 @@
 # Story 1.5: Deploy Infrastructure via Bicep
 
-Status: complete
+Status: done
 
 ## Story
 

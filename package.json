@@ -30,7 +30,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "type-check": "pnpm -r type-check",
-    "clean": "pnpm -r --if-present clean && dotnet clean apps/api/Collabolatte.Api.sln"
+    "clean": "pnpm -r --if-present clean && dotnet clean apps/api/Collabolatte.Api.sln",
+    "validate:epic-gate": "node scripts/validate-epic-gate.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
@@ -43,6 +44,7 @@
     "markdownlint-cli": "^0.47.0",
     "prettier": "^3.8.0",
     "typescript": "~5.9.3",
+    "yaml": "^2.8.1",
     "wait-on": "^8.0.1"
   },
   "engines": {

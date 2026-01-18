@@ -1,6 +1,6 @@
 # Story 1.0: Document Infrastructure Provisioning (Bicep)
 
-Status: review
+Status: done
 
 ## Story
 

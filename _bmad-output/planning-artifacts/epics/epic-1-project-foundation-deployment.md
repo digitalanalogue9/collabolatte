@@ -252,7 +252,7 @@ values.
 - GitHub Secrets configured with deployment tokens and Entra ID values
 - Infrastructure is ready for application deployment
 
-**Status:** 🔄 In Progress
+**Status:** ✅ Complete
 
 ---
 
@@ -298,7 +298,7 @@ specifications, **And** developers can now work on Epic 2 features without infra
 - ACS connection verified
 - No infrastructure blockers for Epic 2 development
 
-**Status:** ⏸️ Not Started
+**Status:** ✅ Complete
 
 ---
 
@@ -309,10 +309,10 @@ specifications, **And** developers can now work on Epic 2 features without infra
 - [x] Storybook set up for component development (Story 1.2)
 - [x] Core web app UI components created (Story 1.3)
 - [x] Bicep templates implemented (Story 1.4)
-- [ ] Infrastructure deployed via Bicep workflow (Story 1.5)
-- [ ] Minimal app deployed and verified (Story 1.6)
-- [ ] End-to-end pipeline proven (Story 1.6)
-- [ ] Developers can work on Epic 2 without infrastructure blockers
+- [x] Infrastructure deployed via Bicep workflow (Story 1.5)
+- [x] Minimal app deployed and verified (Story 1.6)
+- [x] End-to-end pipeline proven (Story 1.6)
+- [x] Developers can work on Epic 2 without infrastructure blockers
 
 ---
 
